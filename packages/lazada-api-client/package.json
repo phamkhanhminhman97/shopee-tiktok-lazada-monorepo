@@ -31,7 +31,8 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phamkhanhminhman97/lazada-api-client.git"
+    "url": "git+https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo.git",
+    "directory": "packages/lazada-api-client"
   },
   "bugs": {
     "url": "https://github.com/phamkhanhminhman97/lazada-api-client/issues"
