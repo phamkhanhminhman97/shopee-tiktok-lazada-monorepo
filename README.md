@@ -39,7 +39,7 @@ The all-in-one package imports from workspace packages, so local changes in the 
 
 ## Publish
 
-Each package is published independently to npm. Always publish changed single-platform packages first, then publish the all-in-one wrapper.
+Each package is published independently to npm. Releases are managed with Changesets so package versions, internal dependency versions, and changelogs are updated consistently.
 
 ### 1. Preflight
 
@@ -50,18 +50,72 @@ npm run pack:all
 git status --short
 ```
 
-`git status --short` should be clean before versioning.
+`git status --short` should only show intentional release changes before versioning.
 
-### 2. Publish A Single-Platform Package
+### 2. Create A Changeset
 
-Example for TikTok Shop:
+After changing package code, create a changeset:
 
 ```bash
+npm run changeset
+```
+
+Select the changed package(s), choose `patch`, `minor`, or `major`, and write a short release note.
+
+Example:
+
+```text
+changed package: tiktokshops-api-client
+bump type: patch
+summary: Add TikTok Shop get price detail API.
+```
+
+### 3. Version Packages
+
+Apply version bumps, changelog updates, and internal dependency updates:
+
+```bash
+npm run version-packages
+```
+
+Review the generated changes, then commit:
+
+```bash
+git add .
+git commit -m "chore: version packages"
+```
+
+### 4. Publish
+
+```bash
+npm run release
+git push
+```
+
+Changesets publishes changed packages in dependency-aware order. The all-in-one wrapper should be released after any changed single-platform package it depends on.
+
+### Manual Fallback
+
+Use this only if Changesets fails or you need a one-off emergency release.
+
+Preflight:
+
+```bash
+npm ci
+npm run build
+npm run pack:all
+git status --short
+```
+
+Publish the changed single-platform package first:
+
+```bash
+# Example: TikTok Shop changed
 npm version patch --workspace=tiktokshops-api-client
 npm publish --workspace=tiktokshops-api-client
 ```
 
-Use the same pattern for Shopee or Lazada:
+If Shopee or Lazada changed, use the same pattern:
 
 ```bash
 npm version patch --workspace=shopee-api-client
@@ -71,32 +125,44 @@ npm version patch --workspace=lazada-api-client
 npm publish --workspace=lazada-api-client
 ```
 
-### 3. Update And Publish The All-In-One Package
-
-If one of the dependency packages was published with a new version, update the dependency version in:
+Then update the all-in-one package dependency version in:
 
 ```text
 packages/shopee-tiktok-lazada-api/package.json
 ```
 
-Then publish the wrapper:
+Example:
+
+```json
+{
+  "dependencies": {
+    "tiktokshops-api-client": "^1.0.4"
+  }
+}
+```
+
+Run install so `package-lock.json` is updated:
+
+```bash
+npm install
+```
+
+Publish the all-in-one wrapper:
 
 ```bash
 npm version patch --workspace=shopee-tiktokshops-lazada-api
 npm publish --workspace=shopee-tiktokshops-lazada-api
 ```
 
-### 4. Commit The Release Changes
-
-`npm version` updates package versions and `package-lock.json`. Commit and push those changes:
+Commit and push the release metadata:
 
 ```bash
 git add .
-git commit -m "chore: release packages"
+git commit -m "chore: release packages manually"
 git push
 ```
 
-### Release Order
+Manual release order:
 
 ```text
 1. shopee-api-client / tiktokshops-api-client / lazada-api-client
