@@ -71,11 +71,21 @@ import {
   ShopeeRequestGetShippingDocumentParameter,
 } from './dto/request/logistic.request';
 import { fetchTokenWithAuthCode, fetchTokenWithRefreshToken, generateAuthLink } from './api/authorization.api';
-import { ShopeeResponseRefreshAccessToken } from './dto/response/config.response';
+import { ShopeeResponseGetAccessToken, ShopeeResponseRefreshAccessToken } from './dto/response/config.response';
 import { getEscrowDetail } from './api/payment.api';
 
 export class ShopeeModule {
   private config: ShopeeConfig;
+
+  /**
+   * Create a Shopee API client.
+   *
+   * IDE IntelliSense will show the required and optional fields from `ShopeeConfig`
+   * when you type `new ShopeeModule({ ... })`.
+   *
+   * @param config Shopee client configuration such as `partnerId`, `partnerKey`,
+   * `shopId`, `mainAccountId`, `accessToken`, and `refreshToken`.
+   */
   constructor(config: ShopeeConfig) {
     this.config = config;
   }
@@ -160,7 +170,7 @@ export class ShopeeModule {
     return await getChannelList(this.config);
   }
 
-  async fetchToken(authCode: string): Promise<any> {
+  async fetchToken(authCode: string): Promise<ShopeeResponseGetAccessToken> {
     return await fetchTokenWithAuthCode(authCode, this.config);
   }
 

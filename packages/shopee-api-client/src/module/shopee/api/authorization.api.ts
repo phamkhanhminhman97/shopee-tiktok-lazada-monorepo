@@ -1,8 +1,8 @@
 import { SHOPEE_ALGORITHM, SHOPEE_DIGEST, SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
-import { ShopeeConfig, ShopeeRequestRefreshToken } from '../dto/request/config.request';
+import { ShopeeConfig, ShopeeRequestGetAccesstoken, ShopeeRequestRefreshToken } from '../dto/request/config.request';
 import { createHmac } from 'crypto';
 import * as ShopeeHelper from '../common/helper';
-import { ShopeeResponseRefreshAccessToken } from '../dto/response/config.response';
+import { ShopeeResponseGetAccessToken, ShopeeResponseRefreshAccessToken } from '../dto/response/config.response';
 
 /**
  *
@@ -30,19 +30,36 @@ export async function generateAuthLink(redirectURL: string, config: ShopeeConfig
  * @param config
  * @returns
  */
-export async function fetchTokenWithAuthCode(authCode: string, config: ShopeeConfig): Promise<any> {
-  const { partnerId, shopId, partnerKey } = config;
+export async function fetchTokenWithAuthCode(authCode: string, config: ShopeeConfig): Promise<ShopeeResponseGetAccessToken> {
+  const { partnerId, shopId, mainAccountId, partnerKey } = config;
+
+  if (!shopId && !mainAccountId) {
+    throw new Error('[Shopee API] fetchToken requires either shopId or mainAccountId in config.');
+  }
+
+  if (shopId && mainAccountId) {
+    throw new Error('[Shopee API] fetchToken accepts only one of shopId or mainAccountId.');
+  }
+
   const timestamp = ShopeeHelper.getTimestampNow();
   const params = [partnerId, SHOPEE_PATH.AUTH_TOKEN, timestamp.toString()];
   const baseString = params.reduce((prev: any, curr: any) => (prev += curr), '');
   const signature = createHmac('sha256', partnerKey).update(baseString).digest('hex');
 
   const commonParam = `?sign=${signature}&partner_id=${partnerId}&timestamp=${timestamp}`;
-  const body = {
+  const body: ShopeeRequestGetAccesstoken = {
     code: authCode,
     partner_id: partnerId,
-    shop_id: parseInt(shopId!),
   };
+
+  if (shopId) {
+    body.shop_id = parseInt(shopId, 10);
+  }
+
+  if (mainAccountId) {
+    body.main_account_id = parseInt(mainAccountId, 10);
+  }
+
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.AUTH_TOKEN}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -63,6 +80,14 @@ export async function fetchTokenWithAuthCode(authCode: string, config: ShopeeCon
 export async function fetchTokenWithRefreshToken(config: ShopeeConfig): Promise<ShopeeResponseRefreshAccessToken> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const { partnerId, shopId, partnerKey, refreshToken } = config;
+
+  if (!shopId) {
+    throw new Error('[Shopee API] refreshToken currently requires shopId in config.');
+  }
+
+  if (!refreshToken) {
+    throw new Error('[Shopee API] refreshToken currently requires refreshToken in config.');
+  }
 
   const params = [partnerId, SHOPEE_PATH.REFRESH_TOKEN, timestamp.toString()];
   const baseString = params.reduce((prev: any, curr: any) => (prev += curr), '');

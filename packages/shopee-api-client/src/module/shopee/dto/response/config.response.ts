@@ -5,6 +5,10 @@ interface ResponseGetAccessToken {
   message: string;
   request_id: string;
   error: string;
+  merchant_id_list?: number[];
+  shop_id_list?: number[];
+  supplier_id_list?: number[];
+  user_id_list?: number[];
 }
 
 interface ResponseRefreshAccessToken extends ResponseGetAccessToken {
