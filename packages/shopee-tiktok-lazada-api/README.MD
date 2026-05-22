@@ -308,17 +308,107 @@ import { LazadaModule } from 'shopee-tiktokshops-lazada-api';
 const lazada = new LazadaModule({
   appKey: process.env.LAZADA_APP_KEY!,
   appSecret: process.env.LAZADA_APP_SECRET!,
-  shopId: process.env.LAZADA_SHOP_ID!,
   appAccessToken: process.env.LAZADA_ACCESS_TOKEN!,
+  refreshToken: process.env.LAZADA_REFRESH_TOKEN!,
+  countryCode: 'sg',
 });
 ```
 
 | Field | Required | Description |
 | --- | --- | --- |
-| `appKey` | Yes | Lazada app key |
-| `appSecret` | Yes | Lazada app secret (used for request signing) |
-| `shopId` | Yes | Lazada shop ID |
-| `appAccessToken` | Yes | Lazada access token |
+| `appKey` | Yes | Lazada Open Platform APP Key |
+| `appSecret` | Yes | Lazada Open Platform APP Secret used for request signing |
+| `countryCode` | No | Store region such as `sg`, `my`, `th`, `vn`, `id`, `ph`, or `cb` |
+| `shopId` | No | Optional store identifier kept by your application |
+| `appAccessToken` | Required for private APIs | Lazada seller access token |
+| `refreshToken` | Required for token refresh | Lazada refresh token |
+
+### Authorization
+
+```ts
+// 1. generate seller authorization URL
+const { url } = lazada.generateAuthLink(
+  'https://your-app.com/lazada/callback',
+  undefined,
+  'CUSTOM_STATE'
+);
+// redirect seller to url
+
+// 2. exchange authorization code for tokens (in your callback handler)
+const token = await lazada.fetchTokenWithAuthCode(req.query.code as string);
+// persist token.access_token, token.refresh_token, token.expires_in
+
+// 3. refresh access token before expiry
+const newToken = await lazada.refreshToken();
+```
+
+According to Lazada's current docs:
+- `code` should be exchanged within 30 minutes
+- `access_token` is valid for 10 days
+- `refresh_token` is valid for 50 days
+
+For a complete OAuth walkthrough, see the [`lazada-api-client` documentation](https://www.npmjs.com/package/lazada-api-client).
+
+### Orders
+
+```ts
+// get recent orders
+const orders = await lazada.getOrdersBeforeSomeDay();
+
+// get order detail
+const detail = await lazada.getOrderDetail('123456789012345');
+```
+
+### Products
+
+```ts
+// list products
+const products = await lazada.getProducts();
+
+// get product detail
+const item = await lazada.getProductItem(123456789);
+
+// update stock
+await lazada.updateSellableQuantity(123456789, {
+  seller_sku: 'SKU-RED-M',
+  quantity: 10,
+});
+
+// update product status
+await lazada.updateStatusProduct(123456789, {
+  seller_sku: 'SKU-RED-M',
+  status: 'active',
+});
+
+// update price
+await lazada.updatePrice(123456789, {
+  seller_sku: 'SKU-RED-M',
+  price: '120000',
+  special_price: '99000',
+});
+
+// categories and brands
+const categories = await lazada.getCategoryTree();
+const brands = await lazada.getBrands();
+```
+
+### Supported Lazada methods
+
+| Method | Description |
+| --- | --- |
+| `generateAuthLink` | Generate Lazada authorization URL |
+| `fetchTokenWithAuthCode` | Exchange authorization code for access and refresh token |
+| `refreshToken` | Refresh access token |
+| `getOrdersBeforeSomeDay` | Get recent orders |
+| `getOrderDetail` | Get order detail |
+| `getProducts` | Get product list |
+| `getProductItem` | Get product item detail |
+| `createProduct` | Create product |
+| `updateSellableQuantity` | Update sellable quantity |
+| `updateStatusProduct` | Update product status |
+| `updatePrice` | Update product price |
+| `getCategoryTree` | Get category tree |
+| `getBrands` | Get brand list |
 
 ---
 
