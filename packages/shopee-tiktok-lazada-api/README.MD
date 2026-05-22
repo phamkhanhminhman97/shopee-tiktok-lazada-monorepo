@@ -1,94 +1,84 @@
-# 🛍️ shopee-tiktokshops-lazada-api
+# shopee-tiktokshops-lazada-api
 
-[![npm version](https://badge.fury.io/js/shopee-tiktokshops-lazada-api.svg)](https://badge.fury.io/js/shopee-tiktokshops-lazada-api)
+[![npm](https://img.shields.io/npm/v/shopee-tiktokshops-lazada-api)](https://www.npmjs.com/package/shopee-tiktokshops-lazada-api)
+[![npm downloads](https://img.shields.io/npm/dm/shopee-tiktokshops-lazada-api)](https://www.npmjs.com/package/shopee-tiktokshops-lazada-api)
+[![Build](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-A unified, strongly-typed Open API wrapper for **Shopee**, **TikTok Shop**, and **Lazada** built with TypeScript. Simplify e-commerce integrations and manage your multi-channel stores efficiently.
+Unified TypeScript wrapper for Shopee Open API v2, TikTok Shop Open API, and Lazada Open API. One package, three platforms.
 
----
+> Need only one platform? Use the individual packages:
+> [`shopee-api-client`](https://www.npmjs.com/package/shopee-api-client) ·
+> [`tiktokshops-api-client`](https://www.npmjs.com/package/tiktokshops-api-client) ·
+> [`lazada-api-client`](https://www.npmjs.com/package/lazada-api-client)
 
-## ✨ What's New in v4.3.2
+> Unofficial package. Not affiliated with Shopee, TikTok, or Lazada.
 
-This release expands the **Shopee Order & Payment Open API v2** coverage with cancel, package, and escrow accounting support.
+## Requirements
 
-### 🛒 Shopee Order & Payment Updates
-- **`getEscrowDetail`**: Fetch Shopee payment escrow/accounting details via `v2.payment.get_escrow_detail`.
-- **`cancelOrder`**: Cancel an order before shipment via `v2.order.cancel_order`, with validation for `OUT_OF_STOCK` item payloads.
-- **`searchPackageList`**: Search Shopee package lists with filter, pagination, and sorting payloads.
-- **`getPackageDetail`**: Retrieve package details for one or multiple package numbers.
-- **Typed Payment Response**: Added dedicated `payment.response.ts` with detailed `order_income` fields and Shopee docs descriptions for escrow detail responses.
+- Node.js 18 or later
 
----
-
-## ✨ What's New in v4.2.0
-
-This release completes the **Shopee Logistics Open API v2 Suite** integration, enabling robust, multi-warehouse, and bulk fulfillment capability.
-
-### 🛒 Shopee Logistics & Fulfillment Suite Integration
-- **Advanced Bulk Operations:**
-  - **`massShipOrder`**: Arrange batch logistics (pickup, dropoff, non-integrated) for multiple orders concurrently.
-  - **`getMassShippingParameter`**: Fetch available addresses, dropoff branches, and recommended time slots for bulk orders under the same location/channel.
-  - **`getMassTrackingNumber`**: Batch fetch tracking numbers from Shopee 3PLs asynchronously.
-  - **`getShippingDocumentParameter`**: Query selectable and Shopee-suggested document formats (thermal/normal airwaybills).
-- **Single Fulfillment & Tracking:**
-  - **`getTrackingNumber`**: Retrieve the 3PL-generated tracking number for single-order packages.
-  - **`getTrackingInfo`**: Get comprehensive real-time tracking logs and reversed logistics history.
-  - **`updateShippingOrder`**: Reschedule pickup details (address ID and time slot ID) for active shipments.
-  - **`getAddressList`**: Query active merchant shop addresses.
-- **Waybills & Documents Handling:**
-  - **`createShippingDocument`**: Asynchronously trigger document generation tasks.
-  - **`getShippingDocumentResult`**: Track the compilation progress of airwaybill tasks.
-  - **`downloadShippingDocument`**: Direct binary stream download (`arraybuffer`) to fetch generated waybills as buffer outputs.
-
----
-
-## ✨ What's New in v4.1.0
-
-This update focuses on performance optimization, pagination bug fixes, and adding the latest data fields from Shopee Open API v2.
-
-### 🛒 Shopee Module Improvements
-- **Fix Data Shifting Bug:** Resolved a critical issue where orders could be duplicated or missed during pagination because the query time window shifted between loop iterations.
-- **`getOrders` Enhancements:**
-  - Optimized `page_size` to 100 (reducing HTTP requests by 50%).
-  - Added a 15-day time range validation as required by Shopee.
-- **`getOrderDetail` Enhancements:**
-  - Support for fetching multiple orders simultaneously by passing a `string[]`.
-  - Added the latest response fields: `return_request_due_date`, `edt`, `payment_info`, `international_label`.
-  - Added support for the `PENDING` order status (via `request_order_status_pending`).
-- **New Feature `getShipmentList`:** Added a dedicated API to retrieve orders ready for fulfillment (`READY_TO_SHIP`) or those requiring a retry (`RETRY_SHIP`).
-- **Enhanced Error Handling:** The system now explicitly catches Shopee API errors and returns detailed error messages instead of silently returning an empty result.
-
----
-
-## ⚡️ Installation
-
-You can install the package via `npm` or `yarn`:
+## Installation
 
 ```bash
-# Using npm
 npm install shopee-tiktokshops-lazada-api
-
-# Using yarn
+# or
 yarn add shopee-tiktokshops-lazada-api
+# or
+pnpm add shopee-tiktokshops-lazada-api
 ```
 
-## 🚀 Usage
+---
 
-### 🛒 Shopee Module
+## Shopee module
 
-```typescript
+### Initialize
+
+```ts
 import { ShopeeModule } from 'shopee-tiktokshops-lazada-api';
 
 const shopee = new ShopeeModule({
-  partnerId: 1234567890,
-  partnerKey: 'YOUR_PARTNER_KEY',
-  shopId: 'YOUR_SHOP_ID',
-  accessToken: 'YOUR_ACCESS_TOKEN',
+  partnerId: Number(process.env.SHOPEE_PARTNER_ID),
+  partnerKey: process.env.SHOPEE_PARTNER_KEY!,
+  shopId: process.env.SHOPEE_SHOP_ID!,
+  accessToken: process.env.SHOPEE_ACCESS_TOKEN!,
+  refreshToken: process.env.SHOPEE_REFRESH_TOKEN!,
 });
 ```
 
-```typescript
+| Field | Required | Description |
+| --- | --- | --- |
+| `partnerId` | Yes | Shopee Open Platform partner ID |
+| `partnerKey` | Yes | Shopee Open Platform partner key |
+| `shopId` | Required for shop APIs | Shopee shop ID |
+| `accessToken` | Required for private APIs | OAuth access token |
+| `refreshToken` | Required for token refresh | OAuth refresh token |
+
+### Authorization
+
+```ts
+// 1. generate seller authorization URL
+const { url } = await shopee.generateAuthLink('https://your-app.com/shopee/callback');
+// redirect seller to url
+
+// 2. exchange authorization code for tokens (in your callback handler)
+const token = await shopee.fetchToken(req.query.code as string);
+// persist token.access_token, token.refresh_token, token.expire_in
+
+// 3. refresh access token before expiry (~4 hours)
+const newToken = await shopee.refreshToken();
+```
+
+For a complete OAuth walkthrough, see the [`shopee-api-client` documentation](https://www.npmjs.com/package/shopee-api-client).
+
+### Orders
+
+```ts
+// get orders from last N minutes (shorthand)
+const orders = await shopee.getOrders(60);
+const orderSnList = orders.map(order => order.order_sn);
+
+// get orders with options
 const orders = await shopee.getOrders({
   beforeMinutes: 60,
   timeRangeField: 'create_time',
@@ -98,62 +88,152 @@ const orders = await shopee.getOrders({
   pageSize: 100,
 });
 
-// orderStatus defaults to ALL, so Shopee returns all statuses when it is omitted.
-const allOrders = await shopee.getOrders(60);
-const orderSnList = allOrders.map(order => order.order_sn);
+// get order detail
+const detail = await shopee.getOrderDetail(['ORDER_SN_1', 'ORDER_SN_2']);
+
+// get orders ready for shipment
+const shipmentList = await shopee.getShipmentList({ pageNo: 1, pageSize: 50 });
 ```
 
-**Supported Methods:**
+Available `orderStatus` values:
 
-| Function                       | Status  |
-| ------------------------------ | ------- |
-| `getOrders`                    | ✅ Done |
-| `getOrderDetail`               | ✅ Done |
-| `getEscrowDetail`              | ✅ Done |
-| `getShipmentList`              | ✅ Done |
-| `searchPackageList`            | ✅ Done |
-| `getPackageDetail`             | ✅ Done |
-| `cancelOrder`                  | ✅ Done |
-| `getProductItemList`           | ✅ Done |
-| `getProductItemBaseInfo`       | ✅ Done |
-| `updateStock`                  | ✅ Done |
-| `unListItem`                   | ✅ Done |
-| `updatePrice`                  | ✅ Done |
-| `addItem`                      | ✅ Done |
-| `getChannelList`               | ✅ Done |
-| `fetchToken`                   | ✅ Done |
-| `getCategory`                  | ✅ Done |
-| `getAttributes`                | ✅ Done |
-| `getBrandList`                 | ✅ Done |
-| `shippingParameter`            | ✅ Done |
-| `shipOrder`                    | ✅ Done |
-| `getTrackingNumber`            | ✅ Done |
-| `createShippingDocument`       | ✅ Done |
-| `getShippingDocumentResult`    | ✅ Done |
-| `downloadShippingDocument`     | ✅ Done |
-| `getTrackingInfo`              | ✅ Done |
-| `massShipOrder`                | ✅ Done |
-| `getMassShippingParameter`     | ✅ Done |
-| `updateShippingOrder`          | ✅ Done |
-| `getMassTrackingNumber`        | ✅ Done |
-| `getShippingDocumentParameter` | ✅ Done |
-| `getAddressList`               | ✅ Done |
+```ts
+type ShopeeOrderStatus =
+  | 'ALL'
+  | 'UNPAID'
+  | 'READY_TO_SHIP'
+  | 'PROCESSED'
+  | 'SHIPPED'
+  | 'COMPLETED'
+  | 'IN_CANCEL'
+  | 'CANCELLED'
+  | 'INVOICE_PENDING';
+```
+
+### Logistics
+
+```ts
+// get shipping parameters before arranging shipment
+const params = await shopee.shippingParameter({ orderSn: 'ORDER_SN' });
+
+// arrange shipment for a single order
+await shopee.shipOrder({
+  orderSn: 'ORDER_SN',
+  pickup: { addressId: 123, pickupTimeId: 'TIME_SLOT_ID' },
+});
+
+// arrange shipment for multiple orders at once
+await shopee.massShipOrder({ orderList: [...] });
+
+// get tracking number
+const tracking = await shopee.getTrackingNumber({ orderSn: 'ORDER_SN', packageNumber: 'PKG' });
+
+// get real-time tracking info
+const trackingInfo = await shopee.getTrackingInfo({ orderSn: 'ORDER_SN' });
+
+// create and download shipping document (airwaybill)
+await shopee.createShippingDocument({ orderList: [...] });
+const result = await shopee.getShippingDocumentResult({ orderList: [...] });
+const buffer = await shopee.downloadShippingDocument({ orderList: [...] }); // arraybuffer
+```
+
+### Products
+
+```ts
+// list products
+const list = await shopee.getProductItemList({ offset: 0, pageSize: 50, itemStatus: ['NORMAL'] });
+
+// get product detail
+const item = await shopee.getProductItemBaseInfo({ itemIdList: [123456789] });
+
+// update stock and price
+await shopee.updateStock({ itemId: 123456789, stockList: [{ modelId: 0, normalStock: 100 }] });
+await shopee.updatePrice({ itemId: 123456789, priceList: [{ modelId: 0, originalPrice: 99000 }] });
+
+// list/unlist product
+await shopee.unListItem({ itemList: [{ itemId: 123456789, unlist: true }] });
+
+// categories, attributes, brands
+const categories = await shopee.getCategory({ language: 'vi' });
+const attributes = await shopee.getAttributes({ categoryId: 100001 });
+const brands = await shopee.getBrandList({ categoryId: 100001, pageSize: 100 });
+```
+
+### Payment
+
+```ts
+// get payment escrow detail
+const escrow = await shopee.getEscrowDetail({ orderSn: 'ORDER_SN' });
+```
+
+### Supported Shopee methods
+
+| Method | Description |
+| --- | --- |
+| `generateAuthLink` | Generate seller authorization URL |
+| `fetchToken` | Exchange authorization code for access and refresh token |
+| `refreshToken` | Refresh access token and refresh token |
+| `getOrders` | Get order list |
+| `getOrderDetail` | Get order detail |
+| `cancelOrder` | Cancel order before shipment |
+| `getShipmentList` | Get orders ready for shipment |
+| `searchPackageList` | Search package list |
+| `getPackageDetail` | Get package detail |
+| `getEscrowDetail` | Get payment escrow detail |
+| `getProductItemList` | Get product item list |
+| `getProductItemBaseInfo` | Get product base information |
+| `addItem` | Add product item |
+| `updateStock` | Update product stock |
+| `updatePrice` | Update product price |
+| `unListItem` | List or unlist product item |
+| `getCategory` | Get Shopee categories |
+| `getAttributes` | Get category attributes |
+| `getBrandList` | Get brand list |
+| `getChannelList` | Get logistics channels |
+| `shippingParameter` | Get shipping parameters |
+| `shipOrder` | Arrange shipment |
+| `massShipOrder` | Arrange bulk shipment |
+| `getMassShippingParameter` | Get bulk shipping parameters |
+| `getTrackingNumber` | Get tracking number |
+| `getTrackingInfo` | Get real-time tracking info |
+| `updateShippingOrder` | Reschedule pickup for active shipment |
+| `getMassTrackingNumber` | Get bulk tracking numbers |
+| `createShippingDocument` | Trigger airwaybill generation |
+| `getShippingDocumentResult` | Check airwaybill generation progress |
+| `downloadShippingDocument` | Download airwaybill as buffer |
+| `getShippingDocumentParameter` | Get selectable document formats |
+| `getAddressList` | Get seller address list |
 
 ---
 
-### 🎵 TikTok Shop Module (v2 2309)
+## TikTok Shop module
 
-```typescript
+### Initialize
+
+```ts
 import { TiktokModule } from 'shopee-tiktokshops-lazada-api';
 
 const tiktok = new TiktokModule({
-  appKey: 'YOUR_APP_KEY',
-  appSecret: 'YOUR_APP_SECRET',
-  shopId: 'YOUR_SHOP_ID',
-  shopCipher: 'YOUR_SHOP_CIPHER',
-  accessToken: 'YOUR_ACCESS_TOKEN',
+  appKey: process.env.TIKTOK_APP_KEY!,
+  appSecret: process.env.TIKTOK_APP_SECRET!,
+  shopId: process.env.TIKTOK_SHOP_ID!,
+  shopCipher: process.env.TIKTOK_SHOP_CIPHER!,
+  accessToken: process.env.TIKTOK_ACCESS_TOKEN!,
 });
+```
 
+| Field | Required | Description |
+| --- | --- | --- |
+| `appKey` | Yes | TikTok Shop app key |
+| `appSecret` | Yes | TikTok Shop app secret (used for request signing) |
+| `shopId` | Yes | TikTok Shop shop ID |
+| `shopCipher` | Yes | TikTok Shop shop cipher |
+| `accessToken` | Yes | TikTok Shop access token |
+
+### Orders
+
+```ts
+// get order list
 const orders = await tiktok.getOrderList({
   beforeHours: 24,
   pageSize: 20,
@@ -161,49 +241,106 @@ const orders = await tiktok.getOrderList({
   sortOrder: 'ASC',
 });
 
-const priceDetail = await tiktok.getPriceDetail('ORDER_ID');
+// get order detail
+const detail = await tiktok.getOrderDetail('ORDER_ID');
+
+// get price detail
+const price = await tiktok.getPriceDetail('ORDER_ID');
 ```
 
-**Supported Methods:**
+### Fulfillment
 
-| Function              | Status |
-| --------------------- | ------ |
-| `getOrderList`        | ✅ Done |
-| `getOrderDetail`      | ✅ Done |
-| `getPriceDetail`      | ✅ Done |
-| `getProductDetail`    | ✅ Done |
-| `getAuthorizedShop`   | ✅ Done |
-| `getPackageTimeSlots` | ✅ Done |
-| `shipPackage`         | ✅ Done |
-| `getShippingDocument` | ✅ Done |
-| `getCategories`       | ✅ Done |
-| `getBrands`           | ✅ Done |
-| `getAttributes`       | ✅ Done |
-| `createProduct`       | ✅ Done |
+```ts
+// get available time slots for a package
+const slots = await tiktok.getPackageTimeSlots({ packageId: 'PKG_ID' });
+
+// ship a package
+await tiktok.shipPackage({ packageId: 'PKG_ID', pickupSlotId: 'SLOT_ID' });
+
+// get shipping document
+const doc = await tiktok.getShippingDocument({ packageId: 'PKG_ID' });
+```
+
+### Products
+
+```ts
+// get product detail
+const product = await tiktok.getProductDetail('PRODUCT_ID');
+
+// get authorized shop info
+const shop = await tiktok.getAuthorizedShop();
+
+// categories, brands, attributes
+const categories = await tiktok.getCategories();
+const brands = await tiktok.getBrands({ categoryId: 'CAT_ID' });
+const attributes = await tiktok.getAttributes({ categoryId: 'CAT_ID' });
+
+// create product
+await tiktok.createProduct({ ... });
+```
+
+### Supported TikTok Shop methods
+
+| Method | Description |
+| --- | --- |
+| `getOrderList` | Get order list |
+| `getOrderDetail` | Get order detail |
+| `getPriceDetail` | Get order price detail |
+| `getPackageTimeSlots` | Get available time slots for a package |
+| `shipPackage` | Arrange package shipment |
+| `getShippingDocument` | Get shipping document |
+| `getProductDetail` | Get product detail |
+| `getAuthorizedShop` | Get authorized shop info |
+| `getCategories` | Get product categories |
+| `getBrands` | Get brands by category |
+| `getAttributes` | Get attributes by category |
+| `createProduct` | Create product |
 
 ---
 
-### 🛍 Lazada Module
+## Lazada module
 
-```typescript
+### Initialize
+
+```ts
 import { LazadaModule } from 'shopee-tiktokshops-lazada-api';
 
 const lazada = new LazadaModule({
-  appKey: 'YOUR_APP_KEY',
-  appSecret: 'YOUR_APP_SECRET',
-  shopId: 'YOUR_SHOP_ID',
-  appAccessToken: 'YOUR_ACCESS_TOKEN',
+  appKey: process.env.LAZADA_APP_KEY!,
+  appSecret: process.env.LAZADA_APP_SECRET!,
+  shopId: process.env.LAZADA_SHOP_ID!,
+  appAccessToken: process.env.LAZADA_ACCESS_TOKEN!,
 });
+```
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `appKey` | Yes | Lazada app key |
+| `appSecret` | Yes | Lazada app secret (used for request signing) |
+| `shopId` | Yes | Lazada shop ID |
+| `appAccessToken` | Yes | Lazada access token |
+
+---
+
+## Error handling
+
+All methods throw if the platform API returns an error. Wrap calls in `try/catch`:
+
+```ts
+try {
+  const orders = await shopee.getOrders({ beforeMinutes: 60 });
+} catch (err) {
+  console.error(err.message); // e.g. "Invalid access_token."
+  console.error(err.code);    // e.g. "error_auth"
+}
 ```
 
 ---
 
+## Changelog
 
+See [CHANGELOG.md](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/blob/main/packages/shopee-tiktok-lazada-api/CHANGELOG.md) for release history.
 
-## 📬 Contact / Hỗ trợ
+## License
 
-- **Email:** phamkhanhminhman97@gmail.com
-- **Skype:** phamkhanhminhman97@gmail.com
-
----
-*Built with ❤️ for E-commerce Integrations. To be continued...*
+ISC
