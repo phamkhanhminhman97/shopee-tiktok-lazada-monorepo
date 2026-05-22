@@ -216,19 +216,51 @@ import { TiktokModule } from 'shopee-tiktokshops-lazada-api';
 const tiktok = new TiktokModule({
   appKey: process.env.TIKTOK_APP_KEY!,
   appSecret: process.env.TIKTOK_APP_SECRET!,
+  serviceId: process.env.TIKTOK_SERVICE_ID!,
   shopId: process.env.TIKTOK_SHOP_ID!,
   shopCipher: process.env.TIKTOK_SHOP_CIPHER!,
   accessToken: process.env.TIKTOK_ACCESS_TOKEN!,
+  refreshToken: process.env.TIKTOK_REFRESH_TOKEN!,
 });
 ```
 
 | Field | Required | Description |
 | --- | --- | --- |
-| `appKey` | Yes | TikTok Shop app key |
-| `appSecret` | Yes | TikTok Shop app secret (used for request signing) |
-| `shopId` | Yes | TikTok Shop shop ID |
-| `shopCipher` | Yes | TikTok Shop shop cipher |
-| `accessToken` | Yes | TikTok Shop access token |
+| `appKey` | Yes | TikTok Shop app key from Partner Center |
+| `appSecret` | Yes | TikTok Shop app secret used for auth and request signing |
+| `serviceId` | Required for auth link generation | TikTok Shop service ID used to build seller authorization URL |
+| `shopId` | Required for most seller APIs | TikTok Shop shop ID |
+| `shopCipher` | Required for some seller APIs | TikTok Shop shop cipher |
+| `accessToken` | Required for private APIs | TikTok Shop access token |
+| `refreshToken` | Required for token refresh | TikTok Shop refresh token |
+| `accessTokenExpire` | No | Access token expiration Unix timestamp |
+| `refreshTokenExipre` | No | Refresh token expiration Unix timestamp |
+
+### Authorization
+
+```ts
+// 1. generate seller authorization URL
+const { url } = tiktok.generateAuthLink(
+  undefined,
+  'RANDOM_STATE',
+  false
+);
+// redirect seller to url
+
+// 2. exchange authorization code for tokens (in your callback handler)
+const token = await tiktok.fetchTokenWithAuthCode(req.query.code as string);
+// persist token.data.access_token, token.data.refresh_token
+
+// 3. refresh access token before expiry
+const newToken = await tiktok.refreshToken();
+```
+
+According to the current TikTok Shop docs:
+- `code` expires in 30 minutes and can only be used once
+- `access_token` is valid for 7 days
+- `refresh_token` has its own expiration timestamp returned by the API
+
+For a complete OAuth walkthrough, see the [`tiktokshops-api-client` documentation](https://www.npmjs.com/package/tiktokshops-api-client).
 
 ### Orders
 
@@ -248,17 +280,28 @@ const detail = await tiktok.getOrderDetail('ORDER_ID');
 const price = await tiktok.getPriceDetail('ORDER_ID');
 ```
 
+If `orderStatus` is omitted or set to `ALL`, `order_status` is not sent and TikTok Shop returns all matching statuses.
+
 ### Fulfillment
 
 ```ts
 // get available time slots for a package
-const slots = await tiktok.getPackageTimeSlots({ packageId: 'PKG_ID' });
+const slots = await tiktok.getPackageTimeSlots('PACKAGE_ID');
 
 // ship a package
-await tiktok.shipPackage({ packageId: 'PKG_ID', pickupSlotId: 'SLOT_ID' });
+await tiktok.shipPackage('PACKAGE_ID', {
+  handover_method: 'PICKUP',
+  pickup_slot: {
+    start_time: 1736236800,
+    end_time: 1736240400,
+  },
+});
 
 // get shipping document
-const doc = await tiktok.getShippingDocument({ packageId: 'PKG_ID' });
+const doc = await tiktok.getShippingDocument(
+  'PACKAGE_ID',
+  'SHIPPING_LABEL'
+);
 ```
 
 ### Products
@@ -272,8 +315,8 @@ const shop = await tiktok.getAuthorizedShop();
 
 // categories, brands, attributes
 const categories = await tiktok.getCategories();
-const brands = await tiktok.getBrands({ categoryId: 'CAT_ID' });
-const attributes = await tiktok.getAttributes({ categoryId: 'CAT_ID' });
+const brands = await tiktok.getBrands('CAT_ID');
+const attributes = await tiktok.getAttributes('CAT_ID');
 
 // create product
 await tiktok.createProduct({ ... });
@@ -283,6 +326,9 @@ await tiktok.createProduct({ ... });
 
 | Method | Description |
 | --- | --- |
+| `generateAuthLink` | Generate seller authorization URL |
+| `fetchTokenWithAuthCode` | Exchange authorization code for access and refresh token |
+| `refreshToken` | Refresh access token |
 | `getOrderList` | Get order list |
 | `getOrderDetail` | Get order detail |
 | `getPriceDetail` | Get order price detail |

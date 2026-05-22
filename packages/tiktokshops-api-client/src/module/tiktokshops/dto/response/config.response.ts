@@ -1,11 +1,11 @@
-interface ResponseCommon<T> {
+export interface TiktokResponseCommon<T> {
   code: string | number;
   message: string;
   request_id: string;
   data: T;
 }
 
-interface AccessToken {
+export interface TiktokAccessToken {
   access_token: string;
   access_token_expire_in: number; //unix timestamp
   refresh_token: string;
@@ -14,10 +14,11 @@ interface AccessToken {
   //Please use our shop api to obtain your shop id
   open_id?: string;
   seller_name: string;
-  request_id: string;
+  seller_base_region?: string;
+  user_type?: number;
 }
 
-interface ShopList {
+export interface TiktokAuthorizedShop {
   region: string;
   shop_cipher: string;
   shop_code: string;
@@ -26,15 +27,8 @@ interface ShopList {
   type: number;
 }
 
-type RefreshToken = AccessToken;
+export type TiktokRefreshToken = TiktokAccessToken;
 
-type ResponseAccessToken = ResponseCommon<AccessToken>;
-type ResponseAuthorizedShop = ResponseCommon<ShopList>;
-type ResponseRefreshToken = ResponseCommon<RefreshToken>;
-
-export {
-  ResponseCommon as TiktokResponseCommon,
-  ResponseAccessToken as TiktokResponseAccessToken,
-  ResponseAuthorizedShop as TiktokResponseAuthorized,
-  ResponseRefreshToken as TiktokResponseRefreshToken,
-};
+export type TiktokResponseAccessToken = TiktokResponseCommon<TiktokAccessToken>;
+export type TiktokResponseAuthorized = TiktokResponseCommon<TiktokAuthorizedShop>;
+export type TiktokResponseRefreshToken = TiktokResponseCommon<TiktokRefreshToken>;

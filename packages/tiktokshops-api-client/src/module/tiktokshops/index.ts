@@ -1,6 +1,6 @@
 import { getOrderDetail, getOrderList, getPriceDetail } from './api/v2/order.api';
 import { TiktokConfig } from './dto/request/config.request';
-import { fetchTokenWithAuthCode, getAuthorizedShop, refreshToken } from './api/v2/authorization.api';
+import { fetchTokenWithAuthCode, generateAuthLink, getAuthorizedShop, refreshToken } from './api/v2/authorization.api';
 import { createProduct, getAttributes, getBrands, getCategories, getProductDetail } from './api/v2/product.api';
 import { getPackageShippingDocument, getPackageTimeSlots, shipPackage } from './api/v2/fulfillment.api';
 import { TiktokRequestShipPackage } from './dto/request/fulfillment.request';
@@ -14,6 +14,13 @@ import { TiktokRequestOrderList } from './dto/request/order.request';
 
 export class TiktokModule {
   private config: TiktokConfig;
+
+  /**
+   * Create a TikTok Shop API client.
+   *
+   * IDE IntelliSense will show the required and optional fields from `TiktokConfig`
+   * when you type `new TiktokModule({ ... })`.
+   */
   constructor(config: TiktokConfig) {
     this.config = config;
   }
@@ -27,6 +34,19 @@ export class TiktokModule {
 
   getConfig(): TiktokConfig {
     return this.config;
+  }
+
+  /**
+   * Generate a seller authorization URL.
+   *
+   * Pass `useUsDomain = true` for US Partner Center authorization links.
+   */
+  generateAuthLink(serviceId = this.config.serviceId || '', state?: string, useUsDomain = false) {
+    if (!serviceId) {
+      throw new Error('serviceId is required to generate a TikTok Shop authorization link.');
+    }
+
+    return generateAuthLink(serviceId, state, useUsDomain);
   }
 
   /**

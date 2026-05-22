@@ -71,6 +71,7 @@ const END_POINT_UAT = 'https://open-api-sandbox.tiktokglobalshop.com';
 const END_POINT_AUTH = 'https://auth.tiktok-shops.com';
 const END_POINT_AUTH_UAT = 'https://auth-sandbox.tiktok-shops.com';
 const END_POINT_AUTH_2309 = 'https://services.tiktokshop.com/open/authorize';
+const END_POINT_AUTH_2309_US = 'https://services.us.tiktokshop.com/open/authorize';
 const ALGORITHM = 'sha256';
 const DIGEST = 'hex';
 
@@ -96,9 +97,8 @@ enum PATH {
 }
 
 enum PATH_202309 {
-  GENERATE_AUTH_LINK = '/open',
   FETCH_TOKEN = '/api/v2/token/get',
-  REFRESH_TOKEN = '/api/v2/token/get2',
+  REFRESH_TOKEN = '/api/v2/token/refresh',
   AUTHORIZED_SHOP = '/authorization/202309/shops',
   ORDER_LIST = '/order/202309/orders/search',
   ORDER_DETAIL = '/order/202309/orders',
@@ -158,4 +158,5 @@ export {
   END_POINT_AUTH as TIKTOK_END_POINT_AUTH,
   END_POINT_AUTH_UAT as TIKTOK_END_POINT_AUTH_UAT,
   END_POINT_AUTH_2309 as TIKTOK_END_POINT_AUTH_2309,
+  END_POINT_AUTH_2309_US as TIKTOK_END_POINT_AUTH_2309_US,
 };
