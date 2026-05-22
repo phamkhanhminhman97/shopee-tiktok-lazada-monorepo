@@ -89,10 +89,10 @@ const orders = await shopee.getOrders({
 });
 
 // get order detail
-const detail = await shopee.getOrderDetail(['ORDER_SN_1', 'ORDER_SN_2']);
+const detail = await shopee.getOrderDetail('ORDER_SN');
 
 // get orders ready for shipment
-const shipmentList = await shopee.getShipmentList({ pageNo: 1, pageSize: 50 });
+const shipmentList = await shopee.getShipmentList();
 ```
 
 Available `orderStatus` values:
@@ -114,22 +114,19 @@ type ShopeeOrderStatus =
 
 ```ts
 // get shipping parameters before arranging shipment
-const params = await shopee.shippingParameter({ orderSn: 'ORDER_SN' });
+const params = await shopee.shippingParameter('ORDER_SN');
 
 // arrange shipment for a single order
-await shopee.shipOrder({
-  orderSn: 'ORDER_SN',
-  pickup: { addressId: 123, pickupTimeId: 'TIME_SLOT_ID' },
-});
+await shopee.shipOrder('ORDER_SN', 123, 'TIME_SLOT_ID');
 
 // arrange shipment for multiple orders at once
 await shopee.massShipOrder({ orderList: [...] });
 
 // get tracking number
-const tracking = await shopee.getTrackingNumber({ orderSn: 'ORDER_SN', packageNumber: 'PKG' });
+const tracking = await shopee.getTrackingNumber('ORDER_SN', 'PKG');
 
 // get real-time tracking info
-const trackingInfo = await shopee.getTrackingInfo({ orderSn: 'ORDER_SN' });
+const trackingInfo = await shopee.getTrackingInfo('ORDER_SN');
 
 // create and download shipping document (airwaybill)
 await shopee.createShippingDocument({ orderList: [...] });
@@ -141,29 +138,29 @@ const buffer = await shopee.downloadShippingDocument({ orderList: [...] }); // a
 
 ```ts
 // list products
-const list = await shopee.getProductItemList({ offset: 0, pageSize: 50, itemStatus: ['NORMAL'] });
+const list = await shopee.getProductItemList();
 
 // get product detail
-const item = await shopee.getProductItemBaseInfo({ itemIdList: [123456789] });
+const item = await shopee.getProductItemBaseInfo(['123456789']);
 
 // update stock and price
-await shopee.updateStock({ itemId: 123456789, stockList: [{ modelId: 0, normalStock: 100 }] });
-await shopee.updatePrice({ itemId: 123456789, priceList: [{ modelId: 0, originalPrice: 99000 }] });
+await shopee.updateStock(123456789, 100);
+await shopee.updatePrice('123456789', 99000);
 
 // list/unlist product
-await shopee.unListItem({ itemList: [{ itemId: 123456789, unlist: true }] });
+await shopee.unListItem('123456789', true);
 
 // categories, attributes, brands
-const categories = await shopee.getCategory({ language: 'vi' });
-const attributes = await shopee.getAttributes({ categoryId: 100001 });
-const brands = await shopee.getBrandList({ categoryId: 100001, pageSize: 100 });
+const categories = await shopee.getCategory();
+const attributes = await shopee.getAttributes(100001);
+const brands = await shopee.getBrandList(100001);
 ```
 
 ### Payment
 
 ```ts
 // get payment escrow detail
-const escrow = await shopee.getEscrowDetail({ orderSn: 'ORDER_SN' });
+const escrow = await shopee.getEscrowDetail('ORDER_SN');
 ```
 
 ### Supported Shopee methods
