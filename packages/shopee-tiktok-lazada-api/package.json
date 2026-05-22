@@ -10,6 +10,10 @@
     "url": "git+https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo.git",
     "directory": "packages/shopee-tiktok-lazada-api"
   },
+  "bugs": {
+    "url": "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/issues"
+  },
+  "homepage": "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/tree/main/packages/shopee-tiktok-lazada-api#readme",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -41,8 +45,8 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "lazada-api-client": "^1.0.1",
-    "shopee-api-client": "^1.0.1",
-    "tiktokshops-api-client": "^1.0.1"
+    "lazada-api-client": "^1.0.2",
+    "shopee-api-client": "^1.0.2",
+    "tiktokshops-api-client": "^1.0.2"
   }
 }

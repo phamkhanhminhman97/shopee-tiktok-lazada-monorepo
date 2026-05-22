@@ -35,9 +35,9 @@
     "directory": "packages/lazada-api-client"
   },
   "bugs": {
-    "url": "https://github.com/phamkhanhminhman97/lazada-api-client/issues"
+    "url": "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/issues"
   },
-  "homepage": "https://github.com/phamkhanhminhman97/lazada-api-client#readme",
+  "homepage": "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/tree/main/packages/lazada-api-client#readme",
   "engines": {
     "node": ">=16"
   },

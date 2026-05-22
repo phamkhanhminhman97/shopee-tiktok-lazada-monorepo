@@ -36,9 +36,9 @@
     "directory": "packages/tiktokshops-api-client"
   },
   "bugs": {
-    "url": "https://github.com/phamkhanhminhman97/tiktokshops-api-client/issues"
+    "url": "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/issues"
   },
-  "homepage": "https://github.com/phamkhanhminhman97/tiktokshops-api-client#readme",
+  "homepage": "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/tree/main/packages/tiktokshops-api-client#readme",
   "engines": {
     "node": ">=16"
   },
