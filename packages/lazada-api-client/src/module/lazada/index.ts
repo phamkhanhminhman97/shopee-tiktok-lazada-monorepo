@@ -16,7 +16,17 @@ import { LazadaResponseAccessToken } from './dto/response/config.response';
 
 export class LazadaModule {
   private config: LazadaConfig;
-  constructor(config) {
+
+  /**
+   * Create a Lazada API client.
+   *
+   * IDE IntelliSense will show the required and optional fields from `LazadaConfig`
+   * when you type `new LazadaModule({ ... })`.
+   *
+   * @param config Lazada client configuration such as `appKey`, `appSecret`,
+   * `appAccessToken`, `refreshToken`, and `countryCode`.
+   */
+  constructor(config: LazadaConfig) {
     this.config = config;
   }
 
@@ -63,19 +73,31 @@ export class LazadaModule {
     return await getCategoryTree(this.config);
   }
 
-  generateAuthLink(redirectURL: string, appKey: string, uuid: string) {
-    return generateAuthLink(redirectURL, appKey, uuid);
+  /**
+   * Generate a Lazada authorization URL.
+   *
+   * The third parameter used to be called `uuid` in older package versions.
+   * Lazada's current docs call this optional parameter `state`.
+   */
+  generateAuthLink(redirectURL: string, appKey = this.config.appKey, state?: string) {
+    return generateAuthLink(redirectURL, appKey, state);
   }
 
-  async fetchTokenWithAuthCode(authCode: string, uuid: string): Promise<LazadaResponseAccessToken> {
-    return fetchTokenWithAuthCode(authCode, uuid, this.config);
+  /**
+   * Exchange the authorization code returned by Lazada for access and refresh tokens.
+   *
+   * The second parameter is optional and kept only for backward compatibility.
+   * Lazada's current token API does not require it.
+   */
+  async fetchTokenWithAuthCode(authCode: string, legacyStateOrUuid?: string): Promise<LazadaResponseAccessToken> {
+    return fetchTokenWithAuthCode(authCode, legacyStateOrUuid, this.config);
   }
 
   async createProduct(payload) {
     return createProduct(payload, this.config);
   }
 
-  async refreshToken() {
+  async refreshToken(): Promise<LazadaResponseAccessToken> {
     return refreshToken(this.config);
   }
 
