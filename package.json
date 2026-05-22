@@ -1,0 +1,15 @@
+{
+  "name": "shopee-tiktok-lazada-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build:shopee && npm run build:tiktok && npm run build:lazada && npm run build:all-in-one",
+    "build:shopee": "npm run build --workspace=shopee-api-client",
+    "build:tiktok": "npm run build --workspace=tiktokshops-api-client",
+    "build:lazada": "npm run build --workspace=lazada-api-client",
+    "build:all-in-one": "npm run build --workspace=shopee-tiktokshops-lazada-api",
+    "pack:all": "npm pack --workspaces --dry-run"
+  }
+}

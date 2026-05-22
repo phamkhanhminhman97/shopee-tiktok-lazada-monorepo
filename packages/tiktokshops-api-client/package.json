@@ -1,0 +1,55 @@
+{
+  "name": "tiktokshops-api-client",
+  "version": "1.0.1",
+  "description": "TikTok Shop Open API client for TypeScript",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && tsc",
+    "prepack": "npm run build",
+    "test": "npm run build"
+  },
+  "keywords": [
+    "tiktok",
+    "tiktok-shop",
+    "tiktokshops",
+    "tiktok-shop-api",
+    "typescript"
+  ],
+  "author": "PKMM97",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phamkhanhminhman97/tiktokshops-api-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phamkhanhminhman97/tiktokshops-api-client/issues"
+  },
+  "homepage": "https://github.com/phamkhanhminhman97/tiktokshops-api-client#readme",
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3"
+  }
+}
