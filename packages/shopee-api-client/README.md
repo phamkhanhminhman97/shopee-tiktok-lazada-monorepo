@@ -291,6 +291,13 @@ const shopee = new ShopeeModule({
 
 ## Get orders
 
+There are two order-list helpers:
+
+| Method | Pagination | Return type | Use when |
+| --- | --- | --- | --- |
+| `getOrders()` | Auto-paginates all pages | `Promise<ShopeeOrderListItem[]>` | You only need the final order items |
+| `getOrderList()` | One page per call | `Promise<ShopeeResponseOrderList>` | You need `request_id`, `response.more`, or `response.next_cursor` |
+
 **Shorthand** — returns orders from the last N minutes:
 
 ```ts
@@ -315,11 +322,15 @@ const orders = await shopee.getOrders({
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `beforeMinutes` | `number` | No | Get orders from the last N minutes |
+| `timeFrom` | `number` | No | Start Unix timestamp in seconds. Max range with `timeTo` is 15 days |
+| `timeTo` | `number` | No | End Unix timestamp in seconds. Defaults to current timestamp |
 | `timeRangeField` | `string` | No | `create_time` or `update_time` |
 | `orderStatus` | `ShopeeOrderStatus` | No | Filter by order status |
 | `responseOptionalFields` | `string[]` | No | Optional fields to include in the response |
 | `requestOrderStatusPending` | `boolean` | No | Whether to include pending orders |
-| `pageSize` | `number` | No | Page size |
+| `pageSize` | `number` | No | Page size, from 1 to 100 |
+| `cursor` | `string` | No | Cursor for `getOrderList()` manual pagination |
+| `logisticsChannelId` | `number` | No | Logistics channel ID. Valid only for BR |
 
 **Available `orderStatus` values**
 
@@ -337,6 +348,25 @@ type ShopeeOrderStatus =
 ```
 
 When `orderStatus` is `"ALL"`, the package omits `order_status` from the Shopee request so Shopee returns all statuses in the selected time range.
+
+**Single-page raw response**
+
+Use `getOrderList()` when you want to control pagination manually or store Shopee cursors.
+
+```ts
+const page = await shopee.getOrderList({
+  beforeMinutes: 60,
+  pageSize: 50,
+  cursor: "",
+  responseOptionalFields: ["order_status"],
+});
+
+console.log(page.response.more);
+console.log(page.response.next_cursor);
+console.log(page.response.order_list);
+```
+
+If `page.response.more` is `true`, pass `page.response.next_cursor` as `cursor` in the next `getOrderList()` call.
 
 ---
 
@@ -415,7 +445,8 @@ app.get("/shopee/callback", async (req, res) => {
 
 | Method | Description |
 | --- | --- |
-| `getOrders` | Get Shopee order list |
+| `getOrders` | Auto-paginate Shopee order list and return order items |
+| `getOrderList` | Get one raw Shopee order-list page with cursor metadata |
 | `getOrderDetail` | Get Shopee order detail |
 | `cancelOrder` | Cancel order before shipment |
 

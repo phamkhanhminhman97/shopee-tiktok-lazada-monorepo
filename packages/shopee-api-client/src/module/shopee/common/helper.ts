@@ -8,11 +8,18 @@ function commonParameter(config: ShopeeConfig, signature: string, timestamp: num
   return commonParam;
 }
 
+function signPublicRequest(path: string, config: ShopeeConfig, timestamp: number) {
+  const { partnerId, partnerKey } = config;
+  const baseString = `${partnerId}${path}${timestamp}`;
+
+  return createHmac('sha256', partnerKey).update(baseString).digest('hex');
+}
+
 function signRequest(path: string, config: ShopeeConfig, timestamp) {
   const { partnerId, accessToken, shopId, partnerKey } = config;
   let params = [partnerId, path, timestamp.toString(), accessToken, shopId];
   params = params.filter(function (item) {
-    return item !== null;
+    return item !== null && item !== undefined;
   });
   const baseString = params.reduce((prev, curr) => (prev += curr), '');
 
@@ -149,6 +156,7 @@ function refreshTokenExpire30Days() {
 export {
   buildCommonParameters,
   getTimestampMinutesAgo,
+  signPublicRequest,
   signRequest,
   getTimestampNow,
   commonParameter,

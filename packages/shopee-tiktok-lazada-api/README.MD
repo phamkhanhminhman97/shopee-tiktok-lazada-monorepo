@@ -73,6 +73,11 @@ For a complete OAuth walkthrough, see the [`shopee-api-client` documentation](ht
 
 ### Orders
 
+| Method | Pagination | Return type | Use when |
+| --- | --- | --- | --- |
+| `getOrders()` | Auto-paginates all pages | `Promise<ShopeeOrderListItem[]>` | You only need the final order items |
+| `getOrderList()` | One page per call | `Promise<ShopeeResponseOrderList>` | You need `request_id`, `response.more`, or `response.next_cursor` |
+
 ```ts
 // get orders from last N minutes (shorthand)
 const orders = await shopee.getOrders(60);
@@ -87,6 +92,16 @@ const orders = await shopee.getOrders({
   requestOrderStatusPending: true,
   pageSize: 100,
 });
+
+// get one raw Shopee page when you need cursor metadata
+const page = await shopee.getOrderList({
+  beforeMinutes: 60,
+  pageSize: 50,
+  cursor: '',
+  responseOptionalFields: ['order_status'],
+});
+console.log(page.response.more, page.response.next_cursor);
+// if more is true, pass next_cursor as cursor in the next getOrderList() call
 
 // get order detail
 const detail = await shopee.getOrderDetail('ORDER_SN');
@@ -170,7 +185,8 @@ const escrow = await shopee.getEscrowDetail('ORDER_SN');
 | `generateAuthLink` | Generate seller authorization URL |
 | `fetchToken` | Exchange authorization code for access and refresh token |
 | `refreshToken` | Refresh access token and refresh token |
-| `getOrders` | Get order list |
+| `getOrders` | Auto-paginate order list and return order items |
+| `getOrderList` | Get one raw order-list page with cursor metadata |
 | `getOrderDetail` | Get order detail |
 | `cancelOrder` | Cancel order before shipment |
 | `getShipmentList` | Get orders ready for shipment |

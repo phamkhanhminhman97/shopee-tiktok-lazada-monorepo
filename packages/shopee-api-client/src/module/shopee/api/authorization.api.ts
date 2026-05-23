@@ -16,8 +16,8 @@ export async function generateAuthLink(redirectURL: string, config: ShopeeConfig
   const redirect = redirectURL;
   const timestamp = ShopeeHelper.getTimestampNow();
 
-  const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GENERATE_AUTH_LINK, config, timestamp);
-  const commonParam = `?partner_id=${partnerId}&redirect=${redirect}&timestamp=${timestamp}&sign=${signature}`;
+  const signature = ShopeeHelper.signPublicRequest(SHOPEE_PATH.GENERATE_AUTH_LINK, config, timestamp);
+  const commonParam = `?partner_id=${partnerId}&redirect=${encodeURIComponent(redirect)}&timestamp=${timestamp}&sign=${signature}`;
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GENERATE_AUTH_LINK}${commonParam}`;
 
@@ -106,18 +106,18 @@ export async function fetchTokenWithRefreshToken(config: ShopeeConfig): Promise<
   return ShopeeHelper.httpPost(url, body, headers);
 }
 
-/**
- *
- * @param signature
- * @param config
- * @param payload
- * @returns
- */
-export function verifySignature(signature: string, config, payload: any): boolean {
-  const baseString = process.env.SHOPEE_WEBHOOK2 + '|' + payload.toString();
-  const calAuth = createHmac(SHOPEE_ALGORITHM, config.partnerKey).update(baseString).digest(SHOPEE_DIGEST);
-  if (calAuth === signature) {
-    return true;
-  }
-  return false;
-}
+// /**
+//  *
+//  * @param signature
+//  * @param config
+//  * @param payload
+//  * @returns
+//  */
+// export function verifySignature(signature: string, config, payload: any): boolean {
+//   const baseString = process.env.SHOPEE_WEBHOOK2 + '|' + payload.toString();
+//   const calAuth = createHmac(SHOPEE_ALGORITHM, config.partnerKey).update(baseString).digest(SHOPEE_DIGEST);
+//   if (calAuth === signature) {
+//     return true;
+//   }
+//   return false;
+// }

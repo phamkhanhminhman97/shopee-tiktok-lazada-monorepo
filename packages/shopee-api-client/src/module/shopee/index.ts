@@ -1,5 +1,5 @@
 import { ShopeeConfig } from './dto/request/config.request';
-import { getOrderDetail, getOrders, getShipmentList, searchPackageList, getPackageDetail, cancelOrder } from './api/order.api';
+import { getOrderDetail, getOrderList, getOrders, getShipmentList, searchPackageList, getPackageDetail, cancelOrder } from './api/order.api';
 import {
   getProductItemBaseInfo,
   getProductItemList,
@@ -14,6 +14,7 @@ import {
 import {
   ShopeeResponseOrderDetail,
   ShopeeOrderListItem,
+  ShopeeResponseOrderList,
   ShopeeResponseSearchPackageList,
   ShopeeResponseGetPackageDetail,
   ShopeeResponseCancelOrder,
@@ -100,7 +101,15 @@ export class ShopeeModule {
   }
 
   /**
-   * Get Shopee orders.
+   * Get Shopee orders with automatic pagination.
+   *
+   * This is the convenience method for most use cases. It keeps calling
+   * Shopee `v2.order.get_order_list` while `response.more` is true, merges
+   * every page, and returns only the final `response.order_list` items.
+   *
+   * Use this when you only need order numbers/statuses and do not need Shopee's
+   * raw pagination metadata such as `request_id`, `response.more`, or
+   * `response.next_cursor`.
    *
    * Legacy usage:
    *   getOrders(60)
@@ -113,9 +122,30 @@ export class ShopeeModule {
    *   })
    *
    * orderStatus defaults to ALL, which means order_status is not sent to Shopee.
+   *
+   * @returns A flattened array of order-list items from all fetched pages.
+   * @see getOrderList Use this instead when you need the raw Shopee response for one page.
    */
   async getOrders(beforeMinutesOrOptions: number | ShopeeGetOrdersOptions = {}): Promise<ShopeeOrderListItem[]> {
     return await getOrders(beforeMinutesOrOptions, this.config);
+  }
+
+  /**
+   * Get one Shopee order-list page and keep Shopee's raw response metadata.
+   *
+   * This is the lower-level method that maps directly to Shopee
+   * `v2.order.get_order_list`. It does not auto-paginate. You receive Shopee's
+   * response exactly for the requested page, including `request_id`,
+   * `response.more`, `response.next_cursor`, and `response.order_list`.
+   *
+   * Use this when you want to control pagination yourself, store cursors,
+   * inspect request IDs for debugging, or mirror Shopee's API response shape.
+   *
+   * @returns Raw Shopee order-list response for one page.
+   * @see getOrders Use this instead when you want auto-pagination and only need order items.
+   */
+  async getOrderList(options: ShopeeGetOrdersOptions = {}): Promise<ShopeeResponseOrderList> {
+    return await getOrderList(options, this.config);
   }
 
   async getOrderDetail(orderNumber: string): Promise<ShopeeResponseOrderDetail> {

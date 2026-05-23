@@ -4,11 +4,120 @@ import * as ShopeeHelper from '../common/helper';
 import {
   ShopeeResponseOrderDetail,
   ShopeeOrderListItem,
+  ShopeeResponseOrderList,
   ShopeeResponseSearchPackageList,
   ShopeeResponseGetPackageDetail,
   ShopeeResponseCancelOrder,
 } from '../dto/response/order.response';
 import { ShopeeRequestSearchPackageList, ShopeeRequestCancelOrder, ShopeeGetOrdersOptions } from '../dto/request/order.request';
+
+const FIFTEEN_DAYS_IN_MINUTES = 15 * 24 * 60;
+
+interface NormalizedGetOrdersOptions {
+  timeRangeField: 'create_time' | 'update_time';
+  timeFrom: number;
+  timeTo: number;
+  pageSize: number;
+  cursor: string;
+  orderStatus: ShopeeGetOrdersOptions['orderStatus'];
+  responseOptionalFields?: string;
+  requestOrderStatusPending?: boolean;
+  logisticsChannelId?: number;
+}
+
+function normalizeGetOrdersOptions(options: ShopeeGetOrdersOptions = {}): NormalizedGetOrdersOptions {
+  const pageSize = options.pageSize ?? 100;
+  if (!Number.isInteger(pageSize) || pageSize < 1 || pageSize > 100) {
+    throw new Error(`[Shopee API] pageSize must be an integer between 1 and 100. You provided ${pageSize}.`);
+  }
+
+  const timeTo = options.timeTo ?? ShopeeHelper.getTimestampNow();
+  const timeFrom = options.timeFrom ?? ShopeeHelper.getTimestampMinutesAgo(options.beforeMinutes ?? FIFTEEN_DAYS_IN_MINUTES);
+
+  if (!Number.isInteger(timeFrom) || !Number.isInteger(timeTo) || timeFrom <= 0 || timeTo <= 0) {
+    throw new Error('[Shopee API] timeFrom and timeTo must be valid Unix timestamps in seconds.');
+  }
+
+  if (timeFrom >= timeTo) {
+    throw new Error('[Shopee API] timeFrom must be earlier than timeTo.');
+  }
+
+  const rangeMinutes = Math.ceil((timeTo - timeFrom) / 60);
+  if (rangeMinutes > FIFTEEN_DAYS_IN_MINUTES) {
+    throw new Error(`[Shopee API] The maximum date range is 15 days (${FIFTEEN_DAYS_IN_MINUTES} minutes). Please reduce the query range.`);
+  }
+
+  if (typeof options.logisticsChannelId === 'number' && !Number.isInteger(options.logisticsChannelId)) {
+    throw new Error(`[Shopee API] logisticsChannelId must be an integer. You provided ${options.logisticsChannelId}.`);
+  }
+
+  const responseOptionalFields = Array.isArray(options.responseOptionalFields)
+    ? options.responseOptionalFields.join(',')
+    : options.responseOptionalFields;
+
+  return {
+    timeRangeField: options.timeRangeField ?? 'create_time',
+    timeFrom,
+    timeTo,
+    pageSize,
+    cursor: options.cursor ?? '',
+    orderStatus: options.orderStatus ?? 'ALL',
+    responseOptionalFields,
+    requestOrderStatusPending: options.requestOrderStatusPending,
+    logisticsChannelId: options.logisticsChannelId,
+  };
+}
+
+/**
+ * Get one page from Shopee v2.order.get_order_list and return the raw Shopee response.
+ *
+ * Use this when you need Shopee pagination metadata such as `more`,
+ * `next_cursor`, and `request_id`.
+ *
+ * @param options Shopee order list query options.
+ * @param config Shopee API configuration.
+ * @returns Raw Shopee response for one page.
+ */
+export async function getOrderList(options: ShopeeGetOrdersOptions, config: ShopeeConfig): Promise<ShopeeResponseOrderList> {
+  const normalized = normalizeGetOrdersOptions(options);
+  const requestTimestamp = ShopeeHelper.getTimestampNow();
+  const signature = ShopeeHelper.signRequest(SHOPEE_PATH.ORDER_LIST, config, requestTimestamp);
+
+  const additionalParams: Record<string, string | number | boolean> = {
+    time_range_field: normalized.timeRangeField,
+    time_from: normalized.timeFrom,
+    time_to: normalized.timeTo,
+    page_size: normalized.pageSize,
+    cursor: normalized.cursor,
+  };
+
+  if (normalized.orderStatus !== 'ALL') {
+    additionalParams.order_status = normalized.orderStatus!;
+  }
+
+  if (normalized.responseOptionalFields) {
+    additionalParams.response_optional_fields = normalized.responseOptionalFields;
+  }
+
+  if (typeof normalized.requestOrderStatusPending === 'boolean') {
+    additionalParams.request_order_status_pending = normalized.requestOrderStatusPending;
+  }
+
+  if (typeof normalized.logisticsChannelId === 'number') {
+    additionalParams.logistics_channel_id = normalized.logisticsChannelId;
+  }
+
+  const commonParams = ShopeeHelper.buildCommonParams(config, signature, requestTimestamp, additionalParams);
+  const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_LIST}${commonParams}`;
+
+  const res: ShopeeResponseOrderList = await ShopeeHelper.httpGet(url, config);
+
+  if (res?.error) {
+    throw new Error(`[Shopee API Error - getOrderList] ${res.error}: ${res.message}`);
+  }
+
+  return res;
+}
 
 /**
  * Get orders from Shopee v2.order.get_order_list.
@@ -35,75 +144,24 @@ export async function getOrders(
   beforeMinutesOrOptions: number | ShopeeGetOrdersOptions,
   config: ShopeeConfig,
 ): Promise<ShopeeOrderListItem[]> {
-  const FIFTEEN_DAYS_IN_MINUTES = 15 * 24 * 60;
   const options: ShopeeGetOrdersOptions =
     typeof beforeMinutesOrOptions === 'number' ? { beforeMinutes: beforeMinutesOrOptions } : beforeMinutesOrOptions;
-
-  const pageSize = options.pageSize ?? 100;
-  if (pageSize < 1 || pageSize > 100) {
-    throw new Error(`[Shopee API] pageSize must be between 1 and 100. You provided ${pageSize}.`);
-  }
-
-  const timeTo = options.timeTo ?? ShopeeHelper.getTimestampNow();
-  const timeFrom = options.timeFrom ?? ShopeeHelper.getTimestampMinutesAgo(options.beforeMinutes ?? FIFTEEN_DAYS_IN_MINUTES);
-
-  // Shopee API restricts time range to 15 days max
-  if (timeFrom >= timeTo) {
-    throw new Error('[Shopee API] timeFrom must be earlier than timeTo.');
-  }
-
-  const rangeMinutes = Math.ceil((timeTo - timeFrom) / 60);
-  if (rangeMinutes > FIFTEEN_DAYS_IN_MINUTES) {
-    throw new Error(`[Shopee API] The maximum date range is 15 days (${FIFTEEN_DAYS_IN_MINUTES} minutes). Please reduce the query range.`);
-  }
-
-  let cursor = options.cursor ?? '';
+  const normalized = normalizeGetOrdersOptions(options);
+  let cursor = normalized.cursor;
   const orderList: ShopeeOrderListItem[] = [];
   let hasMoreData = true;
-  const orderStatus = options.orderStatus ?? 'ALL';
-  const responseOptionalFields = Array.isArray(options.responseOptionalFields)
-    ? options.responseOptionalFields.join(',')
-    : options.responseOptionalFields;
 
   while (hasMoreData) {
-    // Current timestamp for request signature
-    const requestTimestamp = ShopeeHelper.getTimestampNow();
-    const signature = ShopeeHelper.signRequest(SHOPEE_PATH.ORDER_LIST, config, requestTimestamp);
-
-    // time_from and time_to MUST be constant during pagination to prevent data shifting
-    const additionalParams: Record<string, string | number | boolean> = {
-      time_range_field: options.timeRangeField ?? 'create_time',
-      time_from: timeFrom,
-      time_to: timeTo,
-      page_size: pageSize,
-      cursor: cursor,
-    };
-
-    if (orderStatus !== 'ALL') {
-      additionalParams.order_status = orderStatus;
-    }
-
-    if (responseOptionalFields) {
-      additionalParams.response_optional_fields = responseOptionalFields;
-    }
-
-    if (typeof options.requestOrderStatusPending === 'boolean') {
-      additionalParams.request_order_status_pending = options.requestOrderStatusPending;
-    }
-
-    if (typeof options.logisticsChannelId === 'number') {
-      additionalParams.logistics_channel_id = options.logisticsChannelId;
-    }
-
-    const commonParams = ShopeeHelper.buildCommonParams(config, signature, requestTimestamp, additionalParams);
-    const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_LIST}${commonParams}`;
-
-    const res: any = await ShopeeHelper.httpGet(url, config);
-
-    // Handle API Error explicitly instead of silently failing
-    if (res?.error) {
-      throw new Error(`[Shopee API Error - getOrders] ${res.error}: ${res.message}`);
-    }
+    const res = await getOrderList(
+      {
+        ...options,
+        timeFrom: normalized.timeFrom,
+        timeTo: normalized.timeTo,
+        pageSize: normalized.pageSize,
+        cursor,
+      },
+      config,
+    );
 
     // Break gracefully if no data
     if (!res?.response?.order_list || res.response.order_list.length === 0) {
