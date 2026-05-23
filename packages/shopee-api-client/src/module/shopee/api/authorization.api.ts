@@ -1,4 +1,4 @@
-import { SHOPEE_ALGORITHM, SHOPEE_DIGEST, SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
+import { SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
 import { ShopeeConfig, ShopeeRequestGetAccesstoken, ShopeeRequestRefreshToken } from '../dto/request/config.request';
 import { createHmac } from 'crypto';
 import * as ShopeeHelper from '../common/helper';
@@ -105,19 +105,3 @@ export async function fetchTokenWithRefreshToken(config: ShopeeConfig): Promise<
   const headers = ShopeeHelper.getHeaders(config);
   return ShopeeHelper.httpPost(url, body, headers);
 }
-
-// /**
-//  *
-//  * @param signature
-//  * @param config
-//  * @param payload
-//  * @returns
-//  */
-// export function verifySignature(signature: string, config, payload: any): boolean {
-//   const baseString = process.env.SHOPEE_WEBHOOK2 + '|' + payload.toString();
-//   const calAuth = createHmac(SHOPEE_ALGORITHM, config.partnerKey).update(baseString).digest(SHOPEE_DIGEST);
-//   if (calAuth === signature) {
-//     return true;
-//   }
-//   return false;
-// }

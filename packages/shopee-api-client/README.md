@@ -370,6 +370,76 @@ If `page.response.more` is `true`, pass `page.response.next_cursor` as `cursor` 
 
 ---
 
+## Push Mechanism / Webhooks
+
+Shopee Push Mechanism is Shopee's webhook system. Shopee sends an HTTP `POST` request to your callback URL, and the signature is in the `Authorization` header.
+
+Use `verifyPushSignature()` to verify the request before processing it.
+
+```ts
+import express from "express";
+import {
+  ShopeeModule,
+  SHOPEE_PUSH_CODE,
+  type ShopeeKnownPushPayload,
+} from "shopee-api-client";
+
+const app = express();
+const shopee = new ShopeeModule({
+  partnerId: Number(process.env.SHOPEE_PARTNER_ID),
+  partnerKey: process.env.SHOPEE_PARTNER_KEY!,
+});
+
+app.post(
+  "/shopee/webhook",
+  express.raw({ type: "application/json" }),
+  (req, res) => {
+    const callbackUrl = "https://your-app.com/shopee/webhook";
+    const authorization = req.header("authorization") ?? "";
+
+    const isValid = shopee.verifyPushSignature(
+      callbackUrl,
+      req.body,
+      authorization
+    );
+
+    if (!isValid) {
+      return res.status(401).end();
+    }
+
+    const payload = shopee.parsePushPayload<ShopeeKnownPushPayload>(req.body);
+
+    if (payload.code === SHOPEE_PUSH_CODE.ORDER_STATUS_UPDATE) {
+      console.log(payload.data.ordersn, payload.data.status);
+      // Fetch the latest order data from Shopee APIs here.
+      // Push only tells you that data changed.
+    }
+
+    return res.status(204).end();
+  }
+);
+```
+
+Important webhook notes:
+
+- Pass the full callback URL exactly as Shopee calls it.
+- Pass the original raw request body. Do not pass `JSON.stringify(req.body)`.
+- Return a `2xx` status with an empty body to avoid Shopee retries.
+- Push tells you an event changed. Call the related Shopee API to fetch the latest data.
+
+Common push codes:
+
+| Code | Constant | Event |
+| --- | --- | --- |
+| `1` | `SHOP_AUTHORIZATION` | Shop authorization |
+| `2` | `SHOP_AUTHORIZATION_CANCELED` | Shop authorization canceled |
+| `3` | `ORDER_STATUS_UPDATE` | Order status update |
+| `4` | `ORDER_TRACKING_NO` | Tracking number update |
+| `12` | `OPEN_API_AUTHORIZATION_EXPIRY` | Authorization expires soon |
+| `15` | `SHIPPING_DOCUMENT_STATUS` | Shipping document status update |
+
+---
+
 ## Error handling
 
 All methods throw if Shopee returns a non-empty `error` field. Wrap calls in `try/catch`:
@@ -440,6 +510,13 @@ app.get("/shopee/callback", async (req, res) => {
 | `generateAuthLink` | Generate Shopee authorization URL |
 | `fetchToken` | Exchange authorization code for access token and refresh token |
 | `refreshToken` | Refresh access token and refresh token |
+
+### Push Mechanism
+
+| Method | Description |
+| --- | --- |
+| `verifyPushSignature` | Verify Shopee webhook Authorization header |
+| `parsePushPayload` | Parse verified Shopee webhook raw body |
 
 ### Orders
 

@@ -74,6 +74,8 @@ import {
 import { fetchTokenWithAuthCode, fetchTokenWithRefreshToken, generateAuthLink } from './api/authorization.api';
 import { ShopeeResponseGetAccessToken, ShopeeResponseRefreshAccessToken } from './dto/response/config.response';
 import { getEscrowDetail } from './api/payment.api';
+import { parseShopeePushPayload, verifyShopeePushSignature } from './api/push.api';
+import { ShopeeKnownPushPayload, ShopeePushPayload } from './dto/request/push.request';
 
 export class ShopeeModule {
   private config: ShopeeConfig;
@@ -274,5 +276,43 @@ export class ShopeeModule {
 
   async generateAuthLink(redirectURL: string): Promise<{ url: string; redirect: string }> {
     return await generateAuthLink(redirectURL, this.config);
+  }
+
+  /**
+   * Verify Shopee Push Mechanism (webhook) signature.
+   *
+   * Shopee sends the signature in the `Authorization` request header.
+   * The signature base string is:
+   *
+   *   callbackUrl + "|" + rawBody
+   *
+   * Important: `rawBody` must be the original request body bytes/string from
+   * Shopee. Do not pass `JSON.stringify(req.body)` after JSON parsing.
+   *
+   * @param callbackUrl Full callback URL exactly as Shopee calls it.
+   * @param rawBody Original raw HTTP request body from Shopee.
+   * @param authorization The `Authorization` header value sent by Shopee.
+   */
+  verifyPushSignature(callbackUrl: string, rawBody: string | Buffer, authorization: string): boolean {
+    return verifyShopeePushSignature({
+      callbackUrl,
+      rawBody,
+      partnerKey: this.config.partnerKey,
+      authorization,
+    });
+  }
+
+  /**
+   * Parse a verified Shopee Push Mechanism raw body.
+   *
+   * Call this only after `verifyPushSignature()` returns true. Shopee Push docs
+   * require signature verification against the original raw body, so parsing is
+   * intentionally separated from verification.
+   *
+   * Known typed payloads currently cover auth/order webhooks:
+   * code 1, 2, 12, 3, 4, and 15.
+   */
+  parsePushPayload<TPayload extends ShopeePushPayload = ShopeeKnownPushPayload>(rawBody: string | Buffer): TPayload {
+    return parseShopeePushPayload<TPayload>(rawBody);
   }
 }

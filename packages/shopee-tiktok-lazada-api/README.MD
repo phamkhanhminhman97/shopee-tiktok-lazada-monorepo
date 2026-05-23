@@ -178,6 +178,42 @@ const brands = await shopee.getBrandList(100001);
 const escrow = await shopee.getEscrowDetail('ORDER_SN');
 ```
 
+### Push Mechanism / Webhooks
+
+Shopee Push Mechanism is Shopee's webhook system. Verify the `Authorization` header before processing the event.
+
+```ts
+import express from 'express';
+import {
+  SHOPEE_PUSH_CODE,
+  type ShopeeKnownPushPayload,
+} from 'shopee-tiktokshops-lazada-api';
+
+const app = express();
+
+app.post('/shopee/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+  const callbackUrl = 'https://your-app.com/shopee/webhook';
+  const authorization = req.header('authorization') ?? '';
+
+  const isValid = shopee.verifyPushSignature(callbackUrl, req.body, authorization);
+
+  if (!isValid) {
+    return res.status(401).end();
+  }
+
+  const payload = shopee.parsePushPayload<ShopeeKnownPushPayload>(req.body);
+
+  if (payload.code === SHOPEE_PUSH_CODE.ORDER_STATUS_UPDATE) {
+    console.log(payload.data.ordersn, payload.data.status);
+    // Fetch the latest order data from Shopee APIs here.
+  }
+
+  return res.status(204).end();
+});
+```
+
+Use the raw request body for signature verification and return a `2xx` status with an empty body to avoid Shopee retries.
+
 ### Supported Shopee methods
 
 | Method | Description |
@@ -185,6 +221,8 @@ const escrow = await shopee.getEscrowDetail('ORDER_SN');
 | `generateAuthLink` | Generate seller authorization URL |
 | `fetchToken` | Exchange authorization code for access and refresh token |
 | `refreshToken` | Refresh access token and refresh token |
+| `verifyPushSignature` | Verify Shopee webhook Authorization header |
+| `parsePushPayload` | Parse verified Shopee webhook raw body |
 | `getOrders` | Auto-paginate order list and return order items |
 | `getOrderList` | Get one raw order-list page with cursor metadata |
 | `getOrderDetail` | Get order detail |
