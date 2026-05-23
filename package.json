@@ -19,7 +19,7 @@
     "version-patch-tiktok": "npm version patch --workspace=tiktokshops-api-client",
     "publish-tiktok": "npm publish --workspace=tiktokshops-api-client",
     "version-patch-lazada": "npm version patch --workspace=lazada-api-client",
-    "publish-lazada": "npm publish --workspace=lazada-api-client",  
+    "publish-lazada": "npm publish --workspace=lazada-api-client",
     "version-all-in-one": "npm version patch --workspace=shopee-tiktokshops-lazada-api",
     "publish-all-in-one": "npm publish --workspace=shopee-tiktokshops-lazada-api"
   },

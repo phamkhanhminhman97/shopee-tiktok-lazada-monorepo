@@ -1,7 +1,7 @@
 # lazada-api-client
 
 
-[![npm](https://img.shields.io/npm/v/shopee-api-client)](https://www.npmjs.com/package/shopee-api-client)
+[![npm](https://img.shields.io/npm/v/lazada-api-client)](https://www.npmjs.com/package/lazada-api-client)
 [![Build](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](../../LICENSE)
 

@@ -68,14 +68,13 @@ import { ShopeeModule } from "shopee-api-client";
 const shopee = new ShopeeModule({
   partnerId: Number(process.env.SHOPEE_PARTNER_ID),
   partnerKey: process.env.SHOPEE_PARTNER_KEY!,
-  shopId: Number(process.env.SHOPEE_SHOP_ID),
+  shopId: process.env.SHOPEE_SHOP_ID!,
   accessToken: process.env.SHOPEE_ACCESS_TOKEN!,
   refreshToken: process.env.SHOPEE_REFRESH_TOKEN!,
 });
 
 const orders = await shopee.getOrders({
-  timeFrom: 1710000000,
-  timeTo: 1710500000,
+  beforeMinutes: 60,
   pageSize: 50,
   orderStatus: "READY_TO_SHIP",
 });
@@ -91,11 +90,15 @@ import { TiktokModule } from "tiktokshops-api-client";
 const tiktok = new TiktokModule({
   appKey: process.env.TIKTOK_APP_KEY!,
   appSecret: process.env.TIKTOK_APP_SECRET!,
+  serviceId: process.env.TIKTOK_SERVICE_ID!,
+  shopId: process.env.TIKTOK_SHOP_ID!,
   shopCipher: process.env.TIKTOK_SHOP_CIPHER!,
   accessToken: process.env.TIKTOK_ACCESS_TOKEN!,
+  refreshToken: process.env.TIKTOK_REFRESH_TOKEN!,
 });
 
 const orders = await tiktok.getOrderList({
+  beforeHours: 24,
   pageSize: 50,
 });
 
@@ -110,10 +113,12 @@ import { LazadaModule } from "lazada-api-client";
 const lazada = new LazadaModule({
   appKey: process.env.LAZADA_APP_KEY!,
   appSecret: process.env.LAZADA_APP_SECRET!,
-  accessToken: process.env.LAZADA_ACCESS_TOKEN!,
+  appAccessToken: process.env.LAZADA_ACCESS_TOKEN!,
+  refreshToken: process.env.LAZADA_REFRESH_TOKEN!,
+  countryCode: "sg",
 });
 
-const orders = await lazada.getOrders();
+const orders = await lazada.getOrdersBeforeSomeDay();
 
 console.log(orders);
 ```

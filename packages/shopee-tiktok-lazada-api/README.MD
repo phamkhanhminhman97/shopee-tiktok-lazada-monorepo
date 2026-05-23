@@ -16,7 +16,7 @@ Unified TypeScript wrapper for Shopee Open API v2, TikTok Shop Open API, and Laz
 
 ## Requirements
 
-- Node.js 18 or later
+- Node.js 16 or later
 
 ## Installation
 

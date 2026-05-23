@@ -10,7 +10,7 @@ TypeScript client for [Shopee Open API v2](https://open.shopee.com/). Covers sel
 
 ## Requirements
 
-- Node.js 18 or later
+- Node.js 16 or later
 
 ## Installation
 
