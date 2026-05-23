@@ -2,8 +2,10 @@
 
 
 [![npm](https://img.shields.io/npm/v/lazada-api-client)](https://www.npmjs.com/package/lazada-api-client)
+[![Downloads](https://img.shields.io/npm/dm/lazada-api-client)](https://www.npmjs.com/package/lazada-api-client)
+[![Types](https://img.shields.io/npm/types/lazada-api-client)](https://www.npmjs.com/package/lazada-api-client)
 [![Build](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](../../LICENSE)
+[![License](https://img.shields.io/npm/l/lazada-api-client)](https://opensource.org/licenses/ISC)
 
 TypeScript API client for **Lazada Open API**.
 

@@ -1,8 +1,10 @@
 # shopee-api-client
 
 [![npm](https://img.shields.io/npm/v/shopee-api-client)](https://www.npmjs.com/package/shopee-api-client)
+[![Downloads](https://img.shields.io/npm/dm/shopee-api-client)](https://www.npmjs.com/package/shopee-api-client)
+[![Types](https://img.shields.io/npm/types/shopee-api-client)](https://www.npmjs.com/package/shopee-api-client)
 [![Build](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](../../LICENSE)
+[![License](https://img.shields.io/npm/l/shopee-api-client)](https://opensource.org/licenses/ISC)
 
 TypeScript client for [Shopee Open API v2](https://open.shopee.com/). Covers seller authorization, token management, orders, products, logistics, and payment escrow.
 

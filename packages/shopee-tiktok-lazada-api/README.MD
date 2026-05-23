@@ -2,8 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/shopee-tiktokshops-lazada-api)](https://www.npmjs.com/package/shopee-tiktokshops-lazada-api)
 [![npm downloads](https://img.shields.io/npm/dm/shopee-tiktokshops-lazada-api)](https://www.npmjs.com/package/shopee-tiktokshops-lazada-api)
+[![Types](https://img.shields.io/npm/types/shopee-tiktokshops-lazada-api)](https://www.npmjs.com/package/shopee-tiktokshops-lazada-api)
 [![Build](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![License](https://img.shields.io/npm/l/shopee-tiktokshops-lazada-api)](https://opensource.org/licenses/ISC)
 
 Unified TypeScript wrapper for Shopee Open API v2, TikTok Shop Open API, and Lazada Open API. One package, three platforms.
 

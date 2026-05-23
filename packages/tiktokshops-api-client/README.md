@@ -1,5 +1,11 @@
 # tiktokshops-api-client
 
+[![npm](https://img.shields.io/npm/v/tiktokshops-api-client)](https://www.npmjs.com/package/tiktokshops-api-client)
+[![Downloads](https://img.shields.io/npm/dm/tiktokshops-api-client)](https://www.npmjs.com/package/tiktokshops-api-client)
+[![Types](https://img.shields.io/npm/types/tiktokshops-api-client)](https://www.npmjs.com/package/tiktokshops-api-client)
+[![Build](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions)
+[![License](https://img.shields.io/npm/l/tiktokshops-api-client)](https://opensource.org/licenses/ISC)
+
 TypeScript API client for **TikTok Shop Open API**.
 
 This package helps Node.js / TypeScript backends integrate with TikTok Shop seller authorization, access token exchange, token refresh, order APIs, product APIs, and fulfillment APIs.

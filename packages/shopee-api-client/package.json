@@ -20,7 +20,8 @@
     "clean": "rm -rf ./dist",
     "build": "npm run clean && tsc",
     "prepack": "npm run build",
-    "test": "npm run build"
+    "test": "npm run build && node --test test/*.test.js",
+    "coverage": "npm run build && node --test --experimental-test-coverage test/*.test.js"
   },
   "keywords": [
     "shopee",

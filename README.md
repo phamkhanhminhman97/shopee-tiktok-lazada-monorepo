@@ -7,10 +7,13 @@ This monorepo provides independently published npm packages for building marketp
 > This project is not affiliated with Shopee, TikTok Shop, Lazada, Alibaba Group, or ByteDance.
 
 [![CI](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml)
-[![shopee-api-client](https://img.shields.io/npm/v/shopee-api-client.svg)](https://www.npmjs.com/package/shopee-api-client)
-[![tiktokshops-api-client](https://img.shields.io/npm/v/tiktokshops-api-client.svg)](https://www.npmjs.com/package/tiktokshops-api-client)
-[![lazada-api-client](https://img.shields.io/npm/v/lazada-api-client.svg)](https://www.npmjs.com/package/lazada-api-client)
-[![License](https://img.shields.io/badge/license-ISC-blue.svg)](./LICENSE)
+[![Shopee npm](https://img.shields.io/npm/v/shopee-api-client.svg)](https://www.npmjs.com/package/shopee-api-client)
+[![TikTok npm](https://img.shields.io/npm/v/tiktokshops-api-client.svg)](https://www.npmjs.com/package/tiktokshops-api-client)
+[![Lazada npm](https://img.shields.io/npm/v/lazada-api-client.svg)](https://www.npmjs.com/package/lazada-api-client)
+[![All-in-one npm](https://img.shields.io/npm/v/shopee-tiktokshops-lazada-api.svg)](https://www.npmjs.com/package/shopee-tiktokshops-lazada-api)
+[![Downloads](https://img.shields.io/npm/dm/shopee-tiktokshops-lazada-api.svg)](https://www.npmjs.com/package/shopee-tiktokshops-lazada-api)
+[![Types](https://img.shields.io/npm/types/shopee-api-client.svg)](https://www.npmjs.com/package/shopee-api-client)
+[![License](https://img.shields.io/npm/l/shopee-api-client.svg)](./LICENSE)
 
 ## Why This Project?
 
@@ -209,6 +212,13 @@ Build all packages:
 npm run build
 ```
 
+Run tests and coverage:
+
+```bash
+npm test
+npm run coverage
+```
+
 Build one package:
 
 ```bash
@@ -223,6 +233,14 @@ Pack all packages locally:
 ```bash
 npm run pack:all
 ```
+
+## Contributing
+
+Contributions are welcome. Start with:
+
+- [`CONTRIBUTING.md`](./CONTRIBUTING.md) for setup, workflow, and PR expectations.
+- [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md) for community rules.
+- GitHub issue templates for bug reports and feature requests.
 
 ## Release
 

@@ -10,6 +10,8 @@
     "build:tiktok": "npm run build --workspace=tiktokshops-api-client",
     "build:lazada": "npm run build --workspace=lazada-api-client",
     "build:all-in-one": "npm run build --workspace=shopee-tiktokshops-lazada-api",
+    "test": "npm run test --workspaces --if-present",
+    "coverage": "npm run coverage --workspace=shopee-api-client",
     "pack:all": "npm pack --workspaces --dry-run",
     "changeset": "changeset",
     "version-packages": "changeset version",
