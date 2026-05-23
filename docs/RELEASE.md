@@ -65,15 +65,18 @@ npm run version-patch-lazada
 npm run publish-lazada
 ```
 
-Then update `packages/shopee-tiktok-lazada-api/package.json` so its dependencies point to the newly published package versions.
+Then version the all-in-one package. This command automatically syncs its dependencies from the current versions of:
+
+- `packages/shopee-api-client/package.json`
+- `packages/tiktokshops-api-client/package.json`
+- `packages/lazada-api-client/package.json`
 
 Publish the all-in-one package last:
 
 ```bash
-npm install
+npm run version-all-in-one
 npm run build
 npm run pack:all
-npm run version-all-in-one
 npm run publish-all-in-one
 ```
 

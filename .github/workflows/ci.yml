@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check all-in-one dependencies
+        run: npm run check-all-in-one-deps
+
       - name: Build workspaces
         run: npm run build
 
