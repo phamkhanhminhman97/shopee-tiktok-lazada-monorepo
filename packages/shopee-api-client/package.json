@@ -3,7 +3,8 @@
   "version": "1.0.7",
   "description": "Shopee Open API client for TypeScript",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
