@@ -1,17 +1,18 @@
 # lazada-api-client
 
-
 [![npm](https://img.shields.io/npm/v/lazada-api-client)](https://www.npmjs.com/package/lazada-api-client)
 [![Downloads](https://img.shields.io/npm/dm/lazada-api-client)](https://www.npmjs.com/package/lazada-api-client)
 [![Types](https://img.shields.io/npm/types/lazada-api-client)](https://www.npmjs.com/package/lazada-api-client)
 [![Build](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/actions)
 [![License](https://img.shields.io/npm/l/lazada-api-client)](https://opensource.org/licenses/ISC)
 
-TypeScript API client for **Lazada Open API**.
+TypeScript API client for **Lazada Open Platform**.
 
-This package helps Node.js / TypeScript backends integrate with Lazada seller authorization, access token exchange, token refresh, order APIs, and product APIs.
+A Node.js / TypeScript package for integrating with Lazada: seller authorization, token management, **14 Order APIs**, Product APIs, and Payment Options.
 
 > Unofficial package. This project is not affiliated with Lazada.
+
+---
 
 ## Installation
 
@@ -32,10 +33,17 @@ const lazada = new LazadaModule({
   countryCode: "sg",
 });
 
+// Fetch product list
 const products = await lazada.getProducts();
 
-console.log(products);
+// Fetch order list
+const orders = await lazada.getOrders({
+  created_after: "2024-01-01T00:00:00+08:00",
+  limit: 100,
+});
 ```
+
+---
 
 ## Configuration
 
@@ -50,319 +58,344 @@ const lazada = new LazadaModule({
 ```
 
 | Field | Required | Description |
-| --- | --- | --- |
-| `appKey` | Yes | Lazada Open Platform APP Key |
-| `appSecret` | Yes | Lazada Open Platform APP Secret used to sign requests |
-| `countryCode` | No | Store region such as `sg`, `my`, `th`, `vn`, `id`, `ph`, or `cb` |
-| `shopId` | No | Optional store identifier kept by your application |
-| `appAccessToken` | Required for private APIs | Lazada access token used to call seller APIs |
-| `refreshToken` | Required for token refresh | Lazada refresh token used to get a new access token |
-| `expiresIn` | No | Remaining access token lifetime in seconds |
-| `refreshExpiresIn` | No | Remaining refresh token lifetime in seconds |
+|-------|----------|-------------|
+| `appKey` | ✅ Yes | Lazada Open Platform APP Key |
+| `appSecret` | ✅ Yes | APP Secret used to sign requests |
+| `countryCode` | ❌ No | Country code: `sg`, `my`, `th`, `vn`, `id`, `ph`, `cb` |
+| `shopId` | ❌ No | Custom store identifier |
+| `appAccessToken` | ⚠️ Required for private APIs | Access token |
+| `refreshToken` | ⚠️ Required for token refresh | Refresh token |
+| `expiresIn` | ❌ No | Remaining access token lifetime (seconds) |
+| `refreshExpiresIn` | ❌ No | Remaining refresh token lifetime (seconds) |
+
+---
 
 ## Authorization Flow
 
-Lazada seller APIs require seller authorization before you can call order and product APIs.
+Lazada uses OAuth2.0 — seller authorization is required before calling APIs.
 
 ```text
-1. Generate a Lazada authorization link
-2. Redirect the seller to the authorization URL
-3. The seller logs in and approves your app
-4. Lazada redirects back to your callback URL with code
-5. Call fetchTokenWithAuthCode(code) to get access_token and refresh_token
-6. Store the token response on your server
-7. Create a Lazada client with appAccessToken and refreshToken
-8. Call refreshToken() before the access token expires
+1. Generate authorization URL → generateAuthLink()
+2. Redirect seller to that URL
+3. Seller logs in & confirms
+4. Lazada redirects to callback URL with ?code=xxx
+5. Exchange code for token → fetchTokenWithAuthCode(code)
+6. Store access_token and refresh_token
+7. Create LazadaModule with appAccessToken + refreshToken
+8. Refresh token before expiry → refreshToken()
 ```
 
-According to Lazada's current docs:
-- `code` is valid for one use and should be exchanged within 30 minutes
-- `access_token` is valid for 10 days
-- `refresh_token` is valid for 50 days
+Token validity:
+- `code`: valid for 30 minutes, single-use
+- `access_token`: 10 days
+- `refresh_token`: 50 days
 
-## 1. Generate Authorization Link
-
-Use `generateAuthLink(redirectURL, appKey?, state?)` to generate the Lazada authorization URL.
+### 1. Generate Authorization Link
 
 ```ts
-import { LazadaModule } from "lazada-api-client";
-
-const lazada = new LazadaModule({
-  appKey: process.env.LAZADA_APP_KEY!,
-  appSecret: process.env.LAZADA_APP_SECRET!,
-});
-
 const { url } = lazada.generateAuthLink(
   "https://your-app.com/lazada/callback",
   undefined,
   "CUSTOM_STATE"
 );
-
-console.log(url);
+// => url: "https://auth.lazada.com/oauth/authorize?response_type=code&..."
 ```
 
-### Function
+### 2. Handle Callback
 
 ```ts
-generateAuthLink(
-  redirectURL: string,
-  appKey?: string,
-  state?: string
-): {
-  url: string;
-  redirect: string;
-}
-```
-
-### Parameters
-
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| `redirectURL` | `string` | Yes | Callback URL that Lazada redirects to after seller authorization |
-| `appKey` | `string` | No | Lazada APP Key. Defaults to `config.appKey` |
-| `state` | `string` | No | Optional custom state value returned by Lazada callback |
-
-## 2. Handle Lazada Callback
-
-After the seller approves authorization, Lazada redirects back to your callback URL.
-
-Example callback URL:
-
-```text
-https://your-app.com/lazada/callback?code=0_100132_xxxxx&state=CUSTOM_STATE
-```
-
-Read these query parameters from the callback:
-
-| Query Param | Description |
-| --- | --- |
-| `code` | Authorization code returned by Lazada |
-| `state` | Optional custom value passed to `generateAuthLink` |
-
-Example with Express:
-
-```ts
+// Express.js example
 app.get("/lazada/callback", async (req, res) => {
   const code = req.query.code as string;
-  const state = req.query.state as string | undefined;
 
-  if (!code) {
-    return res.status(400).send("Missing code");
-  }
+  if (!code) return res.status(400).send("Missing code");
 
   const lazada = new LazadaModule({
     appKey: process.env.LAZADA_APP_KEY!,
     appSecret: process.env.LAZADA_APP_SECRET!,
   });
 
-  const token = await lazada.fetchTokenWithAuthCode(code, state);
+  const token = await lazada.fetchTokenWithAuthCode(code);
 
-  return res.json(token);
+  // Save token to DB (do not return to browser)
+  await saveToken(token);
+
+  res.send("Authorization successful!");
 });
 ```
 
-Do not return tokens to the browser in production. Persist them server-side and associate them with the seller account or store in your system.
-
-## 3. Fetch Access Token
-
-Use `fetchTokenWithAuthCode(code)` to exchange the authorization code for `access_token` and `refresh_token`.
+### 3. Fetch Access Token
 
 ```ts
 const token = await lazada.fetchTokenWithAuthCode("AUTH_CODE_FROM_CALLBACK");
-```
 
-### Function
-
-```ts
-fetchTokenWithAuthCode(
-  authCode: string,
-  legacyStateOrUuid?: string
-): Promise<LazadaResponseAccessToken>
-```
-
-### Parameters
-
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| `authCode` | `string` | Yes | Authorization code returned by Lazada callback |
-| `legacyStateOrUuid` | `string` | No | Backward compatibility parameter kept for older package usage. Lazada's current token API does not require it |
-
-### Required Config
-
-```ts
-const lazada = new LazadaModule({
-  appKey: process.env.LAZADA_APP_KEY!,
-  appSecret: process.env.LAZADA_APP_SECRET!,
-});
-```
-
-### Example Response
-
-```ts
+// Response
 {
   access_token: "ACCESS_TOKEN",
   country: "sg",
   refresh_token: "REFRESH_TOKEN",
-  account_platform: "seller_center",
-  refresh_expires_in: 4320000,
+  expires_in: 864000,          // 10 days
+  refresh_expires_in: 4320000, // 50 days
   country_user_info: [
-    {
-      country: "sg",
-      user_id: "1152180742",
-      seller_id: "1152180742",
-      short_code: "SGLYT0OS"
-    }
+    { country: "sg", user_id: "1152180742", seller_id: "1152180742", short_code: "SGLYT0OS" }
   ],
-  expires_in: 864000,
   account: "seller@example.com",
-  code: "0",
-  request_id: "REQUEST_ID"
+  code: "0"
 }
 ```
 
-## 4. Use Access Token
-
-After getting `access_token`, create a Lazada client with `appAccessToken` and `refreshToken`.
+### 4. Refresh Token
 
 ```ts
+const newToken = await lazada.refreshToken();
+// => Returns new access_token
+```
+
+---
+
+## Order APIs (14 methods)
+
+### 📋 API List
+
+| # | Method | Endpoint | Description |
+|---|--------|----------|-------------|
+| 1 | [`getOrders()`](src/module/lazada/api/order.api.ts:64) | `GET /orders/get` | Get orders with filters & pagination (raw response) |
+| 2 | [`getAllOrders()`](src/module/lazada/api/order.api.ts:100) | `GET /orders/get` | Auto-paginate through all orders (returns flat array) |
+| 3 | [`getOrderDetail()`](src/module/lazada/api/order.api.ts:156) | `GET /order/get` | Get single order detail |
+| 4 | [`getOrderItems()`](src/module/lazada/api/order.api.ts:187) | `GET /order/items/get` | Get items in an order |
+| 5 | [`getMultipleOrderItems()`](src/module/lazada/api/order.api.ts:215) | `GET /orders/items/get` | Get items in multiple orders (max 50) |
+| 6 | [`getShipmentProviders()`](src/module/lazada/api/order.api.ts:244) | `GET /order/shipment/providers/get` | Get available shipment providers |
+| 7 | [`packOrder()`](src/module/lazada/api/order.api.ts:275) | `POST /order/fulfill/pack` | Pack order (SetToPack) |
+| 8 | [`recreatePackage()`](src/module/lazada/api/order.api.ts:312) | `POST /order/fulfill/pack` | Repack order (SetRepack) |
+| 9 | [`setReadyToShip()`](src/module/lazada/api/order.api.ts:345) | `POST /order/package/rts` | Set package ready to ship (SetRTS) |
+| 10 | [`printAWB()`](src/module/lazada/api/order.api.ts:381) | `GET /order/document/awb/pdf/get` | Print AWB shipping label PDF |
+| 11 | [`getShippingLabel()`](src/module/lazada/api/order.api.ts:410) | `POST /order/package/document/get` | Get shipping labels V2 |
+| 12 | [`traceOrder()`](src/module/lazada/api/order.api.ts:441) | `GET /logistic/order/trace` | Trace logistics status |
+| 13 | [`confirmDeliveryForDBS()`](src/module/lazada/api/order.api.ts:473) | `POST /order/delivery/confirm` | Confirm DBS delivery success |
+| 14 | [`failedDeliveryForDBS()`](src/module/lazada/api/order.api.ts:505) | `POST /order/failed_delivery/confirm` | Confirm DBS delivery failed |
+
+### `getOrders` vs `getAllOrders` — Key Differences
+
+| Aspect | `getOrders()` | `getAllOrders()` |
+|--------|---------------|------------------|
+| **Return type** | [`LazadaResponseGetOrders`](src/module/lazada/dto/response/order.response.ts:153) — contains `{ code, data: { countTotal, count, orders }, request_id }` | [`LazadaOrderDetail[]`](src/module/lazada/dto/response/order.response.ts:54) — flat array of orders only |
+| **Pagination** | Manual — you control `offset` and `limit` | Automatic — loops with `offset += 100` until all orders are collected |
+| **Max limit** | 100 per request (configurable) | Fixed at 100 per internal request |
+| **Max offset** | 5000 (enforced by API) | 5000 (stops automatically) |
+| **Progress tracking** | ❌ Not available | ✅ Optional `onProgress(page, total, countSoFar)` callback |
+| **Use case** | Fine-grained control over pagination, checking `countTotal` | Fetching all orders at once without manual pagination logic |
+
+**Example — `getOrders()` with manual pagination:**
+```ts
+const page1 = await lazada.getOrders({ created_after, offset: 0, limit: 100 });
+const page2 = await lazada.getOrders({ created_after, offset: 100, limit: 100 });
+// ...continue incrementing offset
+```
+
+**Example — `getAllOrders()` with auto-pagination & progress:**
+```ts
+const allOrders = await lazada.getAllOrders(
+  { created_after: "2024-01-01T00:00:00+08:00" },
+  (page, total, countSoFar) => {
+    console.log(`Page ${page}/${Math.ceil(total / 100)} — loaded ${countSoFar}`);
+  }
+);
+// => LazadaOrderDetail[] — all orders
+```
+
+### Complete order processing flow example
+
+```ts
+import { LazadaModule, OrderStatusFilter } from "lazada-api-client";
+
 const lazada = new LazadaModule({
   appKey: process.env.LAZADA_APP_KEY!,
   appSecret: process.env.LAZADA_APP_SECRET!,
-  appAccessToken: "ACCESS_TOKEN",
-  refreshToken: "REFRESH_TOKEN",
+  appAccessToken: process.env.LAZADA_ACCESS_TOKEN!,
+  refreshToken: process.env.LAZADA_REFRESH_TOKEN!,
   countryCode: "sg",
 });
 
-const orders = await lazada.getOrdersBeforeSomeDay();
-
-console.log(orders);
-```
-
-## 5. Refresh Token
-
-Use `refreshToken()` to get a new `access_token`.
-
-```ts
-const lazada = new LazadaModule({
-  appKey: process.env.LAZADA_APP_KEY!,
-  appSecret: process.env.LAZADA_APP_SECRET!,
-  refreshToken: "REFRESH_TOKEN",
+// 1. Fetch pending orders
+const orders = await lazada.getOrders({
+  status: OrderStatusFilter.PENDING,
+  created_after: "2024-06-01T00:00:00+08:00",
+  limit: 100,
 });
 
-const newToken = await lazada.refreshToken();
+for (const order of orders.data?.orders ?? []) {
+  // 2. Get order items
+  const items = await lazada.getOrderItems(order.order_id!);
+  const orderItemIds = (items.data?.items ?? []).map(i => i.order_item_id!);
 
-console.log(newToken);
+  // 3. Get available shipment providers
+  const providers = await lazada.getShipmentProviders(order.order_id!);
+
+  // 4. Pack the order
+  const packResult = await lazada.packOrder({
+    order_id: order.order_id!,
+    order_item_ids: orderItemIds,
+    shipment_provider: providers.data?.providers?.[0]?.name,
+  });
+
+  // 5. Print AWB
+  const packageId = packResult.data?.pack_order_result?.package_id;
+  if (packageId) {
+    const awb = await lazada.printAWB({
+      order_id: order.order_id!,
+      package_id: packageId,
+    });
+  }
+
+  // 6. Set ready to ship
+  await lazada.setReadyToShip({
+    order_id: order.order_id!,
+    package_id: packageId!,
+  });
+}
 ```
 
-### Function
+### DBS (Delivered by Seller)
 
 ```ts
-refreshToken(): Promise<LazadaResponseAccessToken>
-```
+// Confirm successful delivery (DBS)
+await lazada.confirmDeliveryForDBS({
+  order_id: "1234567890",
+  order_item_ids: [111, 222],
+});
 
-### Required Config
-
-```ts
-const lazada = new LazadaModule({
-  appKey: process.env.LAZADA_APP_KEY!,
-  appSecret: process.env.LAZADA_APP_SECRET!,
-  refreshToken: "REFRESH_TOKEN",
+// Confirm failed delivery (DBS)
+await lazada.failedDeliveryForDBS({
+  order_id: "1234567890",
+  order_item_ids: [111, 222],
 });
 ```
 
-### Token Refresh Notes
+---
 
-- `refreshToken()` requires `config.refreshToken`
-- Lazada returns a new `access_token`
-- `refresh_token` itself has its own expiry window and cannot be extended forever
-- Before `refresh_token` expires, the seller should complete authorization again to issue a new long-lived token set
-- Do not expose `appSecret`, `appAccessToken`, or `refreshToken` in frontend code
+## Product APIs
 
-## Orders
+### API List
 
-### Get Recent Orders
+| Method | Description | Notes |
+|--------|-------------|-------|
+| `getProducts()` | Get product list (auto-pagination) | |
+| `getProductItem(itemId)` | Get product item detail | |
+| `createProduct(payload)` | Create a new product | |
+| `updateSellableQuantity(itemId, payload)` | Update sellable quantity | |
+| `updateStatusProduct(itemId, payload)` | Update product status | |
+| `updatePrice(itemId, payload)` | Update product price | |
+| `getCategoryTree()` | Get category tree | |
+| `getCategorySuggestion(productName)` | Get category suggestion | ⚠️ Not exposed on `LazadaModule` class — import directly from module |
+| `getCategoryAttributes(categoryId)` | Get category attributes | ⚠️ Not exposed on `LazadaModule` class — import directly from module |
+| `getBrands()` | Get brand list | |
 
-```ts
-const orders = await lazada.getOrdersBeforeSomeDay();
-```
+> **Deprecated endpoints (legacy constants only):** The constant `SET_STATUS_TO_PACKED_BY_MARKETPLACE = '/order/pack'` is defined in `constant.ts` but **not used** by any exported function. The old Lazada `/order/pack` endpoint has been replaced by `/order/fulfill/pack` (used by [`packOrder()`](src/module/lazada/api/order.api.ts:275) and [`recreatePackage()`](src/module/lazada/api/order.api.ts:312)). Do not use the old endpoint.
 
-### Get Order Detail
-
-```ts
-const order = await lazada.getOrderDetail("123456789012345");
-```
-
-## Products
-
-### Get Product List
+### Example
 
 ```ts
+// Product list
 const products = await lazada.getProducts();
-```
 
-### Get Product Detail
-
-```ts
+// Product detail
 const product = await lazada.getProductItem(123456789);
-```
 
-### Update Sellable Quantity
-
-```ts
+// Update quantity
 await lazada.updateSellableQuantity(123456789, {
   seller_sku: "SKU-RED-M",
   quantity: 10,
 });
-```
 
-### Update Status
+// Update price
+await lazada.updatePrice(123456789, {
+  seller_sku: "SKU-RED-M",
+  price: "120000",
+  special_price: "99000",
+});
 
-```ts
+// Update status
 await lazada.updateStatusProduct(123456789, {
   seller_sku: "SKU-RED-M",
   status: "active",
 });
 ```
 
-### Update Price
+---
+
+## Payment Options
+
+Static helpers for looking up payment methods by country.
 
 ```ts
-await lazada.updatePrice(123456789, {
-  seller_sku: "SKU-RED-M",
-  price: "120000",
-  special_price: "99000",
-});
+// Get payment methods by country
+const methods = LazadaModule.getPaymentMethodsByCountry("SG");
+// => ["MIXEDCARD", "DBS_IPP", "OCBC_IPP", "PAYPAL", ...]
+
+// Check if a method is available in a country
+const available = LazadaModule.isPaymentMethodAvailableInCountry("VN", "MOMO_WALLET");
+// => true
+
+// Get all unique payment methods
+const all = LazadaModule.getAllPaymentMethods();
+
+// Get countries supporting a method
+const countries = LazadaModule.getCountriesByPaymentMethod("COD");
+// => ["PH", "MY", "TH", "VN", "ID"]
 ```
 
-## Supported APIs
+---
+
+## Supported APIs (Overview)
 
 ### Authorization
-
 | Method | Description |
-| --- | --- |
+|--------|-------------|
 | `generateAuthLink` | Generate Lazada authorization URL |
-| `fetchTokenWithAuthCode` | Exchange authorization code for access token and refresh token |
+| `fetchTokenWithAuthCode` | Exchange authorization code for access token & refresh token |
 | `refreshToken` | Refresh access token |
 
-### Orders
-
+### Orders (14 methods)
 | Method | Description |
-| --- | --- |
-| `getOrdersBeforeSomeDay` | Get recent orders |
-| `getOrderDetail` | Get order detail |
+|--------|-------------|
+| `getOrders` | Get orders with filters & pagination (raw response with `countTotal`, `count`, `orders`) |
+| `getAllOrders` | Auto-paginate through all orders (returns flat `LazadaOrderDetail[]` with progress callback) |
+| `getOrderDetail` | Get single order detail |
+| `getOrderItems` | Get items in an order |
+| `getMultipleOrderItems` | Get items in multiple orders (max 50) |
+| `getShipmentProviders` | Get available shipment providers |
+| `packOrder` | Pack order items (SetToPack) using `/order/fulfill/pack` |
+| `recreatePackage` | Repack order items (SetRepack) using `/order/fulfill/pack` |
+| `setReadyToShip` | Set package ready to ship (SetRTS) |
+| `printAWB` | Print AWB shipping label PDF |
+| `getShippingLabel` | Get shipping labels V2 |
+| `traceOrder` | Trace logistics status |
+| `confirmDeliveryForDBS` | Confirm DBS delivery success |
+| `failedDeliveryForDBS` | Confirm DBS delivery failed |
+
+### Payment Options (static)
+| Method | Description |
+|--------|-------------|
+| `getPaymentMethodsByCountry` | Get payment methods for a country |
+| `isPaymentMethodAvailableInCountry` | Check if method is available in country |
+| `getAllPaymentMethods` | Get all unique methods across all countries |
+| `getCountriesByPaymentMethod` | Get countries supporting a method |
 
 ### Products
-
 | Method | Description |
-| --- | --- |
-| `getProducts` | Get product list |
+|--------|-------------|
+| `getProducts` | Get product list (auto-pagination) |
 | `getProductItem` | Get product item detail |
 | `createProduct` | Create product |
 | `updateSellableQuantity` | Update sellable quantity |
 | `updateStatusProduct` | Update product status |
 | `updatePrice` | Update product price |
 | `getCategoryTree` | Get category tree |
+| `getCategorySuggestion` | Get category suggestion (not on class, import directly) |
+| `getCategoryAttributes` | Get category attributes (not on class, import directly) |
 | `getBrands` | Get brand list |
+
+---
 
 ## Build
 

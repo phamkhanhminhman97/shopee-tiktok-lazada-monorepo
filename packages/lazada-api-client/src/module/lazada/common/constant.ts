@@ -68,6 +68,8 @@ enum PATH {
   ORDERS_GET = '/orders/get',
   SINGLE_ORDER_GET = '/order/get',
   SINGLE_ORDER_ITEM_GET = '/order/items/get',
+  /** GET /orders/items/get - Get order items for multiple orders (max 50 at a time) */
+  ORDERS_ITEMS_GET = '/orders/items/get',
   PRODUCT_ITEM_GET = '/product/item/get',
   SET_STATUS_TO_PACKED_BY_MARKETPLACE = '/order/pack',
   REVERSE_LIST = '/reverse/getreverseordersforseller',
