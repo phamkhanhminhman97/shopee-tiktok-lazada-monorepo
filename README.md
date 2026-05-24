@@ -17,18 +17,7 @@ This monorepo provides independently published npm packages for building marketp
 
 ## Why This Project?
 
-Integrating with multiple Southeast Asian marketplaces often requires handling different authentication flows, request signatures, access tokens, refresh tokens, pagination, order APIs, product APIs, logistics APIs, and fulfillment APIs.
-
-This project provides reusable API clients for:
-
-- Shopee Open API integration
-- TikTok Shop Open API integration
-- Lazada Open Platform integration
-- Marketplace order synchronization
-- Product and inventory automation
-- Logistics and fulfillment workflows
-- Multi-channel e-commerce backend services
-- Seller operation tools and internal dashboards
+Each marketplace (Shopee, TikTok Shop, Lazada) has its own auth flow, signing algorithm, token lifecycle, and API conventions. This monorepo abstracts those differences behind consistent TypeScript clients — so you can integrate all three without rewriting boilerplate.
 
 ## Packages
 
@@ -151,46 +140,32 @@ import {
 
 ### Shopee
 
-- Authorization link generation
-- Access token and refresh token APIs
-- Order list
-- Order detail
-- Shipment list
-- Package detail
-- Order cancellation
-- Escrow / payment detail
-- Product item list
-- Product detail
-- Stock update
-- Price update
-- Logistics APIs
+| Group | APIs |
+|-------|------|
+| **Auth** | `generateAuthLink`, `fetchToken`, `refreshToken` |
+| **Orders** | `getOrders` (auto-paginate), `getOrderList` (cursor), `getOrderDetail`, `cancelOrder` |
+| **Products** | `getProductItemList`, `getProductItemBaseInfo`, `addItem`, `updateStock`, `updatePrice`, `unListItem`, `getCategory`, `getAttributes`, `getBrandList` |
+| **Logistics** | `getChannelList`, `getShipmentList`, `getPackageDetail`, `shipOrder`, `massShipOrder`, `getTrackingNumber`, `getTrackingInfo`, `createShippingDocument`, `getShippingDocumentResult`, `downloadShippingDocument`, `getAddressList` |
+| **Payment** | `getEscrowDetail` |
+| **Webhook** | `verifyPushSignature`, `parsePushPayload` |
 
 ### TikTok Shop
 
-- Authorization APIs
-- Access token and refresh token APIs
-- Order list
-- Order detail
-- Price detail
-- Product APIs
-- Fulfillment APIs
+| Group | APIs |
+|-------|------|
+| **Auth** | `generateAuthLink`, `fetchTokenWithAuthCode`, `refreshToken`, `getAuthorizedShop` |
+| **Orders** | `getOrderList`, `getOrderDetail`, `getPriceDetail` |
+| **Products** | `getProductDetail`, `getCategories`, `getBrands`, `getAttributes`, `createProduct` |
+| **Fulfillment** | `getPackageTimeSlots`, `shipPackage`, `getShippingDocument` |
 
 ### Lazada
 
-- OAuth2 Authorization (generate link, exchange code, refresh token)
-- **14 Order APIs**:
-  - `getOrders` — list orders with filters & pagination
-  - `getAllOrders` — auto-paginate through all orders
-  - `getOrderDetail` — single order detail
-  - `getOrderItems` / `getMultipleOrderItems` — order item details
-  - `getShipmentProviders` — available logistics providers
-  - `packOrder` / `recreatePackage` — pack & repack orders
-  - `setReadyToShip` — mark as ready to ship
-  - `printAWB` / `getShippingLabel` — print shipping labels
-  - `traceOrder` — logistics tracking
-  - `confirmDeliveryForDBS` / `failedDeliveryForDBS` — DBS confirmations
-- Product APIs (list, detail, create, update price/quantity/status, categories, brands)
-- Payment Options helpers (payment methods by country)
+| Group | APIs |
+|-------|------|
+| **Auth** | `generateAuthLink`, `fetchTokenWithAuthCode`, `refreshToken` |
+| **Orders** | `getOrders` (paginated), `getAllOrders` (auto-paginate), `getOrderDetail`, `getOrderItems`, `getMultipleOrderItems` (max 50), `getShipmentProviders`, `packOrder`, `recreatePackage`, `setReadyToShip`, `printAWB`, `getShippingLabel`, `traceOrder`, `confirmDeliveryForDBS`, `failedDeliveryForDBS` |
+| **Products** | `getProducts` (auto-paginate), `getProductItem`, `createProduct`, `updateSellableQuantity`, `updateStatusProduct`, `updatePrice`, `getCategoryTree`, `getCategorySuggestion`, `getCategoryAttributes`, `getBrands` |
+| **Payment** | `getPaymentMethodsByCountry`, `isPaymentMethodAvailableInCountry`, `getAllPaymentMethods`, `getCountriesByPaymentMethod` |
 
 ## Common Use Cases
 
