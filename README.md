@@ -111,7 +111,7 @@ console.log(orders);
 ### Lazada API Client
 
 ```ts
-import { LazadaModule } from "lazada-api-client";
+import { LazadaModule, OrderStatusFilter } from "lazada-api-client";
 
 const lazada = new LazadaModule({
   appKey: process.env.LAZADA_APP_KEY!,
@@ -121,9 +121,20 @@ const lazada = new LazadaModule({
   countryCode: "sg",
 });
 
-const orders = await lazada.getOrdersBeforeSomeDay();
+// Get orders with filters
+const orders = await lazada.getOrders({
+  created_after: "2024-01-01T00:00:00+08:00",
+  status: OrderStatusFilter.PENDING,
+  limit: 100,
+});
 
-console.log(orders);
+// Auto-paginate through all orders
+const allOrders = await lazada.getAllOrders(
+  { created_after: "2024-01-01T00:00:00+08:00" },
+  (page, total, countSoFar) => console.log(`Page ${page}/${Math.ceil(total / 100)}`)
+);
+
+console.log(orders, allOrders);
 ```
 
 ### All-in-One Package
@@ -166,10 +177,20 @@ import {
 
 ### Lazada
 
-- Authorization APIs
-- Access token and refresh token APIs
-- Order APIs
-- Product APIs
+- OAuth2 Authorization (generate link, exchange code, refresh token)
+- **14 Order APIs**:
+  - `getOrders` — list orders with filters & pagination
+  - `getAllOrders` — auto-paginate through all orders
+  - `getOrderDetail` — single order detail
+  - `getOrderItems` / `getMultipleOrderItems` — order item details
+  - `getShipmentProviders` — available logistics providers
+  - `packOrder` / `recreatePackage` — pack & repack orders
+  - `setReadyToShip` — mark as ready to ship
+  - `printAWB` / `getShippingLabel` — print shipping labels
+  - `traceOrder` — logistics tracking
+  - `confirmDeliveryForDBS` / `failedDeliveryForDBS` — DBS confirmations
+- Product APIs (list, detail, create, update price/quantity/status, categories, brands)
+- Payment Options helpers (payment methods by country)
 
 ## Common Use Cases
 
