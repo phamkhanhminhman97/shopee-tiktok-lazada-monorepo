@@ -1,6 +1,6 @@
 {
   "name": "shopee-tiktokshops-lazada-api",
-  "version": "4.3.18",
+  "version": "5.0.0",
   "description": "Shopee Tiktokshops Lazada OPEN API",
   "files": [
     "dist"
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "lazada-api-client": "^1.1.0",
-    "shopee-api-client": "^1.0.8",
+    "shopee-api-client": "^2.0.0",
     "tiktokshops-api-client": "^1.0.6"
   }
 }

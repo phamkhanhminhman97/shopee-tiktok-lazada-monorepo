@@ -19,13 +19,16 @@
     "release": "npm run build && changeset publish",
     "sync-all-in-one-deps": "node scripts/sync-all-in-one-deps.cjs && npm install --package-lock-only",
     "check-all-in-one-deps": "node scripts/sync-all-in-one-deps.cjs --check",
+    "version-major-shopee": "npm version major --workspace=shopee-api-client",
+    "version-minor-shopee": "npm version minor --workspace=shopee-api-client",
     "version-patch-shopee": "npm version patch --workspace=shopee-api-client",
     "publish-shopee": "npm publish --workspace=shopee-api-client",
     "version-patch-tiktok": "npm version patch --workspace=tiktokshops-api-client",
     "publish-tiktok": "npm publish --workspace=tiktokshops-api-client",
     "version-patch-lazada": "npm version patch --workspace=lazada-api-client",
     "publish-lazada": "npm publish --workspace=lazada-api-client",
-    "version-all-in-one": "node scripts/sync-all-in-one-deps.cjs --bump patch && npm install --package-lock-only",
+    "version-major-all-in-one": "node scripts/sync-all-in-one-deps.cjs --bump major && npm install --package-lock-only",
+    "version-patch-all-in-one": "node scripts/sync-all-in-one-deps.cjs --bump patch && npm install --package-lock-only",
     "publish-all-in-one": "npm publish --workspace=shopee-tiktokshops-lazada-api"
   },
   "devDependencies": {

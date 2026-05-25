@@ -10,6 +10,27 @@ TypeScript client for [Shopee Open API v2](https://open.shopee.com/). Covers sel
 
 > Unofficial package. Not affiliated with Shopee.
 
+## Release notes
+
+### v2.0.0
+
+This release standardizes error handling and expands typed product APIs.
+
+**Breaking change**
+
+- Shopee HTTP/API failures now throw `ShopeeApiError` instead of returning raw error payloads.
+- Code that previously checked `result.error` should migrate to `try/catch`.
+- `addItem()` is now strongly typed and validates required payload fields before calling Shopee.
+
+**Added**
+
+- `ShopeeApiError` with `code`, `requestId`, `status`, `raw`, and `context`.
+- Product APIs: `addItem()`, `updateItem()`, `getModelList()`, `searchItem()`.
+- Public product request/response types for the new product APIs.
+- README examples and official Shopee docs snapshots for the new product APIs.
+
+See [CHANGELOG.md](./CHANGELOG.md) for the full release history.
+
 ## Requirements
 
 - Node.js 16 or later
@@ -501,6 +522,130 @@ app.get("/shopee/callback", async (req, res) => {
 });
 ```
 
+## Add Product Item
+
+`addItem()` maps to Shopee `v2.product.add_item`. The package validates the required fields locally before sending the request.
+
+```ts
+const result = await shopee.addItem({
+  item_name: "Basic T-shirt",
+  description: "Cotton T-shirt",
+  category_id: 123456,
+  original_price: 99000,
+  weight: 0.3,
+  dimension: {
+    package_length: 20,
+    package_width: 15,
+    package_height: 3,
+  },
+  logistic_info: [
+    {
+      logistic_id: 80014,
+      enabled: true,
+    },
+  ],
+  image: {
+    image_id_list: ["IMAGE_ID_FROM_SHOPEE_MEDIA_API"],
+  },
+  seller_stock: [
+    {
+      stock: 10,
+    },
+  ],
+});
+```
+
+When using rich descriptions, set `description_type: "extended"` together with `description_info`. Shopee accepts only one `video_upload_id` for this endpoint.
+
+## Update Product Item
+
+`updateItem()` maps to Shopee `v2.product.update_item`. Pass `item_id` and only the fields you want to update.
+
+```ts
+const result = await shopee.updateItem({
+  item_id: 2800143058,
+  item_name: "Updated Basic T-shirt",
+  item_status: "UNLIST",
+  weight: 0.35,
+  dimension: {
+    package_length: 20,
+    package_width: 15,
+    package_height: 4,
+  },
+});
+```
+
+Use `updatePrice()` and `updateStock()` for price and stock changes because Shopee exposes those as separate APIs.
+
+## Get Model List
+
+`getModelList()` maps to Shopee `v2.product.get_model_list` and returns variation/model details for an item.
+
+```ts
+const models = await shopee.getModelList(178312);
+
+console.log(models.response.model);
+```
+
+## Search Items
+
+`searchItem()` maps to Shopee `v2.product.search_item` and returns matching item IDs.
+
+```ts
+const result = await shopee.searchItem({
+  page_size: 10,
+  item_name: "apple",
+  item_status: ["NORMAL", "UNLIST"],
+});
+
+console.log(result.response.item_id_list);
+```
+
+## Error Handling
+
+From v2, Shopee HTTP/API failures throw `ShopeeApiError`.
+
+### Before v2
+
+```ts
+const result = await shopee.getOrderDetail("ORDER_SN");
+
+if (result.error) {
+  console.log(result.error);
+  console.log(result.message);
+}
+```
+
+### v2 and later
+
+```ts
+import { ShopeeApiError } from "shopee-api-client";
+
+try {
+  const order = await shopee.getOrderDetail("ORDER_SN");
+  console.log(order.response);
+} catch (error) {
+  if (error instanceof ShopeeApiError) {
+    console.log(error.code);
+    console.log(error.message);
+    console.log(error.requestId);
+    console.log(error.status);
+    console.log(error.raw);
+  }
+}
+```
+
+`ShopeeApiError` fields:
+
+| Field | Description |
+| --- | --- |
+| `code` | Shopee error code or network error code |
+| `message` | Human-readable error message |
+| `requestId` | Shopee `request_id`, when returned |
+| `status` | HTTP status, when available |
+| `raw` | Raw Shopee/axios error payload |
+| `context` | SDK method context, for example `getOrderDetail` |
+
 ---
 
 ## Supported APIs
@@ -535,7 +680,10 @@ app.get("/shopee/callback", async (req, res) => {
 | --- | --- |
 | `getProductItemList` | Get product item list |
 | `getProductItemBaseInfo` | Get product base information |
+| `getModelList` | Get item model and variation list |
+| `searchItem` | Search item IDs by filters |
 | `addItem` | Add product item |
+| `updateItem` | Update product item |
 | `updateStock` | Update product stock |
 | `updatePrice` | Update product price |
 | `unListItem` | List or unlist product item |

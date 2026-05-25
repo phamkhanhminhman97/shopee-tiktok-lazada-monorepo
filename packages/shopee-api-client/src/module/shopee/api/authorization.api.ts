@@ -93,7 +93,8 @@ export async function fetchTokenWithRefreshToken(config: ShopeeConfig): Promise<
   const baseString = params.reduce((prev: any, curr: any) => (prev += curr), '');
   const signature = createHmac('sha256', partnerKey).update(baseString).digest('hex');
 
-  const commonParam = '?sign=' + signature + '&partner_id=' + partnerId + '&timestamp=' + timestamp;
+  const searchParams = new URLSearchParams({ sign: signature, partner_id: String(partnerId), timestamp: String(timestamp) });
+  const commonParam = `?${searchParams.toString()}`;
   const body: ShopeeRequestRefreshToken = {
     refresh_token: refreshToken!,
     partner_id: partnerId,

@@ -26,25 +26,6 @@ interface ItemList {
   next_offset: number;
 }
 
-interface Model {
-  model_id: number;
-  tier_index: Array<any>;
-  promotion_id: number;
-  model_sku: string;
-  //Should be MODEL_NORMAL or MODEL_UNAVAILABLE.
-  //MODEL_NORMAL models can be sold on the buyer's side,
-  //and MODEL_UNAVAILABLE models cannot be sold on the buyer's side.
-  model_status: string;
-  pre_order: any;
-  stock_info_v2: StockInfoV2;
-}
-
-interface ModelList {
-  tier_variation: Array<any>;
-  model: Array<Model>;
-}
-type ResponseGetModelList = ShopeeResponseCommon<ModelList>;
-
 interface FailureList {
   item_id: number;
   failed_reason: string;
@@ -69,10 +50,13 @@ interface PriceInfo {
   currency: string;
   original_price: number;
   current_price: number;
-  inflated_price_of_original_price: number;
-  inflated_price_of_current_price: number;
-  sip_item_price: number;
-  sip_item_price_source: string;
+  inflated_price_of_original_price?: number;
+  inflated_price_of_current_price?: number;
+  sip_item_price?: number;
+  sip_item_price_source?: string;
+  sip_item_price_currency?: string;
+  local_price?: number;
+  local_promotion_price?: number;
 }
 
 interface StockInfo {
@@ -96,12 +80,12 @@ interface Dimension {
 
 interface LogisticInfo {
   logistic_id: number;
-  logistic_name: string;
+  logistic_name?: string;
   enabled: boolean;
-  shipping_fee: number;
-  size_id: number;
-  is_free: boolean;
-  estimated_shipping_fee: number;
+  shipping_fee?: number;
+  size_id?: number;
+  is_free?: boolean;
+  estimated_shipping_fee?: number;
 }
 
 interface PreOrder {
@@ -117,10 +101,10 @@ interface Wholesale {
 }
 
 interface ComplaintPolicy {
-  warranty_time: string;
-  exclude_entrepreneur_warranty: boolean;
-  complaint_address_id: number;
-  additional_information: string;
+  warranty_time?: string;
+  exclude_entrepreneur_warranty?: boolean;
+  complaint_address_id?: number;
+  additional_information?: string;
 }
 
 interface VideoInfo {
@@ -165,17 +149,92 @@ interface SummaryInfo {
 interface SellerStock {
   location_id: string;
   stock: number;
+  if_saleable?: boolean;
 }
 
 interface ShopeeStock {
   location_id: string;
-  stock: number;
+  stock: number | string;
+}
+
+interface AdvanceStock {
+  sellable_advance_stock: number;
+  in_transit_advance_stock: number;
 }
 
 interface StockInfoV2 {
   summary_info: SummaryInfo;
   seller_stock: SellerStock[];
   shopee_stock: ShopeeStock[];
+  advance_stock?: AdvanceStock;
+}
+
+interface ModelImage {
+  image_id: string;
+  image_url: string;
+}
+
+interface TierVariationOption {
+  option: string;
+  image?: ModelImage;
+}
+
+interface TierVariation {
+  option_list: TierVariationOption[];
+  name: string;
+}
+
+interface StandardiseTierVariationOption {
+  variation_option_id?: number;
+  variation_option_name: string;
+  image_id?: string;
+  image_url?: string;
+}
+
+interface StandardiseTierVariation {
+  variation_id?: number;
+  variation_name: string;
+  variation_group_id?: number;
+  variation_option_list: StandardiseTierVariationOption[];
+}
+
+interface Model {
+  model_id: number;
+  tier_index: number[];
+  promotion_id?: number;
+  has_promotion?: boolean;
+  model_sku: string;
+  /**
+   * `MODEL_NORMAL` can be sold. `MODEL_UNAVAILABLE` cannot be sold.
+   */
+  model_status: 'MODEL_NORMAL' | 'MODEL_UNAVAILABLE' | string;
+  price_info?: PriceInfo[];
+  pre_order?: PreOrder;
+  stock_info_v2?: StockInfoV2;
+  gtin_code?: string;
+  weight?: string;
+  dimension?: Dimension;
+  is_fulfillment_by_shopee?: boolean;
+}
+
+interface ModelList {
+  tier_variation: TierVariation[];
+  model: Model[];
+  standardise_tier_variation?: StandardiseTierVariation[];
+}
+
+interface ResponseGetModelList extends ShopeeResponseCommon<ModelList> {
+  warning?: string;
+}
+
+interface SearchItemResponse {
+  item_id_list: number[];
+  total_count: number;
+  next_offset: string;
+}
+
+interface ResponseSearchItem extends ShopeeResponseCommon<SearchItemResponse> {
+  warning?: string;
 }
 
 interface Item {
@@ -260,7 +319,7 @@ interface AttributeValues {
 interface Brand {
   brand_id: number;
   original_brand_name: string;
-  display_brand_name: string;
+  display_brand_name?: string;
 }
 
 interface ResponseGetBrandList extends ShopeeResponseCommon<Brand> {
@@ -284,6 +343,75 @@ type ResponseGetCategories = ShopeeResponseCommon<Categories>;
 type ResponseGetAttributes = ShopeeResponseCommon<AttributeValues>;
 type ResponseUpdatePrice = ShopeeResponseCommon<UpdatePrice>;
 
+/**
+ * Response type for Shopee v2.product.add_item.
+ *
+ * @see docs/product_add_item.md for the full API reference.
+ */
+interface AddItemResponse {
+  item_id: number;
+  item_name: string;
+  description: string;
+  weight: number;
+  category_id: number;
+  condition: string;
+  images: Image;
+  price_info: { current_price: number; original_price: number };
+  logistic_info: LogisticInfo[];
+  dimension: Dimension;
+  pre_order: PreOrder;
+  wholesale: Wholesale[];
+  brand: Brand;
+  item_status: string;
+  item_dangerous: number;
+  video_info: VideoInfo[];
+  description_type: string;
+  description_info?: DescriptionInfo;
+  complaint_policy?: ComplaintPolicy;
+  seller_stock?: SellerStock[];
+  attributes?: Attribute[];
+  /**
+   * Shopee docs return `attributes` (not `attribute_list`) for
+   * v2.product.add_item. The `attribute_list` alias is kept for backward
+   * compatibility with older package users but will be removed in a future
+   * major release. Use `attributes` instead.
+   * @deprecated Use `attributes` instead, which matches the Shopee API response.
+   */
+  attribute_list?: Attribute[];
+}
+
+interface ResponseAddItem extends ShopeeResponseCommon<AddItemResponse> {
+  warning?: string;
+}
+
+/**
+ * Response type for Shopee v2.product.update_item.
+ *
+ * @see docs/product_update_item.md for the full API reference.
+ */
+interface UpdateItemResponse {
+  item_id: number;
+  item_name?: string;
+  description?: string;
+  weight?: number;
+  category_id?: number;
+  condition?: string;
+  images?: Image;
+  logistic_info?: LogisticInfo[];
+  dimension?: Dimension;
+  pre_order?: PreOrder;
+  brand?: Brand;
+  item_status?: string;
+  item_dangerous?: number;
+  description_type?: string;
+  description_info?: DescriptionInfo;
+  complaint_policy?: ComplaintPolicy;
+}
+
+interface ResponseUpdateItem extends ShopeeResponseCommon<UpdateItemResponse> {
+  warning?: string;
+}
+
 export {
   ResponseComment as ShopeeResponseComment,
   ResponseGetModelList as ShopeeResponseGetModelList,
@@ -294,5 +422,8 @@ export {
   ResponseGetCategories as ShopeeResponseGetCategories,
   ResponseGetAttributes as ShopeeResponseGetAttributes,
   ResponseGetBrandList as ShopeeResponseGetBrandList,
+  ResponseSearchItem as ShopeeResponseSearchItem,
   ResponseUpdatePrice as ShopeeResponseUpdatePrice,
+  ResponseAddItem as ShopeeResponseAddItem,
+  ResponseUpdateItem as ShopeeResponseUpdateItem,
 };

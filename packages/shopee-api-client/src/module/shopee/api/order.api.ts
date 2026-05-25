@@ -113,7 +113,7 @@ export async function getOrderList(options: ShopeeGetOrdersOptions, config: Shop
   const res: ShopeeResponseOrderList = await ShopeeHelper.httpGet(url, config);
 
   if (res?.error) {
-    throw new Error(`[Shopee API Error - getOrderList] ${res.error}: ${res.message}`);
+    ShopeeHelper.throwShopeeApiError(res, 'getOrderList');
   }
 
   return res;
@@ -213,7 +213,7 @@ export async function getOrderDetail(orderSnList: string | string[], config: Sho
 
   // Handle API Error explicitly
   if (res?.error) {
-    throw new Error(`[Shopee API Error - getOrderDetail] ${res.error}: ${res.message}`);
+    ShopeeHelper.throwShopeeApiError(res, 'getOrderDetail');
   }
 
   return res;
@@ -245,7 +245,7 @@ export async function getShipmentList(config: ShopeeConfig): Promise<{ order_sn:
 
     // Handle API Error explicitly
     if (res?.error) {
-      throw new Error(`[Shopee API Error - getShipmentList] ${res.error}: ${res.message}`);
+      ShopeeHelper.throwShopeeApiError(res, 'getShipmentList');
     }
 
     if (!res?.response?.order_list || res.response.order_list.length === 0) {
@@ -285,7 +285,7 @@ export async function searchPackageList(
 
   // Handle API Error explicitly
   if (res?.error) {
-    throw new Error(`[Shopee API Error - searchPackageList] ${res.error}: ${res.message}`);
+    ShopeeHelper.throwShopeeApiError(res, 'searchPackageList');
   }
 
   return res;
@@ -323,7 +323,7 @@ export async function getPackageDetail(
 
   // Handle API Error explicitly
   if (res?.error) {
-    throw new Error(`[Shopee API Error - getPackageDetail] ${res.error}: ${res.message}`);
+    ShopeeHelper.throwShopeeApiError(res, 'getPackageDetail');
   }
 
   return res;
@@ -350,7 +350,7 @@ export async function cancelOrder(body: ShopeeRequestCancelOrder, config: Shopee
   const res: any = await ShopeeHelper.httpPost(url, body, headers);
 
   if (res?.error) {
-    throw new Error(`[Shopee API Error - cancelOrder] ${res.error}: ${res.message}`);
+    ShopeeHelper.throwShopeeApiError(res, 'cancelOrder');
   }
 
   return res;

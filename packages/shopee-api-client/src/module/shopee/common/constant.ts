@@ -81,6 +81,7 @@ const END_POINT_SANDBOX = 'https://partner.test-stable.shopeemobile.com';
 
 enum PATH {
   ADD_ITEM = '/api/v2/product/add_item',
+  UPDATE_ITEM = '/api/v2/product/update_item',
   ORDER_LIST = '/api/v2/order/get_order_list',
   ORDER_DETAIL = '/api/v2/order/get_order_detail',
   GET_SHIPMENT_LIST = '/api/v2/order/get_shipment_list',

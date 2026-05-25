@@ -3,10 +3,13 @@ import { getOrderDetail, getOrderList, getOrders, getShipmentList, searchPackage
 import {
   getProductItemBaseInfo,
   getProductItemList,
+  getModelList,
+  searchItem,
   unListItem,
   updatePrice,
   updateStock,
   addItem,
+  updateItem,
   getCategory,
   getAttributes,
   getBrandList,
@@ -26,10 +29,15 @@ import {
   ShopeeResponseGetBrandList,
   ShopeeResponseGetCategories,
   ShopeeResponseProductBaseItemInfo,
+  ShopeeResponseGetModelList,
+  ShopeeResponseSearchItem,
   ShopeeResponseUnlistItem,
   ShopeeResponseUpdatePrice,
   ShopeeResponseUpdateStock,
+  ShopeeResponseAddItem,
+  ShopeeResponseUpdateItem,
 } from './dto/response/product.response';
+import { ShopeeRequestAddItem, ShopeeRequestSearchItem, ShopeeRequestUpdateItem } from './dto/request/product.request';
 import {
   getChannelList,
   shipOrder,
@@ -94,8 +102,7 @@ export class ShopeeModule {
   }
 
   setConfig(config: ShopeeConfig) {
-    this.config.accessToken = config.accessToken;
-    this.config.refreshToken = config.refreshToken;
+    Object.assign(this.config, config);
   }
 
   getConfig() {
@@ -174,12 +181,39 @@ export class ShopeeModule {
     return await getEscrowDetail(orderSn, this.config);
   }
 
-  async getProductItemList(): Promise<any> {
+  async getProductItemList(): Promise<Record<string, unknown>[]> {
     return await getProductItemList(this.config);
   }
 
   async getProductItemBaseInfo(itemIds: string[]): Promise<ShopeeResponseProductBaseItemInfo> {
     return await getProductItemBaseInfo(itemIds, this.config);
+  }
+
+  /**
+   * Get all model/variation records for a Shopee item via
+   * `v2.product.get_model_list`.
+   *
+   * Use this when an item has variations and you need model IDs, tier indexes,
+   * model SKU/status, model-level price info, stock info, GTIN, weight,
+   * dimension, promotion flags, or standardized variation data.
+   *
+   * @see docs/product_get_model_list.md for the full response schema.
+   */
+  async getModelList(itemId: string | number): Promise<ShopeeResponseGetModelList> {
+    return await getModelList(itemId, this.config);
+  }
+
+  /**
+   * Search Shopee item IDs via `v2.product.search_item`.
+   *
+   * `page_size` is required. Provide at least one search filter such as
+   * `item_name`, `attribute_status`, `item_sku`, `item_status`, or
+   * `deboost_only`.
+   *
+   * @see docs/product_search_item.md for the full request and response schema.
+   */
+  async searchItem(params: ShopeeRequestSearchItem): Promise<ShopeeResponseSearchItem> {
+    return await searchItem(params, this.config);
   }
 
   async updateStock(itemId: number, stock: number): Promise<ShopeeResponseUpdateStock> {
@@ -194,8 +228,35 @@ export class ShopeeModule {
     return await updatePrice(itemId, price, this.config);
   }
 
-  async addItem(body: any): Promise<any> {
+  /**
+   * Create a new product item on Shopee via `v2.product.add_item`.
+   *
+   * Required Shopee fields include `original_price`, `description`, `weight`,
+   * `item_name`, `category_id`, `dimension`, `logistic_info`, and
+   * `image.image_id_list`.
+   *
+   * Use `description_type: 'extended'` when passing `description_info`.
+   * Shopee accepts only one `video_upload_id` for this endpoint.
+   *
+   * @see docs/product_add_item.md for the full request and response schema.
+   */
+  async addItem(body: ShopeeRequestAddItem): Promise<ShopeeResponseAddItem> {
     return await addItem(body, this.config);
+  }
+
+  /**
+   * Update an existing product item on Shopee via `v2.product.update_item`.
+   *
+   * `item_id` is required. Every other field is optional and Shopee updates
+   * only the submitted fields. Use `updatePrice()` and `updateStock()` for
+   * price and stock changes because Shopee exposes those as separate APIs.
+   *
+   * Use `description_type: 'extended'` when passing `description_info`.
+   *
+   * @see docs/product_update_item.md for the full request and response schema.
+   */
+  async updateItem(body: ShopeeRequestUpdateItem): Promise<ShopeeResponseUpdateItem> {
+    return await updateItem(body, this.config);
   }
 
   async getChannelList(): Promise<ShopeeResponseLogisticChannelList> {
@@ -238,7 +299,7 @@ export class ShopeeModule {
     return await getShippingDocumentResult(body, this.config);
   }
 
-  async downloadShippingDocument(body: ShopeeRequestDownloadShippingDocument): Promise<Buffer> {
+  async downloadShippingDocument(body: ShopeeRequestDownloadShippingDocument): Promise<ArrayBuffer> {
     return await downloadShippingDocument(body, this.config);
   }
 

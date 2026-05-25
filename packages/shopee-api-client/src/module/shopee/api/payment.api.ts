@@ -23,7 +23,7 @@ export async function getEscrowDetail(orderSn: string, config: ShopeeConfig): Pr
   const res: any = await ShopeeHelper.httpGet(url, config);
 
   if (res?.error) {
-    throw new Error(`[Shopee API Error - getEscrowDetail] ${res.error}: ${res.message}`);
+    ShopeeHelper.throwShopeeApiError(res, 'getEscrowDetail');
   }
 
   return res;

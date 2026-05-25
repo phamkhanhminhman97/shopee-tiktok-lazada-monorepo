@@ -41,7 +41,13 @@ export async function getChannelList(config: ShopeeConfig): Promise<ShopeeRespon
   const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.CHANNEL_LIST}${commonParam}`;
-  return ShopeeHelper.httpGet(url, config);
+  const res = await ShopeeHelper.httpGet<ShopeeResponseLogisticChannelList>(url, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'getChannelList');
+  }
+
+  return res;
 }
 
 /**
@@ -60,7 +66,13 @@ export async function shippingParameter(orderNumber: string, config: ShopeeConfi
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.SHIPPING_PARAMS}${commonParam}`;
 
-  return ShopeeHelper.httpGet(url, config);
+  const res = await ShopeeHelper.httpGet<ShopeeResponseShippingParameter>(url, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'shippingParameter');
+  }
+
+  return res;
 }
 
 /**
@@ -90,7 +102,13 @@ export async function shipOrder(
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.SHIP_ORDER}${commonParam}`;
 
-  return ShopeeHelper.httpPost(url, body, config);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseShipOrder>(url, body, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'shipOrder');
+  }
+
+  return res;
 }
 
 /**
@@ -110,7 +128,7 @@ export async function getTrackingNumber(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.TRACKING_NUMBER, config, timestamp);
 
-  const additionalParams: any = {
+  const additionalParams: Record<string, string | number | boolean> = {
     order_sn: orderNumber,
   };
   if (packageNumber) {
@@ -123,7 +141,13 @@ export async function getTrackingNumber(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.TRACKING_NUMBER}${commonParam}`;
 
-  return ShopeeHelper.httpGet(url, config);
+  const res = await ShopeeHelper.httpGet<ShopeeResponseTrackingNumber>(url, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'getTrackingNumber');
+  }
+
+  return res;
 }
 
 /**
@@ -142,7 +166,13 @@ export async function createShippingDocument(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.CREATE_SHIPPING_DOCUMENTS}${commonParam}`;
 
-  return ShopeeHelper.httpPost(url, body, config);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseCreateShippingDocument>(url, body, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'createShippingDocument');
+  }
+
+  return res;
 }
 
 /**
@@ -161,7 +191,13 @@ export async function getShippingDocumentResult(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHIPPING_DOCUMENTS}${commonParam}`;
 
-  return ShopeeHelper.httpPost(url, body, config);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseGetShippingDocumentResult>(url, body, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'getShippingDocumentResult');
+  }
+
+  return res;
 }
 
 /**
@@ -173,7 +209,7 @@ export async function getShippingDocumentResult(
 export async function downloadShippingDocument(
   body: ShopeeRequestDownloadShippingDocument,
   config: ShopeeConfig,
-): Promise<any> {
+): Promise<ArrayBuffer> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.DOWNLOAD_SHIPPING_DOCUMENT, config, timestamp);
 
@@ -181,7 +217,11 @@ export async function downloadShippingDocument(
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.DOWNLOAD_SHIPPING_DOCUMENT}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
-  return ShopeeHelper.httpPostDownload(url, body, headers);
+  const res = await ShopeeHelper.httpPostDownload(url, body, headers);
+
+  // httpPostDownload throws on network errors via handleError.
+  // For downloads, Shopee returns binary data on success or HTTP error on failure.
+  return res;
 }
 
 /**
@@ -199,7 +239,7 @@ export async function getTrackingInfo(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.TRACKING_INFO, config, timestamp);
 
-  const additionalParams: any = {
+  const additionalParams: Record<string, string | number | boolean> = {
     order_sn: orderNumber,
   };
   if (packageNumber) {
@@ -209,7 +249,13 @@ export async function getTrackingInfo(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.TRACKING_INFO}${commonParam}`;
 
-  return ShopeeHelper.httpGet(url, config);
+  const res = await ShopeeHelper.httpGet<ShopeeResponseTrackingInfo>(url, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'getTrackingInfo');
+  }
+
+  return res;
 }
 
 /**
@@ -228,7 +274,13 @@ export async function massShipOrder(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.MASS_SHIP_ORDER}${commonParam}`;
 
-  return ShopeeHelper.httpPost(url, body, config);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseMassShipOrder>(url, body, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'massShipOrder');
+  }
+
+  return res;
 }
 
 /**
@@ -247,7 +299,13 @@ export async function getMassShippingParameter(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.MASS_SHIPPING_PARAMS}${commonParam}`;
 
-  return ShopeeHelper.httpPost(url, body, config);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseGetMassShippingParameter>(url, body, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'getMassShippingParameter');
+  }
+
+  return res;
 }
 
 /**
@@ -266,7 +324,13 @@ export async function updateShippingOrder(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPDATE_SHIPPING_ORDER}${commonParam}`;
 
-  return ShopeeHelper.httpPost(url, body, config);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseUpdateShippingOrder>(url, body, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'updateShippingOrder');
+  }
+
+  return res;
 }
 
 /**
@@ -285,7 +349,13 @@ export async function getMassTrackingNumber(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.MASS_TRACKING_NUMBER}${commonParam}`;
 
-  return ShopeeHelper.httpPost(url, body, config);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseGetMassTrackingNumber>(url, body, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'getMassTrackingNumber');
+  }
+
+  return res;
 }
 
 /**
@@ -304,7 +374,13 @@ export async function getShippingDocumentParameter(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHIPPING_DOCUMENT_PARAMETER}${commonParam}`;
 
-  return ShopeeHelper.httpPost(url, body, config);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseGetShippingDocumentParameter>(url, body, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'getShippingDocumentParameter');
+  }
+
+  return res;
 }
 
 /**
@@ -318,5 +394,11 @@ export async function getAddressList(config: ShopeeConfig): Promise<ShopeeRespon
   const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ADDRESS_LIST}${commonParam}`;
-  return ShopeeHelper.httpGet(url, config);
+  const res = await ShopeeHelper.httpGet<ShopeeResponseGetAddressList>(url, config);
+
+  if (res?.error) {
+    ShopeeHelper.throwShopeeApiError(res, 'getAddressList');
+  }
+
+  return res;
 }

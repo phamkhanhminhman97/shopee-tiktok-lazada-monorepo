@@ -30,6 +30,7 @@ export {
   parseShopeePushPayload,
   verifyShopeePushSignature,
 } from './module/shopee/api/push.api';
+export { ShopeeApiError, ShopeeApiErrorOptions } from './module/shopee/common/helper';
 export { SHOPEE_PUSH_CODE } from './module/shopee/common/constant';
 export {
   ShopeeRequestCreateShippingDocument,
@@ -70,9 +71,19 @@ export {
   ShopeeResponseGetAttributes,
   ShopeeResponseGetBrandList,
   ShopeeResponseGetCategories,
+  ShopeeResponseGetModelList,
   ShopeeResponseProductBaseItemInfo,
+  ShopeeResponseSearchItem,
   ShopeeResponseUnlistItem,
   ShopeeResponseUpdatePrice,
   ShopeeResponseUpdateStock,
+  ShopeeResponseAddItem,
+  ShopeeResponseUpdateItem,
 } from './module/shopee/dto/response/product.response';
+export {
+  ShopeeRequestAddItem,
+  ShopeeRequestGetModelList,
+  ShopeeRequestSearchItem,
+  ShopeeRequestUpdateItem,
+} from './module/shopee/dto/request/product.request';
 export { ShopeeResponseGetAccessToken, ShopeeResponseRefreshAccessToken } from './module/shopee/dto/response/config.response';
