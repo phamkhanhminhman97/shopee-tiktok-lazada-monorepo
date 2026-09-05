@@ -123,6 +123,31 @@ enum PATH {
   GET_CATEGORY = '/api/v2/product/get_category',
   GET_BRAND_LIST = '/api/v2/product/get_brand_list',
   GET_ATTRIBUTES = '/api/v2/product/get_attributes',
+  // Media (image/video upload)
+  UPLOAD_IMAGE = '/api/v2/media/upload_image',
+  INIT_VIDEO_UPLOAD = '/api/v2/media/init_video_upload',
+  UPLOAD_VIDEO_PART = '/api/v2/media/upload_video_part',
+  COMPLETE_VIDEO_UPLOAD = '/api/v2/media/complete_video_upload',
+  GET_VIDEO_UPLOAD_RESULT = '/api/v2/media/get_video_upload_result',
+  CANCEL_VIDEO_UPLOAD = '/api/v2/media/cancel_video_upload',
+  // Shop
+  GET_SHOP_PROFILE = '/api/v2/shop/get_profile',
+  UPDATE_SHOP_PROFILE = '/api/v2/shop/update_profile',
+  GET_SHOP_INFO = '/api/v2/shop/get_shop_info',
+  GET_SHOP_NOTIFICATION = '/api/v2/shop/get_shop_notification',
+  GET_WAREHOUSE_DETAIL = '/api/v2/shop/get_warehouse_detail',
+  GET_SHOP_HOLIDAY_MODE = '/api/v2/shop/get_shop_holiday_mode',
+ SET_SHOP_HOLIDAY_MODE = '/api/v2/shop/set_shop_holiday_mode',
+  GET_AUTHORISED_RESELLER_BRAND = '/api/v2/shop/get_authorised_reseller_brand',
+  GET_BR_SHOP_ONBOARDING_INFO = '/api/v2/shop/get_br_shop_onboarding_info',
+  // Shop Category
+  ADD_SHOP_CATEGORY = '/api/v2/shop_category/add_shop_category',
+  UPDATE_SHOP_CATEGORY = '/api/v2/shop_category/update_shop_category',
+  DELETE_SHOP_CATEGORY = '/api/v2/shop_category/delete_shop_category',
+  GET_SHOP_CATEGORY_LIST = '/api/v2/shop_category/get_shop_category_list',
+  ADD_SHOP_CATEGORY_ITEM_LIST = '/api/v2/shop_category/add_item_list',
+  DELETE_SHOP_CATEGORY_ITEM_LIST = '/api/v2/shop_category/delete_item_list',
+  GET_SHOP_CATEGORY_ITEM_LIST = '/api/v2/shop_category/get_item_list',
 }
 
 export {

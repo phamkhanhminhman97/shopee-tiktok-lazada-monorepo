@@ -402,3 +402,496 @@ export async function getAddressList(config: ShopeeConfig): Promise<ShopeeRespon
 
   return res;
 }
+
+// ---- Appended: additional endpoints (batch 3) ----
+import {
+  ShopeeBatchShipOrderRequest,
+  ShopeeBatchUpdateTpfWarehouseTrackingStatusRequest,
+  ShopeeCheckPolygonUpdateStatusRequest,
+  ShopeeCreateBookingShippingDocumentRequest,
+  ShopeeCreateShippingDocumentJobRequest,
+  ShopeeDeleteAddressRequest,
+  ShopeeDeleteSpecialOperatingHourRequest,
+  ShopeeDownloadBookingShippingDocumentRequest,
+  ShopeeDownloadShippingDocumentJobRequest,
+  ShopeeDownloadToLabelRequest,
+  ShopeeGetBookingShippingDocumentDataInfoRequest,
+  ShopeeGetBookingShippingDocumentParameterRequest,
+  ShopeeGetBookingShippingDocumentResultRequest,
+  ShopeeGetBookingShippingParameterRequest,
+  ShopeeGetBookingTrackingInfoRequest,
+  ShopeeGetBookingTrackingNumberRequest,
+  ShopeeGetMartPackagingInfoRequest,
+  ShopeeGetOperatingHourRestrictionsRequest,
+  ShopeeGetOperatingHoursRequest,
+  ShopeeGetPauseStatusRequest,
+  ShopeeGetShippingDocumentDataInfoRequest,
+  ShopeeGetShippingDocumentJobStatusRequest,
+  ShopeeSetAddressConfigRequest,
+  ShopeeSetMartPackagingInfoRequest,
+  ShopeeSetPauseStatusRequest,
+  ShopeeShipBookingRequest,
+  ShopeeUpdateAddressRequest,
+  ShopeeUpdateChannelRequest,
+  ShopeeUpdateOperatingHoursRequest,
+  ShopeeUpdateSelfCollectionOrderLogisticsRequest,
+  ShopeeUpdateTrackingStatusRequest,
+  ShopeeUploadServiceablePolygonRequest,
+} from '../dto/request/logistic.request';
+import {
+  ShopeeBatchShipOrderResponse,
+  ShopeeBatchUpdateTpfWarehouseTrackingStatusResponse,
+  ShopeeCheckPolygonUpdateStatusResponse,
+  ShopeeCreateBookingShippingDocumentResponse,
+  ShopeeCreateShippingDocumentJobResponse,
+  ShopeeDeleteAddressResponse,
+  ShopeeDeleteSpecialOperatingHourResponse,
+  ShopeeDownloadBookingShippingDocumentResponse,
+  ShopeeDownloadShippingDocumentJobResponse,
+  ShopeeDownloadToLabelResponse,
+  ShopeeGetBookingShippingDocumentDataInfoResponse,
+  ShopeeGetBookingShippingDocumentParameterResponse,
+  ShopeeGetBookingShippingDocumentResultResponse,
+  ShopeeGetBookingShippingParameterResponse,
+  ShopeeGetBookingTrackingInfoResponse,
+  ShopeeGetBookingTrackingNumberResponse,
+  ShopeeGetMartPackagingInfoResponse,
+  ShopeeGetOperatingHourRestrictionsResponse,
+  ShopeeGetOperatingHoursResponse,
+  ShopeeGetPauseStatusResponse,
+  ShopeeGetShippingDocumentDataInfoResponse,
+  ShopeeGetShippingDocumentJobStatusResponse,
+  ShopeeSetAddressConfigResponse,
+  ShopeeSetMartPackagingInfoResponse,
+  ShopeeSetPauseStatusResponse,
+  ShopeeShipBookingResponse,
+  ShopeeUpdateAddressResponse,
+  ShopeeUpdateChannelResponse,
+  ShopeeUpdateOperatingHoursResponse,
+  ShopeeUpdateSelfCollectionOrderLogisticsResponse,
+  ShopeeUpdateTrackingStatusResponse,
+  ShopeeUploadServiceablePolygonResponse,
+} from '../dto/response/logistic.reponse';
+
+/**
+ * batchShipOrder via Shopee `v2.logistics.batch_ship_order`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function batchShipOrder(params: ShopeeBatchShipOrderRequest, config: ShopeeConfig): Promise<ShopeeBatchShipOrderResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeBatchShipOrderResponse>('/logistics/batch_ship_order', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'batchShipOrder',
+  });
+}
+
+/**
+ * batchUpdateTpfWarehouseTrackingStatus via Shopee `v2.logistics.batch_update_tpf_warehouse_tracking_status`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function batchUpdateTpfWarehouseTrackingStatus(params: ShopeeBatchUpdateTpfWarehouseTrackingStatusRequest, config: ShopeeConfig): Promise<ShopeeBatchUpdateTpfWarehouseTrackingStatusResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeBatchUpdateTpfWarehouseTrackingStatusResponse>('/logistics/batch_update_tpf_warehouse_tracking_status', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'batchUpdateTpfWarehouseTrackingStatus',
+  });
+}
+
+/**
+ * checkPolygonUpdateStatus via Shopee `v2.logistics.check_polygon_update_status`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function checkPolygonUpdateStatus(params: ShopeeCheckPolygonUpdateStatusRequest, config: ShopeeConfig): Promise<ShopeeCheckPolygonUpdateStatusResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeCheckPolygonUpdateStatusResponse>('/logistics/check_polygon_update_status', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'checkPolygonUpdateStatus',
+  });
+}
+
+/**
+ * createBookingShippingDocument via Shopee `v2.logistics.create_booking_shipping_document`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function createBookingShippingDocument(params: ShopeeCreateBookingShippingDocumentRequest, config: ShopeeConfig): Promise<ShopeeCreateBookingShippingDocumentResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeCreateBookingShippingDocumentResponse>('/logistics/create_booking_shipping_document', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'createBookingShippingDocument',
+  });
+}
+
+/**
+ * createShippingDocumentJob via Shopee `v2.logistics.create_shipping_document_job`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function createShippingDocumentJob(params: ShopeeCreateShippingDocumentJobRequest, config: ShopeeConfig): Promise<ShopeeCreateShippingDocumentJobResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeCreateShippingDocumentJobResponse>('/logistics/create_shipping_document_job', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'createShippingDocumentJob',
+  });
+}
+
+/**
+ * deleteAddress via Shopee `v2.logistics.delete_address`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function deleteAddress(params: ShopeeDeleteAddressRequest, config: ShopeeConfig): Promise<ShopeeDeleteAddressResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeDeleteAddressResponse>('/logistics/delete_address', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'deleteAddress',
+  });
+}
+
+/**
+ * deleteSpecialOperatingHour via Shopee `v2.logistics.delete_special_operating_hour`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function deleteSpecialOperatingHour(params: ShopeeDeleteSpecialOperatingHourRequest, config: ShopeeConfig): Promise<ShopeeDeleteSpecialOperatingHourResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeDeleteSpecialOperatingHourResponse>('/logistics/delete_special_operating_hour', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'deleteSpecialOperatingHour',
+  });
+}
+
+/**
+ * downloadBookingShippingDocument via Shopee `v2.logistics.download_booking_shipping_document`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function downloadBookingShippingDocument(params: ShopeeDownloadBookingShippingDocumentRequest, config: ShopeeConfig): Promise<ShopeeDownloadBookingShippingDocumentResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeDownloadBookingShippingDocumentResponse>('/logistics/download_booking_shipping_document', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'downloadBookingShippingDocument',
+  });
+}
+
+/**
+ * downloadShippingDocumentJob via Shopee `v2.logistics.download_shipping_document_job`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function downloadShippingDocumentJob(params: ShopeeDownloadShippingDocumentJobRequest, config: ShopeeConfig): Promise<ShopeeDownloadShippingDocumentJobResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeDownloadShippingDocumentJobResponse>('/logistics/download_shipping_document_job', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'downloadShippingDocumentJob',
+  });
+}
+
+/**
+ * downloadToLabel via Shopee `v2.logistics.download_to_label`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function downloadToLabel(params: ShopeeDownloadToLabelRequest, config: ShopeeConfig): Promise<ShopeeDownloadToLabelResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeDownloadToLabelResponse>('/logistics/download_to_label', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'downloadToLabel',
+  });
+}
+
+/**
+ * getBookingShippingDocumentDataInfo via Shopee `v2.logistics.get_booking_shipping_document_data_info`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBookingShippingDocumentDataInfo(params: ShopeeGetBookingShippingDocumentDataInfoRequest, config: ShopeeConfig): Promise<ShopeeGetBookingShippingDocumentDataInfoResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBookingShippingDocumentDataInfoResponse>('/logistics/get_booking_shipping_document_data_info', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBookingShippingDocumentDataInfo',
+  });
+}
+
+/**
+ * getBookingShippingDocumentParameter via Shopee `v2.logistics.get_booking_shipping_document_parameter`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBookingShippingDocumentParameter(params: ShopeeGetBookingShippingDocumentParameterRequest, config: ShopeeConfig): Promise<ShopeeGetBookingShippingDocumentParameterResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBookingShippingDocumentParameterResponse>('/logistics/get_booking_shipping_document_parameter', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBookingShippingDocumentParameter',
+  });
+}
+
+/**
+ * getBookingShippingDocumentResult via Shopee `v2.logistics.get_booking_shipping_document_result`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBookingShippingDocumentResult(params: ShopeeGetBookingShippingDocumentResultRequest, config: ShopeeConfig): Promise<ShopeeGetBookingShippingDocumentResultResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBookingShippingDocumentResultResponse>('/logistics/get_booking_shipping_document_result', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBookingShippingDocumentResult',
+  });
+}
+
+/**
+ * getBookingShippingParameter via Shopee `v2.logistics.get_booking_shipping_parameter`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBookingShippingParameter(params: ShopeeGetBookingShippingParameterRequest, config: ShopeeConfig): Promise<ShopeeGetBookingShippingParameterResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBookingShippingParameterResponse>('/logistics/get_booking_shipping_parameter', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBookingShippingParameter',
+  });
+}
+
+/**
+ * getBookingTrackingInfo via Shopee `v2.logistics.get_booking_tracking_info`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBookingTrackingInfo(params: ShopeeGetBookingTrackingInfoRequest, config: ShopeeConfig): Promise<ShopeeGetBookingTrackingInfoResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBookingTrackingInfoResponse>('/logistics/get_booking_tracking_info', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBookingTrackingInfo',
+  });
+}
+
+/**
+ * getBookingTrackingNumber via Shopee `v2.logistics.get_booking_tracking_number`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBookingTrackingNumber(params: ShopeeGetBookingTrackingNumberRequest, config: ShopeeConfig): Promise<ShopeeGetBookingTrackingNumberResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBookingTrackingNumberResponse>('/logistics/get_booking_tracking_number', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBookingTrackingNumber',
+  });
+}
+
+/**
+ * getMartPackagingInfo via Shopee `v2.logistics.get_mart_packaging_info`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getMartPackagingInfo(config: ShopeeConfig): Promise<ShopeeGetMartPackagingInfoResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetMartPackagingInfoResponse>('/logistics/get_mart_packaging_info', config, {
+    method: 'GET',
+    params: undefined as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getMartPackagingInfo',
+  });
+}
+
+/**
+ * getOperatingHourRestrictions via Shopee `v2.logistics.get_operating_hour_restrictions`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getOperatingHourRestrictions(config: ShopeeConfig): Promise<ShopeeGetOperatingHourRestrictionsResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetOperatingHourRestrictionsResponse>('/logistics/get_operating_hour_restrictions', config, {
+    method: 'GET',
+    params: undefined as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getOperatingHourRestrictions',
+  });
+}
+
+/**
+ * getOperatingHours via Shopee `v2.logistics.get_operating_hours`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getOperatingHours(config: ShopeeConfig): Promise<ShopeeGetOperatingHoursResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetOperatingHoursResponse>('/logistics/get_operating_hours', config, {
+    method: 'GET',
+    params: undefined as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getOperatingHours',
+  });
+}
+
+/**
+ * getPauseStatus via Shopee `v2.logistics.get_pause_status`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getPauseStatus(config: ShopeeConfig): Promise<ShopeeGetPauseStatusResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetPauseStatusResponse>('/logistics/get_pause_status', config, {
+    method: 'GET',
+    params: undefined as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getPauseStatus',
+  });
+}
+
+/**
+ * getShippingDocumentDataInfo via Shopee `v2.logistics.get_shipping_document_data_info`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getShippingDocumentDataInfo(params: ShopeeGetShippingDocumentDataInfoRequest, config: ShopeeConfig): Promise<ShopeeGetShippingDocumentDataInfoResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetShippingDocumentDataInfoResponse>('/logistics/get_shipping_document_data_info', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getShippingDocumentDataInfo',
+  });
+}
+
+/**
+ * getShippingDocumentJobStatus via Shopee `v2.logistics.get_shipping_document_job_status`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getShippingDocumentJobStatus(params: ShopeeGetShippingDocumentJobStatusRequest, config: ShopeeConfig): Promise<ShopeeGetShippingDocumentJobStatusResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetShippingDocumentJobStatusResponse>('/logistics/get_shipping_document_job_status', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getShippingDocumentJobStatus',
+  });
+}
+
+/**
+ * setAddressConfig via Shopee `v2.logistics.set_address_config`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function setAddressConfig(params: ShopeeSetAddressConfigRequest = {}, config: ShopeeConfig): Promise<ShopeeSetAddressConfigResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeSetAddressConfigResponse>('/logistics/set_address_config', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'setAddressConfig',
+  });
+}
+
+/**
+ * setMartPackagingInfo via Shopee `v2.logistics.set_mart_packaging_info`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function setMartPackagingInfo(params: ShopeeSetMartPackagingInfoRequest, config: ShopeeConfig): Promise<ShopeeSetMartPackagingInfoResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeSetMartPackagingInfoResponse>('/logistics/set_mart_packaging_info', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'setMartPackagingInfo',
+  });
+}
+
+/**
+ * setPauseStatus via Shopee `v2.logistics.set_pause_status`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function setPauseStatus(params: ShopeeSetPauseStatusRequest, config: ShopeeConfig): Promise<ShopeeSetPauseStatusResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeSetPauseStatusResponse>('/logistics/set_pause_status', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'setPauseStatus',
+  });
+}
+
+/**
+ * shipBooking via Shopee `v2.logistics.ship_booking`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function shipBooking(params: ShopeeShipBookingRequest, config: ShopeeConfig): Promise<ShopeeShipBookingResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeShipBookingResponse>('/logistics/ship_booking', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'shipBooking',
+  });
+}
+
+/**
+ * updateAddress via Shopee `v2.logistics.update_address`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function updateAddress(params: ShopeeUpdateAddressRequest, config: ShopeeConfig): Promise<ShopeeUpdateAddressResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeUpdateAddressResponse>('/logistics/update_address', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'updateAddress',
+  });
+}
+
+/**
+ * updateChannel via Shopee `v2.logistics.update_channel`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function updateChannel(params: ShopeeUpdateChannelRequest, config: ShopeeConfig): Promise<ShopeeUpdateChannelResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeUpdateChannelResponse>('/logistics/update_channel', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'updateChannel',
+  });
+}
+
+/**
+ * updateOperatingHours via Shopee `v2.logistics.update_operating_hours`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function updateOperatingHours(params: ShopeeUpdateOperatingHoursRequest = {}, config: ShopeeConfig): Promise<ShopeeUpdateOperatingHoursResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeUpdateOperatingHoursResponse>('/logistics/update_operating_hours', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'updateOperatingHours',
+  });
+}
+
+/**
+ * updateSelfCollectionOrderLogistics via Shopee `v2.logistics.update_self_collection_order_logistics`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function updateSelfCollectionOrderLogistics(params: ShopeeUpdateSelfCollectionOrderLogisticsRequest, config: ShopeeConfig): Promise<ShopeeUpdateSelfCollectionOrderLogisticsResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeUpdateSelfCollectionOrderLogisticsResponse>('/logistics/update_self_collection_order_logistics', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'updateSelfCollectionOrderLogistics',
+  });
+}
+
+/**
+ * updateTrackingStatus via Shopee `v2.logistics.update_tracking_status`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function updateTrackingStatus(params: ShopeeUpdateTrackingStatusRequest, config: ShopeeConfig): Promise<ShopeeUpdateTrackingStatusResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeUpdateTrackingStatusResponse>('/logistics/update_tracking_status', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'updateTrackingStatus',
+  });
+}
+
+/**
+ * uploadServiceablePolygon via Shopee `v2.logistics.upload_serviceable_polygon`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function uploadServiceablePolygon(params: ShopeeUploadServiceablePolygonRequest, config: ShopeeConfig): Promise<ShopeeUploadServiceablePolygonResponse> {
+  const timestamp = ShopeeHelper.getTimestampNow();
+  const signature = ShopeeHelper.signRequest('/logistics/upload_serviceable_polygon', config, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/logistics/upload_serviceable_polygon${commonParam}`;
+
+  const result = await ShopeeHelper.httpPostMultipart<ShopeeUploadServiceablePolygonResponse>(url, { file: params.file }, config);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'uploadServiceablePolygon');
+  }
+
+  return result;
+}

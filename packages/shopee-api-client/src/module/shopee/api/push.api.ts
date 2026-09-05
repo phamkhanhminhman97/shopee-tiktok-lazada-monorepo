@@ -69,3 +69,71 @@ export {
   parsePushPayload as parseShopeePushPayload,
   verifyPushSignature as verifyShopeePushSignature,
 };
+
+// ---- Appended: additional endpoints (batch 3) ----
+import { ShopeeConfig } from '../dto/request/config.request';
+import * as ShopeeHelper from '../common/helper';
+import {
+  ShopeeConfirmConsumedLostPushMessageRequest,
+  ShopeeGetAppPushConfigRequest,
+  ShopeeGetLostPushMessageRequest,
+  ShopeeSetAppPushConfigRequest,
+} from '../dto/request/push.request';
+import {
+  ShopeeConfirmConsumedLostPushMessageResponse,
+  ShopeeGetAppPushConfigResponse,
+  ShopeeGetLostPushMessageResponse,
+  ShopeeSetAppPushConfigResponse,
+} from '../dto/response/push.response';
+
+/**
+ * confirmConsumedLostPushMessage via Shopee `v2.push.confirm_consumed_lost_push_message`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function confirmConsumedLostPushMessage(params: ShopeeConfirmConsumedLostPushMessageRequest, config: ShopeeConfig): Promise<ShopeeConfirmConsumedLostPushMessageResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeConfirmConsumedLostPushMessageResponse>('/push/confirm_consumed_lost_push_message', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'confirmConsumedLostPushMessage',
+  });
+}
+
+/**
+ * getAppPushConfig via Shopee `v2.push.get_app_push_config`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getAppPushConfig(config: ShopeeConfig): Promise<ShopeeGetAppPushConfigResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetAppPushConfigResponse>('/push/get_app_push_config', config, {
+    method: 'GET',
+    params: undefined as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getAppPushConfig',
+  });
+}
+
+/**
+ * getLostPushMessage via Shopee `v2.push.get_lost_push_message`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getLostPushMessage(config: ShopeeConfig): Promise<ShopeeGetLostPushMessageResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetLostPushMessageResponse>('/push/get_lost_push_message', config, {
+    method: 'GET',
+    params: undefined as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getLostPushMessage',
+  });
+}
+
+/**
+ * setAppPushConfig via Shopee `v2.push.set_app_push_config`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function setAppPushConfig(params: ShopeeSetAppPushConfigRequest = {}, config: ShopeeConfig): Promise<ShopeeSetAppPushConfigResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeSetAppPushConfigResponse>('/push/set_app_push_config', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'setAppPushConfig',
+  });
+}

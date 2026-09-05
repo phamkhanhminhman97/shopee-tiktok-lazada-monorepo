@@ -1,6 +1,16 @@
 import { ShopeeConfig } from '../dto/request/config.request';
 import axios, { AxiosResponse } from 'axios';
 import { createHmac } from 'crypto';
+import FormData from 'form-data';
+import { SHOPEE_END_POINT } from './constant';
+
+/**
+ * Shopee base URL including the `/api/v2` prefix shared by every
+ * `v2.*` endpoint. Prefer this with `callShopeeApi()`/`callShopeePublicApi()`
+ * when adding new API wrapper functions, so `SHOPEE_PATH` entries can stay
+ * as short domain-relative paths (e.g. `/media/upload_image`).
+ */
+const SHOPEE_END_POINT_V2 = `${SHOPEE_END_POINT}/api/v2`;
 
 /**
  * Default per-request timeout (ms) applied to every Shopee HTTP call.
@@ -312,6 +322,53 @@ async function httpPostDownload(url: string, body: unknown, headers: Record<stri
 }
 
 /**
+ * Perform a Shopee POST request with a `multipart/form-data` body.
+ *
+ * Used for endpoints that accept binary payloads, such as
+ * `v2.media.upload_image`. Scalar fields in `fields` are sent as regular
+ * form fields; `Buffer` values are sent as binary file parts.
+ */
+async function httpPostMultipart<T = any>(
+  url: string,
+  fields: Record<string, string | number | boolean | Buffer | Buffer[] | undefined>,
+  config: ShopeeConfig,
+): Promise<T> {
+  const form = new FormData();
+
+  Object.entries(fields).forEach(([key, value]) => {
+    if (value === undefined) {
+      return;
+    }
+
+    if (Buffer.isBuffer(value)) {
+      form.append(key, value, { filename: `${key}.bin` });
+      return;
+    }
+
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => {
+        form.append(key, item, { filename: `${key}_${index}.bin` });
+      });
+      return;
+    }
+
+    form.append(key, String(value));
+  });
+
+  try {
+    const res: AxiosResponse<T> = await axios.post(url, form, {
+      headers: form.getHeaders(),
+      timeout: DEFAULT_TIMEOUT_MS,
+      maxBodyLength: Infinity,
+      maxContentLength: Infinity,
+    });
+    return res.data;
+  } catch (err) {
+    handleError(err);
+  }
+}
+
+/**
  * Perform a Shopee GET request with a bounded timeout and automatic retry
  * on transient failures (network errors, 429, 5xx, 408). GET requests are
  * idempotent from a Shopee API perspective, so retrying is safe here.
@@ -343,6 +400,135 @@ function refreshTokenExpire30Days(): number {
   return getTimestampNow() + 30 * 24 * 60 * 60;
 }
 
+type CallShopeeApiParamValue = string | number | boolean | Array<string | number | boolean> | undefined;
+
+interface CallShopeeApiOptions {
+  method: 'GET' | 'POST';
+  /**
+   * Query params for GET, or JSON body for POST. Array values are sent as
+   * repeated query keys for GET (e.g. `?item_id_list=1&item_id_list=2`),
+   * matching Shopee's documented convention, or as a JSON array for POST.
+   */
+  params?: Record<string, CallShopeeApiParamValue>;
+  /** Context string included in thrown `ShopeeApiError` for easier debugging. */
+  context: string;
+}
+
+/**
+ * Generic authenticated Shopee API call helper.
+ *
+ * Signs the request with `signRequest()`, builds the query string via
+ * `buildCommonParams()`, performs the HTTP call (`httpGet` for GET,
+ * `httpPost` for POST), and throws `ShopeeApiError` on a Shopee error
+ * response. This is the shared implementation behind most typed API
+ * wrapper functions in this SDK.
+ *
+ * Use the lower-level `httpGet`/`httpPost`/`signRequest`/`buildCommonParams`
+ * directly for endpoints needing custom request shaping (e.g. array query
+ * params, multipart bodies, or binary responses).
+ */
+async function callShopeeApi<T extends { error?: string }>(
+  path: string,
+  config: ShopeeConfig,
+  options: CallShopeeApiOptions,
+): Promise<T> {
+  const timestamp = getTimestampNow();
+  const signature = signRequest(path, config, timestamp);
+
+  const cleanParams: Record<string, string | number | boolean | Array<string | number | boolean>> = {};
+  if (options.params) {
+    Object.entries(options.params).forEach(([key, value]) => {
+      if (value !== undefined) {
+        cleanParams[key] = value;
+      }
+    });
+  }
+
+  let result: T;
+
+  if (options.method === 'GET') {
+    const scalarParams: Record<string, string | number | boolean> = {};
+    const arrayParams: Record<string, Array<string | number | boolean>> = {};
+    Object.entries(cleanParams).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        arrayParams[key] = value;
+      } else {
+        scalarParams[key] = value;
+      }
+    });
+
+    let commonParam = buildCommonParams(config, signature, timestamp, scalarParams);
+    Object.entries(arrayParams).forEach(([key, values]) => {
+      values.forEach((value) => {
+        commonParam += `&${key}=${encodeURIComponent(value)}`;
+      });
+    });
+
+    const url = `${SHOPEE_END_POINT_V2}${path}${commonParam}`;
+    result = await httpGet<T>(url, config);
+  } else {
+    const commonParam = commonParameter(config, signature, timestamp);
+    const url = `${SHOPEE_END_POINT_V2}${path}${commonParam}`;
+    const headers = getHeaders(config);
+    result = await httpPost<T>(url, cleanParams, headers);
+  }
+
+  if (result?.error) {
+    throwShopeeApiError(result, options.context);
+  }
+
+  return result;
+}
+
+/**
+ * Generic public (non-shop-authenticated) Shopee API call helper.
+ *
+ * Signs the request with `signPublicRequest()` (partner-level signature,
+ * no `access_token`/`shop_id`). Used for endpoints such as
+ * `v2.public.get_shopee_ip_ranges` that do not require shop authorization.
+ */
+async function callShopeePublicApi<T extends { error?: string }>(
+  path: string,
+  config: ShopeeConfig,
+  options: CallShopeeApiOptions,
+): Promise<T> {
+  const timestamp = getTimestampNow();
+  const signature = signPublicRequest(path, config, timestamp);
+  const { partnerId } = config;
+
+  let paramString = `?partner_id=${partnerId}&timestamp=${timestamp}&sign=${signature}`;
+  if (options.params) {
+    Object.entries(options.params).forEach(([key, value]) => {
+      if (value === undefined) {
+        return;
+      }
+      if (Array.isArray(value)) {
+        value.forEach((item) => {
+          paramString += `&${key}=${encodeURIComponent(item)}`;
+        });
+      } else {
+        paramString += `&${key}=${encodeURIComponent(value)}`;
+      }
+    });
+  }
+
+  let result: T;
+  const url = `${SHOPEE_END_POINT_V2}${path}${paramString}`;
+
+  if (options.method === 'GET') {
+    result = await httpGet<T>(url, config);
+  } else {
+    const headers = getHeaders(config);
+    result = await httpPost<T>(url, options.params || {}, headers);
+  }
+
+  if (result?.error) {
+    throwShopeeApiError(result, options.context);
+  }
+
+  return result;
+}
+
 export {
   ShopeeApiErrorOptions,
   ShopeeApiError,
@@ -355,12 +541,16 @@ export {
   httpGet,
   httpPost,
   httpPostDownload,
+  httpPostMultipart,
   getHeaders,
   throwShopeeApiError,
   buildCommonParams,
   isAccessTokenValid,
   isTokenExpired,
   refreshTokenExpire30Days,
+  callShopeeApi,
+  callShopeePublicApi,
+  SHOPEE_END_POINT_V2,
 };
 
 export {

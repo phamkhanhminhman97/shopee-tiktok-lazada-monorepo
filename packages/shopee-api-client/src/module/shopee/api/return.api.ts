@@ -153,3 +153,185 @@ export async function confirmReturn(returnSn: string, config: ShopeeConfig): Pro
 
   return result;
 }
+
+// ---- Appended: additional endpoints (batch 3) ----
+import {
+  ShopeeAcceptOfferRequest,
+  ShopeeCancelDisputeRequest,
+  ShopeeConvertImageRequest,
+  ShopeeDisputeRequest,
+  ShopeeGetReturnDisputeReasonRequest,
+  ShopeeGetReverseTrackingInfoRequest,
+  ShopeeGetShippingCarrierRequest,
+  ShopeeOfferRequest,
+  ShopeeQueryProofRequest,
+  ShopeeUploadProofRequest,
+  ShopeeUploadShippingProofRequest,
+} from '../dto/request/return.request';
+import {
+  ShopeeAcceptOfferResponse,
+  ShopeeCancelDisputeResponse,
+  ShopeeConvertImageResponse,
+  ShopeeDisputeResponse,
+  ShopeeGetReturnDisputeReasonResponse,
+  ShopeeGetReverseTrackingInfoResponse,
+  ShopeeGetShippingCarrierResponse,
+  ShopeeOfferResponse,
+  ShopeeQueryProofResponse,
+  ShopeeUploadProofResponse,
+  ShopeeUploadShippingProofResponse,
+} from '../dto/response/return.response';
+
+/**
+ * acceptOffer via Shopee `v2.returns.accept_offer`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function acceptOffer(params: ShopeeAcceptOfferRequest, config: ShopeeConfig): Promise<ShopeeAcceptOfferResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeAcceptOfferResponse>('/returns/accept_offer', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'acceptOffer',
+  });
+}
+
+/**
+ * cancelDispute via Shopee `v2.returns.cancel_dispute`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function cancelDispute(params: ShopeeCancelDisputeRequest, config: ShopeeConfig): Promise<ShopeeCancelDisputeResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeCancelDisputeResponse>('/returns/cancel_dispute', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'cancelDispute',
+  });
+}
+
+/**
+ * convertImage via Shopee `v2.returns.convert_image`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function convertImage(params: ShopeeConvertImageRequest, config: ShopeeConfig): Promise<ShopeeConvertImageResponse> {
+  const timestamp = ShopeeHelper.getTimestampNow();
+  const signature = ShopeeHelper.signRequest('/returns/convert_image', config, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/returns/convert_image${commonParam}`;
+
+  const result = await ShopeeHelper.httpPostMultipart<ShopeeConvertImageResponse>(
+    url,
+    { return_sn: params.return_sn, upload_image: params.upload_image },
+    config,
+  );
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'convertImage');
+  }
+
+  return result;
+}
+
+/**
+ * dispute via Shopee `v2.returns.dispute`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function dispute(params: ShopeeDisputeRequest, config: ShopeeConfig): Promise<ShopeeDisputeResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeDisputeResponse>('/returns/dispute', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'dispute',
+  });
+}
+
+/**
+ * getReturnDisputeReason via Shopee `v2.returns.get_return_dispute_reason`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getReturnDisputeReason(params: ShopeeGetReturnDisputeReasonRequest, config: ShopeeConfig): Promise<ShopeeGetReturnDisputeReasonResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetReturnDisputeReasonResponse>('/returns/get_return_dispute_reason', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getReturnDisputeReason',
+  });
+}
+
+/**
+ * getReverseTrackingInfo via Shopee `v2.returns.get_reverse_tracking_info`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getReverseTrackingInfo(params: ShopeeGetReverseTrackingInfoRequest, config: ShopeeConfig): Promise<ShopeeGetReverseTrackingInfoResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetReverseTrackingInfoResponse>('/returns/get_reverse_tracking_info', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getReverseTrackingInfo',
+  });
+}
+
+/**
+ * getShippingCarrier via Shopee `v2.returns.get_shipping_carrier`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getShippingCarrier(params: ShopeeGetShippingCarrierRequest, config: ShopeeConfig): Promise<ShopeeGetShippingCarrierResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetShippingCarrierResponse>('/returns/get_shipping_carrier', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getShippingCarrier',
+  });
+}
+
+/**
+ * offer via Shopee `v2.returns.offer`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function offer(params: ShopeeOfferRequest, config: ShopeeConfig): Promise<ShopeeOfferResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeOfferResponse>('/returns/offer', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'offer',
+  });
+}
+
+/**
+ * queryProof via Shopee `v2.returns.query_proof`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function queryProof(params: ShopeeQueryProofRequest, config: ShopeeConfig): Promise<ShopeeQueryProofResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeQueryProofResponse>('/returns/query_proof', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'queryProof',
+  });
+}
+
+/**
+ * uploadProof via Shopee `v2.returns.upload_proof`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function uploadProof(params: ShopeeUploadProofRequest, config: ShopeeConfig): Promise<ShopeeUploadProofResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeUploadProofResponse>('/returns/upload_proof', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'uploadProof',
+  });
+}
+
+/**
+ * uploadShippingProof via Shopee `v2.returns.upload_shipping_proof`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function uploadShippingProof(params: ShopeeUploadShippingProofRequest, config: ShopeeConfig): Promise<ShopeeUploadShippingProofResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeUploadShippingProofResponse>('/returns/upload_shipping_proof', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'uploadShippingProof',
+  });
+}

@@ -166,3 +166,54 @@ export {
   KnownPushPayload as ShopeeKnownPushPayload,
   VerifyPushSignatureOptions as ShopeeVerifyPushSignatureOptions,
 };
+
+// ---- Appended: additional endpoints (batch 3) ----
+/**
+ * Request parameters for confirm_consumed_lost_push_message
+ *
+ * Confirm consumed lost push message
+ */
+export interface ShopeeConfirmConsumedLostPushMessageRequest {
+  /**
+   * The last_message_id returned by v2.push.get_lost_push_message.
+   */
+  last_message_id: number;
+}
+
+/**
+ * Request parameters for get_app_push_config
+ *
+ * you can get your app current push config setting through this api
+ */
+export type ShopeeGetAppPushConfigRequest = Record<string, never>;
+
+/**
+ * Request parameters for get_lost_push_message
+ *
+ * Get the lost push messages that were lost within 3 days of the current time and not confirmed to have been consumed
+ */
+export type ShopeeGetLostPushMessageRequest = Record<string, never>;
+
+/**
+ * Request parameters for set_app_push_config
+ *
+ * you can turn on or turn off your app push config setting through this open api
+ */
+export interface ShopeeSetAppPushConfigRequest {
+  /**
+   * The callback url of push mechanism. It is the address where the Shopee will send the push message to. If you don't set any callback_url before, this parameters is required.
+   */
+  callback_url?: string;
+  /**
+   * Turn on push config, Shopee will send the push message into the callback url.1=Shop authorization for partners2=Shop deauthorization for partners3=Order status update push4=TrackingNo push5=Shopee Updates6=Banned item push7=item promotion push8=reserved stock change push9=promotionn update push10=webchat push11=video upload push12=openapi authorization expiry push13=brand register result
+   */
+  set_push_config_on?: number[];
+  /**
+   * Turn off Push config, Shopee won't send the push message into the callback url.1=Shop authorization for partners2=Shop deauthorization for partners3=Order status update push4=TrackingNo push5=Shopee Updates6=Banned item push7=item promotion push8=reserved stock change push9=promotionn update push10=webchat push11=video upload push12=openapi authorization expiry push13=brand register result
+   */
+  set_push_config_off?: number[];
+  /**
+   * Use this filed to set shops that need to be blocked.Please input no more than 500 shop id.
+   */
+  blocked_shop_id_list?: number[];
+}

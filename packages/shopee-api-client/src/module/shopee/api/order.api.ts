@@ -379,3 +379,260 @@ export async function cancelOrder(body: ShopeeRequestCancelOrder, config: Shopee
 
   return res;
 }
+
+// ---- Appended: additional endpoints (batch 3) ----
+import {
+  ShopeeDownloadFbsInvoicesRequest,
+  ShopeeDownloadInvoiceDocRequest,
+  ShopeeGenerateFbsInvoicesRequest,
+  ShopeeGetBookingDetailRequest,
+  ShopeeGetBookingListRequest,
+  ShopeeGetBuyerInvoiceInfoRequest,
+  ShopeeGetEstimateCancelValueRequest,
+  ShopeeGetFbsInvoicesResultRequest,
+  ShopeeGetPendingBuyerInvoiceOrderListRequest,
+  ShopeeGetWarehouseFilterConfigRequest,
+  ShopeeHandleBuyerCancellationRequest,
+  ShopeeHandlePrescriptionCheckRequest,
+  ShopeeSetNoteRequest,
+  ShopeeSplitOrderRequest,
+  ShopeeUnsplitOrderRequest,
+  ShopeeUploadInvoiceDocRequest,
+} from '../dto/request/order.request';
+import {
+  ShopeeDownloadFbsInvoicesResponse,
+  ShopeeDownloadInvoiceDocResponse,
+  ShopeeGenerateFbsInvoicesResponse,
+  ShopeeGetBookingDetailResponse,
+  ShopeeGetBookingListResponse,
+  ShopeeGetBuyerInvoiceInfoResponse,
+  ShopeeGetEstimateCancelValueResponse,
+  ShopeeGetFbsInvoicesResultResponse,
+  ShopeeGetPendingBuyerInvoiceOrderListResponse,
+  ShopeeGetWarehouseFilterConfigResponse,
+  ShopeeHandleBuyerCancellationResponse,
+  ShopeeHandlePrescriptionCheckResponse,
+  ShopeeSetNoteResponse,
+  ShopeeSplitOrderResponse,
+  ShopeeUnsplitOrderResponse,
+  ShopeeUploadInvoiceDocResponse,
+} from '../dto/response/order.response';
+
+/**
+ * downloadFbsInvoices via Shopee `v2.order.download_fbs_invoices`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function downloadFbsInvoices(params: ShopeeDownloadFbsInvoicesRequest = {}, config: ShopeeConfig): Promise<ShopeeDownloadFbsInvoicesResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeDownloadFbsInvoicesResponse>('/order/download_fbs_invoices', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'downloadFbsInvoices',
+  });
+}
+
+/**
+ * downloadInvoiceDoc via Shopee `v2.order.download_invoice_doc`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function downloadInvoiceDoc(params: ShopeeDownloadInvoiceDocRequest, config: ShopeeConfig): Promise<ShopeeDownloadInvoiceDocResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeDownloadInvoiceDocResponse>('/order/download_invoice_doc', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'downloadInvoiceDoc',
+  });
+}
+
+/**
+ * generateFbsInvoices via Shopee `v2.order.generate_fbs_invoices`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function generateFbsInvoices(params: ShopeeGenerateFbsInvoicesRequest = {}, config: ShopeeConfig): Promise<ShopeeGenerateFbsInvoicesResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGenerateFbsInvoicesResponse>('/order/generate_fbs_invoices', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'generateFbsInvoices',
+  });
+}
+
+/**
+ * getBookingDetail via Shopee `v2.order.get_booking_detail`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBookingDetail(params: ShopeeGetBookingDetailRequest, config: ShopeeConfig): Promise<ShopeeGetBookingDetailResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBookingDetailResponse>('/order/get_booking_detail', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBookingDetail',
+  });
+}
+
+/**
+ * getBookingList via Shopee `v2.order.get_booking_list`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBookingList(params: ShopeeGetBookingListRequest, config: ShopeeConfig): Promise<ShopeeGetBookingListResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBookingListResponse>('/order/get_booking_list', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBookingList',
+  });
+}
+
+/**
+ * getBuyerInvoiceInfo via Shopee `v2.order.get_buyer_invoice_info`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getBuyerInvoiceInfo(params: ShopeeGetBuyerInvoiceInfoRequest, config: ShopeeConfig): Promise<ShopeeGetBuyerInvoiceInfoResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetBuyerInvoiceInfoResponse>('/order/get_buyer_invoice_info', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getBuyerInvoiceInfo',
+  });
+}
+
+/**
+ * getEstimateCancelValue via Shopee `v2.order.get_estimate_cancel_value`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getEstimateCancelValue(params: ShopeeGetEstimateCancelValueRequest, config: ShopeeConfig): Promise<ShopeeGetEstimateCancelValueResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetEstimateCancelValueResponse>('/order/get_estimate_cancel_value', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getEstimateCancelValue',
+  });
+}
+
+/**
+ * getFbsInvoicesResult via Shopee `v2.order.get_fbs_invoices_result`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getFbsInvoicesResult(params: ShopeeGetFbsInvoicesResultRequest, config: ShopeeConfig): Promise<ShopeeGetFbsInvoicesResultResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetFbsInvoicesResultResponse>('/order/get_fbs_invoices_result', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getFbsInvoicesResult',
+  });
+}
+
+/**
+ * getPendingBuyerInvoiceOrderList via Shopee `v2.order.get_pending_buyer_invoice_order_list`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getPendingBuyerInvoiceOrderList(params: ShopeeGetPendingBuyerInvoiceOrderListRequest, config: ShopeeConfig): Promise<ShopeeGetPendingBuyerInvoiceOrderListResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetPendingBuyerInvoiceOrderListResponse>('/order/get_pending_buyer_invoice_order_list', config, {
+    method: 'GET',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getPendingBuyerInvoiceOrderList',
+  });
+}
+
+/**
+ * getWarehouseFilterConfig via Shopee `v2.order.get_warehouse_filter_config`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function getWarehouseFilterConfig(config: ShopeeConfig): Promise<ShopeeGetWarehouseFilterConfigResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeGetWarehouseFilterConfigResponse>('/order/get_warehouse_filter_config', config, {
+    method: 'GET',
+    params: undefined as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'getWarehouseFilterConfig',
+  });
+}
+
+/**
+ * handleBuyerCancellation via Shopee `v2.order.handle_buyer_cancellation`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function handleBuyerCancellation(params: ShopeeHandleBuyerCancellationRequest, config: ShopeeConfig): Promise<ShopeeHandleBuyerCancellationResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeHandleBuyerCancellationResponse>('/order/handle_buyer_cancellation', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'handleBuyerCancellation',
+  });
+}
+
+/**
+ * handlePrescriptionCheck via Shopee `v2.order.handle_prescription_check`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function handlePrescriptionCheck(params: ShopeeHandlePrescriptionCheckRequest, config: ShopeeConfig): Promise<ShopeeHandlePrescriptionCheckResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeHandlePrescriptionCheckResponse>('/order/handle_prescription_check', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'handlePrescriptionCheck',
+  });
+}
+
+/**
+ * setNote via Shopee `v2.order.set_note`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function setNote(params: ShopeeSetNoteRequest, config: ShopeeConfig): Promise<ShopeeSetNoteResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeSetNoteResponse>('/order/set_note', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'setNote',
+  });
+}
+
+/**
+ * splitOrder via Shopee `v2.order.split_order`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function splitOrder(params: ShopeeSplitOrderRequest, config: ShopeeConfig): Promise<ShopeeSplitOrderResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeSplitOrderResponse>('/order/split_order', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'splitOrder',
+  });
+}
+
+/**
+ * unsplitOrder via Shopee `v2.order.unsplit_order`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function unsplitOrder(params: ShopeeUnsplitOrderRequest, config: ShopeeConfig): Promise<ShopeeUnsplitOrderResponse> {
+  return ShopeeHelper.callShopeeApi<ShopeeUnsplitOrderResponse>('/order/unsplit_order', config, {
+    method: 'POST',
+    params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
+    context: 'unsplitOrder',
+  });
+}
+
+/**
+ * uploadInvoiceDoc via Shopee `v2.order.upload_invoice_doc`.
+ *
+ * @see https://open.shopee.com for the official Shopee Open Platform API reference.
+ */
+export async function uploadInvoiceDoc(params: ShopeeUploadInvoiceDocRequest, config: ShopeeConfig): Promise<ShopeeUploadInvoiceDocResponse> {
+  const timestamp = ShopeeHelper.getTimestampNow();
+  const signature = ShopeeHelper.signRequest('/order/upload_invoice_doc', config, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/order/upload_invoice_doc${commonParam}`;
+
+  const result = await ShopeeHelper.httpPostMultipart<ShopeeUploadInvoiceDocResponse>(
+    url,
+    { order_sn: params.order_sn, file_type: params.file_type, file: params.file },
+    config,
+  );
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'uploadInvoiceDoc');
+  }
+
+  return result;
+}
