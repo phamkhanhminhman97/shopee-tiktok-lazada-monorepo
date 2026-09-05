@@ -13,6 +13,30 @@ import { ShopeeRequestSearchPackageList, ShopeeRequestCancelOrder, ShopeeGetOrde
 
 const FIFTEEN_DAYS_IN_MINUTES = 15 * 24 * 60;
 
+interface ShipmentListItem {
+  order_sn: string;
+  package_number: string;
+}
+
+/**
+ * Raw response shape for `v2.order.get_shipment_list`.
+ *
+ * This endpoint is distinct from `v2.order.get_order_list`: its
+ * `response.order_list` items carry `package_number` instead of
+ * `order_status`/`booking_sn`, so it intentionally does not reuse
+ * `ShopeeResponseOrderList`.
+ */
+interface ShopeeResponseShipmentList {
+  request_id?: string;
+  error?: string;
+  message?: string;
+  response?: {
+    more?: boolean;
+    next_cursor?: string;
+    order_list?: ShipmentListItem[];
+  };
+}
+
 interface NormalizedGetOrdersOptions {
   timeRangeField: 'create_time' | 'update_time';
   timeFrom: number;
@@ -209,7 +233,7 @@ export async function getOrderDetail(orderSnList: string | string[], config: Sho
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_DETAIL}${commonParam}`;
 
-  const res: any = await ShopeeHelper.httpGet(url, config);
+  const res = await ShopeeHelper.httpGet<ShopeeResponseOrderDetail>(url, config);
 
   // Handle API Error explicitly
   if (res?.error) {
@@ -241,7 +265,7 @@ export async function getShipmentList(config: ShopeeConfig): Promise<{ order_sn:
     const commonParams = ShopeeHelper.buildCommonParams(config, signature, requestTimestamp, additionalParams);
     const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHIPMENT_LIST}${commonParams}`;
 
-    const res: any = await ShopeeHelper.httpGet(url, config);
+    const res = await ShopeeHelper.httpGet<ShopeeResponseShipmentList>(url, config);
 
     // Handle API Error explicitly
     if (res?.error) {
@@ -281,7 +305,7 @@ export async function searchPackageList(
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.SEARCH_PACKAGE_LIST}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
-  const res: any = await ShopeeHelper.httpPost(url, body, headers);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseSearchPackageList>(url, body, headers);
 
   // Handle API Error explicitly
   if (res?.error) {
@@ -319,7 +343,7 @@ export async function getPackageDetail(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_PACKAGE_DETAIL}${commonParam}`;
 
-  const res: any = await ShopeeHelper.httpGet(url, config);
+  const res = await ShopeeHelper.httpGet<ShopeeResponseGetPackageDetail>(url, config);
 
   // Handle API Error explicitly
   if (res?.error) {
@@ -347,7 +371,7 @@ export async function cancelOrder(body: ShopeeRequestCancelOrder, config: Shopee
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.CANCEL_ORDER}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
-  const res: any = await ShopeeHelper.httpPost(url, body, headers);
+  const res = await ShopeeHelper.httpPost<ShopeeResponseCancelOrder>(url, body, headers);
 
   if (res?.error) {
     ShopeeHelper.throwShopeeApiError(res, 'cancelOrder');

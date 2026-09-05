@@ -61,11 +61,6 @@ Use:
 
 ## Release
 
-Maintainers publish through Changesets:
-
-```bash
-npm run version-packages
-npm run release
-```
-
-See [`docs/RELEASE.md`](./docs/RELEASE.md) for the full release workflow.
+Versioning and publishing are automated by CI once a changeset is merged
+into `main`. See [`docs/RELEASE.md`](./docs/RELEASE.md) for the full,
+up-to-date release workflow, including the manual fallback.

@@ -34,8 +34,15 @@ interface LogisticsChannel {
   logistics_channel_name: string;
   logistics_description: string;
   mask_channel_id: number;
-  seller_logistic_has_configuration: any; // You can replace `any` with the appropriate type if available
-  size_list: any[]; // You can replace `any` with the appropriate type if available
+  /** Whether the seller has configured custom settings for this logistics channel. */
+  seller_logistic_has_configuration: boolean;
+  /**
+   * Package size options accepted by this logistics channel (e.g. size ID
+   * and name). Shopee does not publicly document an exact schema for this
+   * field, so it is intentionally left as a loose record instead of a
+   * fabricated shape. Inspect the raw response if you need specific fields.
+   */
+  size_list: Array<Record<string, unknown>>;
   support_cross_border: boolean;
   volume_limit: VolumeLimit;
   weight_limit: WeightLimit;
@@ -195,7 +202,12 @@ interface GetMassShippingParameter extends ShippingParameter {
 }
 type ResponseGetMassShippingParameter = ShopeeResponseCommon<GetMassShippingParameter>;
 
-type ResponseUpdateShippingOrder = ShopeeResponseCommon<any>;
+/**
+ * Shopee `v2.logistics.update_shipping_order` returns an empty or
+ * minimal `response` object on success. Typed as a loose record instead
+ * of `any` to avoid fabricating an inaccurate shape.
+ */
+type ResponseUpdateShippingOrder = ShopeeResponseCommon<Record<string, unknown>>;
 
 interface MassTrackingNumberSuccessItem {
   package_number: string;

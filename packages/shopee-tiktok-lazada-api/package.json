@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "lazada-api-client": "^1.1.0",
-    "shopee-api-client": "^2.0.0",
+    "shopee-api-client": "^2.1.0",
     "tiktokshops-api-client": "^1.0.6"
   }
 }

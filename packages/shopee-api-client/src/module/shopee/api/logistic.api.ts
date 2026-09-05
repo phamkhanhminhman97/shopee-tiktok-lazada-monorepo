@@ -204,7 +204,7 @@ export async function getShippingDocumentResult(
  *
  * @param body - The payload for downloading shipping document.
  * @param config - Shopee API configuration.
- * @returns {Promise<any>} The waybill file buffer or error object.
+ * @returns {Promise<ArrayBuffer>} The waybill file as a binary buffer.
  */
 export async function downloadShippingDocument(
   body: ShopeeRequestDownloadShippingDocument,

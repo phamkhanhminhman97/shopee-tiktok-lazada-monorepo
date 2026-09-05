@@ -20,7 +20,7 @@ export async function getEscrowDetail(orderSn: string, config: ShopeeConfig): Pr
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ESCROW}${commonParam}`;
 
-  const res: any = await ShopeeHelper.httpGet(url, config);
+  const res = await ShopeeHelper.httpGet<ShopeeResponseEscrowDetail>(url, config);
 
   if (res?.error) {
     ShopeeHelper.throwShopeeApiError(res, 'getEscrowDetail');

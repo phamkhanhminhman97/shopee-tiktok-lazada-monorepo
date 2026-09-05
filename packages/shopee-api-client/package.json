@@ -1,6 +1,6 @@
 {
   "name": "shopee-api-client",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Shopee Open API client for TypeScript",
   "files": [
     "dist",
@@ -47,7 +47,7 @@
     "access": "public"
   },
   "dependencies": {
-    "axios": "^1.6.2"
+    "axios": "^1.20.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",

@@ -87,3 +87,17 @@ export {
   ShopeeRequestUpdateItem,
 } from './module/shopee/dto/request/product.request';
 export { ShopeeResponseGetAccessToken, ShopeeResponseRefreshAccessToken } from './module/shopee/dto/response/config.response';
+export {
+  ShopeeRequestGetReturnList,
+  ShopeeRequestGetReturnDetail,
+  ShopeeRequestConfirmReturn,
+  ShopeeRequestGetAvailableSolutions,
+} from './module/shopee/dto/request/return.request';
+export {
+  ShopeeReturnListItem,
+  ShopeeResponseGetReturnList,
+  ShopeeResponseConfirmReturn,
+  ShopeeAvailableSolution,
+  ShopeeResponseGetAvailableSolutions,
+} from './module/shopee/dto/response/return.response';
+export { SHOPEE_RETURN_STATUS, SHOPEE_RETURN_SOLUTION } from './module/shopee/common/constant';

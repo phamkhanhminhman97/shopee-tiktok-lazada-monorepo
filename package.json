@@ -15,7 +15,7 @@
     "coverage": "npm run coverage --workspace=shopee-api-client",
     "pack:all": "npm pack --workspaces --dry-run",
     "changeset": "changeset",
-    "version-packages": "changeset version",
+    "version-packages": "changeset version && npm run sync-all-in-one-deps",
     "release": "npm run build && changeset publish",
     "sync-all-in-one-deps": "node scripts/sync-all-in-one-deps.cjs && npm install --package-lock-only",
     "check-all-in-one-deps": "node scripts/sync-all-in-one-deps.cjs --check",

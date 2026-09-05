@@ -2,6 +2,26 @@ import { ShopeeConfig } from '../dto/request/config.request';
 import axios, { AxiosResponse } from 'axios';
 import { createHmac } from 'crypto';
 
+/**
+ * Default per-request timeout (ms) applied to every Shopee HTTP call.
+ * Prevents requests from hanging indefinitely when Shopee or the network
+ * stalls.
+ */
+const DEFAULT_TIMEOUT_MS = 30_000;
+
+/**
+ * Default retry policy for idempotent (GET) Shopee requests.
+ * POST requests are never auto-retried by this SDK because Shopee mutation
+ * endpoints (ship order, cancel order, add item, ...) are not guaranteed
+ * idempotent, and a silent retry could duplicate a side effect.
+ */
+const DEFAULT_MAX_RETRIES = 2;
+const DEFAULT_RETRY_BASE_DELAY_MS = 300;
+const DEFAULT_RETRY_MAX_DELAY_MS = 4_000;
+
+/** HTTP status codes considered safe/likely-transient to retry. */
+const RETRYABLE_STATUS_CODES = new Set([408, 429, 500, 502, 503, 504]);
+
 interface ShopeeApiErrorOptions {
   code?: string;
   message?: string;
@@ -169,6 +189,85 @@ function handleError(err: unknown): never {
   });
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Decide whether a failed request is safe to retry.
+ *
+ * Retries on network-level failures (no response received, e.g. ECONNRESET,
+ * ETIMEDOUT, or axios own timeout) and on a small allow-list of HTTP status
+ * codes that are typically transient (429 rate limit, 5xx server errors,
+ * 408 request timeout).
+ */
+function isRetryableError(err: unknown): boolean {
+  if (!axios.isAxiosError(err)) {
+    return false;
+  }
+
+  if (!err.response) {
+    // No response at all: connection reset, DNS failure, timeout, etc.
+    return true;
+  }
+
+  return RETRYABLE_STATUS_CODES.has(err.response.status);
+}
+
+/**
+ * Compute the delay (ms) before the next retry attempt.
+ *
+ * Honors the Shopee/HTTP standard `Retry-After` response header when
+ * present (seconds or HTTP-date). Otherwise falls back to exponential
+ * backoff with random jitter, capped at `DEFAULT_RETRY_MAX_DELAY_MS`.
+ */
+function computeRetryDelayMs(err: unknown, attempt: number): number {
+  if (axios.isAxiosError(err) && err.response?.headers) {
+    const retryAfterHeader = err.response.headers['retry-after'];
+    if (retryAfterHeader) {
+      const asSeconds = Number(retryAfterHeader);
+      if (Number.isFinite(asSeconds) && asSeconds >= 0) {
+        return Math.min(asSeconds * 1000, DEFAULT_RETRY_MAX_DELAY_MS);
+      }
+      const asDate = Date.parse(retryAfterHeader);
+      if (!Number.isNaN(asDate)) {
+        return Math.max(0, Math.min(asDate - Date.now(), DEFAULT_RETRY_MAX_DELAY_MS));
+      }
+    }
+  }
+
+  const exponential = DEFAULT_RETRY_BASE_DELAY_MS * 2 ** attempt;
+  const jitter = Math.random() * DEFAULT_RETRY_BASE_DELAY_MS;
+  return Math.min(exponential + jitter, DEFAULT_RETRY_MAX_DELAY_MS);
+}
+
+/**
+ * Run a request function with automatic retry for idempotent (GET-style)
+ * calls. Retries never apply to POST calls made through
+ * `httpPost`/`httpPostDownload` because Shopee mutation endpoints are not
+ * guaranteed idempotent.
+ */
+async function withRetry<T>(fn: () => Promise<T>, maxRetries: number): Promise<T> {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastError = err;
+
+      if (attempt === maxRetries || !isRetryableError(err)) {
+        throw err;
+      }
+
+      await sleep(computeRetryDelayMs(err, attempt));
+    }
+  }
+
+  // Unreachable: the loop always returns or throws above.
+  throw lastError;
+}
+
 function getHeaders(_config?: ShopeeConfig, contentType = 'application/json'): Record<string, string> {
   return { 'Content-Type': contentType };
 }
@@ -192,7 +291,7 @@ function resolveHeaders(headersOrConfig?: Record<string, string> | ShopeeConfig)
 async function httpPost<T = any>(url: string, body: unknown, headersOrConfig: Record<string, string> | ShopeeConfig): Promise<T> {
   const headers = resolveHeaders(headersOrConfig);
   try {
-    const res: AxiosResponse<T> = await axios.post(url, body, { headers });
+    const res: AxiosResponse<T> = await axios.post(url, body, { headers, timeout: DEFAULT_TIMEOUT_MS });
     return res.data;
   } catch (err) {
     handleError(err);
@@ -204,6 +303,7 @@ async function httpPostDownload(url: string, body: unknown, headers: Record<stri
     const res: AxiosResponse = await axios.post(url, body, {
       headers,
       responseType: 'arraybuffer',
+      timeout: DEFAULT_TIMEOUT_MS,
     });
     return res.data as ArrayBuffer;
   } catch (err) {
@@ -211,12 +311,20 @@ async function httpPostDownload(url: string, body: unknown, headers: Record<stri
   }
 }
 
+/**
+ * Perform a Shopee GET request with a bounded timeout and automatic retry
+ * on transient failures (network errors, 429, 5xx, 408). GET requests are
+ * idempotent from a Shopee API perspective, so retrying is safe here.
+ */
 async function httpGet<T = any>(url: string, _config?: ShopeeConfig): Promise<T> {
   try {
-    const res: AxiosResponse<T> = await axios.get(url, {
-      headers: getHeaders(_config),
-    });
-    return res.data;
+    return await withRetry(async () => {
+      const res: AxiosResponse<T> = await axios.get(url, {
+        headers: getHeaders(_config),
+        timeout: DEFAULT_TIMEOUT_MS,
+      });
+      return res.data;
+    }, DEFAULT_MAX_RETRIES);
   } catch (err) {
     handleError(err);
   }
@@ -253,4 +361,11 @@ export {
   isAccessTokenValid,
   isTokenExpired,
   refreshTokenExpire30Days,
+};
+
+export {
+  DEFAULT_TIMEOUT_MS as SHOPEE_DEFAULT_TIMEOUT_MS,
+  DEFAULT_MAX_RETRIES as SHOPEE_DEFAULT_MAX_RETRIES,
+  isRetryableError,
+  computeRetryDelayMs,
 };

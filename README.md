@@ -242,23 +242,19 @@ Contributions are welcome. Start with:
 
 This repository uses [Changesets](https://github.com/changesets/changesets) to manage package versions, changelogs, and independent npm publishing.
 
-Create a changeset after modifying package code:
+Versioning and publishing are automated by CI via
+[`changesets/action`](https://github.com/changesets/action) and npm
+[Trusted Publishing](https://docs.npmjs.com/trusted-publishers) (OIDC) — no
+manual version bump or `npm publish` is required.
+
+Create a changeset after modifying package code, then commit and push it to `main`:
 
 ```bash
 npm run changeset
 ```
 
-Apply version updates:
-
-```bash
-npm run version-packages
-```
-
-Publish changed packages:
-
-```bash
-npm run release
-```
+CI opens a `"Version Packages"` pull request for you to review and merge.
+Merging it publishes the changed packages to npm automatically.
 
 For the full release process, see [`docs/RELEASE.md`](./docs/RELEASE.md).
 

@@ -476,6 +476,19 @@ try {
 }
 ```
 
+### Timeouts and automatic retry
+
+Every request has a 30 second timeout. `GET` requests (order list, product list,
+tracking info, etc.) automatically retry up to 2 times on transient failures —
+network errors, `408`, `429`, `500`, `502`, `503`, and `504` — using exponential
+backoff with jitter. Shopee's `Retry-After` header is honored when present.
+
+`POST` requests (ship order, cancel order, add item, confirm return, etc.) are
+never auto-retried, since Shopee does not guarantee these mutation endpoints are
+idempotent. If a `POST` call fails, catch the `ShopeeApiError` and decide whether
+it is safe to retry based on your own idempotency handling (e.g. checking order
+state before resubmitting).
+
 ---
 
 ## Full example
@@ -718,6 +731,15 @@ try {
 | Method | Description |
 | --- | --- |
 | `getEscrowDetail` | Get Shopee payment escrow detail |
+
+### Returns
+
+| Method | Description |
+| --- | --- |
+| `getReturnList` | List return/refund requests with pagination and filters |
+| `getReturnDetail` | Get one return/refund request detail by `return_sn` |
+| `getAvailableSolutions` | Get the return/refund solutions available for a return |
+| `confirmReturn` | Seller-side confirmation of a buyer return/refund request |
 
 ---
 

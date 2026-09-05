@@ -187,7 +187,13 @@ export async function getProductItemBaseInfo(itemIds: string[], config: ShopeeCo
   const commonParam = `${ShopeeHelper.commonParameter(config, signature, timestamp)}&item_id_list=${itemIds.toString()}`;
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ITEM_BASE}${commonParam}`;
-  return ShopeeHelper.httpGet(url, config);
+  const result = await ShopeeHelper.httpGet<ShopeeResponseProductBaseItemInfo>(url, config);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'getProductItemBaseInfo');
+  }
+
+  return result;
 }
 
 /**
@@ -292,7 +298,13 @@ export async function updateStock(
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPDATE_STOCK}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
-  return ShopeeHelper.httpPost(url, body, headers);
+  const result = await ShopeeHelper.httpPost<ShopeeResponseUpdateStock>(url, body, headers);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'updateStock');
+  }
+
+  return result;
 }
 
 /**
@@ -319,7 +331,13 @@ export async function unListItem(itemId: string, statusUnlist: boolean, config: 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UNLIST_ITEM}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
-  return ShopeeHelper.httpPost(url, body, headers);
+  const result = await ShopeeHelper.httpPost<ShopeeResponseUnlistItem>(url, body, headers);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'unListItem');
+  }
+
+  return result;
 }
 
 /**
@@ -347,7 +365,13 @@ export async function updatePrice(itemId: string, price: number, config: ShopeeC
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPDATE_PRICE}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
-  return ShopeeHelper.httpPost(url, body, headers);
+  const result = await ShopeeHelper.httpPost<ShopeeResponseUpdatePrice>(url, body, headers);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'updatePrice');
+  }
+
+  return result;
 }
 
 /**
@@ -421,7 +445,13 @@ export async function getCategory(config: ShopeeConfig): Promise<ShopeeResponseG
   const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_CATEGORY}${commonParam}`;
-  return ShopeeHelper.httpGet(url, config);
+  const result = await ShopeeHelper.httpGet<ShopeeResponseGetCategories>(url, config);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'getCategory');
+  }
+
+  return result;
 }
 
 /**
@@ -440,7 +470,13 @@ export async function getAttributes(categoryId: number, config: ShopeeConfig): P
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ATTRIBUTES}${commonParam}`;
-  return ShopeeHelper.httpGet(url, config);
+  const result = await ShopeeHelper.httpGet<ShopeeResponseGetAttributes>(url, config);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'getAttributes');
+  }
+
+  return result;
 }
 
 /**
@@ -466,5 +502,11 @@ export async function getBrandList(categoryId: number, config: ShopeeConfig): Pr
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_BRAND_LIST}${commonParam}`;
-  return ShopeeHelper.httpGet(url, config);
+  const result = await ShopeeHelper.httpGet<ShopeeResponseGetBrandList>(url, config);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'getBrandList');
+  }
+
+  return result;
 }

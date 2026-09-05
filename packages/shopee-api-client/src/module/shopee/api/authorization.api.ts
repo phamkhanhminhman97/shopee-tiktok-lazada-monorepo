@@ -10,7 +10,7 @@ import { ShopeeResponseGetAccessToken, ShopeeResponseRefreshAccessToken } from '
  * @param config
  * @returns
  */
-export async function generateAuthLink(redirectURL: string, config: ShopeeConfig) {
+export async function generateAuthLink(redirectURL: string, config: ShopeeConfig): Promise<{ url: string; redirect: string }> {
   const { partnerId } = config;
 
   const redirect = redirectURL;
@@ -43,7 +43,7 @@ export async function fetchTokenWithAuthCode(authCode: string, config: ShopeeCon
 
   const timestamp = ShopeeHelper.getTimestampNow();
   const params = [partnerId, SHOPEE_PATH.AUTH_TOKEN, timestamp.toString()];
-  const baseString = params.reduce((prev: any, curr: any) => (prev += curr), '');
+  const baseString = params.reduce((prev: string, curr: string | number) => prev + curr, '');
   const signature = createHmac('sha256', partnerKey).update(baseString).digest('hex');
 
   const commonParam = `?sign=${signature}&partner_id=${partnerId}&timestamp=${timestamp}`;
@@ -63,7 +63,13 @@ export async function fetchTokenWithAuthCode(authCode: string, config: ShopeeCon
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.AUTH_TOKEN}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
-  return ShopeeHelper.httpPost(url, body, headers);
+  const result = await ShopeeHelper.httpPost<ShopeeResponseGetAccessToken>(url, body, headers);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'fetchTokenWithAuthCode');
+  }
+
+  return result;
 }
 
 /**
@@ -90,7 +96,7 @@ export async function fetchTokenWithRefreshToken(config: ShopeeConfig): Promise<
   }
 
   const params = [partnerId, SHOPEE_PATH.REFRESH_TOKEN, timestamp.toString()];
-  const baseString = params.reduce((prev: any, curr: any) => (prev += curr), '');
+  const baseString = params.reduce((prev: string, curr: string | number) => prev + curr, '');
   const signature = createHmac('sha256', partnerKey).update(baseString).digest('hex');
 
   const searchParams = new URLSearchParams({ sign: signature, partner_id: String(partnerId), timestamp: String(timestamp) });
@@ -104,5 +110,11 @@ export async function fetchTokenWithRefreshToken(config: ShopeeConfig): Promise<
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.REFRESH_TOKEN}${commonParam}`;
 
   const headers = ShopeeHelper.getHeaders(config);
-  return ShopeeHelper.httpPost(url, body, headers);
+  const result = await ShopeeHelper.httpPost<ShopeeResponseRefreshAccessToken>(url, body, headers);
+
+  if (result?.error) {
+    ShopeeHelper.throwShopeeApiError(result, 'fetchTokenWithRefreshToken');
+  }
+
+  return result;
 }

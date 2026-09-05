@@ -84,6 +84,14 @@ import { ShopeeResponseGetAccessToken, ShopeeResponseRefreshAccessToken } from '
 import { getEscrowDetail } from './api/payment.api';
 import { parseShopeePushPayload, verifyShopeePushSignature } from './api/push.api';
 import { ShopeeKnownPushPayload, ShopeePushPayload } from './dto/request/push.request';
+import { getReturnList, getReturnDetail, getAvailableSolutions, confirmReturn } from './api/return.api';
+import { ShopeeResponseReturnDetail } from './dto/response/order.response';
+import {
+  ShopeeResponseGetReturnList,
+  ShopeeResponseConfirmReturn,
+  ShopeeResponseGetAvailableSolutions,
+} from './dto/response/return.response';
+import { ShopeeRequestGetReturnList } from './dto/request/return.request';
 
 export class ShopeeModule {
   private config: ShopeeConfig;
@@ -179,6 +187,44 @@ export class ShopeeModule {
 
   async getEscrowDetail(orderSn: string): Promise<ShopeeResponseEscrowDetail> {
     return await getEscrowDetail(orderSn, this.config);
+  }
+
+  /**
+   * List Shopee return/refund requests via `v2.returns.get_return_list`.
+   *
+   * `page_no` and `page_size` are required. Check `response.more` on the
+   * result to know whether another page is available.
+   */
+  async getReturnList(params: ShopeeRequestGetReturnList): Promise<ShopeeResponseGetReturnList> {
+    return await getReturnList(params, this.config);
+  }
+
+  /**
+   * Get one return/refund request detail via `v2.returns.get_return_detail`.
+   *
+   * @param returnSn Shopee return serial number from `getReturnList()` or a
+   * return-related Push Mechanism event.
+   */
+  async getReturnDetail(returnSn: string): Promise<ShopeeResponseReturnDetail> {
+    return await getReturnDetail(returnSn, this.config);
+  }
+
+  /**
+   * Get the return/refund solutions available for a return via
+   * `v2.returns.get_available_solutions`.
+   */
+  async getAvailableSolutions(returnSn: string): Promise<ShopeeResponseGetAvailableSolutions> {
+    return await getAvailableSolutions(returnSn, this.config);
+  }
+
+  /**
+   * Confirm a buyer return/refund request via `v2.returns.confirm`.
+   *
+   * Seller-side confirmation that accepts the return/refund as requested by
+   * the buyer.
+   */
+  async confirmReturn(returnSn: string): Promise<ShopeeResponseConfirmReturn> {
+    return await confirmReturn(returnSn, this.config);
   }
 
   async getProductItemList(): Promise<Record<string, unknown>[]> {

@@ -12,7 +12,7 @@ interface ResponseComment {
   order_sn?: string;
   item_id?: number;
   model_id?: number;
-  create_time?: any;
+  create_time?: number;
   rating_star?: number;
   editable?: string;
   hidden?: boolean;
@@ -331,8 +331,8 @@ interface ResponseGetBrandList extends ShopeeResponseCommon<Brand> {
 }
 
 interface UpdatePrice {
-  failure_list: Array<any>;
-  success_list: Array<any>;
+  failure_list: Array<FailureList>;
+  success_list: Array<{ item_id: number; model_id?: number; original_price: number }>;
 }
 
 type ResponseUnlistItem = ShopeeResponseCommon<UnlistItem>;

@@ -20,37 +20,46 @@ git status --short
 
 The working tree should contain only intentional release changes.
 
-## Changesets Flow
+## Automated Release Flow
 
-Create a changeset after changing package code or public docs:
+Release is fully automated by [`.github/workflows/release.yml`](../.github/workflows/release.yml)
+using [`changesets/action`](https://github.com/changesets/action) and npm
+[Trusted Publishing](https://docs.npmjs.com/trusted-publishers) (OIDC). No
+`NPM_TOKEN` secret is used or required.
 
-```bash
-npm run changeset
-```
+1. Create a changeset after changing package code or public docs:
 
-Apply version and changelog updates:
+   ```bash
+   npm run changeset
+   ```
 
-```bash
-npm run version-packages
-```
+2. Commit the changeset file and push to `main` (directly or via a merged PR).
 
-Review the changed files, then commit:
+3. The `Release` workflow detects the pending changeset and opens/updates a
+   `"Version Packages"` pull request. This PR runs `npm run version-packages`,
+   which bumps versions, updates each package's `CHANGELOG.md`, and
+   automatically syncs `shopee-tiktokshops-lazada-api`'s dependency ranges to
+   match the newly bumped client package versions.
 
-```bash
-git add .
-git commit -m "chore: release packages"
-```
+4. Review and merge the `"Version Packages"` PR.
 
-Publish changed packages:
+5. Merging triggers the `Release` workflow again. With no changesets left
+   pending, it runs `npm run release` (build + `changeset publish`) and
+   publishes every changed package straight to npm via OIDC — no further
+   manual steps.
 
-```bash
-npm run release
-git push
-```
+### One-time setup per package
+
+Each published package must have a npm
+[Trusted Publisher](https://docs.npmjs.com/trusted-publishers) configured
+once, pointing at this repository and the `release.yml` workflow filename,
+with "Allow npm publish" enabled. This is already configured for all four
+packages in this repo.
 
 ## Manual Fallback
 
-Use manual publishing only if Changesets is blocked.
+Use manual publishing only if the `Release` workflow or npm Trusted
+Publishing is blocked.
 
 Publish package clients first:
 

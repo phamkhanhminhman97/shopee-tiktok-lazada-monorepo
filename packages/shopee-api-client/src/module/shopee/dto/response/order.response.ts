@@ -22,12 +22,21 @@ interface OrderList {
 }
 
 interface OrderDetail {
-  order_list: Array<any>;
+  /**
+   * Shopee `v2.order.get_order_detail` returns 50+ possible fields per
+   * order, many gated behind `response_optional_fields`. Modeling every
+   * combination precisely is out of scope here, so each order is typed as
+   * a loose record instead of `any` to keep basic safety (e.g. no implicit
+   * `any` leaking into consumer code) without fabricating an inaccurate
+   * shape. Narrow this with your own interface for the fields you request.
+   */
+  order_list: Array<Record<string, unknown>>;
 }
 
 interface ReturnDetail {
   image: Array<string>;
-  buyer_videos: any;
+  /** Buyer-submitted evidence video URLs for this return. */
+  buyer_videos: string[];
   reason: string;
   text_reason: string;
   return_sn: string;
@@ -45,27 +54,38 @@ interface ReturnDetail {
     email: string;
     portrait: string;
   };
-  item: any;
+  /**
+   * Item-level detail for this return. Shopee does not publicly document
+   * an exact schema for this field, so it is intentionally left as a loose
+   * record instead of a fabricated shape. Inspect the raw response if you
+   * need specific item fields.
+   */
+  item: Array<Record<string, unknown>>;
   order_sn: string;
   return_ship_due_date: number;
   return_seller_due_date: number;
-  activity: [];
+  /**
+   * Return status change history. Shopee does not publicly document an
+   * exact schema for this field, so it is intentionally left as a loose
+   * record instead of a fabricated shape.
+   */
+  activity: Array<Record<string, unknown>>;
   seller_proof: {
     seller_proof_status: string;
-    seller_evidence_deadline: any;
+    seller_evidence_deadline: number;
   };
   seller_compensation: {
     seller_compensation_status: string;
-    seller_compensation_due_date: any;
-    compensation_amount: any;
+    seller_compensation_due_date: number;
+    compensation_amount: number;
   };
   negotiation: {
     negotiation_status: string;
     latest_solution: string;
-    latest_offer_amount: any;
+    latest_offer_amount: number;
     latest_offer_creator: string;
-    counter_limit: any;
-    offer_due_date: any;
+    counter_limit: number;
+    offer_due_date: number;
   };
   logistics_status: string;
   return_pickup_address: {
