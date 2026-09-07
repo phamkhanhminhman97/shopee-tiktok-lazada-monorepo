@@ -196,9 +196,9 @@ export async function getPriceDetail(orderId: string, config: TiktokConfig): Pro
  * @param packageId - Package ID.
  * @param payload - Payload.
  * @param config - Tiktok API configuration.
- * @returns {Promise<any>}
+ * @returns {Promise<unknown>}
  */
-export async function shipPackage(packageId: string, payload: TiktokRequestShipPackage, config: TiktokConfig): Promise<any> {
+export async function shipPackage(packageId: string, payload: TiktokRequestShipPackage, config: TiktokConfig): Promise<unknown> {
   if (!packageId) {
     throw new Error('Invalid input: packageId are required');
   }

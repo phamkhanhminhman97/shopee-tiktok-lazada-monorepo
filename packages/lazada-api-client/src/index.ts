@@ -1,4 +1,5 @@
 export { LazadaModule } from './module/lazada';
+export { LazadaApiError } from './module/lazada/common/helper';
 export { LazadaConfig, LazadaConfigList } from './module/lazada/dto/request/config.request';
 export {
   LZD_UPDATE_SELLABLE_QUANTITY,

@@ -57,9 +57,31 @@ const MAX_RANGE_CAN_BE_REVIEW = 12; //WEEK
 const TIME_RANGE_EXCEED = 7; //DAYS
 const END_POINT = 'https://api.lazada.vn/rest';
 const END_POINT_AUTH = 'https://auth.lazada.com/oauth/authorize';
+const END_POINT_TOKEN = 'https://auth.lazada.com/rest';
 const ALGORITHM = 'sha256';
 const DIGEST = 'hex';
 const DROP_SHIP = 'dropship';
+
+/**
+ * Lazada regional REST API base URLs, keyed by lowercase country code.
+ *
+ * Lazada operates as separate regional platforms; the API host must match
+ * the seller's marketplace. `LazadaConfig.countryCode` selects the host via
+ * `resolveEndPoint()` in `helper.ts`. Defaults to `vn` (this package's
+ * historical default) when `countryCode` is omitted, to preserve backward
+ * compatibility for existing callers.
+ */
+const REGION_END_POINTS: Record<string, string> = {
+  sg: 'https://api.lazada.sg/rest',
+  vn: 'https://api.lazada.vn/rest',
+  ph: 'https://api.lazada.com.ph/rest',
+  my: 'https://api.lazada.com.my/rest',
+  th: 'https://api.lazada.co.th/rest',
+  id: 'https://api.lazada.co.id/rest',
+};
+
+/** Auth/token exchange paths that must always hit `END_POINT_TOKEN`, never a regional host. */
+const AUTH_PATHS = new Set(['/auth/token/create', '/auth/token/refresh']);
 
 enum PATH {
   PRODUCT_GET = '/products/get',
@@ -102,6 +124,9 @@ export {
   WEBHOOK_TYPE as LAZADA_WEBHOOK_TYPE,
   END_POINT as LZD_END_POINT,
   END_POINT_AUTH as LZD_END_POINT_AUTH,
+  END_POINT_TOKEN as LZD_END_POINT_TOKEN,
+  REGION_END_POINTS as LZD_REGION_END_POINTS,
+  AUTH_PATHS as LZD_AUTH_PATHS,
   ALGORITHM as LZD_ALGORITHM,
   DIGEST as LZD_DIGEST,
   DROP_SHIP as LZD_DROP_SHIP,

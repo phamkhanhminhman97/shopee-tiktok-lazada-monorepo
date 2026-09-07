@@ -45,7 +45,7 @@ import {
   ConfirmDeliveryForDBSRequest,
   FailedDeliveryForDBSRequest,
 } from './dto/request/order.request';
-import { LZD_UPDATE_SELLABLE_QUANTITY, LZD_UPDATE_STATUS_PRODUCT } from './dto/request/product.request';
+import { LZD_UPDATE_SELLABLE_QUANTITY, LZD_UPDATE_STATUS_PRODUCT, LZD_UPDATE_PRICE_PRODUCT } from './dto/request/product.request';
 import { LazadaResponseAccessToken } from './dto/response/config.response';
 import {
   LazadaResponseGetOrders,
@@ -63,8 +63,111 @@ import {
   LazadaResponseRecreatePackage,
 } from './dto/response/order.response';
 
+
+// ---- Additional domain submodule imports (full shopee-sdk-parity-style API expansion) ----
+import { LazadaChoiceCustomized } from './submodules/choice-customized.submodule';
+import { LazadaContent } from './submodules/content.submodule';
+import { LazadaCrossBoarderProduct } from './submodules/cross-boarder-product.submodule';
+import { LazadaETickets } from './submodules/e-tickets.submodule';
+import { LazadaEarlyBirdPrice } from './submodules/early-bird-price.submodule';
+import { LazadaFbl } from './submodules/fbl.submodule';
+import { LazadaFinance } from './submodules/finance.submodule';
+import { LazadaFirstmileBigbagOnlyForCn } from './submodules/firstmile-bigbag-only-for-cn.submodule';
+import { LazadaFlexicombo } from './submodules/flexicombo.submodule';
+import { LazadaFreeShipping } from './submodules/free-shipping.submodule';
+import { LazadaFulfillment } from './submodules/fulfillment.submodule';
+import { LazadaInstantMessaging } from './submodules/instant-messaging.submodule';
+import { LazadaDg } from './submodules/lazada-dg.submodule';
+import { LazadaOwnLogistics } from './submodules/lazada-own-logistics.submodule';
+import { LazadaWalletCorporateTopUp } from './submodules/lazada-wallet-corporate-top-up.submodule';
+import { LazadaLazlike } from './submodules/lazlike.submodule';
+import { LazadaLazlive } from './submodules/lazlive.submodule';
+import { LazadaLazpay } from './submodules/lazpay.submodule';
+import { LazadaLogistics } from './submodules/logistics.submodule';
+import { LazadaLogisticsStation } from './submodules/logistics-station.submodule';
+import { LazadaMediaCenter } from './submodules/media-center.submodule';
+import { LazadaMembership } from './submodules/membership.submodule';
+import { LazadaOrder } from './submodules/order-api-v2.submodule';
+import { LazadaProduct } from './submodules/product-api-v2.submodule';
+import { LazadaProductReview } from './submodules/product-review.submodule';
+import { LazadaRedmart } from './submodules/redmart.submodule';
+import { LazadaReturnAndRefund } from './submodules/return-and-refund.submodule';
+import { LazadaSeller } from './submodules/seller.submodule';
+import { LazadaSellerVoucher } from './submodules/seller-voucher.submodule';
+import { LazadaServiceMarket } from './submodules/service-market.submodule';
+import { LazadaSponsoredSolutions } from './submodules/sponsored-solutions.submodule';
+import { LazadaStoreDecoration } from './submodules/store-decoration.submodule';
+import { LazadaSystem } from './submodules/system.submodule';
+
 export class LazadaModule {
   private config: LazadaConfig;
+
+  /** Lazada `choice-customized-api` API namespace. */
+  readonly choiceCustomized: LazadaChoiceCustomized;
+  /** Lazada `content-api` API namespace. */
+  readonly content: LazadaContent;
+  /** Lazada `cross-boarder-product-api` API namespace. */
+  readonly crossBoarderProduct: LazadaCrossBoarderProduct;
+  /** Lazada `e-tickets-api` API namespace. */
+  readonly eTickets: LazadaETickets;
+  /** Lazada `early-bird-price-api` API namespace. */
+  readonly earlyBirdPrice: LazadaEarlyBirdPrice;
+  /** Lazada `fbl-api` API namespace. */
+  readonly fbl: LazadaFbl;
+  /** Lazada `finance-api` API namespace. */
+  readonly finance: LazadaFinance;
+  /** Lazada `firstmile-bigbag-only-for-cn` API namespace. */
+  readonly firstmileBigbagOnlyForCn: LazadaFirstmileBigbagOnlyForCn;
+  /** Lazada `flexicombo-api` API namespace. */
+  readonly flexicombo: LazadaFlexicombo;
+  /** Lazada `free-shipping-api` API namespace. */
+  readonly freeShipping: LazadaFreeShipping;
+  /** Lazada `fulfillment-api` API namespace. */
+  readonly fulfillment: LazadaFulfillment;
+  /** Lazada `instant-messaging-api` API namespace. */
+  readonly instantMessaging: LazadaInstantMessaging;
+  /** Lazada `lazada-dg-api` API namespace. */
+  readonly dg: LazadaDg;
+  /** Lazada `lazada-logistics-api` API namespace. */
+  readonly ownLogistics: LazadaOwnLogistics;
+  /** Lazada `lazada-wallet-corporate-top-up-api` API namespace. */
+  readonly walletCorporateTopUp: LazadaWalletCorporateTopUp;
+  /** Lazada `lazlike-api` API namespace. */
+  readonly lazlike: LazadaLazlike;
+  /** Lazada `lazlive-api` API namespace. */
+  readonly lazlive: LazadaLazlive;
+  /** Lazada `lazpay-api` API namespace. */
+  readonly lazpay: LazadaLazpay;
+  /** Lazada `logistics-api` API namespace. */
+  readonly logistics: LazadaLogistics;
+  /** Lazada `logistics-station-api` API namespace. */
+  readonly logisticsStation: LazadaLogisticsStation;
+  /** Lazada `media-center-api` API namespace. */
+  readonly mediaCenter: LazadaMediaCenter;
+  /** Lazada `membership-api` API namespace. */
+  readonly membership: LazadaMembership;
+  /** Lazada `order-api` API namespace. */
+  readonly order: LazadaOrder;
+  /** Lazada `product-api` API namespace. */
+  readonly product: LazadaProduct;
+  /** Lazada `product-review-api` API namespace. */
+  readonly productReview: LazadaProductReview;
+  /** Lazada `redmart-api` API namespace. */
+  readonly redmart: LazadaRedmart;
+  /** Lazada `return-and-refund-api` API namespace. */
+  readonly returnAndRefund: LazadaReturnAndRefund;
+  /** Lazada `seller-api` API namespace. */
+  readonly seller: LazadaSeller;
+  /** Lazada `seller-voucher-api` API namespace. */
+  readonly sellerVoucher: LazadaSellerVoucher;
+  /** Lazada `service-market-api` API namespace. */
+  readonly serviceMarket: LazadaServiceMarket;
+  /** Lazada `sponsored-solutions-api` API namespace. */
+  readonly sponsoredSolutions: LazadaSponsoredSolutions;
+  /** Lazada `store-decoration-api` API namespace. */
+  readonly storeDecoration: LazadaStoreDecoration;
+  /** Lazada `system-api` API namespace. */
+  readonly system: LazadaSystem;
 
   /**
    * Create a Lazada API client.
@@ -77,6 +180,40 @@ export class LazadaModule {
    */
   constructor(config: LazadaConfig) {
     this.config = config;
+
+    this.choiceCustomized = new LazadaChoiceCustomized(this.config);
+    this.content = new LazadaContent(this.config);
+    this.crossBoarderProduct = new LazadaCrossBoarderProduct(this.config);
+    this.eTickets = new LazadaETickets(this.config);
+    this.earlyBirdPrice = new LazadaEarlyBirdPrice(this.config);
+    this.fbl = new LazadaFbl(this.config);
+    this.finance = new LazadaFinance(this.config);
+    this.firstmileBigbagOnlyForCn = new LazadaFirstmileBigbagOnlyForCn(this.config);
+    this.flexicombo = new LazadaFlexicombo(this.config);
+    this.freeShipping = new LazadaFreeShipping(this.config);
+    this.fulfillment = new LazadaFulfillment(this.config);
+    this.instantMessaging = new LazadaInstantMessaging(this.config);
+    this.dg = new LazadaDg(this.config);
+    this.ownLogistics = new LazadaOwnLogistics(this.config);
+    this.walletCorporateTopUp = new LazadaWalletCorporateTopUp(this.config);
+    this.lazlike = new LazadaLazlike(this.config);
+    this.lazlive = new LazadaLazlive(this.config);
+    this.lazpay = new LazadaLazpay(this.config);
+    this.logistics = new LazadaLogistics(this.config);
+    this.logisticsStation = new LazadaLogisticsStation(this.config);
+    this.mediaCenter = new LazadaMediaCenter(this.config);
+    this.membership = new LazadaMembership(this.config);
+    this.order = new LazadaOrder(this.config);
+    this.product = new LazadaProduct(this.config);
+    this.productReview = new LazadaProductReview(this.config);
+    this.redmart = new LazadaRedmart(this.config);
+    this.returnAndRefund = new LazadaReturnAndRefund(this.config);
+    this.seller = new LazadaSeller(this.config);
+    this.sellerVoucher = new LazadaSellerVoucher(this.config);
+    this.serviceMarket = new LazadaServiceMarket(this.config);
+    this.sponsoredSolutions = new LazadaSponsoredSolutions(this.config);
+    this.storeDecoration = new LazadaStoreDecoration(this.config);
+    this.system = new LazadaSystem(this.config);
   }
 
   setConfig(config: LazadaConfig) {
@@ -291,7 +428,7 @@ export class LazadaModule {
   /**
    * Update the price of a product SKU.
    */
-  async updatePrice(itemId: number, payload: any) {
+  async updatePrice(itemId: number, payload: LZD_UPDATE_PRICE_PRODUCT) {
     return await updatePrice(this.config, itemId, [payload]);
   }
 

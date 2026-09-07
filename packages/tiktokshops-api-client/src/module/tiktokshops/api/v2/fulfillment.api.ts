@@ -27,7 +27,7 @@ export async function getPackageTimeSlots(packageId: string, config: TiktokConfi
  * @param config - Tiktok API configuration.
  * @returns Promise of shipping package.
  */
-export async function shipPackage(packageId: string, payload: TiktokRequestShipPackage, config: TiktokConfig): Promise<any> {
+export async function shipPackage(packageId: string, payload: TiktokRequestShipPackage, config: TiktokConfig): Promise<unknown> {
   if (!packageId) {
     throw new Error('Invalid input: packageId are required');
   }

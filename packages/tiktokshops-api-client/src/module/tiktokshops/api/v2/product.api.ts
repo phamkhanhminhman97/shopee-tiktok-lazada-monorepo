@@ -11,6 +11,9 @@ import {
   TiktokResponseDeactiveProduct,
   TiktokResponseUploadImage,
 } from '../../dto/response/product.response';
+import { TiktokGetProductResponse } from '../../dto/response/product-v3.response';
+import { TiktokCreateProductResponse } from '../../dto/response/product-v3.response';
+import { TiktokResponseCommon } from '../../dto/response/config.response';
 
 /**
  * Fetches the list of categories.
@@ -146,9 +149,9 @@ export async function deactiveProduct(productIds: string[], config: TiktokConfig
  *
  * @param productId - Product ID.
  * @param config - Tiktok API configuration.
- * @returns {Promise<any>}
+ * @returns {Promise<TiktokResponseCommon<TiktokGetProductResponse>>}
  */
-export async function getProductDetail(productId: string, config: TiktokConfig): Promise<any> {
+export async function getProductDetail(productId: string, config: TiktokConfig): Promise<TiktokResponseCommon<TiktokGetProductResponse>> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}&product_id=${productId}`;
   const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.PRODUCT_DETAIL, commonParam, config);
@@ -160,9 +163,12 @@ export async function getProductDetail(productId: string, config: TiktokConfig):
  * Create Product
  * @param {TiktokRequestCreateProduct} payload
  * @param {TiktokConfig} config
- * @return {Promise<any>}
+ * @return {Promise<TiktokResponseCommon<TiktokCreateProductResponse | object>>}
  */
-export async function createProduct(payload: TiktokRequestCreateProduct, config: TiktokConfig) {
+export async function createProduct(
+  payload: TiktokRequestCreateProduct,
+  config: TiktokConfig,
+): Promise<TiktokResponseCommon<TiktokCreateProductResponse | object>> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
   const body = payload;

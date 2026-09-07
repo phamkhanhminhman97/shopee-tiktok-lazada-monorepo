@@ -2,21 +2,22 @@ import { LAZADA_PATH, LZD_ALGORITHM } from '../common/constant';
 import { executePOST, priceParametersXML, productParametersXML, toProductXML, toRequestProductsXML } from '../common/helper';
 import * as LazadaHelper from '../common/helper';
 import { LazadaConfig } from '../dto/request/config.request';
-import { LZD_UPDATE_SELLABLE_QUANTITY, LZD_UPDATE_STATUS_PRODUCT } from '../dto/request/product.request';
+import { LZD_UPDATE_SELLABLE_QUANTITY, LZD_UPDATE_STATUS_PRODUCT, LZD_UPDATE_PRICE_PRODUCT } from '../dto/request/product.request';
+import { LazadaResponseProductItem } from '../dto/response/product.response';
 
 /**
  *
  * @param info
  * @returns
  */
-export async function getProducts(info) {
+export async function getProducts(info: LazadaConfig): Promise<LazadaResponseProductItem[]> {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
     timestamp: new Date().getTime(),
     access_token: info.appAccessToken,
   };
-  const productList: any[] = [];
+  const productList: LazadaResponseProductItem[] = [];
   let i = 0;
   while (i < 10000) {
     obj['offset'] = i;
@@ -94,7 +95,7 @@ export async function updateStatusProduct(info, itemId: number, payload: Array<L
  * @param payload
  * @returns
  */
-export async function updatePrice(info, itemId: number, payload) {
+export async function updatePrice(info: LazadaConfig, itemId: number, payload: LZD_UPDATE_PRICE_PRODUCT[]) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,

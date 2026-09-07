@@ -3,7 +3,7 @@ import { TIKTOK_END_POINT_AUTH, TIKTOK_END_POINT_AUTH_2309, TIKTOK_END_POINT_AUT
 import * as TiktokHelper from '../../common/helper';
 import { TiktokResponseAccessToken, TiktokResponseAuthorized, TiktokResponseRefreshToken } from '../../dto/response/config.response';
 
-async function requestTiktokAPI(config: TiktokConfig, path: string): Promise<any> {
+async function requestTiktokAPI<T>(config: TiktokConfig, path: string): Promise<T> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter(config, timestamp);
   const url = TiktokHelper.genURLwithSignature(path, commonParam, config);
@@ -41,7 +41,7 @@ export function generateAuthLink(serviceId: string, state?: string, useUsDomain 
  * @returns {Promise<TiktokResponseAuthorized>} - Response of get authorized shop.
  */
 export function getAuthorizedShop(config: TiktokConfig): Promise<TiktokResponseAuthorized> {
-  return requestTiktokAPI(config, TIKTOK_PATH_202309.AUTHORIZED_SHOP);
+  return requestTiktokAPI<TiktokResponseAuthorized>(config, TIKTOK_PATH_202309.AUTHORIZED_SHOP);
 }
 
 /**

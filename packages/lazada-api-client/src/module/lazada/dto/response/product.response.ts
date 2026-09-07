@@ -8,21 +8,21 @@ interface Rating {
 interface Skus {
   Status: string;
   quantity: number;
-  Images: Array<any>;
+  Images: string[];
   SellerSku: string;
   ShopSku: string;
   special_time_format: string;
-  saleProp: any;
+  saleProp: unknown;
   Url: string;
-  multiWarehouseInventories: any;
+  multiWarehouseInventories: unknown;
   package_width: string;
   special_to_time: string;
   special_from_time: string;
   package_height: string;
-  fblWarehouseInventories: Array<any>;
+  fblWarehouseInventories: unknown[];
   special_price: number;
   price: number;
-  channelInventories: Array<any>;
+  channelInventories: unknown[];
   package_length: string;
   special_from_date: string;
   package_weight: string;
@@ -38,7 +38,7 @@ interface ResponseProductItem {
   item_id: number;
   trialProduct: boolean;
   primary_category: number;
-  marketImages: Array<any>;
+  marketImages: string[];
   attributes: {
     name: string;
     description: string;
@@ -53,14 +53,14 @@ interface ResponseProductItem {
 }
 
 class ResponseReview {
-  review_images?: any;
+  review_images?: string[];
   can_reply?: boolean;
-  create_time?: any;
-  submit_time?: any;
+  create_time?: number;
+  submit_time?: number;
   review_content?: string;
   ratings?: Rating;
-  product_id: any;
-  id: any;
+  product_id?: string;
+  id?: string;
   seller_reply?: string;
   order_id?: number;
   review_type?: string;

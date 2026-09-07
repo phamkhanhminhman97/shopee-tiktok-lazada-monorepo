@@ -1,3 +1,5 @@
+import { LAZADA_PRODUCT_STATUS } from '../../common/constant';
+
 interface UpdateSellableQuantity {
   itemId: string;
   skuId: string;
@@ -9,7 +11,18 @@ interface UpdateStatusProduct {
   itemId: string;
   skuId: string;
   sellerSku?: string;
-  status: any;
+  status: LAZADA_PRODUCT_STATUS;
 }
 
-export { UpdateSellableQuantity as LZD_UPDATE_SELLABLE_QUANTITY, UpdateStatusProduct as LZD_UPDATE_STATUS_PRODUCT };
+interface UpdatePriceProduct {
+  itemId: string;
+  skuId: string;
+  sellerSku?: string;
+  price: string | number;
+}
+
+export {
+  UpdateSellableQuantity as LZD_UPDATE_SELLABLE_QUANTITY,
+  UpdateStatusProduct as LZD_UPDATE_STATUS_PRODUCT,
+  UpdatePriceProduct as LZD_UPDATE_PRICE_PRODUCT,
+};

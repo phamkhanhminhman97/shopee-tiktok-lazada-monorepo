@@ -563,7 +563,7 @@ export interface LazadaResponseTraceOrder {
     not_success?: boolean;
     success?: boolean;
     module?: TracePackageDetail[];
-    error_code?: any;
+    error_code?: string;
     repeated?: boolean;
     retry?: boolean;
   };

@@ -34,7 +34,7 @@ export async function getOrderList(beforeHours: number, config: TiktokConfig) {
       cursor = response.data.data.next_cursor;
 
       if (response.data.data?.order_list) {
-        orderList.push(...response.data.data?.order_list.map((item: any) => item.order_id));
+        orderList.push(...response.data.data?.order_list.map((item: { order_id: string }) => item.order_id));
       }
 
       // i += 1;

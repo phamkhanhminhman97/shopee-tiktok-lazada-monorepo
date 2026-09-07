@@ -19,7 +19,8 @@
     "clean": "rm -rf ./dist",
     "build": "npm run clean && tsc",
     "prepack": "npm run build",
-    "test": "npm run build"
+    "test": "npm run build && node --test test/*.test.js",
+    "coverage": "npm run build && node --test --experimental-test-coverage test/*.test.js"
   },
   "keywords": [
     "tiktok",
@@ -47,7 +48,8 @@
   },
   "dependencies": {
     "axios": "^1.6.2",
-    "crypto-js": "^4.2.0"
+    "crypto-js": "^4.2.0",
+    "form-data": "^4.0.6"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",

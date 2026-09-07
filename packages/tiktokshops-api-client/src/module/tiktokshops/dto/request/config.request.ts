@@ -67,6 +67,12 @@ export interface TiktokConfig {
    * Required for some seller APIs such as order search.
    */
   shopCipher?: string;
+  /**
+   * TikTok Shop category assets cipher.
+   * Required for some Product domain APIs (e.g. category/attribute/brand
+   * lookups that are scoped to a specific category asset context).
+   */
+  categoryAssetsCipher?: string;
 }
 
 export interface TiktokConfigList {

@@ -11,7 +11,7 @@ import axios from 'axios';
 export async function getProductsLists(config: TiktokConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
-  const productList: any[] = [];
+  const productList: unknown[] = [];
   let i = 1;
   while (true) {
     const body = {

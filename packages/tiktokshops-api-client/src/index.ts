@@ -1,4 +1,5 @@
 export { TiktokModule } from './module/tiktokshops';
+export { TiktokApiError } from './module/tiktokshops/common/helper';
 export { TiktokConfig, TiktokConfigList } from './module/tiktokshops/dto/request/config.request';
 export { TiktokRequestShipPackage } from './module/tiktokshops/dto/request/fulfillment.request';
 export {
