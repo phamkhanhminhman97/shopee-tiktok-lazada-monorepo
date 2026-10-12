@@ -1,3 +1,4 @@
+import { TiktokFulfillmentOfficial } from './fulfillment-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   combinablePackage,
@@ -41,8 +42,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.fulfillment.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokFulfillment {
-  constructor(private config: TiktokConfig) {}
+export class TiktokFulfillment extends TiktokFulfillmentOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async getOrderSplitAttributes(params: TiktokGetOrderSplitAttributesQuery): Promise<TiktokResponseCommon<TiktokGetOrderSplitAttributesResponse>> {
     return await getOrderSplitAttributes(params, this.config);

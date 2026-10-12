@@ -1,3 +1,4 @@
+import { LazadaFblOfficial } from './fbl-official.submodule';
 import { LazadaConfig } from '../dto/request/config.request';
 import {
   buildFulfillmentSkuRelation,
@@ -158,8 +159,10 @@ import {
  *
  * Access via `lazada.fbl.<method>()` on a `LazadaModule` instance.
  */
-export class LazadaFbl {
-  constructor(private config: LazadaConfig) {}
+export class LazadaFbl extends LazadaFblOfficial {
+  constructor(config: LazadaConfig) {
+    super(config);
+  }
 
   async getChannelStocksForMCL(params: FblGetChannelStocksForMCLRequest): Promise<FblGetChannelStocksForMCLResponse> {
     return await getChannelStocksForMCL(params, this.config);

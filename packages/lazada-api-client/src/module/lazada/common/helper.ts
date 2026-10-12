@@ -2,9 +2,15 @@ import { LAZADA_PRODUCT_STATUS, LZD_ALGORITHM, LZD_AUTH_PATHS, LZD_DIGEST, LZD_E
 import axios from 'axios';
 import { createHmac } from 'crypto';
 import { LazadaConfig } from '../dto/request/config.request';
+import { LAZADA_DEFAULT_TIMEOUT_MS, resolveMaxRetries, resolveTimeoutMs, withRetry } from './retry';
 
 export function concatDictionaryKeyValue(object) {
   return Object.keys(object).reduce(function (concatString, key) {
+    // Lazada's reference signing code skips parameters whose value is empty (areNotEmpty(key, value)).
+    const value = object[key];
+    if (value === undefined || value === null || value === '') {
+      return concatString;
+    }
     return concatString.concat(key + object[key]);
   }, '');
 }
@@ -220,8 +226,8 @@ class LazadaApiError extends Error {
   }
 }
 
-/** Default per-request timeout (ms) for every request made through `callLazadaApi()`. */
-const DEFAULT_TIMEOUT_MS = 30_000;
+/** Default per-request timeout (ms) for every request made through `callLazadaApi()`. Override with `LazadaConfig.timeoutMs`. */
+const DEFAULT_TIMEOUT_MS = LAZADA_DEFAULT_TIMEOUT_MS;
 
 /**
  * Resolve the correct Lazada regional REST base URL for this config and path.
@@ -323,6 +329,11 @@ function flattenPayloadForTransport(payload: Record<string, unknown>): Record<st
 /**
  * Perform a Lazada GET request with a bounded timeout, correct regional
  * routing, and structured error handling via `LazadaApiError`.
+ *
+ * GET requests are automatically retried on transient failures (network
+ * errors, 408/429/5xx) with exponential backoff, honoring `Retry-After`.
+ * Tune with `LazadaConfig.maxRetries` (default 2, `0` disables) and
+ * `LazadaConfig.timeoutMs` (default 30000).
  */
 async function httpGetJson<T = any>(path: string, payload: Record<string, unknown>, config: LazadaConfig, context?: string): Promise<T> {
   const authFields = LZD_AUTH_PATHS.has(path) ? {} : buildAuthFields(config);
@@ -333,7 +344,7 @@ async function httpGetJson<T = any>(path: string, payload: Record<string, unknow
   const url = `${resolveEndPoint(config, path)}${path}?${params}&sign=${signature}`;
 
   try {
-    const res = await axios.get(url, { timeout: DEFAULT_TIMEOUT_MS });
+    const res = await withRetry(() => axios.get(url, { timeout: resolveTimeoutMs(config) }), resolveMaxRetries(config));
     const data = res.data;
     if (data && typeof data === 'object' && 'code' in data && String(data.code) !== '0') {
       throwLazadaApiError(data, context, res.status);
@@ -368,7 +379,7 @@ async function httpPostForm<T = any>(path: string, payload: Record<string, unkno
   try {
     const res = await axios.post(url, form.toString(), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      timeout: DEFAULT_TIMEOUT_MS,
+      timeout: resolveTimeoutMs(config),
     });
     const data = res.data;
     if (data && typeof data === 'object' && 'code' in data && String(data.code) !== '0') {

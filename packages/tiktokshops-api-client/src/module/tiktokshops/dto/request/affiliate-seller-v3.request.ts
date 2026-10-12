@@ -1,12 +1,14 @@
-export type TiktokCreateConversationWithCreatorBody = {
-    creator_id: string;
-    only_need_conversation_id?: boolean;
-};
+import type {
+  TiktokAffiliateSellerCreateConversationWithCreator202508Body,
+  TiktokAffiliateSellerSellerSearchCreatorOnMarketplace202608Body,
+  TiktokAffiliateSellerSellerSearchCreatorOnMarketplace202608Query,
+  TiktokAffiliateSellerUpdateTargetCollaboration202508Body,
+} from './affiliate-seller-official.request';
 
-export type TiktokCreateConversationwithCreatorBody = {
-    creator_id: string;
-    only_need_conversation_id?: boolean;
-};
+export type TiktokCreateConversationWithCreatorBody = TiktokAffiliateSellerCreateConversationWithCreator202508Body;
+
+/** @deprecated Misspelled duplicate of {@link TiktokCreateConversationWithCreatorBody}. */
+export type TiktokCreateConversationwithCreatorBody = TiktokAffiliateSellerCreateConversationWithCreator202508Body;
 
 export type TiktokCreateOpenCollaborationBody = {
     product_id: string;
@@ -204,33 +206,14 @@ export type TiktokSellerSearchAffiliateOpenCollaborationProductQuery = {
     page_size: number;
 };
 
-export type TiktokSellerSearchCreatorOnMarketplaceBody = {
-    search_key: string;
-    keyword: string;
-    follower_demographics: {
-        age_ranges: string[];
-        count_range: {
-            count_ge: number;
-            count_le: number;
-        };
-        gender_distribution: {
-            gender: 'MALE' | 'FEMALE' | 'OTHER';
-            percentage_ge: number;
-        };
-    };
-    gmv_ranges: string[];
-    units_sold_ranges: string[];
-};
+export type TiktokSellerSearchCreatorOnMarketplaceBody = TiktokAffiliateSellerSellerSearchCreatorOnMarketplace202608Body;
 
 export type TiktokSellerSearchCreatorOnMarketplaceParams = {
     query: TiktokSellerSearchCreatorOnMarketplaceQuery;
     body: TiktokSellerSearchCreatorOnMarketplaceBody;
 };
 
-export type TiktokSellerSearchCreatorOnMarketplaceQuery = {
-    page_size: number;
-    page_token?: string;
-};
+export type TiktokSellerSearchCreatorOnMarketplaceQuery = TiktokAffiliateSellerSellerSearchCreatorOnMarketplace202608Query;
 
 export type TiktokSellerSearchSampleApplicationsBody = {
     product_id?: string;
@@ -270,22 +253,7 @@ export type TiktokSendImMessageParams = {
     body: TiktokSendImMessageBody;
 };
 
-export type TiktokUpdateTargetCollaborationBody = {
-    name: string;
-    end_time: string;
-    products: {
-        id: string;
-        commission_rate: number;
-    }[];
-    creator_user_ids: string[];
-    seller_contact_info: {
-        email: string;
-    };
-    free_sample_rule: {
-        has_free_sample: boolean;
-        is_sample_approval_exempt: boolean;
-    };
-};
+export type TiktokUpdateTargetCollaborationBody = TiktokAffiliateSellerUpdateTargetCollaboration202508Body;
 
 export type TiktokUpdateTargetCollaborationParams = {
     target_collaboration_id: string;

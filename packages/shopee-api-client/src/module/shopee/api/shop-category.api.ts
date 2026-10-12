@@ -33,7 +33,7 @@ export async function addShopCategory(
 ): Promise<ShopeeResponseAddShopCategory> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.ADD_SHOP_CATEGORY, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.ADD_SHOP_CATEGORY);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ADD_SHOP_CATEGORY}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -60,7 +60,7 @@ export async function updateShopCategory(
 ): Promise<ShopeeResponseUpdateShopCategory> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UPDATE_SHOP_CATEGORY, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.UPDATE_SHOP_CATEGORY);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPDATE_SHOP_CATEGORY}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -87,7 +87,7 @@ export async function deleteShopCategory(
 ): Promise<ShopeeResponseDeleteShopCategory> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.DELETE_SHOP_CATEGORY, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.DELETE_SHOP_CATEGORY);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.DELETE_SHOP_CATEGORY}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
   const body = { shop_category_id: shopCategoryId };
@@ -118,7 +118,7 @@ export async function getShopCategoryList(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, {
     page_size: params.page_size,
     page_no: params.page_no,
-  });
+  }, SHOPEE_PATH.GET_SHOP_CATEGORY_LIST);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHOP_CATEGORY_LIST}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetShopCategoryList>(url, config);
@@ -147,7 +147,7 @@ export async function addShopCategoryItemList(
 
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.ADD_SHOP_CATEGORY_ITEM_LIST, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.ADD_SHOP_CATEGORY_ITEM_LIST);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ADD_SHOP_CATEGORY_ITEM_LIST}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -173,7 +173,7 @@ export async function deleteShopCategoryItemList(
 ): Promise<ShopeeResponseDeleteShopCategoryItemList> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.DELETE_SHOP_CATEGORY_ITEM_LIST, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.DELETE_SHOP_CATEGORY_ITEM_LIST);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.DELETE_SHOP_CATEGORY_ITEM_LIST}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -208,7 +208,7 @@ export async function getShopCategoryItemList(
   if (typeof params.page_no === 'number') {
     additionalParams.page_no = params.page_no;
   }
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_SHOP_CATEGORY_ITEM_LIST);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHOP_CATEGORY_ITEM_LIST}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetShopCategoryItemList>(url, config);

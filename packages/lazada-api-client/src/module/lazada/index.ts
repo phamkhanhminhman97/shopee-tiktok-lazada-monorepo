@@ -97,6 +97,7 @@ import { LazadaSellerVoucher } from './submodules/seller-voucher.submodule';
 import { LazadaServiceMarket } from './submodules/service-market.submodule';
 import { LazadaSponsoredSolutions } from './submodules/sponsored-solutions.submodule';
 import { LazadaStoreDecoration } from './submodules/store-decoration.submodule';
+import { LazadaStoreFlashSale } from './submodules/store-flash-sale-official.submodule';
 import { LazadaSystem } from './submodules/system.submodule';
 
 export class LazadaModule {
@@ -166,6 +167,8 @@ export class LazadaModule {
   readonly sponsoredSolutions: LazadaSponsoredSolutions;
   /** Lazada `store-decoration-api` API namespace. */
   readonly storeDecoration: LazadaStoreDecoration;
+  /** Lazada `store-flash-sale-api` API namespace. */
+  readonly storeFlashSale: LazadaStoreFlashSale;
   /** Lazada `system-api` API namespace. */
   readonly system: LazadaSystem;
 
@@ -213,6 +216,7 @@ export class LazadaModule {
     this.serviceMarket = new LazadaServiceMarket(this.config);
     this.sponsoredSolutions = new LazadaSponsoredSolutions(this.config);
     this.storeDecoration = new LazadaStoreDecoration(this.config);
+    this.storeFlashSale = new LazadaStoreFlashSale(this.config);
     this.system = new LazadaSystem(this.config);
   }
 
@@ -319,6 +323,8 @@ export class LazadaModule {
 
   /**
    * Get AWB (Air Waybill) PDF shipping label for a package.
+   *
+   * @deprecated Calls `GET /order/document/awb/pdf/get`, which the current official Lazada reference no longer lists. Use `lazada.fulfillment.printAWB()` (`/order/package/document/get`).
    */
   async printAWB(params: PrintAWBRequest): Promise<LazadaResponsePrintAWB> {
     return await printAWB(this.config, params);
@@ -342,6 +348,8 @@ export class LazadaModule {
 
   /**
    * Confirm successful delivery for Delivered by Seller (DBS) model.
+   *
+   * @deprecated Calls `POST /order/delivery/confirm`, which the current official Lazada reference no longer lists. Use `lazada.fulfillment.confirmDeliveryForDBS()` (`/order/package/sof/delivered`).
    */
   async confirmDeliveryForDBS(params: ConfirmDeliveryForDBSRequest): Promise<LazadaResponseConfirmDeliveryDBS> {
     return await confirmDeliveryForDBS(this.config, params);
@@ -349,6 +357,8 @@ export class LazadaModule {
 
   /**
    * Confirm failed delivery for Delivered by Seller (DBS) model.
+   *
+   * @deprecated Calls `POST /order/failed_delivery/confirm`, which the current official Lazada reference no longer lists. Use `lazada.fulfillment.failedDeliveryForDBS()` (`/order/package/sof/failed_delivery`).
    */
   async failedDeliveryForDBS(params: FailedDeliveryForDBSRequest): Promise<LazadaResponseFailedDeliveryDBS> {
     return await failedDeliveryForDBS(this.config, params);

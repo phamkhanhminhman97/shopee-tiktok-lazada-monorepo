@@ -1,3 +1,4 @@
+import { TiktokAnalyticsOfficial } from './analytics-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   getShopPerformance,
@@ -39,8 +40,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.analytics.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokAnalytics {
-  constructor(private config: TiktokConfig) {}
+export class TiktokAnalytics extends TiktokAnalyticsOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async getShopPerformance(query: TiktokGetShopPerformanceQuery): Promise<TiktokResponseCommon<TiktokGetShopPerformanceResponse>> {
     return await getShopPerformance(query, this.config);

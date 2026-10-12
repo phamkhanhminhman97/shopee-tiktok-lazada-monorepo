@@ -1,20 +1,13 @@
-export type TiktokCreateConversationWithCreatorResponse = {
-    conversation_id?: string;
-    is_new?: boolean;
-    username?: string;
-    avatar?: string;
-    unread_count?: number;
-    creator_im_id?: string;
-};
+import type {
+  TiktokAffiliateSellerCreateConversationWithCreator202508Response,
+  TiktokAffiliateSellerSellerSearchCreatorOnMarketplace202608Response,
+  TiktokAffiliateSellerUpdateTargetCollaboration202508Response,
+} from './affiliate-seller-official.response';
 
-export type TiktokCreateConversationwithCreatorResponse = {
-    conversation_id?: string;
-    is_new?: string;
-    username?: string;
-    avatar?: string;
-    unread_count?: string;
-    creator_im_id?: string;
-};
+export type TiktokCreateConversationWithCreatorResponse = TiktokAffiliateSellerCreateConversationWithCreator202508Response;
+
+/** @deprecated Misspelled duplicate of {@link TiktokCreateConversationWithCreatorResponse}. */
+export type TiktokCreateConversationwithCreatorResponse = TiktokAffiliateSellerCreateConversationWithCreator202508Response;
 
 export type TiktokCreateOpenCollaborationResponse = {
     open_collaboration?: {
@@ -529,52 +522,7 @@ export type TiktokSellerSearchAffiliateOpenCollaborationProductResponse = {
     total_count?: number;
 };
 
-export type TiktokSellerSearchCreatorOnMarketplaceResponse = {
-    next_page_token?: string;
-    search_key?: string;
-    creators?: {
-        username?: string;
-        nickname?: string;
-        avatar?: {
-            url?: string;
-        };
-        selection_region?: string;
-        category_ids?: string[];
-        avg_ec_live_uv?: number;
-        avg_ec_video_view_count?: number;
-        follower_count?: number;
-        gmv?: {
-            currency?: string;
-            amount?: string;
-        };
-        live_gmv?: {
-            currency?: string;
-            amount?: string;
-        };
-        video_gmv?: {
-            currency?: string;
-            amount?: string;
-        };
-        gmv_range?: {
-            currency?: string;
-            minimum_amount?: string;
-            maximum_amount?: string;
-            formatted_range?: string;
-        };
-        units_sold_range?: {
-            minimum_amount?: number;
-            maximum_amount?: number;
-            formatted_range?: string;
-        };
-        top_follower_demographics?: {
-            age_ranges?: string[];
-            major_gender?: {
-                gender?: 'MALE' | 'FEMALE' | 'OTHER';
-                percentage?: number;
-            };
-        };
-    }[];
-};
+export type TiktokSellerSearchCreatorOnMarketplaceResponse = TiktokAffiliateSellerSellerSearchCreatorOnMarketplace202608Response;
 
 export type TiktokSellerSearchSampleApplicationsFulfillmentsResponse = {
     fulfillments?: {
@@ -609,27 +557,4 @@ export type TiktokSendImMessageResponse = {
     content: string;
 };
 
-export type TiktokUpdateTargetCollaborationResponse = {
-    target_collaboration_conflicts?: {
-        creator_user_id?: string;
-        product_id?: string;
-    }[];
-    update_failed?: {
-        remove_creator_ids?: string[];
-        remove_product_ids?: string[];
-        add_creator_ids?: string[];
-        add_products?: {
-            id?: string;
-            commission_rate?: number;
-        };
-        change_commissions?: {
-            product_id?: string;
-            commission_rate?: number;
-        };
-        end_time?: number;
-        seller_contact_info?: {
-            email?: string;
-        };
-        name?: string;
-    };
-};
+export type TiktokUpdateTargetCollaborationResponse = TiktokAffiliateSellerUpdateTargetCollaboration202508Response;

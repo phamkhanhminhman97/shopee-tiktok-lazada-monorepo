@@ -64,12 +64,15 @@ import {
  *
  * @returns A promise resolving to the result of the conversation initiation.
  * Endpoint: `POST /affiliate_seller/202412/conversations`
+ *
+ * @deprecated Misspelled duplicate of {@link createConversationWithCreator}; it targets the same
+ * endpoint. Use `createConversationWithCreator` instead.
  */
 export async function createConversationwithCreator(body: TiktokCreateConversationwithCreatorBody, config: TiktokConfig): Promise<TiktokResponseCommon<TiktokCreateConversationwithCreatorResponse>> {
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokCreateConversationwithCreatorResponse>>(
-    '/affiliate_seller/202412/conversations',
+    '/affiliate_seller/202508/conversations',
     'POST',
-    {},
+    { body: body },
     config,
     'createConversationwithCreator',
   );
@@ -87,7 +90,7 @@ export async function createTargetCollaboration(body: TiktokCreateTargetCollabor
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokCreateTargetCollaborationResponse>>(
     '/affiliate_seller/202405/target_collaborations',
     'POST',
-    {},
+    { body: body },
     config,
     'createTargetCollaboration',
   );
@@ -105,7 +108,7 @@ export async function editOpenCollaborationSettings(body: TiktokEditOpenCollabor
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokEditOpenCollaborationSettingsResponse>>(
     '/affiliate_seller/202405/open_collaboration_settings',
     'POST',
-    {},
+    { body: body },
     config,
     'editOpenCollaborationSettings',
   );
@@ -319,7 +322,7 @@ export async function searchTargetCollaborations(params: TiktokSearchTargetColla
  */
 export async function updateTargetCollaboration(params: TiktokUpdateTargetCollaborationParams, config: TiktokConfig): Promise<TiktokResponseCommon<TiktokUpdateTargetCollaborationResponse>> {
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokUpdateTargetCollaborationResponse>>(
-    `/affiliate_seller/202409/target_collaborations/${params.target_collaboration_id}`,
+    `/affiliate_seller/202508/target_collaborations/${params.target_collaboration_id}`,
     'PUT',
     { body: params.body },
     config,
@@ -393,7 +396,7 @@ export async function getOpenCollaborationCreatorContentDetail(query: TiktokGetO
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetOpenCollaborationCreatorContentDetailResponse>>(
     `/affiliate_seller/202412/open_collaborations/creator_content_details`,
     'GET',
-    {},
+    { query: query },
     config,
     'getOpenCollaborationCreatorContentDetail',
   );
@@ -499,7 +502,7 @@ export async function sendImMessage(params: TiktokSendImMessageParams, config: T
  */
 export async function createConversationWithCreator(body: TiktokCreateConversationWithCreatorBody, config: TiktokConfig): Promise<TiktokResponseCommon<TiktokCreateConversationWithCreatorResponse>> {
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokCreateConversationWithCreatorResponse>>(
-    `/affiliate_seller/202412/conversations`,
+    `/affiliate_seller/202508/conversations`,
     'POST',
     { body: body },
     config,
@@ -514,6 +517,8 @@ export async function createConversationWithCreator(body: TiktokCreateConversati
  *
  * @returns A promise confirming the read status update.
  * Endpoint: `POST /affiliate_seller/202412/conversatons/read`
+ *
+ * The misspelling `conversatons` is the path as published in the official TikTok Shop API reference.
  */
 export async function markConversationRead(body: TiktokMarkConversationReadBody, config: TiktokConfig): Promise<TiktokResponseCommon<TiktokMarkConversationReadResponse>> {
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokMarkConversationReadResponse>>(
@@ -553,7 +558,7 @@ export async function getLatestUnreadMessages(config: TiktokConfig): Promise<Tik
  */
 export async function sellerSearchCreatorOnMarketplace(params: TiktokSellerSearchCreatorOnMarketplaceParams, config: TiktokConfig): Promise<TiktokResponseCommon<TiktokSellerSearchCreatorOnMarketplaceResponse>> {
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokSellerSearchCreatorOnMarketplaceResponse>>(
-    `/affiliate_seller/202412/conversations/messages/list/newest`,
+    `/affiliate_seller/202608/marketplace_creators/search`,
     'POST',
     { query: params.query, body: params.body },
     config,

@@ -184,6 +184,9 @@ import { ShopeeMerchant } from './submodules/merchant.submodule';
 import { ShopeePrincipal } from './submodules/principal.submodule';
 import { ShopeePublicApi } from './submodules/public.submodule';
 import { ShopeeSbs } from './submodules/sbs.submodule';
+import { ShopeeBusinessInsights } from './submodules/business-insights.submodule';
+import { ShopeeBuybox } from './submodules/buybox.submodule';
+import { ShopeeProductSsp } from './submodules/product-ssp.submodule';
 import { ShopeeShopFlashSale } from './submodules/shop-flash-sale.submodule';
 import { ShopeeTopPicks } from './submodules/top-picks.submodule';
 import { ShopeeVideo } from './submodules/video.submodule';
@@ -622,6 +625,8 @@ export class ShopeeModule {
   readonly ams: ShopeeAms;
   /** Shopee `v2.bundle_deal.*` API namespace. */
   readonly bundleDeal: ShopeeBundleDeal;
+  readonly businessInsights: ShopeeBusinessInsights;
+  readonly buybox: ShopeeBuybox;
   /** Shopee `v2.discount.*` API namespace. */
   readonly discount: ShopeeDiscount;
   /** Shopee `v2.fbs.*` API namespace. */
@@ -640,6 +645,7 @@ export class ShopeeModule {
   readonly merchant: ShopeeMerchant;
   /** Shopee `v2.principal.*` API namespace. */
   readonly principal: ShopeePrincipal;
+  readonly productSsp: ShopeeProductSsp;
   /** Shopee `v2.public.*` API namespace. */
   readonly publicApi: ShopeePublicApi;
   /** Shopee `v2.sbs.*` API namespace. */
@@ -669,6 +675,8 @@ export class ShopeeModule {
     this.ads = new ShopeeAds(this.config);
     this.ams = new ShopeeAms(this.config);
     this.bundleDeal = new ShopeeBundleDeal(this.config);
+    this.businessInsights = new ShopeeBusinessInsights(this.config);
+    this.buybox = new ShopeeBuybox(this.config);
     this.discount = new ShopeeDiscount(this.config);
     this.fbs = new ShopeeFbs(this.config);
     this.firstMile = new ShopeeFirstMile(this.config);
@@ -678,6 +686,7 @@ export class ShopeeModule {
     this.mediaSpace = new ShopeeMediaSpace(this.config);
     this.merchant = new ShopeeMerchant(this.config);
     this.principal = new ShopeePrincipal(this.config);
+    this.productSsp = new ShopeeProductSsp(this.config);
     this.publicApi = new ShopeePublicApi(this.config);
     this.sbs = new ShopeeSbs(this.config);
     this.shopFlashSale = new ShopeeShopFlashSale(this.config);

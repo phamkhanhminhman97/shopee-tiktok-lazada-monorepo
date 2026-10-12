@@ -3,6 +3,7 @@ import { TIKTOK_END_POINT, TIKTOK_END_POINT_AUTH } from './constant';
 import { TiktokConfig } from '../dto/request/config.request';
 import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
+import { TIKTOK_DEFAULT_TIMEOUT_MS, resolveMaxRetries, resolveTimeoutMs, withRetry } from './retry';
 
 export function commonParameter(config, timestamp) {
   const { appKey } = config;
@@ -207,8 +208,12 @@ class TiktokApiError extends Error {
   }
 }
 
-/** Default per-request timeout (ms) for every request made through callTiktokApi()/callTiktokMultipart(). */
-const DEFAULT_TIMEOUT_MS = 30_000;
+/**
+ * Default per-request timeout (ms) for every request made through
+ * callTiktokApi()/callTiktokMultipart()/callTiktokAuthApi(). Override per client
+ * with `TiktokConfig.timeoutMs` (not applied to the OAuth token endpoints).
+ */
+const DEFAULT_TIMEOUT_MS = TIKTOK_DEFAULT_TIMEOUT_MS;
 
 function throwTiktokApiError(raw: unknown, context?: string, status?: number, cause?: unknown): never {
   if (raw && typeof raw === 'object') {
@@ -287,15 +292,15 @@ function flattenTiktokQuery(query: Record<string, unknown> | undefined): Record<
 
 /**
  * Compute the TikTok Shop v1 HMAC-SHA256 signature:
- * HMAC_SHA256(appSecret + path + sortedFlatQueryConcat + jsonBody, appSecret)
+ * HMAC_SHA256(appSecret + path + sortedFlatQueryConcat + body + appSecret, appSecret)
  * where sortedFlatQueryConcat is every (non-sign, non-access_token) query
- * key+value concatenated in alphabetical key order, and jsonBody is the
- * JSON-stringified body (empty string when there is no body).
+ * key+value concatenated in alphabetical key order, and `body` is the exact
+ * request body string that is sent (empty string when there is no body, and
+ * for multipart/form-data requests, which TikTok excludes from the signature).
  */
-function signTiktokRequest(path: string, flatQuery: Record<string, string>, appSecret: string, body?: unknown): string {
+function signTiktokRequest(path: string, flatQuery: Record<string, string>, appSecret: string, bodyString = ''): string {
   const sortedKeys = Object.keys(flatQuery).sort();
   const sortedQuery = sortedKeys.map((key) => `${key}${flatQuery[key]}`).join('');
-  const bodyString = body && typeof body === 'object' && Object.keys(body as Record<string, unknown>).length > 0 ? JSON.stringify(body) : '';
   const baseString = `${appSecret}${path}${sortedQuery}${bodyString}${appSecret}`;
   return crypto.HmacSHA256(baseString, appSecret).toString();
 }
@@ -311,6 +316,13 @@ type TiktokApiMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
  * present on config - shop_cipher/category_asset_cipher), sends body as
  * JSON when provided, and throws TiktokApiError on any TikTok error
  * response (code !== 0) or transport failure.
+ *
+ * GET requests are automatically retried on transient failures (network
+ * errors, 408/429/5xx) with exponential backoff, honoring `Retry-After`.
+ * Tune with `TiktokConfig.maxRetries` (default 2, `0` disables) and
+ * `TiktokConfig.timeoutMs` (default 30000). Mutating requests (POST/PUT/
+ * DELETE) are never retried automatically because they are not guaranteed
+ * idempotent.
  */
 async function callTiktokApi<T = any>(
   path: string,
@@ -334,7 +346,10 @@ async function callTiktokApi<T = any>(
   }
 
   const flatQuery = flattenTiktokQuery(unsignedQuery);
-  const signature = signTiktokRequest(path, flatQuery, config.appSecret, options.body);
+  // Sign exactly the bytes that are sent: TikTok appends the request body to the signed string, including an
+  // empty JSON object ("{}"), so the serialized string is both signed and sent.
+  const bodyString = options.body === undefined || options.body === null ? '' : JSON.stringify(options.body);
+  const signature = signTiktokRequest(path, flatQuery, config.appSecret, bodyString);
 
   const url = new URL(TIKTOK_END_POINT + path);
   Object.entries(flatQuery).forEach(([key, value]) => url.searchParams.append(key, value));
@@ -346,13 +361,15 @@ async function callTiktokApi<T = any>(
   }
 
   try {
-    const res: AxiosResponse = await axios.request({
-      url: url.toString(),
-      method,
-      headers,
-      data: options.body,
-      timeout: DEFAULT_TIMEOUT_MS,
-    });
+    const send = (): Promise<AxiosResponse> =>
+      axios.request({
+        url: url.toString(),
+        method,
+        headers,
+        data: bodyString === '' ? undefined : bodyString,
+        timeout: resolveTimeoutMs(config),
+      });
+    const res: AxiosResponse = method === 'GET' ? await withRetry(send, resolveMaxRetries(config)) : await send();
     const data = res.data;
     if (data && typeof data === 'object' && 'code' in data && Number(data.code) !== 0) {
       throwTiktokApiError(data, context, res.status);
@@ -419,7 +436,7 @@ async function callTiktokMultipart<T = any>(
   try {
     const res: AxiosResponse = await axios.post(url.toString(), form, {
       headers,
-      timeout: DEFAULT_TIMEOUT_MS,
+      timeout: resolveTimeoutMs(config),
       maxBodyLength: Infinity,
       maxContentLength: Infinity,
     });
@@ -434,7 +451,77 @@ async function callTiktokMultipart<T = any>(
   }
 }
 
-export { TiktokApiError, callTiktokApi, callTiktokMultipart };
+/** A value of a multipart form field: text, raw file bytes, or file bytes with an explicit file name. */
+type TiktokMultipartField = string | Buffer | { data: Buffer; filename?: string } | undefined;
+
+/**
+ * Multipart/form-data TikTok Shop API call for endpoints that take several files and/or query parameters
+ * (for example `Upload Shipping Document and Tracking Info`). Like callTiktokMultipart(), the multipart body is
+ * excluded from the signature while the query parameters are signed.
+ */
+async function callTiktokMultipartFiles<T = any>(
+  path: string,
+  options: { query?: Record<string, unknown>; fields: Record<string, TiktokMultipartField> },
+  config: TiktokConfig,
+  context?: string,
+): Promise<T> {
+  const timestamp = Math.floor(Date.now() / 1000).toString();
+
+  const unsignedQuery: Record<string, unknown> = {
+    ...flattenTiktokQuery(options.query),
+    app_key: config.appKey,
+    timestamp,
+  };
+  if (config.shopCipher) {
+    unsignedQuery.shop_cipher = config.shopCipher;
+  }
+  if (config.categoryAssetsCipher) {
+    unsignedQuery.category_asset_cipher = config.categoryAssetsCipher;
+  }
+
+  const flatQuery = flattenTiktokQuery(unsignedQuery);
+  const signature = signTiktokRequest(path, flatQuery, config.appSecret, '');
+
+  const url = new URL(TIKTOK_END_POINT + path);
+  Object.entries(flatQuery).forEach(([key, value]) => url.searchParams.append(key, value));
+  url.searchParams.append('sign', signature);
+
+  const form = new FormData();
+  Object.entries(options.fields).forEach(([key, value]) => {
+    if (value === undefined) return;
+    if (Buffer.isBuffer(value)) {
+      form.append(key, value, key);
+    } else if (typeof value === 'object') {
+      form.append(key, value.data, value.filename || key);
+    } else {
+      form.append(key, value);
+    }
+  });
+
+  const headers: Record<string, string> = { ...form.getHeaders() };
+  if (config.accessToken) {
+    headers['x-tts-access-token'] = config.accessToken;
+  }
+
+  try {
+    const res: AxiosResponse = await axios.post(url.toString(), form, {
+      headers,
+      timeout: resolveTimeoutMs(config),
+      maxBodyLength: Infinity,
+      maxContentLength: Infinity,
+    });
+    const data = res.data;
+    if (data && typeof data === 'object' && 'code' in data && Number(data.code) !== 0) {
+      throwTiktokApiError(data, context, res.status);
+    }
+    return data as T;
+  } catch (err) {
+    if (err instanceof TiktokApiError) throw err;
+    return handleTiktokError(err, context);
+  }
+}
+
+export { TiktokApiError, callTiktokApi, callTiktokMultipart, callTiktokMultipartFiles };
 
 /**
  * TikTok Shop OAuth token-exchange call (getAccessToken / refreshAccessToken). Unlike

@@ -8,6 +8,14 @@
 
 Unified TypeScript wrapper for Shopee Open API v2, TikTok Shop Open API, and Lazada Open API. One package, three platforms.
 
+| Platform | Package | Coverage |
+| --- | --- | --- |
+| Shopee | `shopee-api-client` | All 455 APIs of the Shopee Open Platform v2 reference |
+| TikTok Shop | `tiktokshops-api-client` | 352 methods in 20 namespaces (all 316 official endpoints) |
+| Lazada | `lazada-api-client` | 381 methods in 34 namespaces (all 378 official APIs) |
+
+This package re-exports the three clients, so everything documented in their READMEs works here with the same imports.
+
 > Need only one platform? Use the individual packages:
 > [`shopee-api-client`](https://www.npmjs.com/package/shopee-api-client) ·
 > [`tiktokshops-api-client`](https://www.npmjs.com/package/tiktokshops-api-client) ·
@@ -52,6 +60,9 @@ const shopee = new ShopeeModule({
 | `partnerId` | Yes | Shopee Open Platform partner ID |
 | `partnerKey` | Yes | Shopee Open Platform partner key |
 | `shopId` | Required for shop APIs | Shopee shop ID |
+| `merchantId` | Required for Merchant APIs | Shopee merchant ID (`shopee.merchant.*`, `shopee.globalProduct.*`) |
+| `userId` | Required for User APIs | Shopee user ID (`shopee.livestream.*`) |
+| `principalId` | Required for Principal APIs | Shopee principal ID (`shopee.principal.*`) |
 | `accessToken` | Required for private APIs | OAuth access token |
 | `refreshToken` | Required for token refresh | OAuth refresh token |
 
@@ -287,6 +298,9 @@ const tiktok = new TiktokModule({
 | `refreshToken` | Required for token refresh | TikTok Shop refresh token |
 | `accessTokenExpire` | No | Access token expiration Unix timestamp |
 | `refreshTokenExipre` | No | Refresh token expiration Unix timestamp |
+| `categoryAssetsCipher` | Required for some Product APIs | Category assets cipher |
+| `timeoutMs` | No | Per-request timeout in milliseconds for the domain namespaces (default `30000`) |
+| `maxRetries` | No | Automatic GET retries on transient failures (default `2`, `0` disables) |
 
 ### Authorization
 
@@ -394,6 +408,21 @@ await tiktok.createProduct({ ... });
 | `getAttributes` | Get attributes by category |
 | `createProduct` | Create product |
 
+### TikTok Shop domain namespaces (352 methods)
+
+Every TikTok Shop domain is also exposed as a typed namespace on the same instance:
+
+```ts
+const { data } = await tiktok.order.getOrderList({
+  query: { page_size: 20 },
+  body: { order_status: 'AWAITING_SHIPMENT' },
+});
+```
+
+Namespaces: `order`, `product`, `fulfillment`, `fbt`, `returnRefund`, `finance`, `promotion`, `affiliateSeller`, `affiliatePartner`, `affiliateCreator`, `analytics`, `customerService`, `customerEngagement`, `logistic`, `seller`, `shop`, `event`, `auth`, `supplyChain`, `tools`. They are separate from the flat methods above (`tiktok.getOrderList()` and `tiktok.order.getOrderList()` are different calls). The complete method list is in the [TikTok Shop API reference](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/blob/main/packages/tiktokshops-api-client/docs/API.md).
+
+Webhooks: verify incoming TikTok Shop events with `verifyTiktokWebhookSignature({ appKey, appSecret, rawBody, authorization })` before parsing them (see the `tiktokshops-api-client` README).
+
 ---
 
 ## Lazada module
@@ -420,6 +449,8 @@ const lazada = new LazadaModule({
 | `shopId` | No | Optional store identifier kept by your application |
 | `appAccessToken` | Required for private APIs | Lazada seller access token |
 | `refreshToken` | Required for token refresh | Lazada refresh token |
+| `timeoutMs` | No | Per-request timeout in milliseconds for the domain namespaces (default `30000`) |
+| `maxRetries` | No | Automatic GET retries on transient failures (default `2`, `0` disables) |
 
 ### Authorization
 
@@ -508,11 +539,23 @@ const brands = await lazada.getBrands();
 | `getCategoryTree` | Get category tree |
 | `getBrands` | Get brand list |
 
+### Lazada domain namespaces (381 methods)
+
+Every Lazada domain is also exposed as a typed namespace on the same instance, routed to the regional host for `countryCode`:
+
+```ts
+const payout = await lazada.finance.getPayoutStatus({ created_after: '2025-01-01' });
+```
+
+There are 34 namespaces (`order`, `product`, `finance`, `fbl`, `logistics`, `returnAndRefund`, `sellerVoucher`, `instantMessaging`, `sponsoredSolutions`, ...). They are separate from the flat methods above. The complete method list is in the [Lazada API reference](https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/blob/main/packages/lazada-api-client/docs/API.md).
+
+Push messages: verify incoming Lazada callbacks with `verifyLazadaPushSignature({ appKey, appSecret, rawBody, authorization })` before parsing them (see the `lazada-api-client` README).
+
 ---
 
 ## Error handling
 
-All methods throw if the platform API returns an error. Wrap calls in `try/catch`:
+Shopee methods and every TikTok Shop / Lazada domain-namespace method throw if the platform API returns an error. Wrap calls in `try/catch`:
 
 ```ts
 try {
@@ -522,6 +565,8 @@ try {
   console.error(err.code);    // e.g. "error_auth"
 }
 ```
+
+TikTok Shop and Lazada namespace methods throw `TiktokApiError` and `LazadaApiError` (both exported from this package). The older flat TikTok Shop and Lazada methods keep their original behavior: the TikTok methods resolve to TikTok's error body and the Lazada methods log the error and resolve to `undefined`.
 
 ---
 

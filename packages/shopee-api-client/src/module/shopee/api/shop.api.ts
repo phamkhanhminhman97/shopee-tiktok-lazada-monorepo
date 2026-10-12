@@ -29,7 +29,7 @@ import {
 export async function getShopProfile(config: ShopeeConfig): Promise<ShopeeResponseGetShopProfile> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_SHOP_PROFILE, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.GET_SHOP_PROFILE);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHOP_PROFILE}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetShopProfile>(url, config);
@@ -54,7 +54,7 @@ export async function updateShopProfile(
 ): Promise<ShopeeResponseUpdateShopProfile> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UPDATE_SHOP_PROFILE, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.UPDATE_SHOP_PROFILE);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPDATE_SHOP_PROFILE}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -77,7 +77,7 @@ export async function updateShopProfile(
 export async function getShopInfo(config: ShopeeConfig): Promise<ShopeeResponseGetShopInfo> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_SHOP_INFO, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.GET_SHOP_INFO);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHOP_INFO}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetShopInfo>(url, config);
@@ -112,7 +112,7 @@ export async function getShopNotification(
   if (typeof pageSize === 'number') {
     additionalParams.page_size = pageSize;
   }
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_SHOP_NOTIFICATION);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHOP_NOTIFICATION}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetShopNotification>(url, config);
@@ -141,7 +141,7 @@ export async function getWarehouseDetail(
   if (typeof warehouseType === 'number') {
     additionalParams.warehouse_type = warehouseType;
   }
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_WAREHOUSE_DETAIL);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_WAREHOUSE_DETAIL}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetWarehouseDetail>(url, config);
@@ -163,7 +163,7 @@ export async function getWarehouseDetail(
 export async function getShopHolidayMode(config: ShopeeConfig): Promise<ShopeeResponseGetShopHolidayMode> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_SHOP_HOLIDAY_MODE, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.GET_SHOP_HOLIDAY_MODE);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHOP_HOLIDAY_MODE}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetShopHolidayMode>(url, config);
@@ -192,7 +192,7 @@ export async function setShopHolidayMode(
 ): Promise<ShopeeResponseSetShopHolidayMode> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.SET_SHOP_HOLIDAY_MODE, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.SET_SHOP_HOLIDAY_MODE);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.SET_SHOP_HOLIDAY_MODE}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -222,7 +222,7 @@ export async function getAuthorisedResellerBrand(
   const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, {
     page_no: params.page_no,
     page_size: params.page_size,
-  });
+  }, SHOPEE_PATH.GET_AUTHORISED_RESELLER_BRAND);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_AUTHORISED_RESELLER_BRAND}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetAuthorisedResellerBrand>(url, config);
@@ -244,7 +244,7 @@ export async function getAuthorisedResellerBrand(
 export async function getBrShopOnboardingInfo(config: ShopeeConfig): Promise<ShopeeResponseGetBrShopOnboardingInfo> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_BR_SHOP_ONBOARDING_INFO, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.GET_BR_SHOP_ONBOARDING_INFO);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_BR_SHOP_ONBOARDING_INFO}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetBrShopOnboardingInfo>(url, config);

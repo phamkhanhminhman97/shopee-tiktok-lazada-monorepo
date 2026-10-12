@@ -263,3 +263,9 @@ export interface MembershipUpdatePartnerUserId {
 }
 
 export type MembershipUpdatePartnerUserIdResponse = MembershipUpdatePartnerUserId;
+
+/** Response of `GET /partner/get`: same shape as `GET /membership/linkmember/get`. */
+export type MembershipGetPartnerLinkMemberResponse = MembershipGetLinkMemberResponse;
+
+/** Response of `GET /partner/list`: same shape as `GET /membership/linkmember/list`. */
+export type MembershipGetPartnerLinkMemberListResponse = MembershipGetLinkMemberListResponse;

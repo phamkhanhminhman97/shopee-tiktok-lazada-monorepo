@@ -102,7 +102,7 @@ export async function searchActivity(body: TiktokSearchActivityBody, config: Tik
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokSearchActivityResponse>>(
     `/promotion/202309/activities/search`,
     'POST',
-    {},
+    { body: body },
     config,
     'searchActivity',
   );
@@ -118,7 +118,7 @@ export async function updateActivityProduct(body: TiktokUpdateActivityProductBod
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokUpdateActivityProductResponse>>(
     `/promotion/202309/activities/${body.activity_id}/products`,
     'PUT',
-    {},
+    { body: body },
     config,
     'updateActivityProduct',
   );
@@ -159,13 +159,16 @@ export async function getCoupon(coupon_id: string, config: TiktokConfig): Promis
 /**
  * Search coupons using filter options such as title, status, and time range.
  *
+ * Endpoint: `POST /promotion/202406/coupons/search`. (Earlier releases sent this request with the
+ * HTTP verb DELETE, copied from the reference SDK; the official API reference specifies POST.)
+ *
  * Reference:
  * https://partner.tiktokshop.com/docv2/page/search-coupon-202406
  */
 export async function searchCoupon(body: TiktokSearchCouponBody, config: TiktokConfig): Promise<TiktokResponseCommon<TiktokSearchCouponResponse>> {
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokSearchCouponResponse>>(
     `/promotion/202406/coupons/search`,
-    'DELETE',
+    'POST',
     { body: body },
     config,
     'searchCoupon',

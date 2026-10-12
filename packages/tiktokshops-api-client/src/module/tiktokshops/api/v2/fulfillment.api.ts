@@ -36,8 +36,6 @@ export async function shipPackage(packageId: string, payload: TiktokRequestShipP
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
   const pathTimeSlot = TiktokHelper.replacePackageId(TIKTOK_PATH_202309.SHIP_PACKAGE, packageId);
 
-  const url = TiktokHelper.genURLwithSignature(pathTimeSlot, commonParam, config);
-
   const body: TiktokRequestShipPackage = {
     handover_method: payload.handover_method,
     pickup_slot: {
@@ -45,6 +43,9 @@ export async function shipPackage(packageId: string, payload: TiktokRequestShipP
       end_time: payload.pickup_slot.end_time,
     },
   };
+
+  // The JSON body MUST be part of the HMAC signature (only multipart/form-data bodies are excluded).
+  const url = TiktokHelper.genURLwithSignature(pathTimeSlot, commonParam, config, body);
 
   const headers = TiktokHelper.getHeaders(config);
 

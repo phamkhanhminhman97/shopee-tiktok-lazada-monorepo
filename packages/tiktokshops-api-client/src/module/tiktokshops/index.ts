@@ -14,6 +14,12 @@ import { TiktokRequestCreateProduct } from './dto/request/product.request';
 import { TiktokRequestOrderList } from './dto/request/order.request';
 import { TiktokAffiliatePartner } from './submodules/affiliate-partner-v3.submodule';
 import { TiktokAffiliateSeller } from './submodules/affiliate-seller-v3.submodule';
+import { TiktokAffiliateCreator } from './submodules/affiliate-creator-official.submodule';
+import { TiktokCustomerEngagement } from './submodules/customer-engagement-official.submodule';
+import { TiktokCustomerService } from './submodules/customer-service-official.submodule';
+import { TiktokFbt } from './submodules/fbt-official.submodule';
+import { TiktokSupplyChain } from './submodules/supply-chain-official.submodule';
+import { TiktokTools } from './submodules/tools-official.submodule';
 import { TiktokAnalytics } from './submodules/analytics-v3.submodule';
 import { TiktokAuth } from './submodules/auth-v3.submodule';
 import { TiktokEvent } from './submodules/event-v3.submodule';
@@ -39,11 +45,15 @@ export class TiktokModule {
   // getAttributes, getBrands, createProduct) - the flat methods remain
   // untouched for backward compatibility.
   // ============================================================
+  readonly affiliateCreator: TiktokAffiliateCreator;
   readonly affiliatePartner: TiktokAffiliatePartner;
   readonly affiliateSeller: TiktokAffiliateSeller;
   readonly analytics: TiktokAnalytics;
   readonly auth: TiktokAuth;
+  readonly customerEngagement: TiktokCustomerEngagement;
+  readonly customerService: TiktokCustomerService;
   readonly event: TiktokEvent;
+  readonly fbt: TiktokFbt;
   readonly finance: TiktokFinance;
   readonly fulfillment: TiktokFulfillment;
   readonly logistic: TiktokLogistic;
@@ -53,6 +63,8 @@ export class TiktokModule {
   readonly returnRefund: TiktokReturnRefund;
   readonly seller: TiktokSeller;
   readonly shop: TiktokShop;
+  readonly supplyChain: TiktokSupplyChain;
+  readonly tools: TiktokTools;
 
   /**
    * Create a TikTok Shop API client.
@@ -63,11 +75,15 @@ export class TiktokModule {
   constructor(config: TiktokConfig) {
     this.config = config;
 
+    this.affiliateCreator = new TiktokAffiliateCreator(this.config);
     this.affiliatePartner = new TiktokAffiliatePartner(this.config);
     this.affiliateSeller = new TiktokAffiliateSeller(this.config);
     this.analytics = new TiktokAnalytics(this.config);
     this.auth = new TiktokAuth(this.config);
+    this.customerEngagement = new TiktokCustomerEngagement(this.config);
+    this.customerService = new TiktokCustomerService(this.config);
     this.event = new TiktokEvent(this.config);
+    this.fbt = new TiktokFbt(this.config);
     this.finance = new TiktokFinance(this.config);
     this.fulfillment = new TiktokFulfillment(this.config);
     this.logistic = new TiktokLogistic(this.config);
@@ -77,6 +93,8 @@ export class TiktokModule {
     this.returnRefund = new TiktokReturnRefund(this.config);
     this.seller = new TiktokSeller(this.config);
     this.shop = new TiktokShop(this.config);
+    this.supplyChain = new TiktokSupplyChain(this.config);
+    this.tools = new TiktokTools(this.config);
   }
 
   setConfig(config: TiktokConfig) {

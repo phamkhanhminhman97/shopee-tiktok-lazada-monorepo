@@ -1,20 +1,26 @@
 import { LazadaConfig } from '../dto/request/config.request';
 import {
+  digitalInsuranceTestNotificationCopy,
   digitalServiceCdkCodeReceived,
+  digitalTestInstallServiceCallBack,
   installServiceCallBack,
   installServiceCallBackForTest,
   inuranceNotication,
   inuranceNotifyLapse,
 } from '../api/lazada-dg.api';
 import {
+  DgDigitalInsuranceTestNotificationCopyRequest,
   DgDigitalServiceCdkCodeReceivedRequest,
+  DgDigitalTestInstallServiceCallBackRequest,
   DgInstallServiceCallBackForTestRequest,
   DgInstallServiceCallBackRequest,
   DgInuranceNoticationRequest,
   DgInuranceNotifyLapseRequest,
 } from '../dto/request/lazada-dg.request';
 import {
+  DgDigitalInsuranceTestNotificationCopyResponse,
   DgDigitalServiceCdkCodeReceivedResponse,
+  DgDigitalTestInstallServiceCallBackResponse,
   DgInstallServiceCallBackForTestResponse,
   DgInstallServiceCallBackResponse,
   DgInuranceNoticationResponse,
@@ -47,5 +53,13 @@ export class LazadaDg {
 
   async digitalServiceCdkCodeReceived(params: DgDigitalServiceCdkCodeReceivedRequest): Promise<DgDigitalServiceCdkCodeReceivedResponse> {
     return await digitalServiceCdkCodeReceived(params, this.config);
+  }
+
+  async digitalTestInstallServiceCallBack(params: DgDigitalTestInstallServiceCallBackRequest): Promise<DgDigitalTestInstallServiceCallBackResponse> {
+    return await digitalTestInstallServiceCallBack(params, this.config);
+  }
+
+  async digitalInsuranceTestNotificationCopy(params: DgDigitalInsuranceTestNotificationCopyRequest): Promise<DgDigitalInsuranceTestNotificationCopyResponse> {
+    return await digitalInsuranceTestNotificationCopy(params, this.config);
   }
 }

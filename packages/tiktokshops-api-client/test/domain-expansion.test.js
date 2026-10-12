@@ -107,7 +107,7 @@ test('tiktok.order.getOrderList (POST) builds a signed URL with app_key/timestam
       assert.match(call.url, /shop_cipher=test-shop-cipher/);
       assert.match(call.url, /sign=[0-9a-f]{64}/);
       assert.match(call.url, /page_size=10/);
-      assert.deepEqual(call.data, { order_status: 'UNPAID' });
+      assert.deepEqual(JSON.parse(call.data), { order_status: 'UNPAID' });
       assert.equal(call.headers['x-tts-access-token'], 'test-access-token');
     },
   );

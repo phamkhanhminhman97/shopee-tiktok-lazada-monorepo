@@ -1,14 +1,18 @@
 import { LazadaConfig } from '../dto/request/config.request';
 import * as LazadaHelper from '../common/helper';
 import {
+  DgDigitalInsuranceTestNotificationCopyRequest,
   DgDigitalServiceCdkCodeReceivedRequest,
+  DgDigitalTestInstallServiceCallBackRequest,
   DgInstallServiceCallBackForTestRequest,
   DgInstallServiceCallBackRequest,
   DgInuranceNoticationRequest,
   DgInuranceNotifyLapseRequest,
 } from '../dto/request/lazada-dg.request';
 import {
+  DgDigitalInsuranceTestNotificationCopyResponse,
   DgDigitalServiceCdkCodeReceivedResponse,
+  DgDigitalTestInstallServiceCallBackResponse,
   DgInstallServiceCallBackForTestResponse,
   DgInstallServiceCallBackResponse,
   DgInuranceNoticationResponse,
@@ -58,4 +62,24 @@ export async function inuranceNotifyLapse(params: DgInuranceNotifyLapseRequest, 
  */
 export async function digitalServiceCdkCodeReceived(params: DgDigitalServiceCdkCodeReceivedRequest, config: LazadaConfig): Promise<DgDigitalServiceCdkCodeReceivedResponse> {
   return LazadaHelper.callLazadaApi<DgDigitalServiceCdkCodeReceivedResponse>('/digital/service/cdkCodeReceived', 'POST', params as unknown as Record<string, unknown>, config, 'digitalServiceCdkCodeReceived');
+}
+
+/**
+ * InstallServiceCallBack (test path) via Lazada `POST /digital/test/install/servicecallback`.
+ *
+ * Distinct from `installServiceCallBackForTest()` (`/digital/install/test/servicecallback`).
+ *
+ * @see https://open.lazada.com for the official Lazada Open Platform API reference.
+ */
+export async function digitalTestInstallServiceCallBack(params: DgDigitalTestInstallServiceCallBackRequest, config: LazadaConfig): Promise<DgDigitalTestInstallServiceCallBackResponse> {
+  return LazadaHelper.callLazadaApi<DgDigitalTestInstallServiceCallBackResponse>('/digital/test/install/servicecallback', 'POST', params as unknown as Record<string, unknown>, config, 'digitalTestInstallServiceCallBack');
+}
+
+/**
+ * InuranceNotication (test path) via Lazada `POST /digital/insurance/test/notificationcopy`.
+ *
+ * @see https://open.lazada.com for the official Lazada Open Platform API reference.
+ */
+export async function digitalInsuranceTestNotificationCopy(params: DgDigitalInsuranceTestNotificationCopyRequest, config: LazadaConfig): Promise<DgDigitalInsuranceTestNotificationCopyResponse> {
+  return LazadaHelper.callLazadaApi<DgDigitalInsuranceTestNotificationCopyResponse>('/digital/insurance/test/notificationcopy', 'POST', params as unknown as Record<string, unknown>, config, 'digitalInsuranceTestNotificationCopy');
 }

@@ -1,3 +1,4 @@
+import { TiktokSellerOfficial } from './seller-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   getActiveShops,
@@ -14,8 +15,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.seller.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokSeller {
-  constructor(private config: TiktokConfig) {}
+export class TiktokSeller extends TiktokSellerOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async getActiveShops(): Promise<TiktokResponseCommon<TiktokSellerShopsResponse>> {
     return await getActiveShops(this.config);

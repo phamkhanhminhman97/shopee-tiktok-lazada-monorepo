@@ -1,3 +1,4 @@
+import { TiktokOrderOfficial } from './order-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   addExternalOrderReferences,
@@ -29,8 +30,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.order.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokOrder {
-  constructor(private config: TiktokConfig) {}
+export class TiktokOrder extends TiktokOrderOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async getOrderList(params: TiktokGetOrderListParams): Promise<TiktokResponseCommon<TiktokGetOrderListResponse>> {
     return await getOrderList(params, this.config);

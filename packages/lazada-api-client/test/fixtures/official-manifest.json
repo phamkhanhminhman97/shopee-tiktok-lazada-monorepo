@@ -1,0 +1,2270 @@
+[
+  {
+    "path": "/activity/early/bird/addSkus/v2",
+    "method": "POST",
+    "title": "EarlyBirdActivityAddSkusV2",
+    "category": "Early Bird Price API"
+  },
+  {
+    "path": "/activity/early/bird/create/v2",
+    "method": "POST",
+    "title": "CreateEarlyBirdActivityV2",
+    "category": "Early Bird Price API"
+  },
+  {
+    "path": "/activity/early/bird/deactivateSkus/v2",
+    "method": "POST",
+    "title": "EarlyBirdActivityDeactivateSkusV2",
+    "category": "Early Bird Price API"
+  },
+  {
+    "path": "/activity/early/bird/isWhitelistSeller",
+    "method": "POST",
+    "title": "EarlyBirdActivityIsWhitelistSeller",
+    "category": "Early Bird Price API"
+  },
+  {
+    "path": "/auth/token/create",
+    "method": "GET/POST",
+    "title": "GenerateAccessToken",
+    "category": "System API"
+  },
+  {
+    "path": "/auth/token/createWithOpenId",
+    "method": "GET/POST",
+    "title": "GenerateAccessTokenWithOpenId",
+    "category": "System API"
+  },
+  {
+    "path": "/auth/token/refresh",
+    "method": "GET/POST",
+    "title": "RefreshAccessToken",
+    "category": "System API"
+  },
+  {
+    "path": "/category/attributes/get",
+    "method": "GET",
+    "title": "GetCategoryAttributes",
+    "category": "Product API"
+  },
+  {
+    "path": "/category/brands/query",
+    "method": "GET/POST",
+    "title": "GetBrandByPages",
+    "category": "Product API"
+  },
+  {
+    "path": "/category/cascade/getNextCascadeProp",
+    "method": "GET/POST",
+    "title": "GetNextCascadeProp",
+    "category": "Product API"
+  },
+  {
+    "path": "/category/tree/get",
+    "method": "GET",
+    "title": "GetCategoryTree",
+    "category": "Product API"
+  },
+  {
+    "path": "/choice/product/item/get",
+    "method": "GET",
+    "title": "GetChoiceProductItem",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/choice/products/get",
+    "method": "GET/POST",
+    "title": "GetChoiceProducts",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/choice/seller/get",
+    "method": "GET/POST",
+    "title": "GetChoiceSeller",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/choice/sku_item_relation/get_by_sku",
+    "method": "GET/POST",
+    "title": "GetChoiceSkuItemRelationBySku",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/choice/stock/edit",
+    "method": "POST",
+    "title": "EditChoiceSkuStock",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/content/ai/cancelTask",
+    "method": "POST",
+    "title": "cancelTask",
+    "category": "Content API"
+  },
+  {
+    "path": "/content/ai/changeFace",
+    "method": "POST",
+    "title": "changeFace",
+    "category": "Content API"
+  },
+  {
+    "path": "/content/ai/changeProductBackground",
+    "method": "POST",
+    "title": "changeProductBackground",
+    "category": "Content API"
+  },
+  {
+    "path": "/content/ai/fixHand",
+    "method": "POST",
+    "title": "fixHand",
+    "category": "Content API"
+  },
+  {
+    "path": "/content/ai/getTaskStatus",
+    "method": "GET",
+    "title": "getTaskStatus",
+    "category": "Content API"
+  },
+  {
+    "path": "/content/ai/productImageMatch",
+    "method": "GET/POST",
+    "title": "productImageMatch",
+    "category": "Content API"
+  },
+  {
+    "path": "/content/ai/tryOnCloth",
+    "method": "POST",
+    "title": "tryOnCloth",
+    "category": "Content API"
+  },
+  {
+    "path": "/content/mcn/category/list",
+    "method": "GET",
+    "title": "McnContentListCategory",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/content/cancelScheduled",
+    "method": "POST",
+    "title": "McnContentCancelSchedulePublish",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/content/create",
+    "method": "POST",
+    "title": "McnContentCreate",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/content/queryReviewRecords",
+    "method": "GET/POST",
+    "title": "queryContentReviewRecords",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/content/queryTagInfosByName",
+    "method": "GET/POST",
+    "title": "MCNQueryTagInfoByName",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/content/replySchedulePublish",
+    "method": "POST",
+    "title": "McnContentReplySchedulePublish",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/image/upload",
+    "method": "POST",
+    "title": "McnContentUploadImage",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/product/validate",
+    "method": "GET",
+    "title": "McnProductValidator",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/property/list",
+    "method": "GET/POST",
+    "title": "McnContentPropertyTagList",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/similar/product/search",
+    "method": "GET/POST",
+    "title": "McnSimilarProductSearch",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/video/block/commit",
+    "method": "POST",
+    "title": "McnContentCompleteCreateVideo",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/video/block/create",
+    "method": "GET/POST",
+    "title": "McnContentInitCreateVideo",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/content/mcn/video/block/upload",
+    "method": "POST",
+    "title": "McnContentUploadVideoBlock",
+    "category": "LazLike API"
+  },
+  {
+    "path": "/digital/install/servicecallback",
+    "method": "GET/POST",
+    "title": "InstallServiceCallBack",
+    "category": "Lazada DG API"
+  },
+  {
+    "path": "/digital/install/test/servicecallback",
+    "method": "GET/POST",
+    "title": "InstallServiceCallBackForTest",
+    "category": "Lazada DG API"
+  },
+  {
+    "path": "/digital/insurance/notification",
+    "method": "GET/POST",
+    "title": "InuranceNotication",
+    "category": "Lazada DG API"
+  },
+  {
+    "path": "/digital/insurance/notificationlapse",
+    "method": "GET/POST",
+    "title": "InuranceNotifyLapse",
+    "category": "Lazada DG API"
+  },
+  {
+    "path": "/digital/insurance/test/notificationcopy",
+    "method": "GET/POST",
+    "title": "InuranceNotication",
+    "category": "Lazada DG API"
+  },
+  {
+    "path": "/digital/order/alterStatus",
+    "method": "GET/POST",
+    "title": "DigitalAlterOrderStatus",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/digital/order/create",
+    "method": "GET/POST",
+    "title": "DigitalCreateOrder",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/digital/order/getStatus",
+    "method": "GET/POST",
+    "title": "DigitalQueryOrder",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/digital/service/cdkCodeReceived",
+    "method": "POST",
+    "title": "digitalServiceCdkCodeReceived",
+    "category": "Lazada DG API"
+  },
+  {
+    "path": "/digital/service/createorder",
+    "method": "GET/POST",
+    "title": "DGUtiityPreCreateOrder",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/digital/service/getPaymentStatus",
+    "method": "GET/POST",
+    "title": "DGUtilityPreGetPaymentStatus",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/digital/service/updateFulfillemtStatus",
+    "method": "GET/POST",
+    "title": "DGUtilityPreUpdateFulfillemtStatus",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/digital/test/install/servicecallback",
+    "method": "GET/POST",
+    "title": "InstallServiceCallBack",
+    "category": "Lazada DG API"
+  },
+  {
+    "path": "/dop/scan",
+    "method": "GET/POST",
+    "title": "ScanParcel",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/eticket/code/consume",
+    "method": "GET/POST",
+    "title": "RedeemOrderItems",
+    "category": "E-Tickets API"
+  },
+  {
+    "path": "/eticket/code/query",
+    "method": "GET/POST",
+    "title": "GetOrderItemsFromBarCode",
+    "category": "E-Tickets API"
+  },
+  {
+    "path": "/eticket/ma/available",
+    "method": "GET/POST",
+    "title": "GlobalEticketMerchantMaAvailable",
+    "category": "E-Tickets API"
+  },
+  {
+    "path": "/eticket/ma/consume",
+    "method": "POST",
+    "title": "GlobalEticketMerchantMaConsume",
+    "category": "E-Tickets API"
+  },
+  {
+    "path": "/eticket/ma/failsend",
+    "method": "POST",
+    "title": "GlobalEticketMerchantMaFailsend",
+    "category": "E-Tickets API"
+  },
+  {
+    "path": "/eticket/ma/query",
+    "method": "GET/POST",
+    "title": "GlobalEticketMerchantMaQuery",
+    "category": "E-Tickets API"
+  },
+  {
+    "path": "/eticket/ma/queryTbMa",
+    "method": "GET/POST",
+    "title": "GlobalEticketMerchantMaQueryTbMa",
+    "category": "E-Tickets API"
+  },
+  {
+    "path": "/eticket/ma/send",
+    "method": "GET/POST",
+    "title": "GlobalEticketMerchantMaSend",
+    "category": "E-Tickets API"
+  },
+  {
+    "path": "/fbi/download/startExportByDataset",
+    "method": "GET/POST",
+    "title": "startExportByDataset",
+    "category": "System API"
+  },
+  {
+    "path": "/fbl/channel_stocks/get",
+    "method": "GET",
+    "title": "GetChannelStocksForMCL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_order_list/get",
+    "method": "GET",
+    "title": "QueryFulfillmentOrderForMCL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_order_pnf/create",
+    "method": "POST",
+    "title": "CreateFulfillmentOrderForMCLV2PNF",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_order/cancel",
+    "method": "POST",
+    "title": "CancelFulfillmentOrderForMCL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_order/create",
+    "method": "POST",
+    "title": "CreateFulfillmentOrderForMCL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_products/get",
+    "method": "GET",
+    "title": "GetFulfillmentProductDetail",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku_fbl/create",
+    "method": "POST",
+    "title": "CreateFulfillmentSkuForFBL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku_list/get",
+    "method": "GET",
+    "title": "GetFulfillmentSkuListForMCL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku_relation/get_by_sc_item",
+    "method": "GET/POST",
+    "title": "GetFulfillmentSkuRelationByScItem",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku_relation/get_by_sc_items",
+    "method": "GET/POST",
+    "title": "GetFulfillmentSkuRelationsByScItems",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku_relation/get_by_sku",
+    "method": "GET/POST",
+    "title": "GetFulfillmentSkuRelationBySku",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku_relation/get_by_skus",
+    "method": "GET/POST",
+    "title": "GetFulfillmentSkuRelationsBySkus",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku_relation/remove",
+    "method": "POST",
+    "title": "RemoveFulfillmentSkuRelation",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku_relation/write",
+    "method": "POST",
+    "title": "BuildFulfillmentSkuRelation",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku/create",
+    "method": "POST",
+    "title": "CreateFulfillmentSkuDecouple",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/fulfillment_sku/update",
+    "method": "POST",
+    "title": "UpdateFulfillmentSkuDecouple",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/icp_order/file",
+    "method": "GET",
+    "title": "GetIcpOrderFile",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/icp_warehouse/list",
+    "method": "GET",
+    "title": "ListIcpWarehouse",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_batch/query",
+    "method": "GET/POST",
+    "title": "QueryInboundBatch",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_order_detail/get",
+    "method": "GET",
+    "title": "GetInboundOrderDetail",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_order/cancel",
+    "method": "POST",
+    "title": "CancelnBoundOrder",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_order/create",
+    "method": "POST",
+    "title": "CreateInboundOrder",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_orders/get",
+    "method": "GET",
+    "title": "GetInboundOrderList",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_reservation/cancel",
+    "method": "POST",
+    "title": "CancelInboundReservation",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_reservation/check",
+    "method": "GET",
+    "title": "CheckInboundReservationSlot",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_reservation/create",
+    "method": "POST",
+    "title": "CreateInboundReservation",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_reservation/file",
+    "method": "GET",
+    "title": "GetInboundReservationFile",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inbound_reservation/get",
+    "method": "GET",
+    "title": "QueryInboundReservationOrder",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inventory_changed_sku/get",
+    "method": "GET",
+    "title": "GetInventoryChangedSKU",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inventory_occupy_details/get",
+    "method": "GET",
+    "title": "GetInventoryOccupyDetails",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/inventory_operate_log/get",
+    "method": "GET",
+    "title": "GetInventoryOperateLog",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/outbound_order_detail/get",
+    "method": "GET",
+    "title": "GetOutboundOrderDetail",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/outbound_order/cancel",
+    "method": "POST",
+    "title": "CancelOutboundOrder",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/outbound_order/create",
+    "method": "POST",
+    "title": "CreateOutBoundOrder",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/outbound_orders/get",
+    "method": "GET",
+    "title": "GetOutboundOrderList",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/platform_products/get2",
+    "method": "GET",
+    "title": "GetPlatformProductsV2",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/product_batch/query",
+    "method": "GET/POST",
+    "title": "GetProductBatchList",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/product_reinbound/create",
+    "method": "POST",
+    "title": "CreateProductReinboundOrderForMCL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/returns/cancel",
+    "method": "POST",
+    "title": "ReturnCancellation",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/returns/create",
+    "method": "POST",
+    "title": "ReturnOrderCreation",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/reverse_order/get",
+    "method": "GET",
+    "title": "QueryReverseOrderForMCL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/shipper/get",
+    "method": "GET",
+    "title": "GetShipperInfo",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/stock_rule/get",
+    "method": "GET",
+    "title": "GetStockRule",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/stock_rule/set",
+    "method": "POST",
+    "title": "SetStockRule",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/stocks/get",
+    "method": "GET",
+    "title": "GetWarehouseStock",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/stocks/getV3",
+    "method": "GET",
+    "title": "GetWarehouseStockV3",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/vas/cancelVasOrder",
+    "method": "GET/POST",
+    "title": "CancelVasOrder4FBL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/vas/createVasOrder",
+    "method": "GET/POST",
+    "title": "CreateVasOrder4FBL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/vas/getVasOrderByNo",
+    "method": "GET/POST",
+    "title": "GetVasOrderByNo4FBL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/warehouses/get",
+    "method": "GET",
+    "title": "GetWarehouseListForMCL",
+    "category": "FBL API"
+  },
+  {
+    "path": "/fbl/waybill/upload",
+    "method": "GET/POST",
+    "title": "UploadWaybill",
+    "category": "FBL API"
+  },
+  {
+    "path": "/finance/payout/status/get",
+    "method": "GET",
+    "title": "GetPayoutStatus",
+    "category": "Finance API"
+  },
+  {
+    "path": "/finance/transaction/accountTransactions/query",
+    "method": "POST",
+    "title": "QueryAccountTransactions",
+    "category": "Finance API"
+  },
+  {
+    "path": "/finance/transaction/details/get",
+    "method": "GET",
+    "title": "QueryTransactionDetails",
+    "category": "Finance API"
+  },
+  {
+    "path": "/gproject/ads/aidc/click",
+    "method": "GET/POST",
+    "title": "clickserver",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/hunting/buybox/get",
+    "method": "GET/POST",
+    "title": "queryBuyboxHuntingInfo",
+    "category": "Seller API"
+  },
+  {
+    "path": "/im/message/list",
+    "method": "GET",
+    "title": "GetMessages",
+    "category": "Instant Messaging API"
+  },
+  {
+    "path": "/im/message/recall",
+    "method": "GET/POST",
+    "title": "MessageRecall",
+    "category": "Instant Messaging API"
+  },
+  {
+    "path": "/im/message/send",
+    "method": "POST",
+    "title": "SendMessage",
+    "category": "Instant Messaging API"
+  },
+  {
+    "path": "/im/session/get",
+    "method": "GET",
+    "title": "GetSessionDetail",
+    "category": "Instant Messaging API"
+  },
+  {
+    "path": "/im/session/list",
+    "method": "GET",
+    "title": "GetSessionList",
+    "category": "Instant Messaging API"
+  },
+  {
+    "path": "/im/session/open",
+    "method": "GET/POST",
+    "title": "OpenSession",
+    "category": "Instant Messaging API"
+  },
+  {
+    "path": "/im/session/read",
+    "method": "POST",
+    "title": "ReadSession",
+    "category": "Instant Messaging API"
+  },
+  {
+    "path": "/image/migrate",
+    "method": "POST",
+    "title": "MigrateImage",
+    "category": "Product API"
+  },
+  {
+    "path": "/image/response/get",
+    "method": "GET",
+    "title": "GetResponse",
+    "category": "Product API"
+  },
+  {
+    "path": "/image/upload",
+    "method": "POST",
+    "title": "UploadImage",
+    "category": "Product API"
+  },
+  {
+    "path": "/images/migrate",
+    "method": "POST",
+    "title": "MigrateImages",
+    "category": "Product API"
+  },
+  {
+    "path": "/images/set",
+    "method": "POST",
+    "title": "SetImages",
+    "category": "Product API"
+  },
+  {
+    "path": "/insurance/addon/orders/query",
+    "method": "GET/POST",
+    "title": "queryAddonOrder",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/order/alterStatus",
+    "method": "GET/POST",
+    "title": "InsuranceAlterOrderStatus",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/order/create",
+    "method": "GET/POST",
+    "title": "InsuranceCreateOrder",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/order/getStatus",
+    "method": "GET/POST",
+    "title": "InsuranceQueryOrder",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/promotion/collectBenefit",
+    "method": "GET/POST",
+    "title": "collectBenefit",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/promotion/getPromotions",
+    "method": "GET/POST",
+    "title": "InsuranceGetPromotions",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/promotion/queryBenefit",
+    "method": "GET/POST",
+    "title": "queryBenefit",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/subscription/create",
+    "method": "POST",
+    "title": "CreateSubscriptionToFusion",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/subscription/getSubscription",
+    "method": "GET/POST",
+    "title": "GetSubscriptionToFusion",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/syncCDP",
+    "method": "GET/POST",
+    "title": "insuranceRealTimeCDP",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/insurance/voucher/redeemVoucher",
+    "method": "GET/POST",
+    "title": "redeemMpVoucher",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/jit/purchase_order/batch_pickup_deliver",
+    "method": "GET/POST",
+    "title": "BatchDeliverJitPurchaseOrder",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/jit/purchase_order/package",
+    "method": "POST",
+    "title": "PackageJitPurchaseOrder",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/jit/purchase_order/print",
+    "method": "GET/POST",
+    "title": "PrintJitPurchaseOrderAndItem",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/jit/purchase_order/query_list",
+    "method": "GET/POST",
+    "title": "QueryListJitPurchaseOrder",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/jit/purchase_order/query_list_purchase_item",
+    "method": "GET/POST",
+    "title": "QueryListPurchaseItem",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/lazadapay/v1/debit/consult_payment",
+    "method": "GET/POST",
+    "title": "ConsultPayment",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/lazlive/product/highlight",
+    "method": "GET/POST",
+    "title": "HighlightProduct",
+    "category": "LazLive API"
+  },
+  {
+    "path": "/lbs/slb/queryLogisticsFeeDetail",
+    "method": "GET/POST",
+    "title": "QueryLogisticsFeeDetail",
+    "category": "Finance API"
+  },
+  {
+    "path": "/logistic/order/trace",
+    "method": "GET/POST",
+    "title": "GetOrderTrace",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/logistics/cngfc/fulfill/getchannelcode",
+    "method": "GET/POST",
+    "title": "GetChannelcodeByFirstMileNo",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/cnpms/account/bind",
+    "method": "GET/POST",
+    "title": "LazadaSellerAccountBind",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/cnpms/address/query",
+    "method": "GET/POST",
+    "title": "QueryAddressInformaiton",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/cnpms/bigbag/cancel",
+    "method": "GET/POST",
+    "title": "LazadaBigbagCancel",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/cnpms/bigbag/commit",
+    "method": "GET/POST",
+    "title": "LazadaBigbagCommit",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/cnpms/bigbag/lable/getPdf",
+    "method": "GET/POST",
+    "title": "GetLazadaBigbagPDFLable",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/cnpms/bigbag/query",
+    "method": "GET/POST",
+    "title": "QueryLazadaBigbagInfo",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/cnpms/bigbag/querycollection",
+    "method": "GET/POST",
+    "title": "LazadaBigbagCollectionPoints",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/cnpms/bigbag/update",
+    "method": "GET/POST",
+    "title": "LazadaBigbagUpdate",
+    "category": "FirstMile Bigbag(only for CN)"
+  },
+  {
+    "path": "/logistics/epis/customers/external_relationships",
+    "method": "POST",
+    "title": "CreateCustomerAccountRelationshipForExternal",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/customers/external_relationships_bundle",
+    "method": "GET/POST",
+    "title": "CreateCustomerAccountRelationshipByOTP",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/customers/warehouses",
+    "method": "POST",
+    "title": "CreateOrUpdateCustomerWarehouse",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/estimate_shipping_fee",
+    "method": "GET/POST",
+    "title": "EstimateShippingFee",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/fulfillment/upload_awb",
+    "method": "POST",
+    "title": "EpisUploadAwbFulfillment",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/get_shipping_fee",
+    "method": "GET/POST",
+    "title": "GetShippingFee",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages",
+    "method": "POST",
+    "title": "EpisPackageCreation",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages/awb",
+    "method": "GET",
+    "title": "EpisPackagePrintAwb",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages/cancel",
+    "method": "POST",
+    "title": "EpisPackageCancellation",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages/cancel/v3",
+    "method": "POST",
+    "title": "EpisPackageCancellationV3",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages/consign",
+    "method": "POST",
+    "title": "EpisPackageConsignment",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages/consign/v2",
+    "method": "POST",
+    "title": "EpisPackageConsignmentV2",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages/reattempt",
+    "method": "POST",
+    "title": "EpisPackageReAttempt",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages/rts",
+    "method": "POST",
+    "title": "EpisPackageReadyToBeShipped",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/packages/update",
+    "method": "POST",
+    "title": "EpisPackageInfoUpdate",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/service/delivery_options",
+    "method": "GET",
+    "title": "EpisGetDeliveryOptions",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/xspace/create",
+    "method": "POST",
+    "title": "EpisXspaceCreate",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/xspace/detail",
+    "method": "POST",
+    "title": "EpisXspaceGetDetail",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/xspace/query",
+    "method": "GET/POST",
+    "title": "EpisXspaceQuery",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/epis/xspace/rate",
+    "method": "GET/POST",
+    "title": "EpisXspaceRateTicket",
+    "category": "Lazada Logistics API"
+  },
+  {
+    "path": "/logistics/ldp/createConsolidationService",
+    "method": "POST",
+    "title": "createConsolidationService",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/logistics/ldp/updateLastmile",
+    "method": "POST",
+    "title": "updateLastMile",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/logistics/station/cages/validate",
+    "method": "POST",
+    "title": "CageValidation",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/dop/confirm-inbound",
+    "method": "POST",
+    "title": "DopConfirmInbound",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/dop/inbounded-parcels/list",
+    "method": "GET",
+    "title": "DopGetInboundedParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/dop/scanned-parcels",
+    "method": "POST",
+    "title": "DopCreateScannedParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/dop/scanned-parcels/delete",
+    "method": "POST",
+    "title": "DopDeleteScannedParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/dop/scanned-parcels/list",
+    "method": "GET",
+    "title": "DopGetScannedParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/list",
+    "method": "GET",
+    "title": "GetListAccessStation",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/cages/validate",
+    "method": "POST",
+    "title": "ValidateCage",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/confirm-inbound",
+    "method": "POST",
+    "title": "ConfirmInbound",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/cp/confirm-parcel-collection",
+    "method": "POST",
+    "title": "ConfirmParcelCollection",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/cp/scheduled-pu-parcels/list",
+    "method": "GET",
+    "title": "GetCpScheduledPuParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/cp/validate-otp",
+    "method": "POST",
+    "title": "ValidateOTP",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/dop/cr-parcels/search",
+    "method": "GET",
+    "title": "SearchCustomerReturnParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/inbounded-parcels/list",
+    "method": "GET",
+    "title": "GetInboundedParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/metadata",
+    "method": "GET",
+    "title": "GetMetaData",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/scanned-parcels/create",
+    "method": "POST",
+    "title": "CreateScannedParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/scanned-parcels/delete",
+    "method": "POST",
+    "title": "DeleteScannedParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/station/v1/scanned-parcels/list",
+    "method": "GET",
+    "title": "GetScannedParcel",
+    "category": "Logistics Station API"
+  },
+  {
+    "path": "/logistics/tps/runsheets/stops",
+    "method": "POST",
+    "title": "AddOrUpdatePickupStop",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/logistics/tps/sellers/pickup_timeslot",
+    "method": "POST",
+    "title": "UpdatePickupTimeSlot",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/logistics/tps/stations/create",
+    "method": "POST",
+    "title": "Create3PLStation",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/logistics/tps/stations/update",
+    "method": "POST",
+    "title": "Update3PLStation",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/media/video/block/commit",
+    "method": "POST",
+    "title": "CompleteCreateVideo",
+    "category": "Media Center API"
+  },
+  {
+    "path": "/media/video/block/create",
+    "method": "POST",
+    "title": "InitCreateVideo",
+    "category": "Media Center API"
+  },
+  {
+    "path": "/media/video/block/upload",
+    "method": "POST",
+    "title": "UploadVideoBlock",
+    "category": "Media Center API"
+  },
+  {
+    "path": "/media/video/get",
+    "method": "GET",
+    "title": "GetVideo",
+    "category": "Media Center API"
+  },
+  {
+    "path": "/media/video/quota/get",
+    "method": "GET",
+    "title": "GetVideoQuota",
+    "category": "Media Center API"
+  },
+  {
+    "path": "/media/video/remove",
+    "method": "POST",
+    "title": "RemoveVideo",
+    "category": "Media Center API"
+  },
+  {
+    "path": "/membership/link",
+    "method": "POST",
+    "title": "LinkMembership",
+    "category": "Membership API"
+  },
+  {
+    "path": "/membership/linkmember/get",
+    "method": "GET/POST",
+    "title": "GetLinkMember",
+    "category": "Membership API"
+  },
+  {
+    "path": "/membership/linkmember/list",
+    "method": "GET/POST",
+    "title": "GetLinkMemberList",
+    "category": "Membership API"
+  },
+  {
+    "path": "/order/digital/delivered",
+    "method": "POST",
+    "title": "DeliverDigital",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/document/get",
+    "method": "GET",
+    "title": "GetDocument",
+    "category": "Order API"
+  },
+  {
+    "path": "/order/fulfill/pack",
+    "method": "POST",
+    "title": "Pack",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/get",
+    "method": "GET",
+    "title": "GetOrder",
+    "category": "Order API"
+  },
+  {
+    "path": "/order/invoice_number/set",
+    "method": "POST",
+    "title": "SetInvoiceNumber",
+    "category": "Order API"
+  },
+  {
+    "path": "/order/items/get",
+    "method": "GET",
+    "title": "GetOrderItems",
+    "category": "Order API"
+  },
+  {
+    "path": "/order/package/document/get",
+    "method": "GET/POST",
+    "title": "PrintAWB",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/package/repack",
+    "method": "GET/POST",
+    "title": "RecreatePackage",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/package/rts",
+    "method": "POST",
+    "title": "ReadyToShip",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/package/sof/collect",
+    "method": "POST",
+    "title": "ConfirmCollectForDBS",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/package/sof/delivered",
+    "method": "POST",
+    "title": "ConfirmDeliveryForDBS",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/package/sof/failed_delivery",
+    "method": "POST",
+    "title": "FailedDeliveryForDBS",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/package/sof/status/update",
+    "method": "POST",
+    "title": "PackageStatusUpdateForDBS",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/order/reverse/cancel/create",
+    "method": "GET",
+    "title": "InitReverseOrderCancel",
+    "category": "Return and Refund API"
+  },
+  {
+    "path": "/order/reverse/cancel/seller/decide",
+    "method": "GET",
+    "title": "InitReverseOrderCancelDecide",
+    "category": "Return and Refund API"
+  },
+  {
+    "path": "/order/reverse/cancel/validate",
+    "method": "GET",
+    "title": "OrderCancelValidate",
+    "category": "Order API"
+  },
+  {
+    "path": "/order/reverse/onlyrefund/seller/decide",
+    "method": "GET",
+    "title": "ReverseOrderOnlyRefundDecide",
+    "category": "Return and Refund API"
+  },
+  {
+    "path": "/order/reverse/reason/list",
+    "method": "GET",
+    "title": "GetReverseOrderReasonList",
+    "category": "Return and Refund API"
+  },
+  {
+    "path": "/order/reverse/return/detail/list",
+    "method": "GET",
+    "title": "GetReverseOrderDetail",
+    "category": "Return and Refund API"
+  },
+  {
+    "path": "/order/reverse/return/history/list",
+    "method": "GET",
+    "title": "GetReverseOrderHistoryList",
+    "category": "Return and Refund API"
+  },
+  {
+    "path": "/order/reverse/return/update",
+    "method": "GET",
+    "title": "ReverseOrderReturnUpdate",
+    "category": "Return and Refund API"
+  },
+  {
+    "path": "/order/shipment/providers/get",
+    "method": "GET/POST",
+    "title": "GetShipmentProvider",
+    "category": "Fulfillment API"
+  },
+  {
+    "path": "/orders/get",
+    "method": "GET",
+    "title": "GetOrders",
+    "category": "Order API"
+  },
+  {
+    "path": "/orders/items/get",
+    "method": "GET",
+    "title": "GetMultipleOrderItems",
+    "category": "Order API"
+  },
+  {
+    "path": "/orders/ovo/get",
+    "method": "GET/POST",
+    "title": "GetOVOOrders",
+    "category": "Order API"
+  },
+  {
+    "path": "/partner/get",
+    "method": "GET/POST",
+    "title": "GetLinkMember",
+    "category": "Membership API"
+  },
+  {
+    "path": "/partner/link",
+    "method": "GET/POST",
+    "title": "PartnerLink",
+    "category": "Membership API"
+  },
+  {
+    "path": "/partner/list",
+    "method": "GET/POST",
+    "title": "GetLinkMemberList",
+    "category": "Membership API"
+  },
+  {
+    "path": "/partner/transaction",
+    "method": "GET/POST",
+    "title": "PartnerTransaction",
+    "category": "Membership API"
+  },
+  {
+    "path": "/partner/unlink",
+    "method": "GET/POST",
+    "title": "PartnerUnlink",
+    "category": "Membership API"
+  },
+  {
+    "path": "/partner/update",
+    "method": "GET/POST",
+    "title": "PartnerUpdate",
+    "category": "Membership API"
+  },
+  {
+    "path": "/partner/updatePartnerUserId",
+    "method": "GET/POST",
+    "title": "UpdatePartnerUserId",
+    "category": "Membership API"
+  },
+  {
+    "path": "/pickup_order/print",
+    "method": "GET/POST",
+    "title": "PrintPickuoOrder",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/pickup_order/query",
+    "method": "GET/POST",
+    "title": "QueryPickupOrder",
+    "category": "Choice Customized API"
+  },
+  {
+    "path": "/product/category/suggestion/get",
+    "method": "GET",
+    "title": "GetCategorySuggestion",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/content/score/get",
+    "method": "GET/POST",
+    "title": "GetProductContentScore",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/create",
+    "method": "POST",
+    "title": "CreateProduct",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/deactivate",
+    "method": "POST",
+    "title": "DeactivateProduct",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/global/attribute/update",
+    "method": "POST",
+    "title": "UpdateGlobalProductAttribute",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/create",
+    "method": "POST",
+    "title": "CreateGlobalProduct",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/delete",
+    "method": "POST",
+    "title": "deleteMerchantProduct",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/extension",
+    "method": "GET",
+    "title": "GetGlobalProductExtension",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/semi/avaible/get",
+    "method": "GET/POST",
+    "title": "GetUpgradableGlobalPlusProductList",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/semi/recommend/price/get",
+    "method": "GET/POST",
+    "title": "GetRecommendPrice",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/semi/update",
+    "method": "POST",
+    "title": "SemiProductUpdate",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/semi/upgrade",
+    "method": "GET/POST",
+    "title": "SemiProductUpgrade",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/status/get",
+    "method": "GET",
+    "title": "GetGlobalProductStatus",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/unfilled/attribute/get",
+    "method": "GET",
+    "title": "GetUnfilledAttribute",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/global/update/status",
+    "method": "POST",
+    "title": "updateProductStatus",
+    "category": "Cross Boarder Product API"
+  },
+  {
+    "path": "/product/item/get",
+    "method": "GET",
+    "title": "GetProductItem",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/pre/check",
+    "method": "GET/POST",
+    "title": "ProductCheck",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/price_quantity/update",
+    "method": "POST",
+    "title": "UpdatePriceQuantity",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/qc/alert/list",
+    "method": "GET",
+    "title": "GetQCAlertProducts",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/remove",
+    "method": "POST",
+    "title": "RemoveProduct",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/seller/item/getPreQcRules",
+    "method": "GET/POST",
+    "title": "GetPreQcRules",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/seller/item/limit",
+    "method": "GET",
+    "title": "GetSellerItemLimit",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/sku/remove",
+    "method": "POST",
+    "title": "RemoveSku",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/stock/sellable/adjust",
+    "method": "POST",
+    "title": "AdjustSellableQuantity",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/stock/sellable/update",
+    "method": "GET/POST",
+    "title": "UpdateSellableQuantity",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/unfilled/attribute/get",
+    "method": "GET/POST",
+    "title": "GetUnfilledAttributeItem",
+    "category": "Product API"
+  },
+  {
+    "path": "/product/update",
+    "method": "POST",
+    "title": "UpdateProduct",
+    "category": "Product API"
+  },
+  {
+    "path": "/products/get",
+    "method": "GET",
+    "title": "GetProducts",
+    "category": "Product API"
+  },
+  {
+    "path": "/promotion/flexicombo/activate",
+    "method": "POST",
+    "title": "ActivateFlexiCombo",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/flexicombo/create",
+    "method": "POST",
+    "title": "CreateFlexiCombo",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/flexicombo/deactivate",
+    "method": "POST",
+    "title": "DeactivateFlexiCombo",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/flexicombo/details",
+    "method": "GET",
+    "title": "GetFlexiComboDetails",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/flexicombo/list",
+    "method": "GET",
+    "title": "ListFlexiCombo",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/flexicombo/products/add",
+    "method": "POST",
+    "title": "AddFlexiComboProducts",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/flexicombo/products/delete",
+    "method": "POST",
+    "title": "DeleteFlexiComboProducts",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/flexicombo/products/list",
+    "method": "GET",
+    "title": "ListFlexiComboProducts",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/flexicombo/update",
+    "method": "POST",
+    "title": "UpdateFlexiCombo",
+    "category": "Flexicombo API"
+  },
+  {
+    "path": "/promotion/freeshipping/activate",
+    "method": "POST",
+    "title": "FreeShippingActivate",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/create",
+    "method": "POST",
+    "title": "FreeShippingCreate",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/deactivate",
+    "method": "POST",
+    "title": "FreeShippingDeactivate",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/deliveryoptions/get",
+    "method": "GET",
+    "title": "FreeShippingDeliveryOptionsQuery",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/get",
+    "method": "GET",
+    "title": "FreeShippingGet",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/product/sku/add",
+    "method": "POST",
+    "title": "FreeShippingAddSelectedProductSKU",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/product/sku/remove",
+    "method": "POST",
+    "title": "FreeShippingDeleteSelectedProductSKU",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/products/get",
+    "method": "GET",
+    "title": "FreeShippingSelectedProductList",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/regions/get",
+    "method": "GET",
+    "title": "FreeShippingRegionsQuery",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshipping/update",
+    "method": "POST",
+    "title": "FreeShippingUpdate",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/freeshippings/get",
+    "method": "GET",
+    "title": "FreeShippingList",
+    "category": "Free Shipping API"
+  },
+  {
+    "path": "/promotion/storeflashsale/activate",
+    "method": "POST",
+    "title": "ActivateStoreFlashSale",
+    "category": "Store Flash Sale API"
+  },
+  {
+    "path": "/promotion/storeflashsale/create",
+    "method": "POST",
+    "title": "CreateStoreFlashSale",
+    "category": "Store Flash Sale API"
+  },
+  {
+    "path": "/promotion/storeflashsale/deactivate",
+    "method": "POST",
+    "title": "DeactivateStoreFlashSale",
+    "category": "Store Flash Sale API"
+  },
+  {
+    "path": "/promotion/storeflashsale/get",
+    "method": "GET",
+    "title": "getStoreFlashSale",
+    "category": "Store Flash Sale API"
+  },
+  {
+    "path": "/promotion/storeflashsale/list",
+    "method": "GET",
+    "title": "ListStoreFlashSale",
+    "category": "Store Flash Sale API"
+  },
+  {
+    "path": "/promotion/storeflashsale/update",
+    "method": "POST",
+    "title": "UpdateStoreFlashSale",
+    "category": "Store Flash Sale API"
+  },
+  {
+    "path": "/promotion/voucher/activate",
+    "method": "POST",
+    "title": "SellerVoucherActivate",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/promotion/voucher/create",
+    "method": "POST",
+    "title": "SellerVoucherCreate",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/promotion/voucher/deactivate",
+    "method": "POST",
+    "title": "SellerVoucherDeactivate",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/promotion/voucher/get",
+    "method": "GET",
+    "title": "SellerVoucherDetailQuery",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/promotion/voucher/product/sku/add",
+    "method": "POST",
+    "title": "SellerVoucherAddSelectedProductSKU",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/promotion/voucher/product/sku/remove",
+    "method": "POST",
+    "title": "SellerVoucheDeleteSelectedProductSKU",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/promotion/voucher/products/get",
+    "method": "GET",
+    "title": "SellerVoucherSelectedProductList",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/promotion/voucher/update",
+    "method": "POST",
+    "title": "SellerVoucherUpdate",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/promotion/vouchers/get",
+    "method": "GET",
+    "title": "SellerVoucherList",
+    "category": "Seller Voucher API"
+  },
+  {
+    "path": "/rc/sellerWarehouse/saveWarehouseInfo",
+    "method": "GET/POST",
+    "title": "saveSellerWarehouseInfo",
+    "category": "Seller API"
+  },
+  {
+    "path": "/rc/store/list/get",
+    "method": "GET/POST",
+    "title": "GetPickUpStoreList",
+    "category": "Seller API"
+  },
+  {
+    "path": "/rc/warehouse/detail/get",
+    "method": "GET/POST",
+    "title": "QueryWarehouseDetailInfoBySellerId",
+    "category": "Seller API"
+  },
+  {
+    "path": "/rc/warehouse/get",
+    "method": "GET/POST",
+    "title": "GetWarehouseBySellerId",
+    "category": "Seller API"
+  },
+  {
+    "path": "/reverse/getreverseordersforseller",
+    "method": "GET/POST",
+    "title": "GetReverseOrdersForSeller",
+    "category": "Return and Refund API"
+  },
+  {
+    "path": "/review/seller/history/list",
+    "method": "GET/POST",
+    "title": "GetHistoryReviewIdList",
+    "category": "Product Review API"
+  },
+  {
+    "path": "/review/seller/list/v2",
+    "method": "GET",
+    "title": "GetReviewListByIdList",
+    "category": "Product Review API"
+  },
+  {
+    "path": "/review/seller/reply/add",
+    "method": "GET",
+    "title": "SubmitSellerReply",
+    "category": "Product Review API"
+  },
+  {
+    "path": "/rpa/id/tax/callback",
+    "method": "GET/POST",
+    "title": "LazadaCFOInvoiceRpaCallback",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/rss/pickup-job/get",
+    "method": "GET/POST",
+    "title": "RssGetOnePickupJob",
+    "category": "RedMart API"
+  },
+  {
+    "path": "/rss/pickup-jobs/get",
+    "method": "GET/POST",
+    "title": "RssGetPickupJobs",
+    "category": "RedMart API"
+  },
+  {
+    "path": "/rss/pickupLocations/get",
+    "method": "GET",
+    "title": "RssGetPickupLocations",
+    "category": "RedMart API"
+  },
+  {
+    "path": "/rss/product/get",
+    "method": "GET",
+    "title": "RssGetProduct",
+    "category": "RedMart API"
+  },
+  {
+    "path": "/rss/products/get",
+    "method": "GET",
+    "title": "RssGetProducts",
+    "category": "RedMart API"
+  },
+  {
+    "path": "/rss/stockLot/get",
+    "method": "GET",
+    "title": "RssGetStockLot",
+    "category": "RedMart API"
+  },
+  {
+    "path": "/rss/stockLot/update",
+    "method": "GET/POST",
+    "title": "RssUpdateStockLot",
+    "category": "RedMart API"
+  },
+  {
+    "path": "/rss/stockLots/get",
+    "method": "GET",
+    "title": "RssGetStockLots",
+    "category": "RedMart API"
+  },
+  {
+    "path": "/seller/ar/config/syn",
+    "method": "GET/POST",
+    "title": "SynchronizeSellerItemArConfig",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/cb/country/get",
+    "method": "GET/POST",
+    "title": "getCountryInfo",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/cb/country/location/get",
+    "method": "GET/POST",
+    "title": "getSubAddress",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/cb/payment/config",
+    "method": "GET/POST",
+    "title": "paymentBinding",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/cb/register/fieldcheck",
+    "method": "GET/POST",
+    "title": "sellerFieldVerify",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/cb/register/info",
+    "method": "GET/POST",
+    "title": "getSellerRegisterInfo ",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/get",
+    "method": "GET",
+    "title": "GetSeller",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/metrics/get",
+    "method": "GET",
+    "title": "GetSellerMetricsById",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/performance/get",
+    "method": "GET/POST",
+    "title": "GetSellerPerformance",
+    "category": "Seller API"
+  },
+  {
+    "path": "/seller/policy/fetch",
+    "method": "GET",
+    "title": "SellerPolicyFetch",
+    "category": "Seller API"
+  },
+  {
+    "path": "/sellercenter/msg/list",
+    "method": "GET/POST",
+    "title": "SellerCenterMsgList",
+    "category": "Seller API"
+  },
+  {
+    "path": "/service/market/order/query",
+    "method": "GET/POST",
+    "title": "ServiceMarketAppKeyOrderQuery",
+    "category": "Service Market API"
+  },
+  {
+    "path": "/service/market/subs/query",
+    "method": "GET/POST",
+    "title": "ServiceMarketAppKeySubQuery",
+    "category": "Service Market API"
+  },
+  {
+    "path": "/shop/follow/status/batch/query",
+    "method": "GET/POST",
+    "title": "BatchQueryFollowStatus",
+    "category": "Seller API"
+  },
+  {
+    "path": "/size/chart/batch/update",
+    "method": "POST",
+    "title": "BatchUpdateSizeChart",
+    "category": "Product API"
+  },
+  {
+    "path": "/size/chart/template/get",
+    "method": "GET",
+    "title": "GetSizeChartTemplate",
+    "category": "Product API"
+  },
+  {
+    "path": "/sponsor/solutions/account/getAccountSignInfo",
+    "method": "GET",
+    "title": "getAccountSignInfo",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/account/getLatestSignInfo",
+    "method": "GET",
+    "title": "getLatestSignInfo",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/account/sign",
+    "method": "GET/POST",
+    "title": "sign",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/addSolution",
+    "method": "POST",
+    "title": "addSolution",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/adgroup/addAdgroupBatch",
+    "method": "GET/POST",
+    "title": "addAdgroupBatch",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/adgroup/deleteAdgroupBatch",
+    "method": "GET/POST",
+    "title": "deleteAdgroupBatch",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/adgroup/searchAdgroupList",
+    "method": "GET/POST",
+    "title": "searchAdgroupList",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/adgroup/updateAdgroupBatch",
+    "method": "GET/POST",
+    "title": "updateAdgroupBatch",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/campaign/deleteCampaign",
+    "method": "GET/POST",
+    "title": "deleteCampaign",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/campaign/getCampaign",
+    "method": "GET/POST",
+    "title": "getCampaign",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/campaign/getCampaignCount",
+    "method": "GET/POST",
+    "title": "getCampaignCount",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/campaign/searchCampaignList",
+    "method": "GET/POST",
+    "title": "searchCampaignList",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/campaign/updateCampaign",
+    "method": "GET/POST",
+    "title": "updateCampaign",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/category/listCategory",
+    "method": "GET/POST",
+    "title": "listCategory",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/keyword/listKeywordByAdgroup",
+    "method": "GET/POST",
+    "title": "listKeywordByAdgroup",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/keyword/listKeywordByItem",
+    "method": "GET/POST",
+    "title": "listKeywordByItem",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/keyword/searchKeyword",
+    "method": "GET/POST",
+    "title": "searchKeyword",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/product/searchProductWithPage",
+    "method": "GET/POST",
+    "title": "searchProductWithPage",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/report/getDiscoveryReportAdgroup",
+    "method": "GET/POST",
+    "title": "getDiscoveryReportAdgroup",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/report/getDiscoveryReportAudience",
+    "method": "GET/POST",
+    "title": "getDiscoveryReportAudience",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/report/getDiscoveryReportCampaign",
+    "method": "GET/POST",
+    "title": "getDiscoveryReportCampaign",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/report/getDiscoveryReportKeyword",
+    "method": "GET/POST",
+    "title": "getDiscoveryReportKeyword",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/report/getReportCampaignOnPrePlacement",
+    "method": "GET/POST",
+    "title": "getReportCampaignOnFIrstSlot",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/report/getReportOverview",
+    "method": "GET/POST",
+    "title": "getReportOverview",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/report/getReportOverviewMetric",
+    "method": "GET/POST",
+    "title": "getReportOverviewMetric",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/wallet/getAutoTopUpOptionOneConfig",
+    "method": "GET/POST",
+    "title": "getAutoTopUpOptionOneConfig",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/sponsor/solutions/wallet/modifyAutoTopUpOptionOneConfig",
+    "method": "GET/POST",
+    "title": "modifyAutoTopUpOptionOneConfig",
+    "category": "Sponsored Solutions API"
+  },
+  {
+    "path": "/stations/dop/scan",
+    "method": "GET/POST",
+    "title": "StationDopScan",
+    "category": "Logistics API"
+  },
+  {
+    "path": "/store/custom/page/get",
+    "method": "GET/POST",
+    "title": "GetStoreCustomPage",
+    "category": "Store Decoration API"
+  },
+  {
+    "path": "/wallet/giftcode/query",
+    "method": "GET/POST",
+    "title": "GiftCodeQuery",
+    "category": "Lazada Wallet Corporate Top-up API"
+  },
+  {
+    "path": "/wallet/giftcode/request",
+    "method": "GET/POST",
+    "title": "GiftCodeRequest",
+    "category": "Lazada Wallet Corporate Top-up API"
+  },
+  {
+    "path": "/wallet/open/reconciliation",
+    "method": "GET/POST",
+    "title": "Reconciliation",
+    "category": "Lazada Wallet Corporate Top-up API"
+  },
+  {
+    "path": "/wallet/open/service/balance/query",
+    "method": "GET/POST",
+    "title": "OpenServiceBalanceQuery",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/wallet/open/service/kyc/query",
+    "method": "GET/POST",
+    "title": "OpenServiceKycQuery",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/wallet/open/service/reconciliation",
+    "method": "GET/POST",
+    "title": "Reconciliation",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/wallet/open/service/withdraw",
+    "method": "GET/POST",
+    "title": "OpenServiceWithdrawApply",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/wallet/open/service/withdraw/query",
+    "method": "GET/POST",
+    "title": "OpenServiceWithdrawQuery",
+    "category": "LazPay API"
+  },
+  {
+    "path": "/wallet/transfer/query",
+    "method": "GET/POST",
+    "title": "DirectTransferQuery",
+    "category": "Lazada Wallet Corporate Top-up API"
+  },
+  {
+    "path": "/wallet/transfer/request",
+    "method": "GET/POST",
+    "title": "DirectTransferRequest",
+    "category": "Lazada Wallet Corporate Top-up API"
+  }
+]

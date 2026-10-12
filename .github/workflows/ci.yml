@@ -11,15 +11,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Active LTS lines. The packages declare "node": ">=16" but are only tested on maintained releases.
+        node-version: [20, 22, 24]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
           cache: npm
 
       - name: Install dependencies
@@ -36,6 +41,9 @@ jobs:
 
       - name: Build workspaces
         run: npm run build
+
+      - name: Check generated API docs are up to date
+        run: npm run docs:api:check
 
       - name: Validate package tarballs
         run: npm run pack:all

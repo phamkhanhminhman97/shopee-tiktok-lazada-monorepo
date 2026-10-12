@@ -8,7 +8,12 @@
 
 TypeScript API client for **TikTok Shop Open API**.
 
-This package helps Node.js / TypeScript backends integrate with TikTok Shop seller authorization, access token exchange, token refresh, order APIs, product APIs, and fulfillment APIs.
+This package helps Node.js / TypeScript backends integrate with TikTok Shop: seller authorization, token exchange and refresh, and **352 typed API methods across 20 domains** that cover **all 316 endpoints** in TikTok Shop's official API reference (Orders, Products, Fulfillment, FBT, Finance, Return & Refund, Promotion, Affiliate, Analytics, Customer Service, Customer Engagement, Logistics, Seller, Shop, Event, Auth, ...).
+
+- Typed request and response models for every method, no `any`.
+- Requests are signed with the TikTok Shop HMAC-SHA256 scheme; the JSON body is part of the signature.
+- Automatic retry for idempotent GET requests, per-request timeouts, and a structured `TiktokApiError`.
+- A webhook signature verifier for incoming TikTok Shop events.
 
 > Unofficial package. This project is not affiliated with TikTok.
 
@@ -68,6 +73,9 @@ const tiktok = new TiktokModule({
 | `refreshToken` | Required for token refresh | TikTok Shop refresh token |
 | `accessTokenExpire` | No | Access token expiration Unix timestamp |
 | `refreshTokenExipre` | No | Refresh token expiration Unix timestamp |
+| `categoryAssetsCipher` | Required for some Product APIs | Category assets cipher (sent as `category_asset_cipher`) |
+| `timeoutMs` | No | Per-request timeout in milliseconds for the domain namespaces (default `30000`) |
+| `maxRetries` | No | Automatic retries for GET requests on transient failures (default `2`, `0` disables) |
 
 ## Authorization Flow
 
@@ -302,6 +310,103 @@ const product = await tiktok.getProductDetail("PRODUCT_ID");
 | Products | `getProductDetail`, `getCategories`, `getBrands`, `getAttributes`, `createProduct` |
 | Fulfillment | `getPackageTimeSlots`, `shipPackage`, `getShippingDocument` |
 
+## Full API coverage: domain namespaces
+
+Besides the flat methods above, every TikTok Shop domain is available as a typed namespace on the same `TiktokModule` instance:
+
+```ts
+const { data } = await tiktok.order.getOrderList({
+  query: { page_size: 20 },
+  body: { order_status: "AWAITING_SHIPMENT" },
+});
+
+await tiktok.product.updateProductInventory({
+  product_id: "1729",
+  body: { skus: [{ id: "1730", inventory: [{ quantity: 12 }] }] },
+});
+```
+
+| Namespace | Domain | Methods |
+| --- | --- | ---: |
+| `tiktok.order` | Orders, price detail, external order references | 9 |
+| `tiktok.product` | Products, categories, brands, global products, inventory, prices, images, SKPP | 73 |
+| `tiktok.fulfillment` | Packages, shipping, handover, documents, invoices, customs | 30 |
+| `tiktok.fbt` | Fulfilled by TikTok (FBT): inbound orders, inventory, warehouses | 23 |
+| `tiktok.returnRefund` | Returns, cancellations, refunds, after-sale | 25 |
+| `tiktok.finance` | Statements, payments, withdrawals, transactions | 9 |
+| `tiktok.promotion` | Activities and coupons | 10 |
+| `tiktok.affiliateSeller` | Affiliate (seller side): collaborations, samples, creators, messages, Compass exports | 52 |
+| `tiktok.affiliatePartner` | Affiliate (partner side): campaigns and orders | 17 |
+| `tiktok.affiliateCreator` | Affiliate (creator side): showcases, links, shoppable videos and photos | 26 |
+| `tiktok.analytics` | Shop, product, SKU, video and live-room performance | 41 |
+| `tiktok.customerService` | Buyer conversations, messages, agent settings | 12 |
+| `tiktok.customerEngagement` | Engagement features, permissions | 6 |
+| `tiktok.logistic` | Warehouses, delivery options, shipping providers, tracking | 7 |
+| `tiktok.seller` | Active shops, seller permissions, shop groups | 3 |
+| `tiktok.shop` | Authorized shops, category assets | 2 |
+| `tiktok.event` | Webhook subscriptions | 3 |
+| `tiktok.auth` | OAuth token exchange | 2 |
+| `tiktok.supplyChain` | Supply chain | 1 |
+| `tiktok.tools` | Resumable file upload | 1 |
+
+The full method, HTTP verb and path list is in the generated [API reference](./docs/API.md). Methods whose name ends with a version (for example `order.getOrderDetail202507`) call a newer version of an endpoint than the unsuffixed method of the same name.
+
+> The namespaces are separate from the flat methods, so `tiktok.getOrderList()` and `tiktok.order.getOrderList()` are different calls with different parameter shapes. Existing flat methods keep working unchanged.
+
+> Paths, HTTP verbs and request/response fields of the namespaces are checked against the official TikTok Shop API reference (Partner Center). Note that TikTok Shop publishes several versions of some endpoints (for example `order.getOrderDetail` is `202309` and `order.getOrderDetail202507` is the newer `202507` version): the older method keeps calling the older version, the suffixed method calls the newer one. `affiliateSeller.markConversationRead` calls `/conversatons/read`: that misspelling is how TikTok publishes the path.
+
+## Error handling
+
+Domain-namespace methods throw `TiktokApiError` when TikTok Shop returns a non-zero `code` or the request fails (network error, timeout, non-2xx status):
+
+```ts
+import { TiktokApiError } from "tiktokshops-api-client";
+
+try {
+  await tiktok.order.getOrderDetail({ ids: ["576461413038785752"] });
+} catch (error) {
+  if (error instanceof TiktokApiError) {
+    console.error(error.code, error.message, error.requestId, error.status);
+  }
+}
+```
+
+> The older flat methods (`getOrderList`, `getProductDetail`, ...) return TikTok's error body instead of throwing. Check `code` on their responses.
+
+## Timeouts and retries
+
+Domain-namespace requests time out after 30 seconds (`timeoutMs`). GET requests are retried up to `maxRetries` times (default 2) on network errors, HTTP 408, 429 and 5xx, with exponential backoff that honors `Retry-After`. POST, PUT and DELETE are never retried automatically, because TikTok Shop mutations are not guaranteed to be idempotent.
+
+```ts
+const tiktok = new TiktokModule({ ...config, timeoutMs: 10_000, maxRetries: 0 });
+```
+
+## Verifying webhooks
+
+TikTok Shop signs each webhook request. Verify it against the **raw** request body before you trust the payload:
+
+```ts
+import { verifyTiktokWebhookSignature, parseTiktokWebhookPayload } from "tiktokshops-api-client";
+import type { TiktokWebhookOrder } from "tiktokshops-api-client";
+
+app.post("/webhooks/tiktok", express.raw({ type: "application/json" }), (req, res) => {
+  const valid = verifyTiktokWebhookSignature({
+    appKey: process.env.TIKTOK_APP_KEY!,
+    appSecret: process.env.TIKTOK_APP_SECRET!,
+    rawBody: req.body, // Buffer, exactly as received
+    authorization: req.header("authorization") ?? "",
+  });
+  if (!valid) return res.sendStatus(401);
+
+  const event = parseTiktokWebhookPayload<TiktokWebhookOrder>(req.body);
+  res.sendStatus(200);
+});
+```
+
+The signature is `hex(HMAC_SHA256(appSecret, appKey + rawBody))`, compared in constant time. Do not re-serialize a parsed body: whitespace and key order change the signature.
+
+> The scheme is the one in TikTok Shop's official [Webhooks overview](https://partner.tiktokshop.com/docv2/page/tts-webhooks-overview): the `Authorization` header carries the lowercase hex HMAC-SHA256 of `app_key + raw request body`, keyed with the app secret.
+
 ## Types
 
 ```ts
@@ -316,6 +421,7 @@ import type {
 
 ```bash
 npm test
+npm run docs:api   # run from the repo root; regenerates docs/API.md
 npm pack --dry-run
 ```
 

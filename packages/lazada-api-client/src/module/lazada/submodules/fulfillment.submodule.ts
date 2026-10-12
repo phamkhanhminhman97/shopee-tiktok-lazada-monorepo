@@ -1,3 +1,4 @@
+import { LazadaFulfillmentOfficial } from './fulfillment-official.submodule';
 import { LazadaConfig } from '../dto/request/config.request';
 import {
   confirmDeliveryForDBS,
@@ -38,8 +39,10 @@ import {
  *
  * Access via `lazada.fulfillment.<method>()` on a `LazadaModule` instance.
  */
-export class LazadaFulfillment {
-  constructor(private config: LazadaConfig) {}
+export class LazadaFulfillment extends LazadaFulfillmentOfficial {
+  constructor(config: LazadaConfig) {
+    super(config);
+  }
 
   async getShipmentProvider(params: FulfillmentGetShipmentProviderRequest): Promise<FulfillmentGetShipmentProviderResponse> {
     return await getShipmentProvider(params, this.config);

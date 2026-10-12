@@ -282,7 +282,7 @@ export async function getRecommendedProductTitleAndDescription(query: TiktokGetR
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetRecommendedProductTitleAndDescriptionResponse>>(
     `/product/202405/products/suggestions`,
     'GET',
-    {},
+    { query: query },
     config,
     'getRecommendedProductTitleAndDescription',
   );
@@ -295,7 +295,7 @@ export async function getProductsSEOWords(query: TiktokGetRecommendedProductTitl
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetProductSEOWordsResponse>>(
     `/product/202405/products/seo_words`,
     'GET',
-    {},
+    { query: query },
     config,
     'getProductsSEOWords',
   );
@@ -308,7 +308,7 @@ export async function productInformationIssueDiagnosis(query: TiktokGetRecommend
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokProductDiagnosisResponse>>(
     `/product/202405/products/diagnoses`,
     'GET',
-    {},
+    { query: query },
     config,
     'productInformationIssueDiagnosis',
   );
@@ -321,7 +321,7 @@ export async function getGlobalCategories(query: TiktokGetGlobalCategoriesQuery,
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetGlobalCategoriesResponse>>(
     `/product/202309/global_categories`,
     'GET',
-    {},
+    { query: query },
     config,
     'getGlobalCategories',
   );
@@ -540,7 +540,7 @@ export async function searchInventory(body: TiktokSearchInventoryBody, config: T
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokSearchInventoryResponse>>(
     '/product/202309/inventory/search',
     'POST',
-    {},
+    { body: body },
     config,
     'searchInventory',
   );
@@ -585,7 +585,7 @@ export async function recommendGlobalCategory(body: TiktokRecommendGlobalCategor
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokRecommendGlobalCategoryResponse>>(
     '/product/202309/global_categories/recommend',
     'POST',
-    {},
+    { body: body },
     config,
     'recommendGlobalCategory',
   );
@@ -615,7 +615,7 @@ export async function createGlobalProduct(body: TiktokCreateGlobalProductInput, 
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokCreateGlobalProductResponse>>(
     '/product/202309/global_products',
     'POST',
-    {},
+    { body: body },
     config,
     'createGlobalProduct',
   );
@@ -645,7 +645,7 @@ export async function deleteGlobalProducts(body: TiktokDeleteGlobalProductsInput
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokDeleteGlobalProductsResponse>>(
     '/product/202309/global_products',
     'DELETE',
-    {},
+    { body: body },
     config,
     'deleteGlobalProducts',
   );
@@ -720,7 +720,7 @@ export async function createImageTranslationTasks(body: TiktokCreateImageTransla
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokCreateImageTranslationTasksResponse>>(
     '/product/202505/images/translation_tasks',
     'POST',
-    {},
+    { body: body },
     config,
     'createImageTranslationTasks',
   );

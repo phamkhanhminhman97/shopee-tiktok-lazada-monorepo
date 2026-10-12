@@ -9,6 +9,7 @@ function makeShopee() {
     partnerId: 1,
     partnerKey: 'test-partner-key',
     shopId: '1000',
+    merchantId: '3000',
     accessToken: 'test-access-token',
   });
 }
@@ -135,15 +136,16 @@ test('shopee.publicApi.getShopeeIpRanges calls /public/get_shopee_ip_ranges via 
   );
 });
 
-test('shopee.sbs.getCurrentInventory sends array params as repeated query keys', async () => {
+test('shopee.sbs.getCurrentInventory sends array params comma-separated, as Shopee documents for GET', async () => {
   await withMockedAxiosGet(
     { request_id: 'req-6', error: '', message: '', response: {} },
     async (getCall) => {
       const shopee = makeShopee();
       await shopee.sbs.getCurrentInventory({ item_id_list: [111, 222] });
 
-      const matches = getCall().url.match(/item_id_list=\d+/g);
-      assert.deepEqual(matches, ['item_id_list=111', 'item_id_list=222']);
+      const url = new URL(getCall().url);
+      assert.equal(url.searchParams.get('item_id_list'), '111,222');
+      assert.equal(url.searchParams.getAll('item_id_list').length, 1, 'one parameter, not repeated keys');
     },
   );
 });

@@ -51,7 +51,7 @@ export async function getReturnList(
   if (params.seller_proof_status) additionalParams.seller_proof_status = params.seller_proof_status;
   if (params.seller_compensation_status) additionalParams.seller_compensation_status = params.seller_compensation_status;
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.RETURN_LIST);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.RETURN_LIST}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetReturnList>(url, config);
@@ -79,7 +79,7 @@ export async function getReturnDetail(returnSn: string, config: ShopeeConfig): P
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.RETURN_DETAIL, config, timestamp);
   const additionalParams: Record<string, string> = { return_sn: returnSn };
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.RETURN_DETAIL);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.RETURN_DETAIL}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseReturnDetail>(url, config);
@@ -110,7 +110,7 @@ export async function getAvailableSolutions(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.RETURN_SOLUTION, config, timestamp);
   const additionalParams: Record<string, string> = { return_sn: returnSn };
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.RETURN_SOLUTION);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.RETURN_SOLUTION}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetAvailableSolutions>(url, config);
@@ -140,7 +140,7 @@ export async function confirmReturn(returnSn: string, config: ShopeeConfig): Pro
 
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.RETURN_CONFIRM, config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.RETURN_CONFIRM);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.RETURN_CONFIRM}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
   const body: ShopeeRequestConfirmReturn = { return_sn: returnSn };
@@ -216,7 +216,7 @@ export async function cancelDispute(params: ShopeeCancelDisputeRequest, config: 
 export async function convertImage(params: ShopeeConvertImageRequest, config: ShopeeConfig): Promise<ShopeeConvertImageResponse> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest('/returns/convert_image', config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, '/returns/convert_image');
   const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/returns/convert_image${commonParam}`;
 
   const result = await ShopeeHelper.httpPostMultipart<ShopeeConvertImageResponse>(

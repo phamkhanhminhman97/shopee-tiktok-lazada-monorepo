@@ -1,3 +1,4 @@
+import { TiktokFinanceOfficial } from './finance-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   getPayments,
@@ -25,8 +26,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.finance.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokFinance {
-  constructor(private config: TiktokConfig) {}
+export class TiktokFinance extends TiktokFinanceOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async getStatements(params: TiktokGetStatementsQuery): Promise<TiktokResponseCommon<TiktokGetStatementsResponse>> {
     return await getStatements(params, this.config);

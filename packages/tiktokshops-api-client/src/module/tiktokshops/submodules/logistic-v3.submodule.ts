@@ -1,3 +1,4 @@
+import { TiktokLogisticOfficial } from './logistic-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   getGlobalSellerWarehouse,
@@ -17,8 +18,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.logistic.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokLogistic {
-  constructor(private config: TiktokConfig) {}
+export class TiktokLogistic extends TiktokLogisticOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async getWarehouseList(): Promise<TiktokResponseCommon<TiktokGetWarehousesResponse>> {
     return await getWarehouseList(this.config);

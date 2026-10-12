@@ -84,8 +84,25 @@ const shopee = new ShopeeModule({
 | `partnerId` | Yes | Shopee Open Platform partner ID |
 | `partnerKey` | Yes | Shopee Open Platform partner key |
 | `shopId` | Required for shop APIs | Shopee shop ID |
+| `merchantId` | Required for Merchant APIs | Shopee merchant ID (see [API types](#api-types-and-the-identity-they-need)) |
+| `userId` | Required for User APIs | Shopee user ID |
+| `principalId` | Required for Principal APIs | Shopee principal ID |
 | `accessToken` | Required for private APIs | Access token used to call private Shopee APIs |
 | `refreshToken` | Required for token refresh | Refresh token used to get a new access token |
+
+### API types and the identity they need
+
+Shopee does not treat every API alike. It signs and authenticates each API with a different identity, and the client picks the right one from the API's type in the official Shopee API reference:
+
+| API type | Examples | Signed with | Config needed |
+| --- | --- | --- | --- |
+| Shop (most APIs) | orders, products, logistics | `partner_id, path, timestamp, access_token, shop_id` | `shopId`, `accessToken` |
+| Merchant | `shopee.merchant.*`, `shopee.globalProduct.*` | `..., access_token, merchant_id` | `merchantId`, `accessToken` |
+| User | `shopee.livestream.*` | `..., access_token, user_id` | `userId`, `accessToken` |
+| Principal | `shopee.principal.*` | `..., access_token, principal_id` | `principalId`, `accessToken` |
+| Public | media uploads, payment method list, push configuration | `partner_id, path, timestamp` | none (no access token) |
+
+Calling a Merchant, User or Principal API without its id fails fast with a `ShopeeApiError` (`code: "ShopeeConfigError"`) instead of sending a request that Shopee would reject with `error_sign`.
 
 ## Authorization flow
 
@@ -925,7 +942,7 @@ const vouchers = await shopee.voucher.getVoucherList({ status: 1, voucher_type: 
 
 ### Submodule namespaces (v2.1.0+)
 
-The 20 domains below were added after the initial flat-method surface and are accessed as **submodule namespaces** on the `ShopeeModule` instance (`shopee.<namespace>.<method>()`) instead of top-level methods, to avoid name collisions with existing flat methods (for example both `shopee.getCategory()` and `shopee.globalProduct.getCategory()` exist as distinct methods).
+The 23 domains below were added after the initial flat-method surface and are accessed as **submodule namespaces** on the `ShopeeModule` instance (`shopee.<namespace>.<method>()`) instead of top-level methods, to avoid name collisions with existing flat methods (for example both `shopee.getCategory()` and `shopee.globalProduct.getCategory()` exist as distinct methods).
 
 #### Account Health (`shopee.accountHealth.*`)
 
@@ -1243,6 +1260,32 @@ The 20 domains below were added after the initial flat-method surface and are ac
 | `getTimeSlotId` | `v2.shop_flash_sale.get_time_slot_id` |
 | `updateShopFlashSale` | `v2.shop_flash_sale.update_shop_flash_sale` |
 | `updateShopFlashSaleItems` | `v2.shop_flash_sale.update_shop_flash_sale_items` |
+
+#### Buybox (`shopee.buybox.*`)
+
+| Method | Shopee endpoint |
+| --- | --- |
+| `getBuyboxModelPerformance` | `v2.buybox.get_buybox_model_performance` |
+| `getBuyboxModelsByModelId` | `v2.buybox.get_buybox_models_by_model_id` |
+| `getBuyboxModelsByShopId` | `v2.buybox.get_buybox_models_by_shop_id` |
+| `getBuyboxShopPerformance` | `v2.buybox.get_buybox_shop_performance` |
+| `updateBuyboxModelEnrollment` | `v2.buybox.update_buybox_model_enrollment` |
+
+#### Business Insights (`shopee.businessInsights.*`)
+
+| Method | Shopee endpoint |
+| --- | --- |
+| `getMarketingHotListing` | `v2.business_insights.get_marketing_hot_listing` (BR only) |
+
+#### Standardized Shop Product (`shopee.productSsp.*`)
+
+| Method | Shopee endpoint |
+| --- | --- |
+| `getSspDetail` | `v2.product.get_ssp_detail` |
+| `getSspRecommendation` | `v2.product.get_ssp_recommendation` |
+| `linkItemToSsp` | `v2.product.link_item_to_ssp` |
+| `searchSspList` | `v2.product.search_ssp_list` |
+| `unlinkItemFromSsp` | `v2.product.unlink_item_from_ssp` |
 
 #### Top Picks (`shopee.topPicks.*`)
 

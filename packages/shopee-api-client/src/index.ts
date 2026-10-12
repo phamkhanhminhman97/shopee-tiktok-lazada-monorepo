@@ -206,6 +206,12 @@ export * as ShopeeShopFlashSaleRequest from './module/shopee/dto/request/shop-fl
 export * as ShopeeShopFlashSaleResponse from './module/shopee/dto/response/shop-flash-sale.response';
 export * as ShopeeTopPicksRequest from './module/shopee/dto/request/top-picks.request';
 export * as ShopeeTopPicksResponse from './module/shopee/dto/response/top-picks.response';
+export * as ShopeeBusinessInsightsRequest from './module/shopee/dto/request/business-insights.request';
+export * as ShopeeBusinessInsightsResponse from './module/shopee/dto/response/business-insights.response';
+export * as ShopeeBuyboxRequest from './module/shopee/dto/request/buybox.request';
+export * as ShopeeBuyboxResponse from './module/shopee/dto/response/buybox.response';
+export * as ShopeeProductSspRequest from './module/shopee/dto/request/product-ssp.request';
+export * as ShopeeProductSspResponse from './module/shopee/dto/response/product-ssp.response';
 export * as ShopeeVideoRequest from './module/shopee/dto/request/video.request';
 export * as ShopeeVideoResponse from './module/shopee/dto/response/video.response';
 export * as ShopeeVoucherRequest from './module/shopee/dto/request/voucher.request';

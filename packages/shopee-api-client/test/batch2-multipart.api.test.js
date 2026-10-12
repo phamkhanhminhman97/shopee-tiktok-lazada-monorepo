@@ -9,6 +9,7 @@ function makeShopee() {
     partnerId: 1,
     partnerKey: 'test-partner-key',
     shopId: '1000',
+    userId: '5000',
     accessToken: 'test-access-token',
   });
 }
@@ -119,4 +120,3 @@ test('shopee.livestream.uploadImage throws ShopeeApiError on Shopee error respon
     );
   });
 });
-

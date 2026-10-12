@@ -1,0 +1,2732 @@
+[
+  {
+    "name": "v2.account_health.get_late_orders",
+    "path": "/api/v2/account_health/get_late_orders",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.account_health.get_listings_with_issues",
+    "path": "/api/v2/account_health/get_listings_with_issues",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.account_health.get_metric_source_detail",
+    "path": "/api/v2/account_health/get_metric_source_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.account_health.get_penalty_point_history",
+    "path": "/api/v2/account_health/get_penalty_point_history",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.account_health.get_punishment_history",
+    "path": "/api/v2/account_health/get_punishment_history",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.account_health.get_shop_performance",
+    "path": "/api/v2/account_health/get_shop_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.add_add_on_deal",
+    "path": "/api/v2/add_on_deal/add_add_on_deal",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.add_add_on_deal_main_item",
+    "path": "/api/v2/add_on_deal/add_add_on_deal_main_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.add_add_on_deal_sub_item",
+    "path": "/api/v2/add_on_deal/add_add_on_deal_sub_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.delete_add_on_deal",
+    "path": "/api/v2/add_on_deal/delete_add_on_deal",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.delete_add_on_deal_main_item",
+    "path": "/api/v2/add_on_deal/delete_add_on_deal_main_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.delete_add_on_deal_sub_item",
+    "path": "/api/v2/add_on_deal/delete_add_on_deal_sub_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.end_add_on_deal",
+    "path": "/api/v2/add_on_deal/end_add_on_deal",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.get_add_on_deal",
+    "path": "/api/v2/add_on_deal/get_add_on_deal",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.get_add_on_deal_list",
+    "path": "/api/v2/add_on_deal/get_add_on_deal_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.get_add_on_deal_main_item",
+    "path": "/api/v2/add_on_deal/get_add_on_deal_main_item",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.get_add_on_deal_sub_item",
+    "path": "/api/v2/add_on_deal/get_add_on_deal_sub_item",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.update_add_on_deal",
+    "path": "/api/v2/add_on_deal/update_add_on_deal",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.update_add_on_deal_main_item",
+    "path": "/api/v2/add_on_deal/update_add_on_deal_main_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.add_on_deal.update_add_on_deal_sub_item",
+    "path": "/api/v2/add_on_deal/update_add_on_deal_sub_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.check_create_gms_product_campaign_eligibility",
+    "path": "/api/v2/ads/check_create_gms_product_campaign_eligibility",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "(coming offline soon) v2.ads.create_auto_product_ads",
+    "path": "/api/v2/ads/create_auto_product_ads",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.create_gms_product_campaign",
+    "path": "/api/v2/ads/create_gms_product_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.create_manual_product_ads",
+    "path": "/api/v2/ads/create_manual_product_ads",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "(coming offline soon) v2.ads.edit_auto_product_ads",
+    "path": "/api/v2/ads/edit_auto_product_ads",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.edit_gms_item_product_campaign",
+    "path": "/api/v2/ads/edit_gms_item_product_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.edit_gms_product_campaign",
+    "path": "/api/v2/ads/edit_gms_product_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.edit_manual_product_ad_keywords",
+    "path": "/api/v2/ads/edit_manual_product_ad_keywords",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.edit_manual_product_ads",
+    "path": "/api/v2/ads/edit_manual_product_ads",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_ads_fácil_shop_rate",
+    "path": "/api/v2/ads/get_ads_facil_shop_rate",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_all_cpc_ads_daily_performance",
+    "path": "/api/v2/ads/get_all_cpc_ads_daily_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_all_cpc_ads_hourly_performance",
+    "path": "/api/v2/ads/get_all_cpc_ads_hourly_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_create_product_ad_budget_suggestion",
+    "path": "/api/v2/ads/get_create_product_ad_budget_suggestion",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_gms_campaign_performance",
+    "path": "/api/v2/ads/get_gms_campaign_performance",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_gms_item_performance",
+    "path": "/api/v2/ads/get_gms_item_performance",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_product_campaign_daily_performance",
+    "path": "/api/v2/ads/get_product_campaign_daily_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_product_campaign_hourly_performance",
+    "path": "/api/v2/ads/get_product_campaign_hourly_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_product_level_campaign_id_list",
+    "path": "/api/v2/ads/get_product_level_campaign_id_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_product_level_campaign_setting_info",
+    "path": "/api/v2/ads/get_product_level_campaign_setting_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_product_recommended_roi_target",
+    "path": "/api/v2/ads/get_product_recommended_roi_target",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_recommended_item_list",
+    "path": "/api/v2/ads/get_recommended_item_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_recommended_keyword_list",
+    "path": "/api/v2/ads/get_recommended_keyword_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_shop_toggle_info",
+    "path": "/api/v2/ads/get_shop_toggle_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.get_total_balance",
+    "path": "/api/v2/ads/get_total_balance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ads.list_gms_user_deleted_item",
+    "path": "/api/v2/ads/list_gms_user_deleted_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.add_all_products_to_open_campaign",
+    "path": "/api/v2/ams/add_all_products_to_open_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.batch_add_products_to_open_campaign",
+    "path": "/api/v2/ams/batch_add_products_to_open_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.batch_edit_products_open_campaign_setting",
+    "path": "/api/v2/ams/batch_edit_products_open_campaign_setting",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.batch_get_products_suggested_rate",
+    "path": "/api/v2/ams/batch_get_products_suggested_rate",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.batch_remove_products_open_campaign_setting",
+    "path": "/api/v2/ams/batch_remove_products_open_campaign_setting",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.create_new_targeted_campaign",
+    "path": "/api/v2/ams/create_new_targeted_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.edit_affiliate_list_of_targeted_campaign",
+    "path": "/api/v2/ams/edit_affiliate_list_of_targeted_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.edit_all_products_open_campaign_setting",
+    "path": "/api/v2/ams/edit_all_products_open_campaign_setting",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.edit_product_list_of_targeted_campaign",
+    "path": "/api/v2/ams/edit_product_list_of_targeted_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_affiliate_performance",
+    "path": "/api/v2/ams/get_affiliate_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_auto_add_new_product_toggle_status",
+    "path": "/api/v2/ams/get_auto_add_new_product_toggle_status",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_campaign_key_metrics_performance",
+    "path": "/api/v2/ams/get_campaign_key_metrics_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_content_performance",
+    "path": "/api/v2/ams/get_content_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_conversion_report",
+    "path": "/api/v2/ams/get_conversion_report",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_managed_affiliate_list",
+    "path": "/api/v2/ams/get_managed_affiliate_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_open_campaign_added_product",
+    "path": "/api/v2/ams/get_open_campaign_added_product",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_open_campaign_batch_task_result",
+    "path": "/api/v2/ams/get_open_campaign_batch_task_result",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_open_campaign_not_added_product",
+    "path": "/api/v2/ams/get_open_campaign_not_added_product",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_open_campaign_performance",
+    "path": "/api/v2/ams/get_open_campaign_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_optimization_suggestion_product",
+    "path": "/api/v2/ams/get_optimization_suggestion_product",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_performance_data_update_time",
+    "path": "/api/v2/ams/get_performance_data_update_time",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_product_performance",
+    "path": "/api/v2/ams/get_product_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_recommended_affiliate_list",
+    "path": "/api/v2/ams/get_recommended_affiliate_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_shop_performance",
+    "path": "/api/v2/ams/get_shop_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_shop_suggested_rate",
+    "path": "/api/v2/ams/get_shop_suggested_rate",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_targeted_campaign_addable_product_list",
+    "path": "/api/v2/ams/get_targeted_campaign_addable_product_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_targeted_campaign_list",
+    "path": "/api/v2/ams/get_targeted_campaign_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_targeted_campaign_performance",
+    "path": "/api/v2/ams/get_targeted_campaign_performance",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_targeted_campaign_settings",
+    "path": "/api/v2/ams/get_targeted_campaign_settings",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_validation_list",
+    "path": "/api/v2/ams/get_validation_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.get_validation_report",
+    "path": "/api/v2/ams/get_validation_report",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.query_affiliate_list",
+    "path": "/api/v2/ams/query_affiliate_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.remove_all_products_open_campaign_setting",
+    "path": "/api/v2/ams/remove_all_products_open_campaign_setting",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.terminate_targeted_campaign",
+    "path": "/api/v2/ams/terminate_targeted_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.update_auto_add_new_product_setting",
+    "path": "/api/v2/ams/update_auto_add_new_product_setting",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.ams.update_basic_info_of_targeted_campaign",
+    "path": "/api/v2/ams/update_basic_info_of_targeted_campaign",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.public.refresh_access_token",
+    "path": "/api/v2/auth/access_token/get",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.public.get_access_token",
+    "path": "/api/v2/auth/token/get",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.bundle_deal.add_bundle_deal",
+    "path": "/api/v2/bundle_deal/add_bundle_deal",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.add_bundle_deal_item",
+    "path": "/api/v2/bundle_deal/add_bundle_deal_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.delete_bundle_deal",
+    "path": "/api/v2/bundle_deal/delete_bundle_deal",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.delete_bundle_deal_item",
+    "path": "/api/v2/bundle_deal/delete_bundle_deal_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.end_bundle_deal",
+    "path": "/api/v2/bundle_deal/end_bundle_deal",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.get_bundle_deal",
+    "path": "/api/v2/bundle_deal/get_bundle_deal",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.get_bundle_deal_item",
+    "path": "/api/v2/bundle_deal/get_bundle_deal_item",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.get_bundle_deal_list",
+    "path": "/api/v2/bundle_deal/get_bundle_deal_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.update_bundle_deal",
+    "path": "/api/v2/bundle_deal/update_bundle_deal",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.bundle_deal.update_bundle_deal_item",
+    "path": "/api/v2/bundle_deal/update_bundle_deal_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.business_insights.get_marketing_hot_listing（only BR now）",
+    "path": "/api/v2/business_insights/get_marketing_hot_listing",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.buybox.get_buybox_model_performance",
+    "path": "/api/v2/buybox/get_buybox_model_performance",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.buybox.get_buybox_models_by_model_id",
+    "path": "/api/v2/buybox/get_buybox_models_by_model_id",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.buybox.get_buybox_models_by_shop_id",
+    "path": "/api/v2/buybox/get_buybox_models_by_shop_id",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.buybox.get_buybox_shop_performance",
+    "path": "/api/v2/buybox/get_buybox_shop_performance",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.buybox.update_buybox_model_enrollment",
+    "path": "/api/v2/buybox/update_buybox_model_enrollment",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.add_discount",
+    "path": "/api/v2/discount/add_discount",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.add_discount_item",
+    "path": "/api/v2/discount/add_discount_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.delete_discount",
+    "path": "/api/v2/discount/delete_discount",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.delete_discount_item",
+    "path": "/api/v2/discount/delete_discount_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.delete_sip_discount",
+    "path": "/api/v2/discount/delete_sip_discount",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.end_discount",
+    "path": "/api/v2/discount/end_discount",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.get_discount",
+    "path": "/api/v2/discount/get_discount",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.get_discount_list",
+    "path": "/api/v2/discount/get_discount_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.get_sip_discounts",
+    "path": "/api/v2/discount/get_sip_discounts",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.set_sip_discount",
+    "path": "/api/v2/discount/set_sip_discount",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.update_discount",
+    "path": "/api/v2/discount/update_discount",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.discount.update_discount_item",
+    "path": "/api/v2/discount/update_discount_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.fbs.query_br_shop_block_status",
+    "path": "/api/v2/fbs/query_br_shop_block_status",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.fbs.query_br_shop_enrollment_status",
+    "path": "/api/v2/fbs/query_br_shop_enrollment_status",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.fbs.query_br_shop_invoice_error",
+    "path": "/api/v2/fbs/query_br_shop_invoice_error",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.fbs.query_br_sku_block_status",
+    "path": "/api/v2/fbs/query_br_sku_block_status",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.bind_courier_delivery_first_mile_tracking_number",
+    "path": "/api/v2/first_mile/bind_courier_delivery_first_mile_tracking_number",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.bind_first_mile_tracking_number",
+    "path": "/api/v2/first_mile/bind_first_mile_tracking_number",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.generate_and_bind_first_mile_tracking_number",
+    "path": "/api/v2/first_mile/generate_and_bind_first_mile_tracking_number",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.generate_first_mile_tracking_number",
+    "path": "/api/v2/first_mile/generate_first_mile_tracking_number",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_channel_list",
+    "path": "/api/v2/first_mile/get_channel_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_courier_delivery_channel_list",
+    "path": "/api/v2/first_mile/get_courier_delivery_channel_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_courier_delivery_detail",
+    "path": "/api/v2/first_mile/get_courier_delivery_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_courier_delivery_tracking_number_list",
+    "path": "/api/v2/first_mile/get_courier_delivery_tracking_number_list",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_courier_delivery_waybill",
+    "path": "/api/v2/first_mile/get_courier_delivery_waybill",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_detail",
+    "path": "/api/v2/first_mile/get_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_tracking_number_list",
+    "path": "/api/v2/first_mile/get_tracking_number_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_transit_warehouse_list",
+    "path": "/api/v2/first_mile/get_transit_warehouse_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_unbind_order_list",
+    "path": "/api/v2/first_mile/get_unbind_order_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.get_waybill",
+    "path": "/api/v2/first_mile/get_waybill",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.unbind_first_mile_tracking_number",
+    "path": "/api/v2/first_mile/unbind_first_mile_tracking_number",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.first_mile.unbind_first_mile_tracking_number_all",
+    "path": "/api/v2/first_mile/unbind_first_mile_tracking_number_all",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.follow_prize.add_follow_prize",
+    "path": "/api/v2/follow_prize/add_follow_prize",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.follow_prize.delete_follow_prize",
+    "path": "/api/v2/follow_prize/delete_follow_prize",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.follow_prize.end_follow_prize",
+    "path": "/api/v2/follow_prize/end_follow_prize",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.follow_prize.get_follow_prize_detail",
+    "path": "/api/v2/follow_prize/get_follow_prize_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.follow_prize.get_follow_prize_list",
+    "path": "/api/v2/follow_prize/get_follow_prize_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.follow_prize.update_follow_prize",
+    "path": "/api/v2/follow_prize/update_follow_prize",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.global_product.add_global_item",
+    "path": "/api/v2/global_product/add_global_item",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.add_global_model",
+    "path": "/api/v2/global_product/add_global_model",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.category_recommend",
+    "path": "/api/v2/global_product/category_recommend",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.create_publish_task",
+    "path": "/api/v2/global_product/create_publish_task",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.delete_global_item",
+    "path": "/api/v2/global_product/delete_global_item",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.delete_global_model",
+    "path": "/api/v2/global_product/delete_global_model",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_attribute_tree",
+    "path": "/api/v2/global_product/get_attribute_tree",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_brand_list",
+    "path": "/api/v2/global_product/get_brand_list",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_category",
+    "path": "/api/v2/global_product/get_category",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_global_item_id",
+    "path": "/api/v2/global_product/get_global_item_id",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_global_item_info",
+    "path": "/api/v2/global_product/get_global_item_info",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_global_item_limit",
+    "path": "/api/v2/global_product/get_global_item_limit",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_global_item_list",
+    "path": "/api/v2/global_product/get_global_item_list",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_global_model_list",
+    "path": "/api/v2/global_product/get_global_model_list",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_local_adjustment_rate",
+    "path": "/api/v2/global_product/get_local_adjustment_rate",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_publish_task_result",
+    "path": "/api/v2/global_product/get_publish_task_result",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_publishable_shop",
+    "path": "/api/v2/global_product/get_publishable_shop",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_published_list",
+    "path": "/api/v2/global_product/get_published_list",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_recommend_attribute",
+    "path": "/api/v2/global_product/get_recommend_attribute",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_shop_publishable_status",
+    "path": "/api/v2/global_product/get_shop_publishable_status",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_size_chart_detail",
+    "path": "/api/v2/global_product/get_size_chart_detail",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_size_chart_list ",
+    "path": "/api/v2/global_product/get_size_chart_list",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.get_variations",
+    "path": "/api/v2/global_product/get_variations",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.init_tier_variation",
+    "path": "/api/v2/global_product/init_tier_variation",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.search_global_attribute_value_list",
+    "path": "/api/v2/global_product/search_global_attribute_value_list",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.set_sync_field",
+    "path": "/api/v2/global_product/set_sync_field",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.support_size_chart",
+    "path": "/api/v2/global_product/support_size_chart",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.update_global_item",
+    "path": "/api/v2/global_product/update_global_item",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.update_global_model",
+    "path": "/api/v2/global_product/update_global_model",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.update_local_adjustment_rate",
+    "path": "/api/v2/global_product/update_local_adjustment_rate",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.update_price",
+    "path": "/api/v2/global_product/update_price",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.update_size_chart",
+    "path": "/api/v2/global_product/update_size_chart",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.update_stock",
+    "path": "/api/v2/global_product/update_stock",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.global_product.update_tier_variation",
+    "path": "/api/v2/global_product/update_tier_variation",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.livestream.add_item_list",
+    "path": "/api/v2/livestream/add_item_list",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.apply_item_set",
+    "path": "/api/v2/livestream/apply_item_set",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.ban_user_comment",
+    "path": "/api/v2/livestream/ban_user_comment",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.create_session",
+    "path": "/api/v2/livestream/create_session",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.delete_item_list",
+    "path": "/api/v2/livestream/delete_item_list",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.delete_show_item",
+    "path": "/api/v2/livestream/delete_show_item",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.end_session",
+    "path": "/api/v2/livestream/end_session",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_item_count",
+    "path": "/api/v2/livestream/get_item_count",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_item_list",
+    "path": "/api/v2/livestream/get_item_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_item_set_item_list",
+    "path": "/api/v2/livestream/get_item_set_item_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_item_set_list",
+    "path": "/api/v2/livestream/get_item_set_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_latest_comment_list",
+    "path": "/api/v2/livestream/get_latest_comment_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_like_item_list",
+    "path": "/api/v2/livestream/get_like_item_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_recent_item_list",
+    "path": "/api/v2/livestream/get_recent_item_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_session_detail",
+    "path": "/api/v2/livestream/get_session_detail",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_session_item_metric",
+    "path": "/api/v2/livestream/get_session_item_metric",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_session_metric",
+    "path": "/api/v2/livestream/get_session_metric",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.get_show_item",
+    "path": "/api/v2/livestream/get_show_item",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.post_comment",
+    "path": "/api/v2/livestream/post_comment",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.start_session",
+    "path": "/api/v2/livestream/start_session",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.unban_user_comment",
+    "path": "/api/v2/livestream/unban_user_comment",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.update_item_list",
+    "path": "/api/v2/livestream/update_item_list",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.update_session",
+    "path": "/api/v2/livestream/update_session",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.update_show_item",
+    "path": "/api/v2/livestream/update_show_item",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.livestream.upload_image",
+    "path": "/api/v2/livestream/upload_image",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.logistics.batch_ship_order",
+    "path": "/api/v2/logistics/batch_ship_order",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.batch_update_tpf_warehouse_tracking_status",
+    "path": "/api/v2/logistics/batch_update_tpf_warehouse_tracking_status",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.check_polygon_update_status",
+    "path": "/api/v2/logistics/check_polygon_update_status",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.create_booking_shipping_document",
+    "path": "/api/v2/logistics/create_booking_shipping_document",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.create_shipping_document",
+    "path": "/api/v2/logistics/create_shipping_document",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.create_shipping_document_job",
+    "path": "/api/v2/logistics/create_shipping_document_job",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.delete_address",
+    "path": "/api/v2/logistics/delete_address",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.delete_special_operating_hour",
+    "path": "/api/v2/logistics/delete_special_operating_hour",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.download_booking_shipping_document",
+    "path": "/api/v2/logistics/download_booking_shipping_document",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.download_shipping_document",
+    "path": "/api/v2/logistics/download_shipping_document",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.download_shipping_document_job",
+    "path": "/api/v2/logistics/download_shipping_document_job",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.download_to_label",
+    "path": "/api/v2/logistics/download_to_label",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_address_list",
+    "path": "/api/v2/logistics/get_address_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_booking_shipping_document_data_info",
+    "path": "/api/v2/logistics/get_booking_shipping_document_data_info",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_booking_shipping_document_parameter",
+    "path": "/api/v2/logistics/get_booking_shipping_document_parameter",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_booking_shipping_document_result",
+    "path": "/api/v2/logistics/get_booking_shipping_document_result",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_booking_shipping_parameter",
+    "path": "/api/v2/logistics/get_booking_shipping_parameter",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_booking_tracking_info",
+    "path": "/api/v2/logistics/get_booking_tracking_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_booking_tracking_number",
+    "path": "/api/v2/logistics/get_booking_tracking_number",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_channel_list",
+    "path": "/api/v2/logistics/get_channel_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_mart_packaging_info",
+    "path": "/api/v2/logistics/get_mart_packaging_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_mass_shipping_parameter",
+    "path": "/api/v2/logistics/get_mass_shipping_parameter",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_mass_tracking_number",
+    "path": "/api/v2/logistics/get_mass_tracking_number",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_operating_hour_restrictions",
+    "path": "/api/v2/logistics/get_operating_hour_restrictions",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_operating_hours",
+    "path": "/api/v2/logistics/get_operating_hours",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_pause_status",
+    "path": "/api/v2/logistics/get_pause_status",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_shipping_document_data_info",
+    "path": "/api/v2/logistics/get_shipping_document_data_info",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_shipping_document_job_status",
+    "path": "/api/v2/logistics/get_shipping_document_job_status",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_shipping_document_parameter",
+    "path": "/api/v2/logistics/get_shipping_document_parameter",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_shipping_document_result",
+    "path": "/api/v2/logistics/get_shipping_document_result",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_shipping_parameter",
+    "path": "/api/v2/logistics/get_shipping_parameter",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_tracking_info",
+    "path": "/api/v2/logistics/get_tracking_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.get_tracking_number",
+    "path": "/api/v2/logistics/get_tracking_number",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.mass_ship_order",
+    "path": "/api/v2/logistics/mass_ship_order",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.set_address_config",
+    "path": "/api/v2/logistics/set_address_config",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.set_mart_packaging_info",
+    "path": "/api/v2/logistics/set_mart_packaging_info",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.set_pause_status",
+    "path": "/api/v2/logistics/set_pause_status",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.ship_booking",
+    "path": "/api/v2/logistics/ship_booking",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.ship_order",
+    "path": "/api/v2/logistics/ship_order",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.update_address",
+    "path": "/api/v2/logistics/update_address",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.update_channel",
+    "path": "/api/v2/logistics/update_channel",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.update_operating_hours",
+    "path": "/api/v2/logistics/update_operating_hours",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.update_self_collection_order_logistics",
+    "path": "/api/v2/logistics/update_self_collection_order_logistics",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.update_shipping_order",
+    "path": "/api/v2/logistics/update_shipping_order",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.update_tracking_status",
+    "path": "/api/v2/logistics/update_tracking_status",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.logistics.upload_serviceable_polygon",
+    "path": "/api/v2/logistics/upload_serviceable_polygon",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.media_space.cancel_video_upload",
+    "path": "/api/v2/media_space/cancel_video_upload",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.media_space.complete_video_upload",
+    "path": "/api/v2/media_space/complete_video_upload",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.media_space.get_video_upload_result",
+    "path": "/api/v2/media_space/get_video_upload_result",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.media_space.init_video_upload",
+    "path": "/api/v2/media_space/init_video_upload",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.media_space.upload_image",
+    "path": "/api/v2/media_space/upload_image",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.media_space.upload_video_part",
+    "path": "/api/v2/media_space/upload_video_part",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.media.cancel_video_upload",
+    "path": "/api/v2/media/cancel_video_upload",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.media.complete_video_upload",
+    "path": "/api/v2/media/complete_video_upload",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.media.get_video_upload_result",
+    "path": "/api/v2/media/get_video_upload_result",
+    "verb": "GET",
+    "type": "public"
+  },
+  {
+    "name": "v2.media.init_video_upload",
+    "path": "/api/v2/media/init_video_upload",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.media.upload_image",
+    "path": "/api/v2/media/upload_image",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.media.upload_video_part",
+    "path": "/api/v2/media/upload_video_part",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.merchant.get_merchant_info",
+    "path": "/api/v2/merchant/get_merchant_info",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.merchant.get_merchant_prepaid_account_list",
+    "path": "/api/v2/merchant/get_merchant_prepaid_account_list",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.merchant.get_merchant_warehouse_list",
+    "path": "/api/v2/merchant/get_merchant_warehouse_list",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.merchant.get_merchant_warehouse_location_list",
+    "path": "/api/v2/merchant/get_merchant_warehouse_location_list",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.merchant.get_shop_list_by_merchant",
+    "path": "/api/v2/merchant/get_shop_list_by_merchant",
+    "verb": "GET",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.merchant.get_warehouse_eligible_shop_list",
+    "path": "/api/v2/merchant/get_warehouse_eligible_shop_list",
+    "verb": "POST",
+    "type": "merchant"
+  },
+  {
+    "name": "v2.order.cancel_order",
+    "path": "/api/v2/order/cancel_order",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.download_fbs_invoices",
+    "path": "/api/v2/order/download_fbs_invoices",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.download_invoice_doc",
+    "path": "/api/v2/order/download_invoice_doc",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.generate_fbs_invoices",
+    "path": "/api/v2/order/generate_fbs_invoices",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_booking_detail",
+    "path": "/api/v2/order/get_booking_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_booking_list",
+    "path": "/api/v2/order/get_booking_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_buyer_invoice_info",
+    "path": "/api/v2/order/get_buyer_invoice_info",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_estimate_cancel_value",
+    "path": "/api/v2/order/get_estimate_cancel_value",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_fbs_invoices_result",
+    "path": "/api/v2/order/get_fbs_invoices_result",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_order_detail",
+    "path": "/api/v2/order/get_order_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_order_list",
+    "path": "/api/v2/order/get_order_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_package_detail",
+    "path": "/api/v2/order/get_package_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_pending_buyer_invoice_order_list",
+    "path": "/api/v2/order/get_pending_buyer_invoice_order_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_shipment_list",
+    "path": "/api/v2/order/get_shipment_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.get_warehouse_filter_config",
+    "path": "/api/v2/order/get_warehouse_filter_config",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.handle_buyer_cancellation",
+    "path": "/api/v2/order/handle_buyer_cancellation",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.handle_prescription_check",
+    "path": "/api/v2/order/handle_prescription_check",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.search_package_list",
+    "path": "/api/v2/order/search_package_list",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.set_note",
+    "path": "/api/v2/order/set_note",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.split_order",
+    "path": "/api/v2/order/split_order",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.unsplit_order",
+    "path": "/api/v2/order/unsplit_order",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.order.upload_invoice_doc",
+    "path": "/api/v2/order/upload_invoice_doc",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.generate_income_report",
+    "path": "/api/v2/payment/generate_income_report",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.generate_income_statement",
+    "path": "/api/v2/payment/generate_income_statement",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_billing_transaction_info",
+    "path": "/api/v2/payment/get_billing_transaction_info",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_escrow_detail",
+    "path": "/api/v2/payment/get_escrow_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_escrow_detail_batch",
+    "path": "/api/v2/payment/get_escrow_detail_batch",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_escrow_list",
+    "path": "/api/v2/payment/get_escrow_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_income_detail",
+    "path": "/api/v2/payment/get_income_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_income_overview",
+    "path": "/api/v2/payment/get_income_overview",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_income_report",
+    "path": "/api/v2/payment/get_income_report",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_income_statement",
+    "path": "/api/v2/payment/get_income_statement",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_item_installment_status",
+    "path": "/api/v2/payment/get_item_installment_status",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_payment_method_list",
+    "path": "/api/v2/payment/get_payment_method_list",
+    "verb": "GET",
+    "type": "public"
+  },
+  {
+    "name": "v2.payment.get_payout_detail",
+    "path": "/api/v2/payment/get_payout_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_payout_info",
+    "path": "/api/v2/payment/get_payout_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_shop_installment_status",
+    "path": "/api/v2/payment/get_shop_installment_status",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.get_wallet_transaction_list",
+    "path": "/api/v2/payment/get_wallet_transaction_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.set_item_installment_status",
+    "path": "/api/v2/payment/set_item_installment_status",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.payment.set_shop_installment_status",
+    "path": "/api/v2/payment/set_shop_installment_status",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.principal.get_clip_video_performance",
+    "path": "/api/v2/principal/get_clip_video_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_content_affiliate_performance",
+    "path": "/api/v2/principal/get_content_affiliate_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_principal_affiliate_performance",
+    "path": "/api/v2/principal/get_principal_affiliate_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_principal_livestream_performance",
+    "path": "/api/v2/principal/get_principal_livestream_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_principal_sales_performance_detail",
+    "path": "/api/v2/principal/get_principal_sales_performance_detail",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_principal_video_performance",
+    "path": "/api/v2/principal/get_principal_video_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_session_livestream_performance",
+    "path": "/api/v2/principal/get_session_livestream_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_shop_affiliate_performance",
+    "path": "/api/v2/principal/get_shop_affiliate_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_shop_livestream_performance",
+    "path": "/api/v2/principal/get_shop_livestream_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_shop_sales_performance_detail",
+    "path": "/api/v2/principal/get_shop_sales_performance_detail",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.principal.get_shop_video_performance",
+    "path": "/api/v2/principal/get_shop_video_performance",
+    "verb": "POST",
+    "type": "principal"
+  },
+  {
+    "name": "v2.product.add_item",
+    "path": "/api/v2/product/add_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.add_kit_item",
+    "path": "/api/v2/product/add_kit_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.add_model",
+    "path": "/api/v2/product/add_model",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.batch_add_item",
+    "path": "/api/v2/product/batch_add_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.batch_publish_item_to_outlet_shop",
+    "path": "/api/v2/product/batch_publish_item_to_outlet_shop",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.batch_update_outlet_price",
+    "path": "/api/v2/product/batch_update_outlet_price",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.batch_update_outlet_stock",
+    "path": "/api/v2/product/batch_update_outlet_stock",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.boost_item",
+    "path": "/api/v2/product/boost_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.category_recommend",
+    "path": "/api/v2/product/category_recommend",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.delete_item",
+    "path": "/api/v2/product/delete_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.delete_model",
+    "path": "/api/v2/product/delete_model",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.generate_kit_image",
+    "path": "/api/v2/product/generate_kit_image",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_aitem_by_pitem_id",
+    "path": "/api/v2/product/get_aitem_by_pitem_id",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_all_vehicle_list",
+    "path": "/api/v2/product/get_all_vehicle_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_attribute_tree",
+    "path": "/api/v2/product/get_attribute_tree",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_batch_task_result",
+    "path": "/api/v2/product/get_batch_task_result",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_boosted_list",
+    "path": "/api/v2/product/get_boosted_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_brand_list",
+    "path": "/api/v2/product/get_brand_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_category",
+    "path": "/api/v2/product/get_category",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_comment",
+    "path": "/api/v2/product/get_comment",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_direct_item_list",
+    "path": "/api/v2/product/get_direct_item_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_direct_shop_recommended_price",
+    "path": "/api/v2/product/get_direct_shop_recommended_price",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_item_base_info",
+    "path": "/api/v2/product/get_item_base_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_item_content_diagnosis_result",
+    "path": "/api/v2/product/get_item_content_diagnosis_result",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_item_extra_info",
+    "path": "/api/v2/product/get_item_extra_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_item_limit",
+    "path": "/api/v2/product/get_item_limit",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_item_list",
+    "path": "/api/v2/product/get_item_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_item_list_by_content_diagnosis",
+    "path": "/api/v2/product/get_item_list_by_content_diagnosis",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_item_promotion",
+    "path": "/api/v2/product/get_item_promotion",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_item_violation_info",
+    "path": "/api/v2/product/get_item_violation_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_kit_item_info",
+    "path": "/api/v2/product/get_kit_item_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_kit_item_limit",
+    "path": "/api/v2/product/get_kit_item_limit",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_main_item_list",
+    "path": "/api/v2/product/get_main_item_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_mart_item_by_outlet_item_id",
+    "path": "/api/v2/product/get_mart_item_by_outlet_item_id",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_mart_item_mapping_by_id",
+    "path": "/api/v2/product/get_mart_item_mapping_by_id",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_model_list",
+    "path": "/api/v2/product/get_model_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_product_certification_rule",
+    "path": "/api/v2/product/get_product_certification_rule",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_recommend_attribute",
+    "path": "/api/v2/product/get_recommend_attribute",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_size_chart_detail",
+    "path": "/api/v2/product/get_size_chart_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_size_chart_list ",
+    "path": "/api/v2/product/get_size_chart_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_ssp_detail",
+    "path": "/api/v2/product/get_ssp_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_ssp_recommendation",
+    "path": "/api/v2/product/get_ssp_recommendation",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_variations",
+    "path": "/api/v2/product/get_variation_tree",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_vehicle_list_by_compatibility_detail",
+    "path": "/api/v2/product/get_vehicle_list_by_compatibility_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.get_weight_recommendation",
+    "path": "/api/v2/product/get_weight_recommendation",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.init_tier_variation",
+    "path": "/api/v2/product/init_tier_variation",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.link_item_to_ssp",
+    "path": "/api/v2/product/link_item_to_ssp",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": " v2.product.publish_item_to_outlet_shop",
+    "path": "/api/v2/product/publish_item_to_outlet_shop",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.register_brand",
+    "path": "/api/v2/product/register_brand",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.reply_comment",
+    "path": "/api/v2/product/reply_comment",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.search_attribute_value_list",
+    "path": "/api/v2/product/search_attribute_value_list",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.search_item",
+    "path": "/api/v2/product/search_item",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.search_ssp_list",
+    "path": "/api/v2/product/search_ssp_list",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.search_unpackaged_model_list",
+    "path": "/api/v2/product/search_unpackaged_model_list",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.unlink_item_from_ssp",
+    "path": "/api/v2/product/unlink_item_from_ssp",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.unlist_item",
+    "path": "/api/v2/product/unlist_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.update_item",
+    "path": "/api/v2/product/update_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.update_kit_item",
+    "path": "/api/v2/product/update_kit_item",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.update_model",
+    "path": "/api/v2/product/update_model",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.update_price",
+    "path": "/api/v2/product/update_price",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.update_sip_item_price",
+    "path": "/api/v2/product/update_sip_item_price",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.update_stock",
+    "path": "/api/v2/product/update_stock",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.product.update_tier_variation",
+    "path": "/api/v2/product/update_tier_variation",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.public.get_merchants_by_partner",
+    "path": "/api/v2/public/get_merchants_by_partner",
+    "verb": "GET",
+    "type": "public"
+  },
+  {
+    "name": "v2.public.get_shopee_ip_ranges",
+    "path": "/api/v2/public/get_shopee_ip_ranges",
+    "verb": "GET",
+    "type": "public"
+  },
+  {
+    "name": "v2.public.get_shops_by_partner",
+    "path": "/api/v2/public/get_shops_by_partner",
+    "verb": "GET",
+    "type": "public"
+  },
+  {
+    "name": "v2.public.get_token_by_resend_code",
+    "path": "/api/v2/public/get_token_by_resend_code",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.push.confirm_consumed_lost_push_message",
+    "path": "/api/v2/push/confirm_consumed_lost_push_message",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.push.get_app_push_config",
+    "path": "/api/v2/push/get_app_push_config",
+    "verb": "GET",
+    "type": "public"
+  },
+  {
+    "name": "v2.push.get_lost_push_message",
+    "path": "/api/v2/push/get_lost_push_message",
+    "verb": "GET",
+    "type": "public"
+  },
+  {
+    "name": "v2.push.set_app_push_config",
+    "path": "/api/v2/push/set_app_push_config",
+    "verb": "POST",
+    "type": "public"
+  },
+  {
+    "name": "v2.returns.accept_offer",
+    "path": "/api/v2/returns/accept_offer",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.cancel_dispute",
+    "path": "/api/v2/returns/cancel_dispute",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.confirm",
+    "path": "/api/v2/returns/confirm",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.convert_image",
+    "path": "/api/v2/returns/convert_image",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.dispute",
+    "path": "/api/v2/returns/dispute",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.get_available_solutions",
+    "path": "/api/v2/returns/get_available_solutions",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.get_return_detail",
+    "path": "/api/v2/returns/get_return_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.get_return_dispute_reason",
+    "path": "/api/v2/returns/get_return_dispute_reason",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.get_return_list",
+    "path": "/api/v2/returns/get_return_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.get_reverse_tracking_info",
+    "path": "/api/v2/returns/get_reverse_tracking_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.get_shipping_carrier",
+    "path": "/api/v2/returns/get_shipping_carrier",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.offer",
+    "path": "/api/v2/returns/offer",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.query_proof",
+    "path": "/api/v2/returns/query_proof",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.upload_proof",
+    "path": "/api/v2/returns/upload_proof",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.returns.upload_shipping_proof",
+    "path": "/api/v2/returns/upload_shipping_proof",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.sbs.get_bound_whs_info",
+    "path": "/api/v2/sbs/get_bound_whs_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.sbs.get_current_inventory",
+    "path": "/api/v2/sbs/get_current_inventory",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.sbs.get_expiry_report",
+    "path": "/api/v2/sbs/get_expiry_report",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.sbs.get_fulfillment_mapping_inventory_list",
+    "path": "/api/v2/sbs/get_fulfillment_mapping_inventory_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.sbs.get_stock_aging",
+    "path": "/api/v2/sbs/get_stock_aging",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.sbs.get_stock_movement",
+    "path": "/api/v2/sbs/get_stock_movement",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_category.add_item_list",
+    "path": "/api/v2/shop_category/add_item_list",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_category.add_shop_category",
+    "path": "/api/v2/shop_category/add_shop_category",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_category.delete_item_list",
+    "path": "/api/v2/shop_category/delete_item_list",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_category.delete_shop_category",
+    "path": "/api/v2/shop_category/delete_shop_category",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_category.get_item_list",
+    "path": "/api/v2/shop_category/get_item_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_category.get_shop_category_list",
+    "path": "/api/v2/shop_category/get_shop_category_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_category.update_shop_category",
+    "path": "/api/v2/shop_category/update_shop_category",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.add_shop_flash_sale_items",
+    "path": "/api/v2/shop_flash_sale/add_shop_flash_sale_items",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.create_shop_flash_sale",
+    "path": "/api/v2/shop_flash_sale/create_shop_flash_sale",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.delete_shop_flash_sale",
+    "path": "/api/v2/shop_flash_sale/delete_shop_flash_sale",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.delete_shop_flash_sale_items",
+    "path": "/api/v2/shop_flash_sale/delete_shop_flash_sale_items",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.get_item_criteria",
+    "path": "/api/v2/shop_flash_sale/get_item_criteria",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.get_shop_flash_sale",
+    "path": "/api/v2/shop_flash_sale/get_shop_flash_sale",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.get_shop_flash_sale_items",
+    "path": "/api/v2/shop_flash_sale/get_shop_flash_sale_items",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.get_shop_flash_sale_list",
+    "path": "/api/v2/shop_flash_sale/get_shop_flash_sale_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.get_time_slot_id",
+    "path": "/api/v2/shop_flash_sale/get_time_slot_id",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.update_shop_flash_sale",
+    "path": "/api/v2/shop_flash_sale/update_shop_flash_sale",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop_flash_sale.update_shop_flash_sale_items",
+    "path": "/api/v2/shop_flash_sale/update_shop_flash_sale_items",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.get_authorised_reseller_brand",
+    "path": "/api/v2/shop/get_authorised_reseller_brand",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.get_br_shop_onboarding_info",
+    "path": "/api/v2/shop/get_br_shop_onboarding_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.get_profile",
+    "path": "/api/v2/shop/get_profile",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.get_shop_holiday_mode",
+    "path": "/api/v2/shop/get_shop_holiday_mode",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.get_shop_info",
+    "path": "/api/v2/shop/get_shop_info",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.get_shop_notification",
+    "path": "/api/v2/shop/get_shop_notification",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.get_warehouse_detail",
+    "path": "/api/v2/shop/get_warehouse_detail",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.set_shop_holiday_mode",
+    "path": "/api/v2/shop/set_shop_holiday_mode",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.shop.update_profile",
+    "path": "/api/v2/shop/update_profile",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.top_picks.add_top_picks",
+    "path": "/api/v2/top_picks/add_top_picks",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.top_picks.delete_top_picks",
+    "path": "/api/v2/top_picks/delete_top_picks",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.top_picks.get_top_picks_list",
+    "path": "/api/v2/top_picks/get_top_picks_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.top_picks.update_top_picks",
+    "path": "/api/v2/top_picks/update_top_picks",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.video.delete_video",
+    "path": "/api/v2/video/delete_video",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.edit_video_info",
+    "path": "/api/v2/video/edit_video_info",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_cover_list",
+    "path": "/api/v2/video/get_cover_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_metric_trend",
+    "path": "/api/v2/video/get_metric_trend",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_overview_performance",
+    "path": "/api/v2/video/get_overview_performance",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_prodcut_performance_list",
+    "path": "/api/v2/video/get_prodcut_performance_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_user_demographics",
+    "path": "/api/v2/video/get_user_demographics",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_video_detail",
+    "path": "/api/v2/video/get_video_detail",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_video_detail_audience_distribution",
+    "path": "/api/v2/video/get_video_detail_audience_distribution",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_video_detail_metric_trend",
+    "path": "/api/v2/video/get_video_detail_metric_trend",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_video_detail_performance",
+    "path": "/api/v2/video/get_video_detail_performance",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_video_detail_product_performance",
+    "path": "/api/v2/video/get_video_detail_product_performance",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_video_list",
+    "path": "/api/v2/video/get_video_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.get_video_performance_list",
+    "path": "/api/v2/video/get_video_performance_list",
+    "verb": "GET",
+    "type": "user"
+  },
+  {
+    "name": "v2.video.post_video",
+    "path": "/api/v2/video/post_video",
+    "verb": "POST",
+    "type": "user"
+  },
+  {
+    "name": "v2.voucher.add_voucher",
+    "path": "/api/v2/voucher/add_voucher",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.voucher.delete_voucher",
+    "path": "/api/v2/voucher/delete_voucher",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.voucher.end_voucher",
+    "path": "/api/v2/voucher/end_voucher",
+    "verb": "POST",
+    "type": "shop"
+  },
+  {
+    "name": "v2.voucher.get_voucher",
+    "path": "/api/v2/voucher/get_voucher",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.voucher.get_voucher_list",
+    "path": "/api/v2/voucher/get_voucher_list",
+    "verb": "GET",
+    "type": "shop"
+  },
+  {
+    "name": "v2.voucher.update_voucher",
+    "path": "/api/v2/voucher/update_voucher",
+    "verb": "POST",
+    "type": "shop"
+  }
+]

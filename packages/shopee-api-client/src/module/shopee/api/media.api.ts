@@ -38,7 +38,7 @@ export async function uploadImage(
 
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UPLOAD_IMAGE, config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.UPLOAD_IMAGE);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPLOAD_IMAGE}${commonParam}`;
 
   const result = await ShopeeHelper.httpPostMultipart<ShopeeResponseUploadImage>(
@@ -71,7 +71,7 @@ export async function initVideoUpload(
 ): Promise<ShopeeResponseInitVideoUpload> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.INIT_VIDEO_UPLOAD, config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.INIT_VIDEO_UPLOAD);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.INIT_VIDEO_UPLOAD}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -98,7 +98,7 @@ export async function uploadVideoPart(
 ): Promise<ShopeeResponseUploadVideoPart> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UPLOAD_VIDEO_PART, config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.UPLOAD_VIDEO_PART);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPLOAD_VIDEO_PART}${commonParam}`;
 
   const result = await ShopeeHelper.httpPostMultipart<ShopeeResponseUploadVideoPart>(
@@ -133,7 +133,7 @@ export async function completeVideoUpload(
 ): Promise<ShopeeResponseCompleteVideoUpload> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.COMPLETE_VIDEO_UPLOAD, config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.COMPLETE_VIDEO_UPLOAD);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.COMPLETE_VIDEO_UPLOAD}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -162,7 +162,7 @@ export async function getVideoUploadResult(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_VIDEO_UPLOAD_RESULT, config, timestamp);
   const additionalParams: Record<string, string> = { video_upload_id: body.video_upload_id };
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_VIDEO_UPLOAD_RESULT);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_VIDEO_UPLOAD_RESULT}${commonParam}`;
 
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetVideoUploadResult>(url, config);
@@ -189,7 +189,7 @@ export async function cancelVideoUpload(
 ): Promise<ShopeeResponseCancelVideoUpload> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.CANCEL_VIDEO_UPLOAD, config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.CANCEL_VIDEO_UPLOAD);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.CANCEL_VIDEO_UPLOAD}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 

@@ -50,3 +50,24 @@ export interface DgDigitalServiceCdkCodeReceivedRequest {
   valid_end?: string;
   terms_use?: string;
 }
+
+export interface DgDigitalTestInstallServiceCallBackRequest {
+  orderNo: string;
+  thirdOrderNo: string;
+  type: string;
+  servicePrice?: string;
+  serviceDate?: string;
+  jobStatus: string;
+  jobReason?: string;
+  extendInfo?: string;
+}
+
+export interface DgDigitalInsuranceTestNotificationCopyRequest {
+  orderNo: string;
+  thirdOrderNo: string;
+  premium: string;
+  ePolicyLink: string;
+  policyNo: string;
+  underwritingStatus: string;
+  underwritingReason?: string;
+}

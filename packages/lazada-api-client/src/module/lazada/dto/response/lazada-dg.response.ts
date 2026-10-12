@@ -40,3 +40,9 @@ export interface DgDigitalServiceCdkCodeReceived {
 }
 
 export type DgDigitalServiceCdkCodeReceivedResponse = DgDigitalServiceCdkCodeReceived;
+
+/** Response of `/digital/test/install/servicecallback`: same shape as `installServiceCallBack()`. */
+export type DgDigitalTestInstallServiceCallBackResponse = DgInstallServiceCallBackResponse;
+
+/** Response of `/digital/insurance/test/notificationcopy`: same shape as `inuranceNotication()`. */
+export type DgDigitalInsuranceTestNotificationCopyResponse = DgInuranceNoticationResponse;

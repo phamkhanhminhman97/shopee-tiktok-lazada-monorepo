@@ -38,7 +38,7 @@ import {
 export async function getChannelList(config: ShopeeConfig): Promise<ShopeeResponseLogisticChannelList> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.CHANNEL_LIST, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.CHANNEL_LIST);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.CHANNEL_LIST}${commonParam}`;
   const res = await ShopeeHelper.httpGet<ShopeeResponseLogisticChannelList>(url, config);
@@ -63,7 +63,7 @@ export async function shippingParameter(orderNumber: string, config: ShopeeConfi
   const additionalParams = {
     order_sn: orderNumber,
   };
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.SHIPPING_PARAMS);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.SHIPPING_PARAMS}${commonParam}`;
 
   const res = await ShopeeHelper.httpGet<ShopeeResponseShippingParameter>(url, config);
@@ -90,7 +90,7 @@ export async function shipOrder(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.SHIP_ORDER, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.SHIP_ORDER);
 
   const body: ShopeeRequestShipOrder = {
     order_sn: orderNumber,
@@ -138,7 +138,7 @@ export async function getTrackingNumber(
     additionalParams.response_optional_fields = responseOptionalFields;
   }
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.TRACKING_NUMBER);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.TRACKING_NUMBER}${commonParam}`;
 
   const res = await ShopeeHelper.httpGet<ShopeeResponseTrackingNumber>(url, config);
@@ -163,7 +163,7 @@ export async function createShippingDocument(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.CREATE_SHIPPING_DOCUMENTS, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.CREATE_SHIPPING_DOCUMENTS);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.CREATE_SHIPPING_DOCUMENTS}${commonParam}`;
 
   const res = await ShopeeHelper.httpPost<ShopeeResponseCreateShippingDocument>(url, body, config);
@@ -188,7 +188,7 @@ export async function getShippingDocumentResult(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_SHIPPING_DOCUMENTS, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.GET_SHIPPING_DOCUMENTS);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHIPPING_DOCUMENTS}${commonParam}`;
 
   const res = await ShopeeHelper.httpPost<ShopeeResponseGetShippingDocumentResult>(url, body, config);
@@ -213,7 +213,7 @@ export async function downloadShippingDocument(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.DOWNLOAD_SHIPPING_DOCUMENT, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.DOWNLOAD_SHIPPING_DOCUMENT);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.DOWNLOAD_SHIPPING_DOCUMENT}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -246,7 +246,7 @@ export async function getTrackingInfo(
     additionalParams.package_number = packageNumber;
   }
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.TRACKING_INFO);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.TRACKING_INFO}${commonParam}`;
 
   const res = await ShopeeHelper.httpGet<ShopeeResponseTrackingInfo>(url, config);
@@ -271,7 +271,7 @@ export async function massShipOrder(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.MASS_SHIP_ORDER, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.MASS_SHIP_ORDER);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.MASS_SHIP_ORDER}${commonParam}`;
 
   const res = await ShopeeHelper.httpPost<ShopeeResponseMassShipOrder>(url, body, config);
@@ -296,7 +296,7 @@ export async function getMassShippingParameter(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.MASS_SHIPPING_PARAMS, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.MASS_SHIPPING_PARAMS);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.MASS_SHIPPING_PARAMS}${commonParam}`;
 
   const res = await ShopeeHelper.httpPost<ShopeeResponseGetMassShippingParameter>(url, body, config);
@@ -321,7 +321,7 @@ export async function updateShippingOrder(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UPDATE_SHIPPING_ORDER, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.UPDATE_SHIPPING_ORDER);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPDATE_SHIPPING_ORDER}${commonParam}`;
 
   const res = await ShopeeHelper.httpPost<ShopeeResponseUpdateShippingOrder>(url, body, config);
@@ -346,7 +346,7 @@ export async function getMassTrackingNumber(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.MASS_TRACKING_NUMBER, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.MASS_TRACKING_NUMBER);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.MASS_TRACKING_NUMBER}${commonParam}`;
 
   const res = await ShopeeHelper.httpPost<ShopeeResponseGetMassTrackingNumber>(url, body, config);
@@ -371,7 +371,7 @@ export async function getShippingDocumentParameter(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_SHIPPING_DOCUMENT_PARAMETER, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.GET_SHIPPING_DOCUMENT_PARAMETER);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHIPPING_DOCUMENT_PARAMETER}${commonParam}`;
 
   const res = await ShopeeHelper.httpPost<ShopeeResponseGetShippingDocumentParameter>(url, body, config);
@@ -391,7 +391,7 @@ export async function getShippingDocumentParameter(
 export async function getAddressList(config: ShopeeConfig): Promise<ShopeeResponseGetAddressList> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.ADDRESS_LIST, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.ADDRESS_LIST);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ADDRESS_LIST}${commonParam}`;
   const res = await ShopeeHelper.httpGet<ShopeeResponseGetAddressList>(url, config);
@@ -884,7 +884,7 @@ export async function updateTrackingStatus(params: ShopeeUpdateTrackingStatusReq
 export async function uploadServiceablePolygon(params: ShopeeUploadServiceablePolygonRequest, config: ShopeeConfig): Promise<ShopeeUploadServiceablePolygonResponse> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest('/logistics/upload_serviceable_polygon', config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, '/logistics/upload_serviceable_polygon');
   const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/logistics/upload_serviceable_polygon${commonParam}`;
 
   const result = await ShopeeHelper.httpPostMultipart<ShopeeUploadServiceablePolygonResponse>(url, { file: params.file }, config);

@@ -109,11 +109,12 @@ export async function activeProduct(productIds: string[], config: TiktokConfig):
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
 
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.ACTIVE_PRODUCT, commonParam, config);
-
   const body: TiktokRequestActiveProduct = {
     product_ids: productIds,
   };
+
+  // The JSON body MUST be part of the HMAC signature (only multipart/form-data bodies are excluded).
+  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.ACTIVE_PRODUCT, commonParam, config, body);
 
   const headers = TiktokHelper.getHeaders(config);
 
@@ -134,11 +135,12 @@ export async function deactiveProduct(productIds: string[], config: TiktokConfig
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
 
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.DEACTIVE_PRODUCT, commonParam, config);
-
   const body: TiktokRequestDeactiveProduct = {
     product_ids: productIds,
   };
+
+  // The JSON body MUST be part of the HMAC signature (only multipart/form-data bodies are excluded).
+  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.DEACTIVE_PRODUCT, commonParam, config, body);
 
   const headers = TiktokHelper.getHeaders(config);
 
@@ -172,7 +174,8 @@ export async function createProduct(
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
   const body = payload;
-  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.CREATE_PRODUCT, commonParam, config);
+  // The JSON body MUST be part of the HMAC signature (only multipart/form-data bodies are excluded).
+  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.CREATE_PRODUCT, commonParam, config, body);
 
   const headers = TiktokHelper.getHeaders(config);
   return TiktokHelper.httpPost(url, body, headers);

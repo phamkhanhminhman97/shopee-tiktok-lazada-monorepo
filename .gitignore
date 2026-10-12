@@ -5,6 +5,7 @@ dist/
 .env
 .env.*
 .git-backups/
+.cache/
 packages/*/node_modules/
 packages/*/dist/
 /test/

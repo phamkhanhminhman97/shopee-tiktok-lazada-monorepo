@@ -1,3 +1,4 @@
+import { TiktokReturnRefundOfficial } from './return-refund-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   approveCancellation,
@@ -44,8 +45,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.returnRefund.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokReturnRefund {
-  constructor(private config: TiktokConfig) {}
+export class TiktokReturnRefund extends TiktokReturnRefundOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async getAftersaleEligibility(params: TiktokGetAftersaleEligibilityParams): Promise<TiktokResponseCommon<TiktokGetAftersaleEligibilityResponse>> {
     return await getAftersaleEligibility(params, this.config);

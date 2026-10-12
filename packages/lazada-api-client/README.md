@@ -8,7 +8,12 @@
 
 TypeScript API client for **Lazada Open Platform**.
 
-A Node.js / TypeScript package for integrating with Lazada: seller authorization, token management, **14 Order APIs**, Product APIs, and Payment Options.
+A Node.js / TypeScript package for integrating with Lazada: seller authorization, token management, and **381 typed API methods across 34 domains** that cover **all 378 APIs** of the official Lazada Open Platform reference (Orders, Products, Finance, Logistics, FBL, Returns & Refunds, Vouchers, Messaging, Sponsored Solutions and more), plus Payment Options.
+
+- Typed request and response models for every method, no `any`.
+- Requests are signed with the Lazada HMAC-SHA256 scheme and routed to the regional host chosen by `countryCode`.
+- Automatic retry for idempotent GET requests, per-request timeouts, and a structured `LazadaApiError`.
+- A push-message signature verifier for incoming Lazada callbacks.
 
 > Unofficial package. This project is not affiliated with Lazada.
 
@@ -67,6 +72,8 @@ const lazada = new LazadaModule({
 | `refreshToken` | ⚠️ Required for token refresh | Refresh token |
 | `expiresIn` | ❌ No | Remaining access token lifetime (seconds) |
 | `refreshExpiresIn` | ❌ No | Remaining refresh token lifetime (seconds) |
+| `timeoutMs` | ❌ No | Per-request timeout in milliseconds for the domain namespaces (default `30000`) |
+| `maxRetries` | ❌ No | Automatic retries for GET requests on transient failures (default `2`, `0` disables) |
 
 ---
 
@@ -394,6 +401,83 @@ const countries = LazadaModule.getCountriesByPaymentMethod("COD");
 | `getCategorySuggestion` | Get category suggestion (not on class, import directly) |
 | `getCategoryAttributes` | Get category attributes (not on class, import directly) |
 | `getBrands` | Get brand list |
+
+---
+
+## Full API coverage: domain namespaces
+
+Besides the flat methods above, every Lazada domain is available as a typed namespace on the same `LazadaModule` instance:
+
+```ts
+const payout = await lazada.finance.getPayoutStatus({ created_after: "2025-01-01" });
+const warehouses = await lazada.seller.getWarehouseBySellerId();
+await lazada.fbl.getShipperInfo();
+```
+
+34 namespaces, 381 methods:
+
+`choiceCustomized`, `content`, `crossBoarderProduct`, `eTickets`, `earlyBirdPrice`, `fbl`, `finance`, `firstmileBigbagOnlyForCn`, `flexicombo`, `freeShipping`, `fulfillment`, `instantMessaging`, `dg`, `ownLogistics`, `walletCorporateTopUp`, `lazlike`, `lazlive`, `lazpay`, `logistics`, `logisticsStation`, `mediaCenter`, `membership`, `order`, `product`, `productReview`, `redmart`, `returnAndRefund`, `seller`, `sellerVoucher`, `serviceMarket`, `sponsoredSolutions`, `storeDecoration`, `storeFlashSale`, `system`.
+
+The full method, HTTP verb and path list is in the generated [API reference](./docs/API.md). Several APIs have a newer `V2` variant next to the original (for example `earlyBirdPrice.createEarlyBirdActivityV2`); the method without the suffix calls the older version.
+
+> Three flat methods call older endpoints that the current official reference no longer lists and are marked `@deprecated`: use `lazada.fulfillment.printAWB()`, `lazada.fulfillment.confirmDeliveryForDBS()` and `lazada.fulfillment.failedDeliveryForDBS()` (their parameters differ: they take `packages: [{ package_id }]`).
+
+> The namespaces are separate from the flat methods, so `lazada.getOrders()` and `lazada.order.getOrders()` can differ in parameters and response shape. Existing flat methods keep working unchanged.
+
+## Regions
+
+Namespace requests go to the regional host for `countryCode` (`sg`, `vn`, `ph`, `my`, `th`, `id`). When `countryCode` is omitted or not one of these (for example `cb`), the client uses `vn`, as in earlier releases, so always set `countryCode` for non-Vietnam shops. OAuth token endpoints always use `auth.lazada.com`.
+
+## Error handling
+
+Domain-namespace methods throw `LazadaApiError` when Lazada returns a non-`"0"` `code` or the request fails (network error, timeout, non-2xx status):
+
+```ts
+import { LazadaApiError } from "lazada-api-client";
+
+try {
+  await lazada.finance.getPayoutStatus({ created_after: "2025-01-01" });
+} catch (error) {
+  if (error instanceof LazadaApiError) {
+    console.error(error.code, error.type, error.message, error.requestId, error.status);
+  }
+}
+```
+
+> The older flat methods (`getOrders`, `getProductItem`, ...) log the error and resolve to `undefined` on failure. Check their result before use.
+
+## Timeouts and retries
+
+Domain-namespace requests time out after 30 seconds (`timeoutMs`). GET requests are retried up to `maxRetries` times (default 2) on network errors, HTTP 408, 429 and 5xx, with exponential backoff that honors `Retry-After`. POST requests are never retried automatically, because Lazada mutations are not guaranteed to be idempotent.
+
+```ts
+const lazada = new LazadaModule({ ...config, timeoutMs: 10_000, maxRetries: 0 });
+```
+
+## Verifying push messages
+
+Lazada signs push messages sent to your callback URL. Verify the `Authorization` header against the **raw** request body before you trust the payload:
+
+```ts
+import { verifyLazadaPushSignature, parseLazadaPushPayload } from "lazada-api-client";
+
+app.post("/webhooks/lazada", express.raw({ type: "application/json" }), (req, res) => {
+  const valid = verifyLazadaPushSignature({
+    appKey: process.env.LAZADA_APP_KEY!,
+    appSecret: process.env.LAZADA_APP_SECRET!,
+    rawBody: req.body, // Buffer, exactly as received
+    authorization: req.header("authorization") ?? "",
+  });
+  if (!valid) return res.sendStatus(401);
+
+  const message = parseLazadaPushPayload(req.body);
+  res.sendStatus(200);
+});
+```
+
+The signature is `hex(HMAC_SHA256(appSecret, appKey + rawBody))`, compared in constant time. Do not re-serialize a parsed body: whitespace and key order change the signature.
+
+> This is the scheme in Lazada's official [Push Mechanism guide](https://developer.alibaba.com/docs/doc.htm?treeId=499&articleId=120168&docType=1): `Authorization = HEX(HMAC-SHA256(Base, app_secret))` with `Base = app_key + message body`. The guide's own example elides the message body, so it cannot be used as a test vector; the tests here use an independent implementation of the same construction.
 
 ---
 

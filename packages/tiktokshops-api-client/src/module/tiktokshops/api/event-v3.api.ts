@@ -37,7 +37,7 @@ export async function updateShopWebhook(body: TiktokUpdateShopWebhookBody, confi
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokApiResponse>>(
     '/event/202309/webhooks',
     'PUT',
-    {},
+    { body: body },
     config,
     'updateShopWebhook',
   );
@@ -54,7 +54,7 @@ export async function deleteShopWebhook(body: TiktokDeleteShopWebhookBody, confi
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokApiResponse>>(
     '/event/202309/webhooks',
     'DELETE',
-    {},
+    { body: body },
     config,
     'deleteShopWebhook',
   );

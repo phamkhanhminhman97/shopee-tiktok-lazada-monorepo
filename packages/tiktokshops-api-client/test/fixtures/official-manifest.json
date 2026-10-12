@@ -1,0 +1,1814 @@
+{
+  "affiliateCreator.addShowcaseProducts": {
+    "slug": "add-showcase-products-202405",
+    "verb": "POST",
+    "path": "/affiliate_creator/202405/showcases/products/add",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.creatorGenerateGeneralLink": {
+    "slug": "creator-generate-general-link-202505",
+    "verb": "POST",
+    "path": "/affiliate_creator/202505/affiliate_sharing_links/general_publishers/generate_batch",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.creatorGeneratePublisherLink": {
+    "slug": "creator-generate-publisher-link-202504",
+    "verb": "POST",
+    "path": "/affiliate_creator/202504/affiliate_sharing_links/publisher/{publisher_id}/generate_batch",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.creatorSearchAffiliateTraceOrders": {
+    "slug": "creator-search-affiliate-trace-orders-202505",
+    "verb": "POST",
+    "path": "/affiliate_creator/202505/orders/trace/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.creatorSearchOpenCollaborationProduct": {
+    "slug": "creator-search-open-collaboration-product-202405",
+    "verb": "POST",
+    "path": "/affiliate_creator/202405/open_collaborations/products/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.creatorSearchSampleApplicationFulfillments": {
+    "slug": "creator-search-sample-application-fulfillments-202409",
+    "verb": "POST",
+    "path": "/affiliate_creator/202409/sample_applications/fulfillments/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.getCreatorApplicableSampleLabel": {
+    "slug": "get-creator-applicable-sample-label-202412",
+    "verb": "GET",
+    "path": "/affiliate_creator/202412/samples/labels",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.getCreatorProfile": {
+    "slug": "get-creator-profile-202508",
+    "verb": "GET",
+    "path": "/affiliate_creator/202508/profiles",
+    "sections": [],
+    "multipart": false
+  },
+  "affiliateCreator.getCreatorSampleApplicationDetail": {
+    "slug": "get-creator-sample-application-detail-202412",
+    "verb": "POST",
+    "path": "/affiliate_creator/202412/sample_applications/single_query",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.getOpenCollaborationProductListByProductIds": {
+    "slug": "get-open-collaboration-product-list-by-product-ids-202509",
+    "verb": "POST",
+    "path": "/affiliate_creator/202509/open_collaborations/products",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.getShoppableVideoPrecheckResult": {
+    "slug": "get-shoppable-video-precheck-result-202601",
+    "verb": "GET",
+    "path": "/affiliate_creator/202601/videos/precheck_tasks/{task_id}",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.getShoppableVideoStatus": {
+    "slug": "get-shoppable-video-status-202509",
+    "verb": "GET",
+    "path": "/affiliate_creator/202509/videos/{video_id}/status",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.getShopProducts": {
+    "slug": "get-shop-products-202509",
+    "verb": "GET",
+    "path": "/affiliate_creator/202509/shop_products",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.getShowcaseProducts": {
+    "slug": "get-showcase-products-202405",
+    "verb": "GET",
+    "path": "/affiliate_creator/202405/showcases/products",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.getTokoProductMappers": {
+    "slug": "get-toko-product-mappers-202606",
+    "verb": "GET",
+    "path": "/affiliate_creator/202606/toko_product_mappers",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.postShoppablePhotos": {
+    "slug": "post-shoppable-photos-202607",
+    "verb": "POST",
+    "path": "/affiliate_creator/202607/photos",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.postShoppableVideo": {
+    "slug": "post-shoppable-video-202603",
+    "verb": "POST",
+    "path": "/affiliate_creator/202603/videos",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.precheckVideoContent": {
+    "slug": "precheck-video-content-202511",
+    "verb": "POST",
+    "path": "/affiliate_creator/202511/videos/precheck_task",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.removeShowcaseProducts": {
+    "slug": "remove-showcase-products-202409",
+    "verb": "DELETE",
+    "path": "/affiliate_creator/202409/showcases/products",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.searchCreatorAffiliateOrders": {
+    "slug": "search-creator-affiliate-orders-202410",
+    "verb": "POST",
+    "path": "/affiliate_creator/202410/orders/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.searchCreatorSampleApplications": {
+    "slug": "search-creator-sample-applications-202412",
+    "verb": "POST",
+    "path": "/affiliate_creator/202412/sample_applications/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.searchCreatorTargetCollaborations": {
+    "slug": "search-creator-target-collaborations-202405",
+    "verb": "POST",
+    "path": "/affiliate_creator/202405/target_collaborations/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.tokoProductMapperV2": {
+    "slug": "toko-product-mapper-v2-202607",
+    "verb": "POST",
+    "path": "/affiliate_creator/202607/map_toko_product",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.topShowcaseProducts": {
+    "slug": "top-showcase-products-202409",
+    "verb": "POST",
+    "path": "/affiliate_creator/202409/showcases/products/top",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateCreator.uploadShoppablePhotoFile": {
+    "slug": "upload-shoppable-photo-file-202511",
+    "verb": "POST",
+    "path": "/affiliate_creator/202511/photos/photo_files",
+    "sections": [
+      "body"
+    ],
+    "multipart": true
+  },
+  "affiliateCreator.uploadShoppableVideoFile": {
+    "slug": "upload-shoppable-video-file-202505",
+    "verb": "POST",
+    "path": "/affiliate_creator/202505/videos/video_files",
+    "sections": [
+      "body"
+    ],
+    "multipart": true
+  },
+  "affiliatePartner.searchCAPAffiliateOrders202603": {
+    "slug": "search-cap-affiliate-orders-202603",
+    "verb": "POST",
+    "path": "/affiliate_partner/202603/cap_order/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliatePartner.searchTapAffiliateOrders202603": {
+    "slug": "search-tap-affiliate-orders-202603",
+    "verb": "POST",
+    "path": "/affiliate_partner/202603/orders/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.cancelTargetCollaborationConflicts": {
+    "slug": "cancel-target-collaboration-conflicts-202605",
+    "verb": "POST",
+    "path": "/affiliate_seller/202605/target_collaborations/conflicts/resolve",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.checkTargetCollaborationConflicts": {
+    "slug": "check-target-collaboration-conflicts-202605",
+    "verb": "POST",
+    "path": "/affiliate_seller/202605/target_collaborations/conflicts/check",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.createCompassOfflineExportTask": {
+    "slug": "create-compass-offline-export-task-202603",
+    "verb": "POST",
+    "path": "/affiliate_seller/202603/compass/offline_task",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.createTargetCollaboration202508": {
+    "slug": "create-target-collaboration-202508",
+    "verb": "POST",
+    "path": "/affiliate_seller/202508/target_collaborations",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.downloadCompassTaskFile": {
+    "slug": "download-compass-task-file-202603",
+    "verb": "GET",
+    "path": "/affiliate_seller/202603/compass/offline_tasks/{task_id}/file",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.generateTargetCollaborationLink": {
+    "slug": "generate-target-collaboration-link-202509",
+    "verb": "POST",
+    "path": "/affiliate_seller/202509/target_collaboration/{target_collaboration_id}/link",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.getCompassTaskList": {
+    "slug": "get-compass-task-list-202603",
+    "verb": "GET",
+    "path": "/affiliate_seller/202603/compass/offline_tasks",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.getInboxCategoryCounts": {
+    "slug": "get-inbox-category-counts-202608",
+    "verb": "GET",
+    "path": "/affiliate_seller/202608/conversations/group_counts",
+    "sections": [],
+    "multipart": false
+  },
+  "affiliateSeller.getMarketplaceCreatorPerformance202608": {
+    "slug": "get-marketplace-creator-performance-202608",
+    "verb": "GET",
+    "path": "/affiliate_seller/202608/marketplace_creators/{creator_user_id}",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.getOpenCollaborationCreatorContentDetail202508": {
+    "slug": "get-open-collaboration-creator-content-detail-202508",
+    "verb": "GET",
+    "path": "/affiliate_seller/202508/open_collaborations/creator_content_details",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.getSellerSearchCreatorMarketplaceAdvancedFilters": {
+    "slug": "get-seller-search-creator-marketplace-advanced-filters-202608",
+    "verb": "POST",
+    "path": "/affiliate_seller/202608/marketplace_creators/search/filter",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.getWeeklyCreatorOutreachQuota": {
+    "slug": "get-weekly-creator-outreach-quota-202607",
+    "verb": "GET",
+    "path": "/affiliate_seller/202607/creator_outreach/quota",
+    "sections": [],
+    "multipart": false
+  },
+  "affiliateSeller.getWeeklyCreatorOutreachRecords": {
+    "slug": "get-weekly-creator-outreach-records-202608",
+    "verb": "POST",
+    "path": "/affiliate_seller/202608/creator_outreach/records/query",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.queryCreatorPromotionDetailsInTargetCollaboration": {
+    "slug": "query-creator-promotion-details-in-target-collaboration-202608",
+    "verb": "POST",
+    "path": "/affiliate_seller/202608/target_collaborations/creator_promotion_details/query",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.queryTargetCollaborationDetail202508": {
+    "slug": "query-target-collaboration-detail-202508",
+    "verb": "GET",
+    "path": "/affiliate_seller/202508/target_collaborations/{target_collaboration_id}",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.removeCreatorFromOpenCollaboration202508": {
+    "slug": "remove-creator-from-open-collaboration-202508",
+    "verb": "POST",
+    "path": "/affiliate_seller/202508/open_collaborations/{open_collaboration_id}/remove_creator",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.searchTargetCollaborations202508": {
+    "slug": "search-target-collaborations-202508",
+    "verb": "POST",
+    "path": "/affiliate_seller/202508/target_collaborations/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.sellerGetSampleRequestDeeplink": {
+    "slug": "seller-get-sample-request-deeplink-202512",
+    "verb": "GET",
+    "path": "/affiliate_seller/202512/sample_applications/deeplink",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.sellerReviewSampleApplications202507": {
+    "slug": "seller-review-sample-applications-202507",
+    "verb": "POST",
+    "path": "/affiliate_seller/202507/sample_applications/{application_id}/review",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.sellerSearchSampleApplications202508": {
+    "slug": "seller-search-sample-applications-202508",
+    "verb": "POST",
+    "path": "/affiliate_seller/202508/sample_applications/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.updateConversationStatus": {
+    "slug": "update-conversation-status-202608",
+    "verb": "POST",
+    "path": "/affiliate_seller/202608/conversations/{conversation_id}/status",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "affiliateSeller.uploadMessageImage": {
+    "slug": "upload-message-image-202511",
+    "verb": "POST",
+    "path": "/affiliate_seller/202511/images/upload",
+    "sections": [
+      "body"
+    ],
+    "multipart": true
+  },
+  "affiliateSeller.uploadMessageImageV2": {
+    "slug": "upload-message-image-v2-202608",
+    "verb": "POST",
+    "path": "/affiliate_seller/202608/media/upload",
+    "sections": [
+      "body"
+    ],
+    "multipart": true
+  },
+  "analytics.getBestsellingCreators": {
+    "slug": "get-bestselling-creators-202511",
+    "verb": "GET",
+    "path": "/analytics/202511/creators/bestselling",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getBestsellingLIVESessions": {
+    "slug": "get-bestselling-live-sessions-202511",
+    "verb": "GET",
+    "path": "/analytics/202511/lives/bestselling",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getBestsellingProducts": {
+    "slug": "get-bestselling-products-202511",
+    "verb": "GET",
+    "path": "/analytics/202511/products/bestselling",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getBestsellingVideos": {
+    "slug": "get-bestselling-videos-202511",
+    "verb": "GET",
+    "path": "/analytics/202511/videos/bestselling",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getLiveRoomCoreStats": {
+    "slug": "get-live-room-core-stats-202502",
+    "verb": "GET",
+    "path": "/analytics/202502/live_rooms/{live_room_id}/core_stats",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "analytics.getLiveRoomGMVTrend": {
+    "slug": "get-live-room-gmv-trend-202502",
+    "verb": "GET",
+    "path": "/analytics/202502/live_rooms/{live_room_id}/gmv_trend_performances",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "analytics.getLiveRoomInteractiveTrends": {
+    "slug": "get-live-room-interactive-trends-202502",
+    "verb": "GET",
+    "path": "/analytics/202502/live_rooms/{live_room_id}/interactive_trend_performances",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "analytics.getLiveRoomProductStats": {
+    "slug": "get-live-room-product-stats-202502",
+    "verb": "GET",
+    "path": "/analytics/202502/live_rooms/{live_room_id}/product_stats",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "analytics.getLiveRoomTrafficPerformance": {
+    "slug": "get-live-room-traffic-performance-202502",
+    "verb": "GET",
+    "path": "/analytics/202502/live_rooms/{live_room_id}/traffic_performances",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "analytics.getLiveRoomUserPortraits": {
+    "slug": "get-live-room-user-portraits-202502",
+    "verb": "GET",
+    "path": "/analytics/202502/live_rooms/{live_room_id}/user_portraits",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "analytics.getLiveRoomViewTrends": {
+    "slug": "get-live-room-view-trends-202502",
+    "verb": "GET",
+    "path": "/analytics/202502/live_rooms/{live_room_id}/view_trend_performances",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopLIVEMinutePerformance": {
+    "slug": "get-shop-live-minute-performance-202510",
+    "verb": "GET",
+    "path": "/analytics/202510/shop_lives/{live_id}/performance_per_minutes",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopLIVEPerformanceList": {
+    "slug": "get-shop-live-performance-list-202609",
+    "verb": "GET",
+    "path": "/analytics/202609/shop_lives/performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopLIVEPerformanceOverview": {
+    "slug": "get-shop-live-performance-overview-202609",
+    "verb": "GET",
+    "path": "/analytics/202609/shop_lives/overview_performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopLIVEProductsPerformanceList": {
+    "slug": "get-shop-live-products-performance-list-202512",
+    "verb": "GET",
+    "path": "/analytics/202512/shop/{live_id}/products_performance",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopPerformance202609": {
+    "slug": "get-shop-performance-202609",
+    "verb": "GET",
+    "path": "/analytics/202609/shop/performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopPerformancePerHour": {
+    "slug": "get-shop-performance-per-hour-202510",
+    "verb": "GET",
+    "path": "/analytics/202510/shop/performance/{date}/performance_per_hour",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopProductPerformanceDetail": {
+    "slug": "get-shop-product-performance-detail-202509",
+    "verb": "GET",
+    "path": "/analytics/202509/shop_products/{product_id}/performance",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopProductPerformanceList202605": {
+    "slug": "get-shop-product-performance-list-202605",
+    "verb": "GET",
+    "path": "/analytics/202605/shop_products/performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopSKUPerformanceDetail": {
+    "slug": "get-shop-sku-performance-detail-202509",
+    "verb": "GET",
+    "path": "/analytics/202509/shop_skus/{sku_id}/performance",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopSKUPerformanceList202509": {
+    "slug": "get-shop-sku-performance-list-202509",
+    "verb": "GET",
+    "path": "/analytics/202509/shop_skus/performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopVideoPerformanceDetails202509": {
+    "slug": "get-shop-video-performance-details-202509",
+    "verb": "GET",
+    "path": "/analytics/202509/shop_videos/{video_id}/performance",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopVideoPerformanceList202605": {
+    "slug": "get-shop-video-performance-list-202605",
+    "verb": "GET",
+    "path": "/analytics/202605/shop_videos/performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopVideoPerformanceOverview202609": {
+    "slug": "get-shop-video-performance-overview-202609",
+    "verb": "GET",
+    "path": "/analytics/202609/shop_videos/overview_performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopVideoProductPerformanceList202509": {
+    "slug": "get-shop-video-product-performance-list-202509",
+    "verb": "GET",
+    "path": "/analytics/202509/shop_videos/{video_id}/products/performance",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getShopVideosPerformanceDetails": {
+    "slug": "get-shop-videos-performance-details-202609",
+    "verb": "GET",
+    "path": "/analytics/202609/shop_videos/batch_performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getSPSMetricDiagnosis": {
+    "slug": "get-sps-metric-diagnosis-202606",
+    "verb": "GET",
+    "path": "/analytics/202606/shop_performances/metrics/{metric_code}/diagnosis",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getSPSMetricProblemDetails": {
+    "slug": "get-sps-metric-problem-details-202606",
+    "verb": "GET",
+    "path": "/analytics/202606/shop_performances/metrics/{metric_code}/problem_details",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getSPSMetrics": {
+    "slug": "get-sps-metrics-202606",
+    "verb": "GET",
+    "path": "/analytics/202606/shop_performances/metrics",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getSPSMetricTopItems": {
+    "slug": "get-sps-metric-top-items-202606",
+    "verb": "GET",
+    "path": "/analytics/202606/shop_performances/metrics/{metric_code}/top_items",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getSPSOverview": {
+    "slug": "get-sps-overview-202606",
+    "verb": "GET",
+    "path": "/analytics/202606/shop_performances/overview",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "analytics.getVideoPerformances": {
+    "slug": "get-video-performances-202403",
+    "verb": "GET",
+    "path": "/analytics/202403/videos/performances",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "customerEngagement.createCustomEngagementTask": {
+    "slug": "create-custom-engagement-task-202502",
+    "verb": "POST",
+    "path": "/customer_engagement/202502/engagement_tasks/custom",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "customerEngagement.createEngagementTask": {
+    "slug": "create-engagement-task-202412",
+    "verb": "POST",
+    "path": "/customer_engagement/202412/engagement_tasks",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "customerEngagement.getEngagementFeaturePermissions": {
+    "slug": "get-engagement-feature-permissions-202502",
+    "verb": "GET",
+    "path": "/customer_engagement/202502/permissions",
+    "sections": [],
+    "multipart": false
+  },
+  "customerEngagement.getEngagementTaskPerformances": {
+    "slug": "get-engagement-task-performances-202412",
+    "verb": "POST",
+    "path": "/customer_engagement/202412/performances",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "customerEngagement.getMessageTemplates": {
+    "slug": "get-message-templates-202412",
+    "verb": "GET",
+    "path": "/customer_engagement/202412/message_templates",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "customerEngagement.sendEngagementMessage": {
+    "slug": "send-engagement-message-202412",
+    "verb": "POST",
+    "path": "/customer_engagement/202412/messages",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "customerService.createConversation": {
+    "slug": "create-conversation-202309",
+    "verb": "POST",
+    "path": "/customer_service/202309/conversations",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "customerService.endSession": {
+    "slug": "end-session-202605",
+    "verb": "POST",
+    "path": "/customer_service/202605/conversations/{conversation_id}/sessions/{session_id}/end",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "customerService.getAgentSettings": {
+    "slug": "get-agent-settings-202309",
+    "verb": "GET",
+    "path": "/customer_service/202309/agents/settings",
+    "sections": [],
+    "multipart": false
+  },
+  "customerService.getConversation": {
+    "slug": "get-conversation-202601",
+    "verb": "GET",
+    "path": "/customer_service/202601/conversations/{conversation_id}",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "customerService.getConversationMessages": {
+    "slug": "get-conversation-messages-202309",
+    "verb": "GET",
+    "path": "/customer_service/202309/conversations/{conversation_id}/messages",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "customerService.getConversations": {
+    "slug": "get-conversations-202309",
+    "verb": "GET",
+    "path": "/customer_service/202309/conversations",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "customerService.getCustomerServicePerformance": {
+    "slug": "get-customer-service-performance-202407",
+    "verb": "GET",
+    "path": "/customer_service/202407/performance",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "customerService.readMessage": {
+    "slug": "read-message-202309",
+    "verb": "POST",
+    "path": "/customer_service/202309/conversations/{conversation_id}/messages/read",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "customerService.searchSessions": {
+    "slug": "search-sessions-202602",
+    "verb": "POST",
+    "path": "/customer_service/202602/sessions/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "customerService.sendMessage": {
+    "slug": "send-message-202606",
+    "verb": "POST",
+    "path": "/customer_service/202606/conversations/{conversation_id}/messages",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "customerService.updateAgentSettings": {
+    "slug": "update-agent-settings-202309",
+    "verb": "PUT",
+    "path": "/customer_service/202309/agents/settings",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "customerService.uploadBuyerMessagesImage": {
+    "slug": "upload-buyer-messages-image-202309",
+    "verb": "POST",
+    "path": "/customer_service/202309/images/upload",
+    "sections": [
+      "body"
+    ],
+    "multipart": true
+  },
+  "fbt.cancelFBTMCFOrder": {
+    "slug": "cancel-fbt-mcf-order-202601",
+    "verb": "POST",
+    "path": "/fbt/202601/mcf_outbound_orders/cancel",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.cancelInboundOrder": {
+    "slug": "cancel-inbound-order-202602",
+    "verb": "POST",
+    "path": "/fbt/202602/inbound_orders/cancel",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.confirmInboundMethod": {
+    "slug": "confirm-inbound-method-202603",
+    "verb": "POST",
+    "path": "/fbt/202603/confirm_inbound_method",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.createFBTGoods": {
+    "slug": "create-fbt-goods-202607",
+    "verb": "POST",
+    "path": "/fbt/202607/goods/create_goods",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.createFBTMCFOrder": {
+    "slug": "create-fbt-mcf-order-202607",
+    "verb": "POST",
+    "path": "/fbt/202607/mcf_outbound_orders",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.createOrUpdateInboundPlan": {
+    "slug": "create-or-update-inbound-plan-202602",
+    "verb": "POST",
+    "path": "/fbt/202602/create_update_inbound_plan",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.getFBTInboundOrderDetails": {
+    "slug": "get-fbt-inbound-order-details-202602",
+    "verb": "GET",
+    "path": "/fbt/202602/inbound_orders",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "fbt.getFBTMCFOrderStatus": {
+    "slug": "get-fbt-mcf-order-status-202601",
+    "verb": "GET",
+    "path": "/fbt/202601/mcf_outbound_orders",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "fbt.getFBTMerchantMCFStatus": {
+    "slug": "get-fbt-merchant-mcf-status-202601",
+    "verb": "GET",
+    "path": "/fbt/202601/merchants/mcf_status",
+    "sections": [],
+    "multipart": false
+  },
+  "fbt.getFBTMerchantOnboardedRegions": {
+    "slug": "get-fbt-merchant-onboarded-regions-202409",
+    "verb": "GET",
+    "path": "/fbt/202409/merchants/onboarded_regions",
+    "sections": [],
+    "multipart": false
+  },
+  "fbt.getFBTWarehouseList": {
+    "slug": "get-fbt-warehouse-list-202408",
+    "verb": "GET",
+    "path": "/fbt/202408/warehouses",
+    "sections": [],
+    "multipart": false
+  },
+  "fbt.getInboundMethodDetail": {
+    "slug": "get-inbound-method-detail-202602",
+    "verb": "POST",
+    "path": "/fbt/202602/inbound_method_detail",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.listAvailableInboundMethods": {
+    "slug": "list-available-inbound-methods-202602",
+    "verb": "POST",
+    "path": "/fbt/202602/list_available_inbound_method",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.printInboundOrderLabels": {
+    "slug": "print-inbound-order-labels-202602",
+    "verb": "POST",
+    "path": "/fbt/202602/inbound_orders/label_print",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.queryGoodsInventoryForMCF": {
+    "slug": "query-goods-inventory-for-mcf-202601",
+    "verb": "POST",
+    "path": "/fbt/202601/mcf/goods/inventory/search",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.searchFBTInventory": {
+    "slug": "search-fbt-inventory-202408",
+    "verb": "POST",
+    "path": "/fbt/202408/inventory/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.searchFBTInventoryRecord": {
+    "slug": "search-fbt-inventory-record-202410",
+    "verb": "POST",
+    "path": "/fbt/202410/inventory_records/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.searchGoodsHazmatAndExpirationInfo": {
+    "slug": "search-goods-hazmat-and-expiration-info-202603",
+    "verb": "POST",
+    "path": "/fbt/202603/goods/hazmat_and_expiration_info/search",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.searchGoodsInfo": {
+    "slug": "search-goods-info-202607",
+    "verb": "POST",
+    "path": "/fbt/202607/goods/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.shipInboundOrder": {
+    "slug": "ship-inbound-order-202603",
+    "verb": "POST",
+    "path": "/fbt/202603/ship_inbound_order",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.updateFBTGoodsInfo": {
+    "slug": "update-fbt-goods-info-202607",
+    "verb": "POST",
+    "path": "/fbt/202607/goods/update_goods_info",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.updateGoodsSkuRelation": {
+    "slug": "update-goods-sku-relation-202603",
+    "verb": "POST",
+    "path": "/fbt/202603/goods/update_goods_sku_relation",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fbt.updateInboundOrderTracking": {
+    "slug": "update-inbound-order-tracking-202602",
+    "verb": "POST",
+    "path": "/fbt/202602/inbound_orders/tracking_update",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "finance.getPayments202605": {
+    "slug": "get-payments-202605",
+    "verb": "GET",
+    "path": "/finance/202605/payments",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "finance.getTradeInAccountTransactions": {
+    "slug": "get-tradein-account-transactions-202609",
+    "verb": "GET",
+    "path": "/finance/202609/account_transactions",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "finance.getTradeInSupplierAccountBalance": {
+    "slug": "get-tradein-supplier-account-balance-202609",
+    "verb": "GET",
+    "path": "/finance/202609/account_balances",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "finance.getUnsettledTransactions": {
+    "slug": "get-unsettled-transactions-202507",
+    "verb": "GET",
+    "path": "/finance/202507/orders/unsettled",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "fulfillment.batchShipPackages": {
+    "slug": "batch-ship-packages-202309",
+    "verb": "POST",
+    "path": "/fulfillment/202309/packages/ship",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.createFirstMileBundleV2": {
+    "slug": "create-first-mile-bundle-v2-202510",
+    "verb": "POST",
+    "path": "/fulfillment/202510/first_mile_bundle",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.createPackages": {
+    "slug": "create-packages-202512",
+    "verb": "POST",
+    "path": "/fulfillment/202512/packages",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.fulfillmentUploadDeliveryFile": {
+    "slug": "fulfillment-upload-delivery-file-202309",
+    "verb": "POST",
+    "path": "/fulfillment/202309/files/upload",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": true
+  },
+  "fulfillment.fulfillmentUploadDeliveryImage": {
+    "slug": "fulfillment-upload-delivery-image-202309",
+    "verb": "POST",
+    "path": "/fulfillment/202309/images/upload",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": true
+  },
+  "fulfillment.getOrderCustomsRequirements": {
+    "slug": "get-order-customs-requirements-202607",
+    "verb": "POST",
+    "path": "/fulfillment/202607/orders/customs_info/query",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.getPackageDetail": {
+    "slug": "get-package-detail-202309",
+    "verb": "GET",
+    "path": "/fulfillment/202309/packages/{package_id}",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "fulfillment.getPackageShippingDocument": {
+    "slug": "get-package-shipping-document-202309",
+    "verb": "GET",
+    "path": "/fulfillment/202309/packages/{package_id}/shipping_documents",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "fulfillment.getPodDetail": {
+    "slug": "get-pod-detail-202606",
+    "verb": "POST",
+    "path": "/fulfillment/202606/pod_details/get",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.getTracking": {
+    "slug": "get-tracking-202309",
+    "verb": "GET",
+    "path": "/fulfillment/202309/orders/{order_id}/tracking",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "fulfillment.markPackageAsShipped": {
+    "slug": "mark-package-as-shipped-202309",
+    "verb": "POST",
+    "path": "/fulfillment/202309/orders/{order_id}/packages",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.redeemInfoCallback": {
+    "slug": "redeem-info-callback-202601",
+    "verb": "POST",
+    "path": "/fulfillment/202601/redeem_info/callback",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.shipPackage": {
+    "slug": "ship-package-202309",
+    "verb": "POST",
+    "path": "/fulfillment/202309/packages/{package_id}/ship",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.trackingStatusUpdate": {
+    "slug": "tracking-status-update-202609",
+    "verb": "POST",
+    "path": "/fulfillment/202609/order/sof/track/update",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.tTSTrackingValidation": {
+    "slug": "tts-tracking-validation-202508",
+    "verb": "GET",
+    "path": "/fulfillment/202508/tts_tracking_validation",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "fulfillment.updatePackageDeliveryStatus": {
+    "slug": "update-package-delivery-status-202309",
+    "verb": "POST",
+    "path": "/fulfillment/202309/packages/deliver",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.updatePackageShippingInfo": {
+    "slug": "update-package-shipping-info-202309",
+    "verb": "POST",
+    "path": "/fulfillment/202309/packages/{package_id}/shipping_info/update",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.updateShippingInfo": {
+    "slug": "update-shipping-info-202309",
+    "verb": "POST",
+    "path": "/fulfillment/202309/orders/{order_id}/shipping_info/update",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.uploadCustomsInfomation": {
+    "slug": "upload-customs-infomation-202607",
+    "verb": "POST",
+    "path": "/fulfillment/202607/orders/customs_info/submit",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "fulfillment.uploadInvoice": {
+    "slug": "upload-invoice-202502",
+    "verb": "POST",
+    "path": "/fulfillment/202502/invoice/upload",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "logistic.getAvailableShippingTemplate": {
+    "slug": "get-available-shipping-template-202510",
+    "verb": "GET",
+    "path": "/logistics/202510/seller_templates",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "logistic.getLogisticsTracking": {
+    "slug": "get-logistics-tracking-202604",
+    "verb": "GET",
+    "path": "/logistics/202604/orders/{order_id}/tracking",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "logistic.shippingTemplateExistV2": {
+    "slug": "shipping-template-exist-v2-202606",
+    "verb": "GET",
+    "path": "/logistics/202606/seller_template/template_exist",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "order.getOrderDetail202507": {
+    "slug": "get-order-detail-202507",
+    "verb": "GET",
+    "path": "/order/202507/orders",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "order.podDetails": {
+    "slug": "pod-details-202606",
+    "verb": "POST",
+    "path": "/order/202606/pod_details/search",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "order.updateTheBlindBoxOpeningResults": {
+    "slug": "update-the-blind-box-opening-results-202605",
+    "verb": "POST",
+    "path": "/order/202605/orders/blind_box_result/callback",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.checkListingPrerequisites": {
+    "slug": "check-listing-prerequisites-202312",
+    "verb": "GET",
+    "path": "/product/202312/prerequisites",
+    "sections": [],
+    "multipart": false
+  },
+  "product.createGPAUpgradeTask": {
+    "slug": "create-gpa-upgrade-task-202604",
+    "verb": "POST",
+    "path": "/product/202604/products/gpa_upgrade_task",
+    "sections": [],
+    "multipart": false
+  },
+  "product.createSizeChart": {
+    "slug": "create-size-chart-202608",
+    "verb": "POST",
+    "path": "/product/202608/size_charts",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.diagnoseAndOptimizeProduct": {
+    "slug": "diagnose-and-optimize-product-202411",
+    "verb": "POST",
+    "path": "/product/202411/products/diagnose_optimize",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.editProduct202509": {
+    "slug": "edit-product-202509",
+    "verb": "PUT",
+    "path": "/product/202509/products/{product_id}",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.editSizeChart": {
+    "slug": "edit-size-chart-202608",
+    "verb": "POST",
+    "path": "/product/202608/size_charts/edit",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.getGlobalListingRules": {
+    "slug": "get-global-listing-rules-202507",
+    "verb": "GET",
+    "path": "/product/202507/global_listing_rules",
+    "sections": [],
+    "multipart": false
+  },
+  "product.getGlobalReplicatedProducts": {
+    "slug": "get-global-replicated-products-202507",
+    "verb": "GET",
+    "path": "/product/202507/products/{product_id}/replicated_products",
+    "sections": [
+      "path"
+    ],
+    "multipart": false
+  },
+  "product.getOpportunityDetail": {
+    "slug": "get-opportunity-detail-202604",
+    "verb": "GET",
+    "path": "/product/202604/opportunities/{opportunity_id}",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "product.getProductPackageRecommendations": {
+    "slug": "get-product-package-recommendations-202602",
+    "verb": "POST",
+    "path": "/product/202602/packages/recommend",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.getProductSKPPDetail": {
+    "slug": "get-product-skpp-detail-202606",
+    "verb": "GET",
+    "path": "/product/202606/skpps/{product_id}",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "product.getShopSKPPSummary": {
+    "slug": "get-shop-skpp-summary-202606",
+    "verb": "GET",
+    "path": "/product/202606/skpps/sum",
+    "sections": [],
+    "multipart": false
+  },
+  "product.getSubmissionRecords": {
+    "slug": "get-submission-records-202604",
+    "verb": "GET",
+    "path": "/product/202604/opportunities/submissions",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "product.listOpportunities": {
+    "slug": "list-opportunities-202604",
+    "verb": "POST",
+    "path": "/product/202604/opportunities/query",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.listProductSKPPStatuses": {
+    "slug": "list-product-skpp-statuses-202606",
+    "verb": "POST",
+    "path": "/product/202606/skpps/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.partialEditGlobalProduct": {
+    "slug": "partial-edit-global-product-202509",
+    "verb": "PUT",
+    "path": "/product/202509/global_products/{global_product_id}/partial_edit",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.partialEditProduct202509": {
+    "slug": "partial-edit-product-202509",
+    "verb": "POST",
+    "path": "/product/202509/products/{product_id}/partial_edit",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.predictProductPackageDimensionsAndWeight": {
+    "slug": "predict-product-package-dimensions-and-weight-202609",
+    "verb": "POST",
+    "path": "/product/202609/products/package/predict",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.recommendRequiredProductProperties": {
+    "slug": "recommend-required-product-properties-202609",
+    "verb": "POST",
+    "path": "/product/202609/products/properties/recommend",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.replicateProduct": {
+    "slug": "replicate-product-202507",
+    "verb": "POST",
+    "path": "/product/202507/products/{product_id}/global_replicate",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.searchProductsForComplianceAuditing": {
+    "slug": "search-products-for-compliance-auditing-202601",
+    "verb": "POST",
+    "path": "/product/202601/compliance/auditing/research",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.searchResponsiblePersons202501": {
+    "slug": "search-responsible-persons-202501",
+    "verb": "POST",
+    "path": "/product/202501/compliance/responsible_persons/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.submitProductViaOpportunity": {
+    "slug": "submit-product-via-opportunity-202604",
+    "verb": "POST",
+    "path": "/product/202604/opportunities/{opportunity_id}/submit",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.submitSizeChartAppeal": {
+    "slug": "submit-size-chart-appeal-202604",
+    "verb": "POST",
+    "path": "/product/202604/appeals/submit",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.submitStrikethroughPrice": {
+    "slug": "submit-strikethrough-price-202609",
+    "verb": "POST",
+    "path": "/product/202609/products/{product_id}/strikethrough_price/submit",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "product.updateStockOperationSettings": {
+    "slug": "update-stock-operation-settings-202608",
+    "verb": "POST",
+    "path": "/product/202608/inventory/operation/settings",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "promotion.republishActivity": {
+    "slug": "republish-activity-202607",
+    "verb": "POST",
+    "path": "/promotion/202607/activities/{activity_id}/republish",
+    "sections": [
+      "path",
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.calculateRefund": {
+    "slug": "calculate-refund-202602",
+    "verb": "POST",
+    "path": "/return_refund/202602/refunds/calculate",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.cancelOrder202602": {
+    "slug": "cancel-order-202602",
+    "verb": "POST",
+    "path": "/return_refund/202602/cancellations",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.createReturn202602": {
+    "slug": "create-return-202602",
+    "verb": "POST",
+    "path": "/return_refund/202602/returns",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.getAftersaleEligibility202602": {
+    "slug": "get-aftersale-eligibility-202602",
+    "verb": "GET",
+    "path": "/return_refund/202602/orders/{order_id}/aftersale_eligibility",
+    "sections": [
+      "path",
+      "query"
+    ],
+    "multipart": false
+  },
+  "returnRefund.getDecisionEligibility": {
+    "slug": "get-decision-eligibility-202601",
+    "verb": "GET",
+    "path": "/return_refund/202601/decision_eligibility",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "returnRefund.getReviewDecision": {
+    "slug": "get-review-decision-202606",
+    "verb": "GET",
+    "path": "/return_refund/202606/review_decision",
+    "sections": [
+      "query"
+    ],
+    "multipart": false
+  },
+  "returnRefund.rejectReturn202606": {
+    "slug": "reject-return-202606",
+    "verb": "POST",
+    "path": "/return_refund/202606/returns/{return_id}/reject",
+    "sections": [
+      "path",
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.reviewAftersales": {
+    "slug": "review-aftersales-202609",
+    "verb": "POST",
+    "path": "/return_refund/202609/aftersales/review",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.searchAftersalesRequest": {
+    "slug": "search-aftersales-request-202603",
+    "verb": "POST",
+    "path": "/return_refund/202603/aftersales/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.searchCancellations": {
+    "slug": "search-cancellations-202602",
+    "verb": "POST",
+    "path": "/return_refund/202602/cancellations/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.searchReturnMerchandiseAuthorization": {
+    "slug": "search-return-merchandise-authorization-202604",
+    "verb": "POST",
+    "path": "/return_refund/202604/rma/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.searchReturns": {
+    "slug": "search-returns-202602",
+    "verb": "POST",
+    "path": "/return_refund/202602/returns/search",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  },
+  "returnRefund.uploadShippingDocumentAndTrackingInfo": {
+    "slug": "upload-shipping-document-and-tracking-info-202405",
+    "verb": "POST",
+    "path": "/return_refund/202405/returns/shipping_documents",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": true
+  },
+  "seller.getShopGroups": {
+    "slug": "get-shop-groups-202601",
+    "verb": "GET",
+    "path": "/seller/202601/shop_groups",
+    "sections": [],
+    "multipart": false
+  },
+  "supplyChain.confirmPackageShipment": {
+    "slug": "confirm-package-shipment-202309",
+    "verb": "POST",
+    "path": "/supply_chain/202309/packages/sync",
+    "sections": [
+      "body"
+    ],
+    "multipart": false
+  },
+  "tools.uploadFileInit": {
+    "slug": "upload-file-init-202512",
+    "verb": "POST",
+    "path": "/open/202512/file/init",
+    "sections": [
+      "query",
+      "body"
+    ],
+    "multipart": false
+  }
+}

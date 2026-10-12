@@ -77,7 +77,7 @@ export async function initVideoUpload(params: ShopeeInitVideoUploadRequest, conf
 export async function uploadImage(params: ShopeeUploadImageRequest, config: ShopeeConfig): Promise<ShopeeUploadImageResponse> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest('/media_space/upload_image', config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, '/media_space/upload_image');
   const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/media_space/upload_image${commonParam}`;
 
   const result = await ShopeeHelper.httpPostMultipart<ShopeeUploadImageResponse>(
@@ -101,7 +101,7 @@ export async function uploadImage(params: ShopeeUploadImageRequest, config: Shop
 export async function uploadVideoPart(params: ShopeeUploadVideoPartRequest, config: ShopeeConfig): Promise<ShopeeUploadVideoPartResponse> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest('/media_space/upload_video_part', config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, '/media_space/upload_video_part');
   const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/media_space/upload_video_part${commonParam}`;
 
   const result = await ShopeeHelper.httpPostMultipart<ShopeeUploadVideoPartResponse>(

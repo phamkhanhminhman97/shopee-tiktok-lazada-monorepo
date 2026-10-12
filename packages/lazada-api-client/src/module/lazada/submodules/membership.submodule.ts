@@ -2,6 +2,8 @@ import { LazadaConfig } from '../dto/request/config.request';
 import {
   getLinkMember,
   getLinkMemberList,
+  getPartnerLinkMember,
+  getPartnerLinkMemberList,
   linkMembership,
   partnerLink,
   partnerTransaction,
@@ -12,6 +14,8 @@ import {
 import {
   MembershipGetLinkMemberListRequest,
   MembershipGetLinkMemberRequest,
+  MembershipGetPartnerLinkMemberListRequest,
+  MembershipGetPartnerLinkMemberRequest,
   MembershipLinkMembershipRequest,
   MembershipPartnerLinkRequest,
   MembershipPartnerTransactionRequest,
@@ -22,6 +26,8 @@ import {
 import {
   MembershipGetLinkMemberListResponse,
   MembershipGetLinkMemberResponse,
+  MembershipGetPartnerLinkMemberListResponse,
+  MembershipGetPartnerLinkMemberResponse,
   MembershipLinkMembershipResponse,
   MembershipPartnerLinkResponse,
   MembershipPartnerTransactionResponse,
@@ -68,5 +74,13 @@ export class LazadaMembership {
 
   async updatePartnerUserId(params: MembershipUpdatePartnerUserIdRequest): Promise<MembershipUpdatePartnerUserIdResponse> {
     return await updatePartnerUserId(params, this.config);
+  }
+
+  async getPartnerLinkMember(params: MembershipGetPartnerLinkMemberRequest): Promise<MembershipGetPartnerLinkMemberResponse> {
+    return await getPartnerLinkMember(params, this.config);
+  }
+
+  async getPartnerLinkMemberList(params: MembershipGetPartnerLinkMemberListRequest): Promise<MembershipGetPartnerLinkMemberListResponse> {
+    return await getPartnerLinkMemberList(params, this.config);
   }
 }

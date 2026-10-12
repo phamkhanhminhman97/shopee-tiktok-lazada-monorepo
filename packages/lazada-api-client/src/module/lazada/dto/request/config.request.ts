@@ -61,6 +61,17 @@ export interface LazadaConfig {
    * Remaining refresh token lifetime in seconds.
    */
   refreshExpiresIn?: number;
+  /**
+   * Per-request timeout in milliseconds for API calls made through the domain
+   * namespaces (`lazada.order.*`, `lazada.product.*`, ...). Defaults to 30000.
+   */
+  timeoutMs?: number;
+  /**
+   * Number of automatic retries for idempotent GET requests on transient
+   * failures (network errors, 408/429/5xx). Defaults to 2; set `0` to disable.
+   * POST requests are never retried automatically.
+   */
+  maxRetries?: number;
 }
 
 export interface LazadaConfigList {

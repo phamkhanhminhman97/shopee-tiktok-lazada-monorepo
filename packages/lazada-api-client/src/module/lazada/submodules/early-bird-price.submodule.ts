@@ -1,3 +1,4 @@
+import { LazadaEarlyBirdPriceOfficial } from './early-bird-price-official.submodule';
 import { LazadaConfig } from '../dto/request/config.request';
 import {
   createEarlyBirdActivity,
@@ -20,8 +21,10 @@ import {
  *
  * Access via `lazada.earlyBirdPrice.<method>()` on a `LazadaModule` instance.
  */
-export class LazadaEarlyBirdPrice {
-  constructor(private config: LazadaConfig) {}
+export class LazadaEarlyBirdPrice extends LazadaEarlyBirdPriceOfficial {
+  constructor(config: LazadaConfig) {
+    super(config);
+  }
 
   async earlyBirdActivityAddSkus(params: EarlyBirdPriceEarlyBirdActivityAddSkusRequest): Promise<EarlyBirdPriceEarlyBirdActivityAddSkusResponse> {
     return await earlyBirdActivityAddSkus(params, this.config);

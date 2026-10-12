@@ -1,3 +1,4 @@
+import { TiktokAffiliatePartnerOfficial } from './affiliate-partner-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   createAffiliatePartnerCampaign,
@@ -52,8 +53,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.affiliatePartner.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokAffiliatePartner {
-  constructor(private config: TiktokConfig) {}
+export class TiktokAffiliatePartner extends TiktokAffiliatePartnerOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async createAffiliatePartnerCampaign(params: {
     body: TiktokCreateAffiliatePartnerCampaignBody;

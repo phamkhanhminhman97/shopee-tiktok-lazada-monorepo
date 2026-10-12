@@ -1,3 +1,4 @@
+import { TiktokProductOfficial } from './product-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   activateProducts,
@@ -141,8 +142,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.product.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokProduct {
-  constructor(private config: TiktokConfig) {}
+export class TiktokProduct extends TiktokProductOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async getProductPrerequisites(): Promise<TiktokResponseCommon<TiktokCheckListingPrerequisitesResponse>> {
     return await getProductPrerequisites(this.config);

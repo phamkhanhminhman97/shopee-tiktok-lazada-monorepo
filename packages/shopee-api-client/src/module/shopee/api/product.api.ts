@@ -155,7 +155,7 @@ export async function getProductItemList(config: ShopeeConfig): Promise<Record<s
       throw new Error(`[Shopee API] getProductItemList exceeded max iterations (${MAX_GET_ITEM_ITERATIONS}). Possible infinite loop.`);
     }
 
-    const commonParam = `${ShopeeHelper.commonParameter(config, signature, timestamp)}&page_size=100&item_status=NORMAL&offset=${offset}`;
+    const commonParam = `${ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.GET_ITEM_LIST)}&page_size=100&item_status=NORMAL&offset=${offset}`;
     const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ITEM_LIST}${commonParam}`;
     const { data } = await axios.get<{
       response: {
@@ -184,7 +184,7 @@ export async function getProductItemList(config: ShopeeConfig): Promise<Record<s
 export async function getProductItemBaseInfo(itemIds: string[], config: ShopeeConfig): Promise<ShopeeResponseProductBaseItemInfo> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_ITEM_BASE, config, timestamp);
-  const commonParam = `${ShopeeHelper.commonParameter(config, signature, timestamp)}&item_id_list=${itemIds.toString()}`;
+  const commonParam = `${ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.GET_ITEM_BASE)}&item_id_list=${itemIds.toString()}`;
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ITEM_BASE}${commonParam}`;
   const result = await ShopeeHelper.httpGet<ShopeeResponseProductBaseItemInfo>(url, config);
@@ -216,7 +216,7 @@ export async function getModelList(itemId: string | number, config: ShopeeConfig
   const additionalParams: Record<string, string | number | boolean> = {
     item_id: numericItemId,
   };
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_MODEL_LIST);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_MODEL_LIST}${commonParam}`;
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetModelList>(url, config);
 
@@ -251,7 +251,7 @@ export async function searchItem(params: ShopeeRequestSearchItem, config: Shopee
     additionalParams[key] = value;
   });
 
-  let commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  let commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.SEARCH_ITEM);
   params.item_status?.forEach((status) => {
     commonParam += `&item_status=${encodeURIComponent(status)}`;
   });
@@ -281,7 +281,7 @@ export async function updateStock(
 ): Promise<ShopeeResponseUpdateStock> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UPDATE_STOCK, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.UPDATE_STOCK);
   const body = {
     item_id: typeof shopeeItemId === 'string' ? parseInt(shopeeItemId) : shopeeItemId,
     stock_list: [
@@ -317,7 +317,7 @@ export async function updateStock(
 export async function unListItem(itemId: string, statusUnlist: boolean, config: ShopeeConfig): Promise<ShopeeResponseUnlistItem> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UNLIST_ITEM, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.UNLIST_ITEM);
 
   const body: ShopeeRequestUnlistItem = {
     item_list: [
@@ -350,7 +350,7 @@ export async function unListItem(itemId: string, statusUnlist: boolean, config: 
 export async function updatePrice(itemId: string, price: number, config: ShopeeConfig): Promise<ShopeeResponseUpdatePrice> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UPDATE_PRICE, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.UPDATE_PRICE);
 
   const body: ShopeeRequestUpdatePrice = {
     item_id: parseInt(itemId),
@@ -391,7 +391,7 @@ export async function addItem(
 
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.ADD_ITEM, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.ADD_ITEM);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ADD_ITEM}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -421,7 +421,7 @@ export async function updateItem(
 
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.UPDATE_ITEM, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.UPDATE_ITEM);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.UPDATE_ITEM}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -442,7 +442,7 @@ export async function updateItem(
 export async function getCategory(config: ShopeeConfig): Promise<ShopeeResponseGetCategories> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.GET_CATEGORY, config, timestamp);
-  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp);
+  const commonParam = ShopeeHelper.commonParameter(config, signature, timestamp, SHOPEE_PATH.GET_CATEGORY);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_CATEGORY}${commonParam}`;
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetCategories>(url, config);
@@ -467,7 +467,7 @@ export async function getAttributes(categoryId: number, config: ShopeeConfig): P
     category_id: categoryId,
   };
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_ATTRIBUTES);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ATTRIBUTES}${commonParam}`;
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetAttributes>(url, config);
@@ -499,7 +499,7 @@ export async function getBrandList(categoryId: number, config: ShopeeConfig): Pr
     status,
   };
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_BRAND_LIST);
 
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_BRAND_LIST}${commonParam}`;
   const result = await ShopeeHelper.httpGet<ShopeeResponseGetBrandList>(url, config);

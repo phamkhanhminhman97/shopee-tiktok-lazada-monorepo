@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { createHmac } from 'crypto';
 import FormData from 'form-data';
 import { SHOPEE_END_POINT } from './constant';
+import { SHOPEE_API_TYPES, ShopeeApiType } from './api-types';
 
 /**
  * Shopee base URL including the `/api/v2` prefix shared by every
@@ -75,24 +76,78 @@ function getStringField(source: Record<string, unknown>, key: string): string | 
   return typeof value === 'string' ? value : undefined;
 }
 
-function commonParameter(config: ShopeeConfig, signature: string, timestamp: number): string {
+/** Query-string parameter that carries the identity of each non-shop API type, and the config field it comes from. */
+const IDENTITY_BY_TYPE = {
+  merchant: { param: 'merchant_id', field: 'merchantId' },
+  user: { param: 'user_id', field: 'userId' },
+  principal: { param: 'principal_id', field: 'principalId' },
+} as const;
+
+/**
+ * Look up the type of a Shopee API from its path (full `/api/v2/...` path or the domain-relative one). Shopee
+ * signs shop, merchant, user, principal and public APIs with different identities; unknown paths are shop APIs.
+ */
+function getApiType(path?: string): ShopeeApiType {
+  if (!path) return 'shop';
+  return SHOPEE_API_TYPES[toSignedApiPath(path)] || 'shop';
+}
+
+/** The identity (merchant_id / user_id / principal_id) required by a non-shop API, or a clear error when it is not configured. */
+function requireIdentity(type: 'merchant' | 'user' | 'principal', config: ShopeeConfig, path: string): { param: string; value: string | number } {
+  const { param, field } = IDENTITY_BY_TYPE[type];
+  const value = config[field];
+  if (value === undefined || value === null || value === '') {
+    throw new ShopeeApiError({
+      code: 'ShopeeConfigError',
+      message: `\`${field}\` is required to call the ${type}-level API ${toSignedApiPath(path)}: Shopee signs it with ${param} instead of shop_id.`,
+      context: toSignedApiPath(path),
+    });
+  }
+  return { param, value };
+}
+
+function commonParameter(config: ShopeeConfig, signature: string, timestamp: number, path?: string): string {
   const { partnerId, accessToken, shopId } = config;
+  const type = getApiType(path);
+  if (type === 'public') {
+    return `?partner_id=${partnerId}&timestamp=${timestamp}&sign=${signature}`;
+  }
+  if (type !== 'shop') {
+    const identity = requireIdentity(type, config, path as string);
+    return `?${identity.param}=${identity.value}&partner_id=${partnerId}&access_token=${accessToken}&sign=${signature}&timestamp=${timestamp}`;
+  }
   return `?shop_id=${shopId}&partner_id=${partnerId}&access_token=${accessToken}&sign=${signature}&timestamp=${timestamp}`;
 }
 
 function signPublicRequest(path: string, config: ShopeeConfig, timestamp: number): string {
   const { partnerId, partnerKey } = config;
-  const baseString = `${partnerId}${path}${timestamp}`;
+  const baseString = `${partnerId}${toSignedApiPath(path)}${timestamp}`;
   return createHmac('sha256', partnerKey).update(baseString).digest('hex');
 }
 
 function signRequest(path: string, config: ShopeeConfig, timestamp: number): string {
   const { partnerId, accessToken, shopId, partnerKey } = config;
-  const params = [partnerId, path, timestamp.toString(), accessToken, shopId].filter(
+  const type = getApiType(path);
+  if (type === 'public') {
+    return signPublicRequest(path, config, timestamp);
+  }
+  const identity = type === 'shop' ? shopId : requireIdentity(type, config, path).value;
+  const params = [partnerId, toSignedApiPath(path), timestamp.toString(), accessToken, identity].filter(
     (item): item is string => item !== null && item !== undefined,
   );
   const baseString = params.reduce((prev, curr) => (prev += curr), '');
   return createHmac('sha256', partnerKey).update(baseString).digest('hex');
+}
+
+/**
+ * Shopee verifies the signature over the FULL api path (for example `/api/v2/shop/get_shop_info`), not the
+ * domain-relative path (`/shop/get_shop_info`) that `callShopeeApi()`, `callShopeePublicApi()` and the
+ * multipart helpers use to build the URL (`SHOPEE_END_POINT_V2 + path`). Normalize here so every caller signs
+ * exactly what Shopee verifies. Paths that already start with `/api/` (the legacy `SHOPEE_PATH` constants) are
+ * left untouched.
+ */
+function toSignedApiPath(path: string): string {
+  return path.startsWith('/api/') ? path : `/api/v2${path}`;
 }
 
 function getTimestampNow(): number {
@@ -108,9 +163,9 @@ function buildCommonParams(
   signature: string,
   timestamp: number,
   additionalParams?: Record<string, string | number | boolean>,
+  path?: string,
 ): string {
-  const { partnerId, accessToken, shopId } = config;
-  let paramString = `?shop_id=${shopId}&partner_id=${partnerId}&access_token=${accessToken}&sign=${signature}&timestamp=${timestamp}`;
+  let paramString = commonParameter(config, signature, timestamp, path);
 
   if (additionalParams) {
     Object.entries(additionalParams).forEach(([key, value]) => {
@@ -405,9 +460,10 @@ type CallShopeeApiParamValue = string | number | boolean | Array<string | number
 interface CallShopeeApiOptions {
   method: 'GET' | 'POST';
   /**
-   * Query params for GET, or JSON body for POST. Array values are sent as
-   * repeated query keys for GET (e.g. `?item_id_list=1&item_id_list=2`),
-   * matching Shopee's documented convention, or as a JSON array for POST.
+   * Query params for GET, or JSON body for POST. Array values are sent
+   * comma-separated in a single query parameter for GET
+   * (e.g. `?item_id_list=1%2C2`), matching Shopee's documented convention,
+   * or as a JSON array for POST.
    */
   params?: Record<string, CallShopeeApiParamValue>;
   /** Context string included in thrown `ShopeeApiError` for easier debugging. */
@@ -457,17 +513,17 @@ async function callShopeeApi<T extends { error?: string }>(
       }
     });
 
-    let commonParam = buildCommonParams(config, signature, timestamp, scalarParams);
+    let commonParam = buildCommonParams(config, signature, timestamp, scalarParams, path);
     Object.entries(arrayParams).forEach(([key, values]) => {
-      values.forEach((value) => {
-        commonParam += `&${key}=${encodeURIComponent(value)}`;
-      });
+      // Shopee's documented GET convention: list values are comma-separated in one parameter
+      // (e.g. order_sn_list=A%2CB), not repeated keys.
+      commonParam += `&${key}=${encodeURIComponent(values.join(','))}`;
     });
 
     const url = `${SHOPEE_END_POINT_V2}${path}${commonParam}`;
     result = await httpGet<T>(url, config);
   } else {
-    const commonParam = commonParameter(config, signature, timestamp);
+    const commonParam = commonParameter(config, signature, timestamp, path);
     const url = `${SHOPEE_END_POINT_V2}${path}${commonParam}`;
     const headers = getHeaders(config);
     result = await httpPost<T>(url, cleanParams, headers);
@@ -497,15 +553,15 @@ async function callShopeePublicApi<T extends { error?: string }>(
   const { partnerId } = config;
 
   let paramString = `?partner_id=${partnerId}&timestamp=${timestamp}&sign=${signature}`;
-  if (options.params) {
+  // GET sends request params in the query string; POST sends them only in the JSON body (never in the URL,
+  // where they would end up in access logs and can exceed URL length limits).
+  if (options.method === 'GET' && options.params) {
     Object.entries(options.params).forEach(([key, value]) => {
       if (value === undefined) {
         return;
       }
       if (Array.isArray(value)) {
-        value.forEach((item) => {
-          paramString += `&${key}=${encodeURIComponent(item)}`;
-        });
+        paramString += `&${key}=${encodeURIComponent(value.join(','))}`;
       } else {
         paramString += `&${key}=${encodeURIComponent(value)}`;
       }

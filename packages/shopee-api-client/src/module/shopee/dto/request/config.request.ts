@@ -64,6 +64,21 @@ export interface ShopeeConfig {
    */
   mainAccountId?: string;
   /**
+   * Shopee merchant ID. Required by the Merchant-level APIs (for example `shopee.merchant.*` and
+   * `shopee.globalProduct.*`), which Shopee signs with `merchant_id` instead of `shop_id`.
+   */
+  merchantId?: string | number;
+  /**
+   * Shopee user ID. Required by the User-level APIs (for example `shopee.livestream.*`), which Shopee signs with
+   * `user_id` instead of `shop_id`.
+   */
+  userId?: string | number;
+  /**
+   * Shopee principal ID. Required by the Principal-level APIs (`shopee.principal.*`), which Shopee signs with
+   * `principal_id` instead of `shop_id`.
+   */
+  principalId?: string | number;
+  /**
    * Current Shopee access token.
    * Required for private APIs such as orders, products, logistics, and payment APIs.
    */

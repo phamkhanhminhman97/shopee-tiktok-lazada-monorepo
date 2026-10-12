@@ -375,7 +375,7 @@ export async function updateShowItem(params: ShopeeUpdateShowItemRequest, config
 export async function uploadImage(params: ShopeeUploadImageRequest, config: ShopeeConfig): Promise<ShopeeUploadImageResponse> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest('/livestream/upload_image', config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, '/livestream/upload_image');
   const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/livestream/upload_image${commonParam}`;
 
   const result = await ShopeeHelper.httpPostMultipart<ShopeeUploadImageResponse>(url, { image: params.image }, config);

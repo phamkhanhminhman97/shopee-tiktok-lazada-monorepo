@@ -51,7 +51,6 @@ export async function getOrderDetail(params: TiktokGetOrderDetailParams, config:
 
 /**
  * Retrieves the price details of an order. (GET /order/price_detail)
- *
  * @param params Parameters containing the order_id.
  * @returns Promise resolving to the price details.
  */
@@ -83,7 +82,6 @@ export async function addExternalOrderReferences(body: TiktokAddExternalOrderRef
 
 /**
  * Retrieves external order references. (GET /order/get_external_references)
- *
  * @param params Search parameters for external references.
  * @returns Promise resolving to a list of external references.
  */
@@ -99,7 +97,6 @@ export async function getExternalOrderReferences(params: TiktokGetExternalOrderR
 
 /**
  * Searches for an order by external order reference. (POST /order/search_by_external_reference)
- *
  * @param query Data used to search for an order using an external reference.
  * @returns Promise resolving to the found order details.
  */

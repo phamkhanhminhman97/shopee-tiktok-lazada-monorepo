@@ -34,7 +34,7 @@ export async function getShopPerformance(query: TiktokGetShopPerformanceQuery, c
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetShopPerformanceResponse>>(
     '/analytics/202405/shop/performance',
     'GET',
-    {},
+    { query: query },
     config,
     'getShopPerformance',
   );
@@ -67,7 +67,7 @@ export async function getShopProductPerformanceList(query: TiktokGetShopProductP
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetShopProductPerformanceListResponse>>(
     '/analytics/202405/shop_products/performance',
     'GET',
-    {},
+    { query: query },
     config,
     'getShopProductPerformanceList',
   );
@@ -100,7 +100,7 @@ export async function getShopSKUPerformanceList(query: TiktokGetShopSKUPerforman
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetShopSKUPerformanceListResponse>>(
     '/analytics/202406/shop_skus/performance',
     'GET',
-    {},
+    { query: query },
     config,
     'getShopSKUPerformanceList',
   );
@@ -116,7 +116,7 @@ export async function getShopVideoPerformanceList(query: TiktokGetShopVideoPerfo
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetShopVideoPerformanceListResponse>>(
     '/analytics/202409/shop_videos/performance',
     'GET',
-    {},
+    { query: query },
     config,
     'getShopVideoPerformanceList',
   );
@@ -132,7 +132,7 @@ export async function getShopVideoPerformanceOverview(query: TiktokGetShopVideoP
   return TiktokHelper.callTiktokApi<TiktokResponseCommon<TiktokGetShopVideoPerformanceOverviewResponse>>(
     '/analytics/202409/shop_videos/overview_performance',
     'GET',
-    {},
+    { query: query },
     config,
     'getShopVideoPerformanceOverview',
   );

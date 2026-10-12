@@ -131,7 +131,7 @@ export async function getOrderList(options: ShopeeGetOrdersOptions, config: Shop
     additionalParams.logistics_channel_id = normalized.logisticsChannelId;
   }
 
-  const commonParams = ShopeeHelper.buildCommonParams(config, signature, requestTimestamp, additionalParams);
+  const commonParams = ShopeeHelper.buildCommonParams(config, signature, requestTimestamp, additionalParams, SHOPEE_PATH.ORDER_LIST);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_LIST}${commonParams}`;
 
   const res: ShopeeResponseOrderList = await ShopeeHelper.httpGet(url, config);
@@ -230,7 +230,7 @@ export async function getOrderDetail(orderSnList: string | string[], config: Sho
     request_order_status_pending: true, // Enable new logic to support PENDING status and return pending_terms
   };
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.ORDER_DETAIL);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_DETAIL}${commonParam}`;
 
   const res = await ShopeeHelper.httpGet<ShopeeResponseOrderDetail>(url, config);
@@ -262,7 +262,7 @@ export async function getShipmentList(config: ShopeeConfig): Promise<{ order_sn:
       cursor: cursor,
     };
 
-    const commonParams = ShopeeHelper.buildCommonParams(config, signature, requestTimestamp, additionalParams);
+    const commonParams = ShopeeHelper.buildCommonParams(config, signature, requestTimestamp, additionalParams, SHOPEE_PATH.GET_SHIPMENT_LIST);
     const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_SHIPMENT_LIST}${commonParams}`;
 
     const res = await ShopeeHelper.httpGet<ShopeeResponseShipmentList>(url, config);
@@ -301,7 +301,7 @@ export async function searchPackageList(
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.SEARCH_PACKAGE_LIST, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.SEARCH_PACKAGE_LIST);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.SEARCH_PACKAGE_LIST}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -340,7 +340,7 @@ export async function getPackageDetail(
     package_number_list: packageNumbers,
   };
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_PACKAGE_DETAIL);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_PACKAGE_DETAIL}${commonParam}`;
 
   const res = await ShopeeHelper.httpGet<ShopeeResponseGetPackageDetail>(url, config);
@@ -367,7 +367,7 @@ export async function cancelOrder(body: ShopeeRequestCancelOrder, config: Shopee
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest(SHOPEE_PATH.CANCEL_ORDER, config, timestamp);
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, SHOPEE_PATH.CANCEL_ORDER);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.CANCEL_ORDER}${commonParam}`;
   const headers = ShopeeHelper.getHeaders(config);
 
@@ -621,7 +621,7 @@ export async function unsplitOrder(params: ShopeeUnsplitOrderRequest, config: Sh
 export async function uploadInvoiceDoc(params: ShopeeUploadInvoiceDocRequest, config: ShopeeConfig): Promise<ShopeeUploadInvoiceDocResponse> {
   const timestamp = ShopeeHelper.getTimestampNow();
   const signature = ShopeeHelper.signRequest('/order/upload_invoice_doc', config, timestamp);
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, undefined, '/order/upload_invoice_doc');
   const url = `${ShopeeHelper.SHOPEE_END_POINT_V2}/order/upload_invoice_doc${commonParam}`;
 
   const result = await ShopeeHelper.httpPostMultipart<ShopeeUploadInvoiceDocResponse>(

@@ -1,3 +1,4 @@
+import { TiktokAffiliateSellerOfficial } from './affiliate-seller-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   createConversationWithCreator,
@@ -91,9 +92,15 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.affiliateSeller.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokAffiliateSeller {
-  constructor(private config: TiktokConfig) {}
+export class TiktokAffiliateSeller extends TiktokAffiliateSellerOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
+  /**
+   * @deprecated Misspelled duplicate of {@link TiktokAffiliateSeller.createConversationWithCreator}; it
+   * targets the same endpoint. Use `createConversationWithCreator` instead.
+   */
   async createConversationwithCreator(body: TiktokCreateConversationwithCreatorBody): Promise<TiktokResponseCommon<TiktokCreateConversationwithCreatorResponse>> {
     return await createConversationwithCreator(body, this.config);
   }

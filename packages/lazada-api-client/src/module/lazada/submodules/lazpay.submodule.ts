@@ -1,3 +1,4 @@
+import { LazadaLazpayOfficial } from './lazpay-official.submodule';
 import { LazadaConfig } from '../dto/request/config.request';
 import {
   collectBenefit,
@@ -80,8 +81,10 @@ import {
  *
  * Access via `lazada.lazpay.<method>()` on a `LazadaModule` instance.
  */
-export class LazadaLazpay {
-  constructor(private config: LazadaConfig) {}
+export class LazadaLazpay extends LazadaLazpayOfficial {
+  constructor(config: LazadaConfig) {
+    super(config);
+  }
 
   async queryAddonOrder(params: LazpayQueryAddonOrderRequest): Promise<LazpayQueryAddonOrderResponse> {
     return await queryAddonOrder(params, this.config);

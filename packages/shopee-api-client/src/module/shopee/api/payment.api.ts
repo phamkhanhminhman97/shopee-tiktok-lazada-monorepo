@@ -17,7 +17,7 @@ export async function getEscrowDetail(orderSn: string, config: ShopeeConfig): Pr
     order_sn: orderSn,
   };
 
-  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams);
+  const commonParam = ShopeeHelper.buildCommonParams(config, signature, timestamp, additionalParams, SHOPEE_PATH.GET_ESCROW);
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ESCROW}${commonParam}`;
 
   const res = await ShopeeHelper.httpGet<ShopeeResponseEscrowDetail>(url, config);
@@ -115,7 +115,7 @@ export async function getBillingTransactionInfo(params: ShopeeGetBillingTransact
  */
 export async function getEscrowDetailBatch(params: ShopeeGetEscrowDetailBatchRequest, config: ShopeeConfig): Promise<ShopeeGetEscrowDetailBatchResponse> {
   return ShopeeHelper.callShopeeApi<ShopeeGetEscrowDetailBatchResponse>('/payment/get_escrow_detail_batch', config, {
-    method: 'POST',
+    method: 'GET',
     params: params as unknown as Record<string, string | number | boolean | Array<string | number | boolean> | undefined> | undefined,
     context: 'getEscrowDetailBatch',
   });

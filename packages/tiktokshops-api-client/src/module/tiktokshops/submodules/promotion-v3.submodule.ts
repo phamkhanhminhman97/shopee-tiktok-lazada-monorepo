@@ -1,3 +1,4 @@
+import { TiktokPromotionOfficial } from './promotion-official.submodule';
 import { TiktokConfig } from '../dto/request/config.request';
 import {
   createActivity,
@@ -36,8 +37,10 @@ import { TiktokResponseCommon } from '../dto/response/config.response';
  *
  * Access via `tiktok.promotion.<method>()` on a `TiktokModule` instance.
  */
-export class TiktokPromotion {
-  constructor(private config: TiktokConfig) {}
+export class TiktokPromotion extends TiktokPromotionOfficial {
+  constructor(config: TiktokConfig) {
+    super(config);
+  }
 
   async createActivity(params: TiktokCreateActivityBody): Promise<TiktokResponseCommon<TiktokCreateActivityResponse>> {
     return await createActivity(params, this.config);

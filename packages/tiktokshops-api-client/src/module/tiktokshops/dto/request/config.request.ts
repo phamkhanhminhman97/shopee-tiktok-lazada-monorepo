@@ -73,11 +73,28 @@ export interface TiktokConfig {
    * lookups that are scoped to a specific category asset context).
    */
   categoryAssetsCipher?: string;
+  /**
+   * Per-request timeout in milliseconds for seller API calls made through the
+   * domain namespaces (`tiktok.order.*`, `tiktok.product.*`, ...). Defaults to 30000.
+   */
+  timeoutMs?: number;
+  /**
+   * Number of automatic retries for idempotent GET requests on transient
+   * failures (network errors, 408/429/5xx). Defaults to 2; set `0` to disable.
+   * POST/PUT/DELETE requests are never retried automatically.
+   */
+  maxRetries?: number;
 }
 
 export interface TiktokConfigList {
   [shopId: string]: TiktokConfig;
 }
+
+/**
+ * A file sent in a multipart/form-data request: raw bytes, or bytes plus the file name to send them with
+ * (defaults to the form field name).
+ */
+export type TiktokUploadFile = Buffer | { data: Buffer; filename?: string };
 
 export interface TiktokRequestAccessToken {
   app_key: string;

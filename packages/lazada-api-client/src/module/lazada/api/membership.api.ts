@@ -3,6 +3,8 @@ import * as LazadaHelper from '../common/helper';
 import {
   MembershipGetLinkMemberListRequest,
   MembershipGetLinkMemberRequest,
+  MembershipGetPartnerLinkMemberListRequest,
+  MembershipGetPartnerLinkMemberRequest,
   MembershipLinkMembershipRequest,
   MembershipPartnerLinkRequest,
   MembershipPartnerTransactionRequest,
@@ -13,6 +15,8 @@ import {
 import {
   MembershipGetLinkMemberListResponse,
   MembershipGetLinkMemberResponse,
+  MembershipGetPartnerLinkMemberListResponse,
+  MembershipGetPartnerLinkMemberResponse,
   MembershipLinkMembershipResponse,
   MembershipPartnerLinkResponse,
   MembershipPartnerTransactionResponse,
@@ -91,4 +95,28 @@ export async function partnerUpdate(params: MembershipPartnerUpdateRequest, conf
  */
 export async function updatePartnerUserId(params: MembershipUpdatePartnerUserIdRequest, config: LazadaConfig): Promise<MembershipUpdatePartnerUserIdResponse> {
   return LazadaHelper.callLazadaApi<MembershipUpdatePartnerUserIdResponse>('/partner/updatePartnerUserId', 'POST', params as unknown as Record<string, unknown>, config, 'updatePartnerUserId');
+}
+
+/**
+ * GetLinkMember (partner endpoint) via Lazada `GET /partner/get`.
+ *
+ * Looks up the partner user linked to a buyer; unlike `getLinkMember()` (`/membership/linkmember/get`)
+ * it takes only `buyer_id`.
+ *
+ * @see https://open.lazada.com for the official Lazada Open Platform API reference.
+ */
+export async function getPartnerLinkMember(params: MembershipGetPartnerLinkMemberRequest, config: LazadaConfig): Promise<MembershipGetPartnerLinkMemberResponse> {
+  return LazadaHelper.callLazadaApi<MembershipGetPartnerLinkMemberResponse>('/partner/get', 'GET', params as unknown as Record<string, unknown>, config, 'getPartnerLinkMember');
+}
+
+/**
+ * GetLinkMemberList (partner endpoint) via Lazada `GET /partner/list`.
+ *
+ * Lists linked members; unlike `getLinkMemberList()` (`/membership/linkmember/list`) it takes only
+ * `page_num` and `page_size`.
+ *
+ * @see https://open.lazada.com for the official Lazada Open Platform API reference.
+ */
+export async function getPartnerLinkMemberList(params: MembershipGetPartnerLinkMemberListRequest, config: LazadaConfig): Promise<MembershipGetPartnerLinkMemberListResponse> {
+  return LazadaHelper.callLazadaApi<MembershipGetPartnerLinkMemberListResponse>('/partner/list', 'GET', params as unknown as Record<string, unknown>, config, 'getPartnerLinkMemberList');
 }

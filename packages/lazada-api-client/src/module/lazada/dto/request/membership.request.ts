@@ -63,3 +63,12 @@ export interface MembershipUpdatePartnerUserIdRequest {
   old_p_uid: string;
   new_p_uid: string;
 }
+
+export interface MembershipGetPartnerLinkMemberRequest {
+  buyer_id: string;
+}
+
+export interface MembershipGetPartnerLinkMemberListRequest {
+  page_num: string;
+  page_size: string;
+}
