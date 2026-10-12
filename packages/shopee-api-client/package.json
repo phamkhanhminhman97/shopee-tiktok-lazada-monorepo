@@ -1,6 +1,6 @@
 {
   "name": "shopee-api-client",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Shopee Open API client for TypeScript",
   "files": [
     "dist",
