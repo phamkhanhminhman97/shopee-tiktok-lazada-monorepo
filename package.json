@@ -38,6 +38,6 @@
     "publish-all-in-one": "npm publish --workspace=shopee-tiktokshops-lazada-api"
   },
   "devDependencies": {
-    "@changesets/cli": "^3.0.2"
+    "@changesets/cli": "^3.0.3"
   }
 }
